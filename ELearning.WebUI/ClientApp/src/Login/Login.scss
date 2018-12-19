@@ -1,0 +1,13 @@
+.login {
+color: gray;
+display: flex;
+}
+
+.loginfield {
+    display: flex;
+    flex-direction: column;
+}
+
+.ui input {
+    margin:0 5px 5px 5px !important;
+}

@@ -1,0 +1,17 @@
+.App {
+  height: 900px;
+  width: 1000px;
+}
+.coding {
+  display: flex;
+}
+
+.menu {
+  background-color: #1b1c1d;
+  height: 100%;
+  width: 15rem;
+}
+
+.logincontainer {
+  width: fit-content;
+}
