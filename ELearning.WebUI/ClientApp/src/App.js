@@ -1,20 +1,52 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
-import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
+import 'semantic-ui-css/semantic.min.css'
+import 'semantic-ui-react';
 
-export default class App extends Component {
-  static displayName = App.name;
+import './App.css';
+//import LoginInput from './Login/Login.jsx';
+//import Codemirror from './CodeMirror/CodeMirror.jsx';
+//import Output from './CodeMirror/Output.jsx';
+//import Runbutton from './Buttons/RunButton';
+//import Menu from './Menu/Menu.jsx';
+//import LoginButton from './Login/LoginButton.jsx';
+import Grade from './Grades/Grade.jsx';
 
-  render () {
+
+class App extends Component {
+  render() {
     return (
-      <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/counter' component={Counter} />
-        <Route path='/fetch-data' component={FetchData} />
-      </Layout>
+      <div className='App'>
+      <Grade></Grade>
+
+
+
+
+
+
+
+
+
+
+
+        {/*
+      <div className = "menu">
+      <Menu></Menu>
+      </div>
+        <div className="logincontainer">
+          <LoginInput></LoginInput>
+          <LoginButton></LoginButton>
+        </div>
+        
+
+         <div className='coding'>
+          <Codemirror></Codemirror>
+          <Output></Output>
+        </div>
+        */}
+
+      </div>
     );
   }
 }
+
+export default App;
