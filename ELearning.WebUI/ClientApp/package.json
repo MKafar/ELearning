@@ -15,7 +15,6 @@
     "rxjs": "^6.3.3",
     "semantic-ui-react": "^0.84.0",
     "semantic-ui-css": "^2.4.1"
-
   },
   "scripts": {
     "start": "react-scripts start",
