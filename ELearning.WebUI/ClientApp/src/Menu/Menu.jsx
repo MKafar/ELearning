@@ -19,8 +19,8 @@ class menu extends Component {
                     onClick={this.handleItemClick}
                 />
                 <Menu.Item
-                    name='login'
-                    active={activeItem === 'login'}
+                    name='coding'
+                    active={activeItem === 'coding'}
                     onClick={this.handleItemClick}
                 />
             </Menu>

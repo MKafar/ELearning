@@ -7,11 +7,19 @@
 }
 
 .menu {
-  background-color: #1b1c1d;
-  height: 100%;
+  background-color: #C0B283;
+  height: 760px;
   width: 15rem;
 }
 
 .logincontainer {
   width: fit-content;
+}
+
+.block {
+  display: flex;
+}
+
+.runbutton {
+
 }
