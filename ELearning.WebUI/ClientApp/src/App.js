@@ -3,10 +3,11 @@ import 'semantic-ui-css/semantic.min.css'
 import 'semantic-ui-react';
 
 import './App.css';
+import Grade from './Grades/Grade';
 //import LoginInput from './Login/Login.jsx';
-import Codemirror from './CodeMirror/CodeMirror.jsx';
-import Output from './CodeMirror/Output.jsx';
-import Runbutton from './CodeMirror/RunButton';
+//import Codemirror from './CodeMirror/CodeMirror.jsx';
+//import Output from './CodeMirror/Output.jsx';
+//import Runbutton from './CodeMirror/RunButton';
 import Menu from './Menu/Menu.jsx';
 //import LoginButton from './Login/LoginButton.jsx';
 //import Grade from './Grades/Grade.jsx';
@@ -20,9 +21,8 @@ class App extends Component {
           <div className="menu">
             <Menu></Menu>
           </div>
-          <div className='coding'>
-            <Codemirror></Codemirror>
-            <Output></Output>
+          <div>
+            <Grade></Grade>
           </div>
 
         </div>
