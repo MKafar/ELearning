@@ -10,7 +10,7 @@ namespace ELearning.Domain.Entities
             Evaluations = new HashSet<Evaluation>();
         }
 
-        public int Id { get; set; }
+        public int SectionId { get; set; }
         public int Number { get; set; }
 
         public int GroupId { get; set; }

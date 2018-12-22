@@ -9,7 +9,7 @@ namespace ELearning.Domain.Entities
             Assignments = new HashSet<Assignment>();
         }
 
-        public int Id { get; set; }
+        public int TaskVariantId { get; set; }
         public string Content { get; set; }
         public string Solution { get; set; }
 

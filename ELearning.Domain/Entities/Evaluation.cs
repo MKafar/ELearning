@@ -2,7 +2,7 @@
 {
     public class Evaluation
     {
-        public int Id { get; set; }
+        public int EvaluationId { get; set; }
         public int Grade { get; set; }
 
         public int AssignmentId { get; set; }

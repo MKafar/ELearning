@@ -10,7 +10,7 @@ namespace ELearning.Domain.Entities
             Sections = new HashSet<Section>();
         }
 
-        public int Id { get; set; }
+        public int GroupId { get; set; }
         public string Name { get; set; }
         public DateTime AcademicYear { get; set; }
 

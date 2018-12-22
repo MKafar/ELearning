@@ -9,7 +9,7 @@ namespace ELearning.Domain.Entities
             Groups = new HashSet<Group>();
         }
 
-        public int Id { get; set; }
+        public int SubjectId { get; set; }
         public string Name { get; set; }
 
         public int? MajorId { get; set; }
