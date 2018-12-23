@@ -4,7 +4,7 @@ import 'semantic-ui-react'
 
 import './App.css'
 import Menu from './Menu/Menu.jsx'
-import Grade from './Grades/Grade.jsx'
+import CodeMirror from './CodeMirror/CodeMirror.jsx'
 
 class App extends Component {
   render() {
@@ -15,7 +15,7 @@ class App extends Component {
             <Menu></Menu>
           </div>
           <div>
-            <Grade></Grade>
+            <CodeMirror />
           </div>
 
         </div>
