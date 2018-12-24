@@ -11,7 +11,8 @@ namespace ELearning.Persistence.Configurations
             builder.HasKey(e => e.AssignmentId);
 
             builder.Property(e => e.AssignmentId)
-                .HasColumnName("AssignmentId");
+                .HasColumnName("AssignmentId")
+                .IsRequired(true);
 
             builder.Property(e => e.FinalGrade)
                 .HasColumnType("decimal(4, 2)")
@@ -21,13 +22,15 @@ namespace ELearning.Persistence.Configurations
                 .HasColumnType("ntext");
 
             builder.Property(e => e.SectionId)
-                .HasColumnName("SectionId");
+                .HasColumnName("SectionId")
+                .IsRequired(true);
 
             builder.Property(e => e.Solution)
                 .HasColumnType("ntext");
 
             builder.Property(e => e.TaskVariantId)
-                .HasColumnName("TaskVariantId");
+                .HasColumnName("TaskVariantId")
+                .IsRequired(true);
 
             builder.HasOne(e => e.Section)
                 .WithMany(e => e.Assignments)
