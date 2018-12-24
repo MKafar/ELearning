@@ -3,7 +3,7 @@
     public class Evaluation
     {
         public int EvaluationId { get; set; }
-        public int Grade { get; set; }
+        public decimal Grade { get; set; }
 
         public int AssignmentId { get; set; }
         public Assignment Assignment { get; set; }

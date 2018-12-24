@@ -11,7 +11,8 @@ namespace ELearning.Domain.Entities
 
         public int TaskVariantId { get; set; }
         public string Content { get; set; }
-        public string CorrectSolution { get; set; }
+        public string TestingCode { get; set; }
+        public string CorrectOutput { get; set; }
 
         public int TaskId { get; set; }
         public Task Task { get; set; }

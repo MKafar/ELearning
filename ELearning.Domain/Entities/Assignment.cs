@@ -13,7 +13,8 @@ namespace ELearning.Domain.Entities
         public int AssignmentId { get; set; }
         public DateTime Date { get; set; }
         public string Solution { get; set; }
-        public int? FinalGrade { get; set; }
+        public string Output { get; set; }
+        public decimal? FinalGrade { get; set; }
 
         public int SectionId { get; set; }
         public Section Section { get; set; }
