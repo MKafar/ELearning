@@ -11,7 +11,8 @@ namespace ELearning.Persistence.Configurations
             builder.HasKey(e => e.GroupId);
 
             builder.Property(e => e.GroupId)
-                .HasColumnName("GroupId");
+                .HasColumnName("GroupId")
+                .IsRequired(true);
 
             builder.Property(e => e.Name)
                 .HasMaxLength(30)

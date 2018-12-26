@@ -16,7 +16,7 @@ namespace ELearning.Persistence.Configurations
 
             builder.Property(e => e.FinalGrade)
                 .HasColumnType("decimal(4, 2)")
-                .HasDefaultValue(0);         
+                .HasDefaultValue(0);
 
             builder.Property(e => e.Output)
                 .HasColumnType("ntext");
