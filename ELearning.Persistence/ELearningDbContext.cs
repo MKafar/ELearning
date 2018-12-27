@@ -16,6 +16,8 @@ namespace ELearning.Persistence
 
         public DbSet<Group> Groups { get; set; }
 
+        public DbSet<Role> Roles { get; set; }
+
         public DbSet<Section> Sections { get; set; }
 
         public DbSet<Subject> Subjects { get; set; }
