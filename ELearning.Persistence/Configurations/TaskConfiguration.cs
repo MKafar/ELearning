@@ -15,8 +15,7 @@ namespace ELearning.Persistence.Configurations
                 .IsRequired(true);
 
             builder.Property(e => e.Description)
-                .HasColumnType("ntext")
-                .IsRequired(false);
+                .HasColumnType("ntext");
 
             builder.Property(e => e.Title)
                 .HasMaxLength(50)

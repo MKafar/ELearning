@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ELearning.Persistence.Migrations
 {
     [DbContext(typeof(ELearningDbContext))]
-    [Migration("20181224112140_CreateELearningDb")]
+    [Migration("20181227222341_CreateELearningDb")]
     partial class CreateELearningDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,17 +25,28 @@ namespace ELearning.Persistence.Migrations
                 {
                     b.Property<int>("AssignmentId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("AssignmentId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Date");
+                    b.Property<DateTime?>("Date")
+                        .HasColumnType("datetime");
 
-                    b.Property<int?>("FinalGrade");
+                    b.Property<decimal?>("FinalGrade")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(4, 2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<int>("SectionId");
+                    b.Property<string>("Output")
+                        .HasColumnType("ntext");
 
-                    b.Property<string>("Solution");
+                    b.Property<int>("SectionId")
+                        .HasColumnName("SectionId");
 
-                    b.Property<int>("TaskVariantId");
+                    b.Property<string>("Solution")
+                        .HasColumnType("ntext");
+
+                    b.Property<int>("TaskVariantId")
+                        .HasColumnName("TaskVariantId");
 
                     b.HasKey("AssignmentId");
 
@@ -50,13 +61,19 @@ namespace ELearning.Persistence.Migrations
                 {
                     b.Property<int>("EvaluationId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("EvaluationId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AssignmentId");
+                    b.Property<int>("AssignmentId")
+                        .HasColumnName("AssignmentId");
 
-                    b.Property<int>("Grade");
+                    b.Property<decimal>("Grade")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(4, 2)")
+                        .HasDefaultValue(0m);
 
-                    b.Property<int>("SectionId");
+                    b.Property<int>("SectionId")
+                        .HasColumnName("SectionId");
 
                     b.HasKey("EvaluationId");
 
@@ -71,13 +88,18 @@ namespace ELearning.Persistence.Migrations
                 {
                     b.Property<int>("GroupId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("GroupId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("AcademicYear");
+                    b.Property<short?>("AcademicYear")
+                        .HasColumnType("smallint");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30);
 
-                    b.Property<int>("SubjectId");
+                    b.Property<int>("SubjectId")
+                        .HasColumnName("SubjectId");
 
                     b.HasKey("GroupId");
 
@@ -86,17 +108,37 @@ namespace ELearning.Persistence.Migrations
                     b.ToTable("Groups");
                 });
 
+            modelBuilder.Entity("ELearning.Domain.Entities.Role", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("RoleId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(16);
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("ELearning.Domain.Entities.Section", b =>
                 {
                     b.Property<int>("SectionId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("SectionId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("GroupId");
+                    b.Property<int>("GroupId")
+                        .HasColumnName("GroupId");
 
-                    b.Property<int>("Number");
+                    b.Property<short>("Number")
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnName("UserId");
 
                     b.HasKey("SectionId");
 
@@ -111,9 +153,12 @@ namespace ELearning.Persistence.Migrations
                 {
                     b.Property<int>("SubjectId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("SubjectId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.HasKey("SubjectId");
 
@@ -124,11 +169,15 @@ namespace ELearning.Persistence.Migrations
                 {
                     b.Property<int>("TaskId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("TaskId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .HasColumnType("ntext");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.HasKey("TaskId");
 
@@ -139,13 +188,21 @@ namespace ELearning.Persistence.Migrations
                 {
                     b.Property<int>("TaskVariantId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("TaskVariantId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Content");
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("ntext");
 
-                    b.Property<string>("CorrectSolution");
+                    b.Property<string>("CorrectOutput")
+                        .HasColumnType("ntext");
 
-                    b.Property<int>("TaskId");
+                    b.Property<int>("TaskId")
+                        .HasColumnName("TaskId");
+
+                    b.Property<string>("TestingCode")
+                        .HasColumnType("ntext");
 
                     b.HasKey("TaskVariantId");
 
@@ -161,21 +218,32 @@ namespace ELearning.Persistence.Migrations
                         .HasColumnName("UserId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(320);
 
-                    b.Property<string>("Login");
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasMaxLength(16);
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<string>("Password");
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(16);
 
-                    b.Property<int>("Role");
+                    b.Property<int>("RoleId")
+                        .HasColumnName("RoleId");
 
                     b.Property<string>("Surname")
+                        .IsRequired()
                         .HasMaxLength(50);
 
                     b.HasKey("UserId");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Users");
                 });
@@ -185,11 +253,13 @@ namespace ELearning.Persistence.Migrations
                     b.HasOne("ELearning.Domain.Entities.Section", "Section")
                         .WithMany("Assignments")
                         .HasForeignKey("SectionId")
+                        .HasConstraintName("FK_Assignments_Sections")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ELearning.Domain.Entities.TaskVariant", "TaskVariant")
                         .WithMany("Assignments")
                         .HasForeignKey("TaskVariantId")
+                        .HasConstraintName("FK_Assignments_TaskVariants")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -198,11 +268,13 @@ namespace ELearning.Persistence.Migrations
                     b.HasOne("ELearning.Domain.Entities.Assignment", "Assignment")
                         .WithMany("Evaluations")
                         .HasForeignKey("AssignmentId")
+                        .HasConstraintName("FK_Evaluations_Assignments")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ELearning.Domain.Entities.Section", "Section")
                         .WithMany("Evaluations")
                         .HasForeignKey("SectionId")
+                        .HasConstraintName("FK_Evaluations_Sections")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
@@ -211,6 +283,7 @@ namespace ELearning.Persistence.Migrations
                     b.HasOne("ELearning.Domain.Entities.Subject", "Subject")
                         .WithMany("Groups")
                         .HasForeignKey("SubjectId")
+                        .HasConstraintName("FK_Groups_Subjects")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -219,11 +292,13 @@ namespace ELearning.Persistence.Migrations
                     b.HasOne("ELearning.Domain.Entities.Group", "Group")
                         .WithMany("Sections")
                         .HasForeignKey("GroupId")
+                        .HasConstraintName("FK_Sections_Groups")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ELearning.Domain.Entities.User", "User")
                         .WithMany("Sections")
                         .HasForeignKey("UserId")
+                        .HasConstraintName("FK_Sections_Users")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -232,6 +307,16 @@ namespace ELearning.Persistence.Migrations
                     b.HasOne("ELearning.Domain.Entities.Task", "Task")
                         .WithMany("TaskVariants")
                         .HasForeignKey("TaskId")
+                        .HasConstraintName("FK_TaskVariants_Tasks")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ELearning.Domain.Entities.User", b =>
+                {
+                    b.HasOne("ELearning.Domain.Entities.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
+                        .HasConstraintName("FK_Users_Roles")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -9,12 +9,25 @@ namespace ELearning.Persistence.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    RoleId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 16, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.RoleId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Subjects",
                 columns: table => new
                 {
                     SubjectId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,8 +40,8 @@ namespace ELearning.Persistence.Migrations
                 {
                     TaskId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Title = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    Title = table.Column<string>(maxLength: 50, nullable: false),
+                    Description = table.Column<string>(type: "ntext", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -41,16 +54,22 @@ namespace ELearning.Persistence.Migrations
                 {
                     UserId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 50, nullable: true),
-                    Surname = table.Column<string>(maxLength: 50, nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Login = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    Role = table.Column<int>(nullable: false)
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    Surname = table.Column<string>(maxLength: 50, nullable: false),
+                    Email = table.Column<string>(maxLength: 320, nullable: false),
+                    Login = table.Column<string>(maxLength: 16, nullable: false),
+                    Password = table.Column<string>(maxLength: 16, nullable: false),
+                    RoleId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.ForeignKey(
+                        name: "FK_Users_Roles",
+                        column: x => x.RoleId,
+                        principalTable: "Roles",
+                        principalColumn: "RoleId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -59,15 +78,15 @@ namespace ELearning.Persistence.Migrations
                 {
                     GroupId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    AcademicYear = table.Column<DateTime>(nullable: false),
+                    Name = table.Column<string>(maxLength: 30, nullable: false),
+                    AcademicYear = table.Column<short>(type: "smallint", nullable: true),
                     SubjectId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Groups", x => x.GroupId);
                     table.ForeignKey(
-                        name: "FK_Groups_Subjects_SubjectId",
+                        name: "FK_Groups_Subjects",
                         column: x => x.SubjectId,
                         principalTable: "Subjects",
                         principalColumn: "SubjectId",
@@ -80,15 +99,16 @@ namespace ELearning.Persistence.Migrations
                 {
                     TaskVariantId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Content = table.Column<string>(nullable: true),
-                    CorrectSolution = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(type: "ntext", nullable: false),
+                    TestingCode = table.Column<string>(type: "ntext", nullable: true),
+                    CorrectOutput = table.Column<string>(type: "ntext", nullable: true),
                     TaskId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TaskVariants", x => x.TaskVariantId);
                     table.ForeignKey(
-                        name: "FK_TaskVariants_Tasks_TaskId",
+                        name: "FK_TaskVariants_Tasks",
                         column: x => x.TaskId,
                         principalTable: "Tasks",
                         principalColumn: "TaskId",
@@ -101,7 +121,7 @@ namespace ELearning.Persistence.Migrations
                 {
                     SectionId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Number = table.Column<int>(nullable: false),
+                    Number = table.Column<short>(type: "smallint", nullable: false),
                     GroupId = table.Column<int>(nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
@@ -109,13 +129,13 @@ namespace ELearning.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_Sections", x => x.SectionId);
                     table.ForeignKey(
-                        name: "FK_Sections_Groups_GroupId",
+                        name: "FK_Sections_Groups",
                         column: x => x.GroupId,
                         principalTable: "Groups",
                         principalColumn: "GroupId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Sections_Users_UserId",
+                        name: "FK_Sections_Users",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
@@ -128,9 +148,10 @@ namespace ELearning.Persistence.Migrations
                 {
                     AssignmentId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Date = table.Column<DateTime>(nullable: false),
-                    Solution = table.Column<string>(nullable: true),
-                    FinalGrade = table.Column<int>(nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Solution = table.Column<string>(type: "ntext", nullable: true),
+                    Output = table.Column<string>(type: "ntext", nullable: true),
+                    FinalGrade = table.Column<decimal>(type: "decimal(4, 2)", nullable: true, defaultValue: 0m),
                     SectionId = table.Column<int>(nullable: false),
                     TaskVariantId = table.Column<int>(nullable: false)
                 },
@@ -138,13 +159,13 @@ namespace ELearning.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_Assignments", x => x.AssignmentId);
                     table.ForeignKey(
-                        name: "FK_Assignments_Sections_SectionId",
+                        name: "FK_Assignments_Sections",
                         column: x => x.SectionId,
                         principalTable: "Sections",
                         principalColumn: "SectionId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Assignments_TaskVariants_TaskVariantId",
+                        name: "FK_Assignments_TaskVariants",
                         column: x => x.TaskVariantId,
                         principalTable: "TaskVariants",
                         principalColumn: "TaskVariantId",
@@ -157,7 +178,7 @@ namespace ELearning.Persistence.Migrations
                 {
                     EvaluationId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Grade = table.Column<int>(nullable: false),
+                    Grade = table.Column<decimal>(type: "decimal(4, 2)", nullable: false, defaultValue: 0m),
                     AssignmentId = table.Column<int>(nullable: false),
                     SectionId = table.Column<int>(nullable: false)
                 },
@@ -165,13 +186,13 @@ namespace ELearning.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_Evaluations", x => x.EvaluationId);
                     table.ForeignKey(
-                        name: "FK_Evaluations_Assignments_AssignmentId",
+                        name: "FK_Evaluations_Assignments",
                         column: x => x.AssignmentId,
                         principalTable: "Assignments",
                         principalColumn: "AssignmentId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Evaluations_Sections_SectionId",
+                        name: "FK_Evaluations_Sections",
                         column: x => x.SectionId,
                         principalTable: "Sections",
                         principalColumn: "SectionId",
@@ -217,6 +238,11 @@ namespace ELearning.Persistence.Migrations
                 name: "IX_TaskVariants_TaskId",
                 table: "TaskVariants",
                 column: "TaskId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_RoleId",
+                table: "Users",
+                column: "RoleId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -244,6 +270,9 @@ namespace ELearning.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Subjects");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
         }
     }
 }

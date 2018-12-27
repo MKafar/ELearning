@@ -14,9 +14,12 @@ namespace ELearning.Persistence.Configurations
                 .HasColumnName("AssignmentId")
                 .IsRequired(true);
 
+            builder.Property(e => e.Date)
+                .HasColumnType("datetime");
+
             builder.Property(e => e.FinalGrade)
                 .HasColumnType("decimal(4, 2)")
-                .HasDefaultValue(0);
+                .HasDefaultValue((decimal)0);
 
             builder.Property(e => e.Output)
                 .HasColumnType("ntext");

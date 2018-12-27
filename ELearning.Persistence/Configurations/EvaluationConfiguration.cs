@@ -20,7 +20,7 @@ namespace ELearning.Persistence.Configurations
 
             builder.Property(e => e.Grade)
                 .HasColumnType("decimal(4, 2)")
-                .HasDefaultValue(0)
+                .HasDefaultValue((decimal)0)
                 .IsRequired(true);
 
             builder.Property(e => e.SectionId)

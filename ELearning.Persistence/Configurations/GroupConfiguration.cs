@@ -14,6 +14,9 @@ namespace ELearning.Persistence.Configurations
                 .HasColumnName("GroupId")
                 .IsRequired(true);
 
+            builder.Property(e => e.AcademicYear)
+                .HasColumnType("smallint");
+
             builder.Property(e => e.Name)
                 .HasMaxLength(30)
                 .IsRequired(true);

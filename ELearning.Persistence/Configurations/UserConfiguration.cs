@@ -15,7 +15,6 @@ namespace ELearning.Persistence.Configurations
                 .IsRequired(true);
 
             builder.Property(e => e.Email)
-                .HasColumnType("varchar")
                 .HasMaxLength(320)
                 .IsRequired(true);
 
