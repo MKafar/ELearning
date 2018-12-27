@@ -32,7 +32,7 @@ namespace ELearning.Persistence.Configurations
 
             builder.HasOne(e => e.User)
                 .WithMany(e => e.Sections)
-                .HasConstraintName("FK_Groups_Users");
+                .HasConstraintName("FK_Sections_Users");
         }
     }
 }

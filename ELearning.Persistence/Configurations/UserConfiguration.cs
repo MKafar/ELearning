@@ -8,11 +8,40 @@ namespace ELearning.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.Property(e => e.UserId).HasColumnName("UserId");
+            builder.HasKey(e => e.UserId);
 
-            builder.Property(e => e.Name).HasMaxLength(50);
+            builder.Property(e => e.UserId)
+                .HasColumnName("UserId")
+                .IsRequired(true);
 
-            builder.Property(e => e.Surname).HasMaxLength(50);
+            builder.Property(e => e.Email)
+                .HasColumnType("varchar")
+                .HasMaxLength(320)
+                .IsRequired(true);
+
+            builder.Property(e => e.Login)
+                .HasMaxLength(16)
+                .IsRequired(true);
+
+            builder.Property(e => e.Password)
+                .HasMaxLength(16)
+                .IsRequired(true);
+
+            builder.Property(e => e.Name)
+                .HasMaxLength(50)
+                .IsRequired(true);
+
+            builder.Property(e => e.Surname)
+                .HasMaxLength(50)
+                .IsRequired(true);
+
+            builder.Property(e => e.RoleId)
+                .HasColumnName("RoleId")
+                .IsRequired(true);
+
+            builder.HasOne(e => e.Role)
+                .WithMany(e => e.Users)
+                .HasConstraintName("FK_Users_Roles");
         }
     }
 }
