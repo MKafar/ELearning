@@ -20,6 +20,8 @@
   display: flex;
 }
 
-.runbutton {
-
+.detailList {
+  height: 260px;
+  overflow: auto;
+  overflow-x: auto;
 }
