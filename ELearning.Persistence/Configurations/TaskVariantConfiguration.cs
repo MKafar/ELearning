@@ -15,19 +15,23 @@ namespace ELearning.Persistence.Configurations
                 .IsRequired(true);
 
             builder.Property(e => e.Content)
-                .HasColumnType("ntext")
+                .HasColumnType("nvarchar(max)")
                 .IsRequired(true);
 
             builder.Property(e => e.CorrectOutput)
-                .HasColumnType("ntext")
+                .HasColumnType("nvarchar(max)")
                 .IsRequired(false);
+
+            builder.Property(e => e.Number)
+                .HasColumnType("tinyint(1)")
+                .IsRequired(true);
 
             builder.Property(e => e.TaskId)
                 .HasColumnName("TaskId")
                 .IsRequired(true);
 
             builder.Property(e => e.TestingCode)
-                .HasColumnType("ntext")
+                .HasColumnType("nvarchar(max)")
                 .IsRequired(false);
 
             builder.HasOne(e => e.Task)

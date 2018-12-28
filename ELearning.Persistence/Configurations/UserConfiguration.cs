@@ -19,7 +19,7 @@ namespace ELearning.Persistence.Configurations
                 .IsRequired(true);
 
             builder.Property(e => e.Login)
-                .HasMaxLength(16)
+                .HasMaxLength(10)
                 .IsRequired(true);
 
             builder.Property(e => e.Password)

@@ -15,10 +15,10 @@ namespace ELearning.Persistence.Configurations
                 .IsRequired(true);
 
             builder.Property(e => e.Description)
-                .HasColumnType("ntext");
+                .HasMaxLength(1000);
 
             builder.Property(e => e.Title)
-                .HasMaxLength(50)
+                .HasMaxLength(64)
                 .IsRequired(true);
         }
     }

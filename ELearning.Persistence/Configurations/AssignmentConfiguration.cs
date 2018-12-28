@@ -15,21 +15,22 @@ namespace ELearning.Persistence.Configurations
                 .IsRequired(true);
 
             builder.Property(e => e.Date)
-                .HasColumnType("datetime");
+                .HasColumnType("date")
+                .IsRequired(true);
 
             builder.Property(e => e.FinalGrade)
                 .HasColumnType("decimal(4, 2)")
                 .HasDefaultValue((decimal)0);
 
             builder.Property(e => e.Output)
-                .HasColumnType("ntext");
+                .HasColumnType("nvarchar(max)");
 
             builder.Property(e => e.SectionId)
                 .HasColumnName("SectionId")
                 .IsRequired(true);
 
             builder.Property(e => e.Solution)
-                .HasColumnType("ntext");
+                .HasColumnType("nvarchar(max)");
 
             builder.Property(e => e.TaskVariantId)
                 .HasColumnName("TaskVariantId")
