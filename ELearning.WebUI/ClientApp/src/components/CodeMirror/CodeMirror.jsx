@@ -12,15 +12,12 @@ import 'codemirror/addon/edit/closebrackets.js'
 
 
 class Codemirror extends Component {
-    constructor() {
-        super();
-        this.state = {
-            name: 'CodeMirror',
-            code: '// Code Here'
-        };
-    }
+    state = {
+        name: 'CodeMirror',
+        code: '// Code Here'
+    };
 
-    sendCodeHandler = () => {
+    postCodeHandler = () => {
         console.log(this.state.code)
     }
 
@@ -42,7 +39,7 @@ class Codemirror extends Component {
         return (
             <div>
                 <CodeMirror value={this.state.code} onChange={this.updateCode.bind(this)} options={options} />
-                <Button onClick = {this.sendCodeHandler}>Run</Button>
+                <Button onClick={this.postCodeHandler}>Run</Button>
             </div>
         );
     }
