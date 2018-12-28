@@ -23,7 +23,7 @@ namespace ELearning.Persistence.Configurations
                 .IsRequired(false);
 
             builder.Property(e => e.Number)
-                .HasColumnType("tinyint(1)")
+                .HasColumnType("tinyint")
                 .IsRequired(true);
 
             builder.Property(e => e.TaskId)
