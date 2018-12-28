@@ -4,8 +4,7 @@ import 'semantic-ui-react';
 
 import './App.css';
 import Menu from './components/Menu/Menu.jsx';
-import CodeMirror from './components/CodeMirror/CodeMirror.jsx';
-import Output from './components/CodeMirror/Output.jsx';
+
 
 class App extends Component {
 
@@ -30,6 +29,7 @@ class App extends Component {
 
   render() {
 
+
     return (
       <div className='App'>
         <div className=" block">
@@ -37,10 +37,9 @@ class App extends Component {
             <Menu></Menu>
           </div>
           <div>
-            <CodeMirror></CodeMirror>
+
           </div>
-          
-          <Output></Output>
+
         </div>
 
 
@@ -52,6 +51,9 @@ class App extends Component {
 
 
         {/* 
+        //różne mody jednego komponentu
+            <CodeWindow code={code}></CodeWindow>
+            <CodeWindow changeMode={true} code={'Hello'}></CodeWindow>
         // tabela szukania
            { this.state.searches.map((search) => {
            return <SearchTable
