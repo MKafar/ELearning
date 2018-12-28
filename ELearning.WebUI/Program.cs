@@ -21,7 +21,7 @@ namespace ELearning.WebUI
                     var context = scope.ServiceProvider.GetService<ELearningDbContext>();
                     context.Database.Migrate();
 
-                    // TODO add database initializer
+                    ELearningInitializer.Initialize(context);
                 }
                 catch (Exception ex)
                 {
