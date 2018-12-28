@@ -17,7 +17,7 @@ namespace ELearning.Persistence
         {
             context.Database.EnsureCreated();
 
-            if(context.Users.Any())
+            if(context.Subjects.Any())
             {
                 return;
             }
@@ -154,15 +154,15 @@ namespace ELearning.Persistence
                 new Section { SectionId = 28, UserId = 11, GroupId = 5, Number = 8 },
                 new Section { SectionId = 29, UserId = 12, GroupId = 5, Number = 9 },
                 new Section { SectionId = 30, UserId = 3, GroupId = 6, Number = 1 },
-                new Section { SectionId = 30, UserId = 2, GroupId = 6, Number = 2 },
-                new Section { SectionId = 30, UserId = 4, GroupId = 6, Number = 6 },
-                new Section { SectionId = 30, UserId = 6, GroupId = 6, Number = 4 },
-                new Section { SectionId = 30, UserId = 7, GroupId = 6, Number = 8 },
-                new Section { SectionId = 30, UserId = 8, GroupId = 6, Number = 7 },
-                new Section { SectionId = 30, UserId = 9, GroupId = 6, Number = 5 },
-                new Section { SectionId = 30, UserId = 10, GroupId = 6, Number = 9 },
-                new Section { SectionId = 30, UserId = 11, GroupId = 6, Number = 10 },
-                new Section { SectionId = 30, UserId = 12, GroupId = 6, Number = 3 },
+                new Section { SectionId = 31, UserId = 2, GroupId = 6, Number = 2 },
+                new Section { SectionId = 32, UserId = 4, GroupId = 6, Number = 6 },
+                new Section { SectionId = 33, UserId = 6, GroupId = 6, Number = 4 },
+                new Section { SectionId = 34, UserId = 7, GroupId = 6, Number = 8 },
+                new Section { SectionId = 35, UserId = 8, GroupId = 6, Number = 7 },
+                new Section { SectionId = 36, UserId = 9, GroupId = 6, Number = 5 },
+                new Section { SectionId = 37, UserId = 10, GroupId = 6, Number = 9 },
+                new Section { SectionId = 38, UserId = 11, GroupId = 6, Number = 10 },
+                new Section { SectionId = 39, UserId = 12, GroupId = 6, Number = 3 },
             };
 
             context.Sections.AddRange(sections);
