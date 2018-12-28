@@ -1,18 +1,18 @@
 import React from 'react';
-import { Input } from 'semantic-ui-react';
+import { Input, Button } from 'semantic-ui-react';
 
 import './Login.scss';
 
-const LoginInput = () => (
+const Login = () => (
     <div className="login">
         <div className='loginfield'>
             <Input placeholder='Login' />
             <Input placeholder='Password' />
+            <Button className = 'loginbutton' primary>Login</Button>
         </div>
-
-
+        
     </div>
 
 )
 
-export default LoginInput;
+export default Login;

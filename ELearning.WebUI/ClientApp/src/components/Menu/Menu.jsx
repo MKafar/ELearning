@@ -12,15 +12,15 @@ class menu extends Component {
         const { activeItem } = this.state
 
         return (
-            <Menu inverted pointing vertical>
+            <Menu inverted vertical>
                 <Menu.Item
                     name='home'
                     active={activeItem === 'home'}
                     onClick={this.handleItemClick}
                 />
                 <Menu.Item
-                    name='login'
-                    active={activeItem === 'login'}
+                    name='coding'
+                    active={activeItem === 'coding'}
                     onClick={this.handleItemClick}
                 />
             </Menu>

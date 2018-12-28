@@ -1,10 +1,11 @@
 {
-  "name": "elearning",
+  "name": "Elearning",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@types/react-codemirror": "^1.0.2",
     "JSCPP": "^2.0.8",
+    "axios": "^0.18.0",
     "codemirror": "^5.42.0",
     "node-sass": "^4.11.0",
     "react": "^16.6.3",
@@ -13,8 +14,8 @@
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1",
     "rxjs": "^6.3.3",
-    "semantic-ui-react": "^0.84.0",
-    "semantic-ui-css": "^2.4.1"
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.84.0"
   },
   "scripts": {
     "start": "react-scripts start",

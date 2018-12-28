@@ -1,23 +1,25 @@
-import React, { Component } from 'react';
-import CodeMirror from 'react-codemirror';
+import React, { Component } from 'react'
+import CodeMirror from 'react-codemirror'
+import { Button } from 'semantic-ui-react'
 
-import './CodeMirror.scss';
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/mode/clike/clike';
-import 'codemirror/theme/neat.css';
-import 'codemirror/addon/edit/closebrackets.js';
-import 'JSCPP/lib/index.js';
+import './CodeMirror.scss'
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/mode/clike/clike'
+import 'codemirror/theme/neat.css'
+import 'codemirror/addon/edit/closebrackets.js'
+
+
 
 
 class Codemirror extends Component {
-    constructor() {
-        super();
-        this.state = {
-            name: 'CodeMirror',
-            code: '// Code Here'
-        };
-    }
+    state = {
+        name: 'CodeMirror',
+        code: '// Code Here'
+    };
 
+    postCodeHandler = () => {
+        console.log(this.state.code)
+    }
 
     updateCode(newCode) {
         this.setState({
@@ -37,6 +39,7 @@ class Codemirror extends Component {
         return (
             <div>
                 <CodeMirror value={this.state.code} onChange={this.updateCode.bind(this)} options={options} />
+                <Button onClick={this.postCodeHandler}>Run</Button>
             </div>
         );
     }
