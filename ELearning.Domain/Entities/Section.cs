@@ -19,7 +19,7 @@ namespace ELearning.Domain.Entities
         public int UserId { get; set; }
         public User User { get; set; }
 
-        public ICollection<Assignment> Assignments { get; private set; }
-        public ICollection<Evaluation> Evaluations { get; private set; }
+        public ICollection<Assignment> Assignments { get; set; }
+        public ICollection<Evaluation> Evaluations { get; set; }
     }
 }

@@ -13,6 +13,7 @@ namespace ELearning.Domain.Entities
         public string Content { get; set; }
         public string TestingCode { get; set; }
         public string CorrectOutput { get; set; }
+        public short Number { get; set; }
 
         public int TaskId { get; set; }
         public Task Task { get; set; }
