@@ -27,7 +27,8 @@ namespace ELearning.Persistence.Migrations
                 {
                     SubjectId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 50, nullable: false)
+                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    Abreviation = table.Column<string>(maxLength: 8, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,8 +41,8 @@ namespace ELearning.Persistence.Migrations
                 {
                     TaskId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Title = table.Column<string>(maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "ntext", nullable: true)
+                    Title = table.Column<string>(maxLength: 64, nullable: false),
+                    Description = table.Column<string>(maxLength: 1000, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -57,7 +58,7 @@ namespace ELearning.Persistence.Migrations
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     Surname = table.Column<string>(maxLength: 50, nullable: false),
                     Email = table.Column<string>(maxLength: 320, nullable: false),
-                    Login = table.Column<string>(maxLength: 16, nullable: false),
+                    Login = table.Column<string>(maxLength: 10, nullable: false),
                     Password = table.Column<string>(maxLength: 16, nullable: false),
                     RoleId = table.Column<int>(nullable: false)
                 },
@@ -79,7 +80,7 @@ namespace ELearning.Persistence.Migrations
                     GroupId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 30, nullable: false),
-                    AcademicYear = table.Column<short>(type: "smallint", nullable: true),
+                    AcademicYear = table.Column<short>(type: "smallint", nullable: false),
                     SubjectId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -99,9 +100,10 @@ namespace ELearning.Persistence.Migrations
                 {
                     TaskVariantId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Content = table.Column<string>(type: "ntext", nullable: false),
-                    TestingCode = table.Column<string>(type: "ntext", nullable: true),
-                    CorrectOutput = table.Column<string>(type: "ntext", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TestingCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CorrectOutput = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Number = table.Column<byte>(type: "tinyint", nullable: false),
                     TaskId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -148,9 +150,9 @@ namespace ELearning.Persistence.Migrations
                 {
                     AssignmentId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Date = table.Column<DateTime>(type: "datetime", nullable: true),
-                    Solution = table.Column<string>(type: "ntext", nullable: true),
-                    Output = table.Column<string>(type: "ntext", nullable: true),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Solution = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Output = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FinalGrade = table.Column<decimal>(type: "decimal(4, 2)", nullable: true, defaultValue: 0m),
                     SectionId = table.Column<int>(nullable: false),
                     TaskVariantId = table.Column<int>(nullable: false)
@@ -186,16 +188,16 @@ namespace ELearning.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_Evaluations", x => x.EvaluationId);
                     table.ForeignKey(
-                        name: "FK_Evaluations_Assignments",
+                        name: "FK_EvaluationsReceived_Assignments",
                         column: x => x.AssignmentId,
                         principalTable: "Assignments",
                         principalColumn: "AssignmentId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Evaluations_Sections",
+                        name: "FK_EvaluationsGiven_Assignments",
                         column: x => x.SectionId,
-                        principalTable: "Sections",
-                        principalColumn: "SectionId",
+                        principalTable: "Assignments",
+                        principalColumn: "AssignmentId",
                         onDelete: ReferentialAction.Restrict);
                 });
 

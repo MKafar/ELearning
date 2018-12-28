@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ELearning.Persistence.Migrations
 {
     [DbContext(typeof(ELearningDbContext))]
-    [Migration("20181227222341_CreateELearningDb")]
+    [Migration("20181228115832_CreateELearningDb")]
     partial class CreateELearningDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,8 +28,8 @@ namespace ELearning.Persistence.Migrations
                         .HasColumnName("AssignmentId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("datetime");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("date");
 
                     b.Property<decimal?>("FinalGrade")
                         .ValueGeneratedOnAdd()
@@ -37,13 +37,13 @@ namespace ELearning.Persistence.Migrations
                         .HasDefaultValue(0m);
 
                     b.Property<string>("Output")
-                        .HasColumnType("ntext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SectionId")
                         .HasColumnName("SectionId");
 
                     b.Property<string>("Solution")
-                        .HasColumnType("ntext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TaskVariantId")
                         .HasColumnName("TaskVariantId");
@@ -91,7 +91,7 @@ namespace ELearning.Persistence.Migrations
                         .HasColumnName("GroupId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<short?>("AcademicYear")
+                    b.Property<short>("AcademicYear")
                         .HasColumnType("smallint");
 
                     b.Property<string>("Name")
@@ -156,9 +156,13 @@ namespace ELearning.Persistence.Migrations
                         .HasColumnName("SubjectId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Abreviation")
+                        .IsRequired()
+                        .HasMaxLength(8);
+
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50);
+                        .HasMaxLength(128);
 
                     b.HasKey("SubjectId");
 
@@ -173,11 +177,11 @@ namespace ELearning.Persistence.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .HasColumnType("ntext");
+                        .HasMaxLength(1000);
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(50);
+                        .HasMaxLength(64);
 
                     b.HasKey("TaskId");
 
@@ -193,16 +197,19 @@ namespace ELearning.Persistence.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("ntext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CorrectOutput")
-                        .HasColumnType("ntext");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("Number")
+                        .HasColumnType("tinyint");
 
                     b.Property<int>("TaskId")
                         .HasColumnName("TaskId");
 
                     b.Property<string>("TestingCode")
-                        .HasColumnType("ntext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TaskVariantId");
 
@@ -224,7 +231,7 @@ namespace ELearning.Persistence.Migrations
 
                     b.Property<string>("Login")
                         .IsRequired()
-                        .HasMaxLength(16);
+                        .HasMaxLength(10);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -266,15 +273,15 @@ namespace ELearning.Persistence.Migrations
             modelBuilder.Entity("ELearning.Domain.Entities.Evaluation", b =>
                 {
                     b.HasOne("ELearning.Domain.Entities.Assignment", "Assignment")
-                        .WithMany("Evaluations")
+                        .WithMany("EvaluationsReceived")
                         .HasForeignKey("AssignmentId")
-                        .HasConstraintName("FK_Evaluations_Assignments")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasConstraintName("FK_EvaluationsReceived_Assignments")
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("ELearning.Domain.Entities.Section", "Section")
-                        .WithMany("Evaluations")
+                    b.HasOne("ELearning.Domain.Entities.Assignment", "Section")
+                        .WithMany("EvaluationsGiven")
                         .HasForeignKey("SectionId")
-                        .HasConstraintName("FK_Evaluations_Sections")
+                        .HasConstraintName("FK_EvaluationsGiven_Assignments")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
