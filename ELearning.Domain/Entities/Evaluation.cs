@@ -9,6 +9,6 @@
         public Assignment Assignment { get; set; }
 
         public int SectionId { get; set; }
-        public Section Section { get; set; }
+        public Assignment Section { get; set; }
     }
 }

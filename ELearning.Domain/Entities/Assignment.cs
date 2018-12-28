@@ -7,7 +7,8 @@ namespace ELearning.Domain.Entities
     {
         public Assignment()
         {
-            Evaluations = new HashSet<Evaluation>();
+            EvaluationsReceived = new HashSet<Evaluation>();
+            EvaluationsGiven = new HashSet<Evaluation>();
         }
 
         public int AssignmentId { get; set; }
@@ -22,6 +23,7 @@ namespace ELearning.Domain.Entities
         public int TaskVariantId { get; set; }
         public TaskVariant TaskVariant { get; set; }
 
-        public ICollection<Evaluation> Evaluations { get; private set; }
+        public ICollection<Evaluation> EvaluationsReceived { get; private set; }
+        public ICollection<Evaluation> EvaluationsGiven { get; private set; }
     }
 }

@@ -7,7 +7,6 @@ namespace ELearning.Domain.Entities
         public Section()
         {
             Assignments = new HashSet<Assignment>();
-            Evaluations = new HashSet<Evaluation>();
         }
 
         public int SectionId { get; set; }
@@ -20,6 +19,5 @@ namespace ELearning.Domain.Entities
         public User User { get; set; }
 
         public ICollection<Assignment> Assignments { get; set; }
-        public ICollection<Evaluation> Evaluations { get; set; }
     }
 }
