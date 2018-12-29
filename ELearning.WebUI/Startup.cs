@@ -1,6 +1,11 @@
-using ELearning.Application.Tasks.Queries.GetTasksList;
+using ELearning.Application.Exercises.Commands.CreateExercise;
+using ELearning.Application.Exercises.Queries.GetExercisesList;
+using ELearning.Application.Infrastructure;
 using ELearning.Persistence;
+using ELearning.WebUI.Filters;
+using FluentValidation.AspNetCore;
 using MediatR;
+using MediatR.Pipeline;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,9 +30,15 @@ namespace ELearning.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMediatR(typeof(GetTasksListQueryHandler).GetTypeInfo().Assembly);
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPreProcessorBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+            services.AddMediatR(typeof(GetExercisesListQueryHandler).GetTypeInfo().Assembly);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services
+                .AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateExerciseCommandValidator>());
 
             services.AddDbContext<ELearningDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ELearningDatabase")));

@@ -9,10 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Tasks\Commands\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="8.1.2" />
     <PackageReference Include="MediatR" Version="6.0.0" />
   </ItemGroup>
 
