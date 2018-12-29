@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ELearning.Persistence.Configurations
 {
-    public class TaskVariantConfiguration : IEntityTypeConfiguration<TaskVariant>
+    public class VariantConfiguration : IEntityTypeConfiguration<Variant>
     {
-        public void Configure(EntityTypeBuilder<TaskVariant> builder)
+        public void Configure(EntityTypeBuilder<Variant> builder)
         {
-            builder.HasKey(e => e.TaskVariantId);
+            builder.HasKey(e => e.VariantId);
 
-            builder.Property(e => e.TaskVariantId)
-                .HasColumnName("TaskVariantId")
+            builder.Property(e => e.VariantId)
+                .HasColumnName("VariantId")
                 .IsRequired(true);
 
             builder.Property(e => e.Content)
@@ -26,17 +26,17 @@ namespace ELearning.Persistence.Configurations
                 .HasColumnType("tinyint")
                 .IsRequired(true);
 
-            builder.Property(e => e.TaskId)
-                .HasColumnName("TaskId")
+            builder.Property(e => e.ExerciseId)
+                .HasColumnName("ExerciseId")
                 .IsRequired(true);
 
             builder.Property(e => e.TestingCode)
                 .HasColumnType("nvarchar(max)")
                 .IsRequired(false);
 
-            builder.HasOne(e => e.Task)
-                .WithMany(e => e.TaskVariants)
-                .HasConstraintName("FK_TaskVariants_Tasks");
+            builder.HasOne(e => e.Exercise)
+                .WithMany(e => e.Variants)
+                .HasConstraintName("FK_Variants_Exercises");
         }
     }
 }

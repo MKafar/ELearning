@@ -43,14 +43,14 @@ namespace ELearning.Persistence.Migrations
                     b.Property<string>("Solution")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TaskVariantId")
-                        .HasColumnName("TaskVariantId");
+                    b.Property<int>("VariantId")
+                        .HasColumnName("VariantId");
 
                     b.HasKey("AssignmentId");
 
                     b.HasIndex("SectionId");
 
-                    b.HasIndex("TaskVariantId");
+                    b.HasIndex("VariantId");
 
                     b.ToTable("Assignments");
                 });
@@ -80,6 +80,25 @@ namespace ELearning.Persistence.Migrations
                     b.HasIndex("SectionId");
 
                     b.ToTable("Evaluations");
+                });
+
+            modelBuilder.Entity("ELearning.Domain.Entities.Exercise", b =>
+                {
+                    b.Property<int>("ExerciseId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("ExerciseId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(64);
+
+                    b.HasKey("ExerciseId");
+
+                    b.ToTable("Exercises");
                 });
 
             modelBuilder.Entity("ELearning.Domain.Entities.Group", b =>
@@ -167,55 +186,6 @@ namespace ELearning.Persistence.Migrations
                     b.ToTable("Subjects");
                 });
 
-            modelBuilder.Entity("ELearning.Domain.Entities.Task", b =>
-                {
-                    b.Property<int>("TaskId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("TaskId")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(1000);
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(64);
-
-                    b.HasKey("TaskId");
-
-                    b.ToTable("Tasks");
-                });
-
-            modelBuilder.Entity("ELearning.Domain.Entities.TaskVariant", b =>
-                {
-                    b.Property<int>("TaskVariantId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("TaskVariantId")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CorrectOutput")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte>("Number")
-                        .HasColumnType("tinyint");
-
-                    b.Property<int>("TaskId")
-                        .HasColumnName("TaskId");
-
-                    b.Property<string>("TestingCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("TaskVariantId");
-
-                    b.HasIndex("TaskId");
-
-                    b.ToTable("TaskVariants");
-                });
-
             modelBuilder.Entity("ELearning.Domain.Entities.User", b =>
                 {
                     b.Property<int>("UserId")
@@ -253,6 +223,36 @@ namespace ELearning.Persistence.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("ELearning.Domain.Entities.Variant", b =>
+                {
+                    b.Property<int>("VariantId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("VariantId")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CorrectOutput")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ExerciseId")
+                        .HasColumnName("ExerciseId");
+
+                    b.Property<byte>("Number")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("TestingCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("VariantId");
+
+                    b.HasIndex("ExerciseId");
+
+                    b.ToTable("Variants");
+                });
+
             modelBuilder.Entity("ELearning.Domain.Entities.Assignment", b =>
                 {
                     b.HasOne("ELearning.Domain.Entities.Section", "Section")
@@ -261,10 +261,10 @@ namespace ELearning.Persistence.Migrations
                         .HasConstraintName("FK_Assignments_Sections")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ELearning.Domain.Entities.TaskVariant", "TaskVariant")
+                    b.HasOne("ELearning.Domain.Entities.Variant", "Variant")
                         .WithMany("Assignments")
-                        .HasForeignKey("TaskVariantId")
-                        .HasConstraintName("FK_Assignments_TaskVariants")
+                        .HasForeignKey("VariantId")
+                        .HasConstraintName("FK_Assignments_Variants")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -307,21 +307,21 @@ namespace ELearning.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("ELearning.Domain.Entities.TaskVariant", b =>
-                {
-                    b.HasOne("ELearning.Domain.Entities.Task", "Task")
-                        .WithMany("TaskVariants")
-                        .HasForeignKey("TaskId")
-                        .HasConstraintName("FK_TaskVariants_Tasks")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("ELearning.Domain.Entities.User", b =>
                 {
                     b.HasOne("ELearning.Domain.Entities.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
                         .HasConstraintName("FK_Users_Roles")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ELearning.Domain.Entities.Variant", b =>
+                {
+                    b.HasOne("ELearning.Domain.Entities.Exercise", "Exercise")
+                        .WithMany("Variants")
+                        .HasForeignKey("ExerciseId")
+                        .HasConstraintName("FK_Variants_Exercises")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

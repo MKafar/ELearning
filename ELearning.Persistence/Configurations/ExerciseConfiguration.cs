@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ELearning.Persistence.Configurations
 {
-    public class TaskConfiguration : IEntityTypeConfiguration<Task>
+    public class TaskConfiguration : IEntityTypeConfiguration<Exercise>
     {
-        public void Configure(EntityTypeBuilder<Task> builder)
+        public void Configure(EntityTypeBuilder<Exercise> builder)
         {
-            builder.HasKey(e => e.TaskId);
+            builder.HasKey(e => e.ExerciseId);
 
-            builder.Property(e => e.TaskId)
-                .HasColumnName("TaskId")
+            builder.Property(e => e.ExerciseId)
+                .HasColumnName("ExerciseId")
                 .IsRequired(true);
 
             builder.Property(e => e.Description)

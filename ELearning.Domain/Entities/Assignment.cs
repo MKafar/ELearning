@@ -20,8 +20,8 @@ namespace ELearning.Domain.Entities
         public int SectionId { get; set; }
         public Section Section { get; set; }
 
-        public int TaskVariantId { get; set; }
-        public TaskVariant TaskVariant { get; set; }
+        public int VariantId { get; set; }
+        public Variant Variant { get; set; }
 
         public ICollection<Evaluation> EvaluationsReceived { get; private set; }
         public ICollection<Evaluation> EvaluationsGiven { get; private set; }

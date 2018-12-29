@@ -14,6 +14,8 @@ namespace ELearning.Persistence
 
         public DbSet<Evaluation> Evaluations { get; set; }
 
+        public DbSet<Exercise> Exercises { get; set; }
+
         public DbSet<Group> Groups { get; set; }
 
         public DbSet<Role> Roles { get; set; }
@@ -22,11 +24,9 @@ namespace ELearning.Persistence
 
         public DbSet<Subject> Subjects { get; set; }
 
-        public DbSet<Task> Tasks { get; set; }
-
-        public DbSet<TaskVariant> TaskVariants { get; set; }
-
         public DbSet<User> Users { get; set; }
+
+        public DbSet<Variant> Variants { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

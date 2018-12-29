@@ -32,17 +32,17 @@ namespace ELearning.Persistence.Configurations
             builder.Property(e => e.Solution)
                 .HasColumnType("nvarchar(max)");
 
-            builder.Property(e => e.TaskVariantId)
-                .HasColumnName("TaskVariantId")
+            builder.Property(e => e.VariantId)
+                .HasColumnName("VariantId")
                 .IsRequired(true);
 
             builder.HasOne(e => e.Section)
                 .WithMany(e => e.Assignments)
                 .HasConstraintName("FK_Assignments_Sections");
 
-            builder.HasOne(e => e.TaskVariant)
+            builder.HasOne(e => e.Variant)
                 .WithMany(e => e.Assignments)
-                .HasConstraintName("FK_Assignments_TaskVariants");
+                .HasConstraintName("FK_Assignments_Variants");
         }
     }
 }

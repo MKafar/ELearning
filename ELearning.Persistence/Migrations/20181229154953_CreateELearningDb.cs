@@ -9,6 +9,20 @@ namespace ELearning.Persistence.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Exercises",
+                columns: table => new
+                {
+                    ExerciseId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(maxLength: 64, nullable: false),
+                    Description = table.Column<string>(maxLength: 1000, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Exercises", x => x.ExerciseId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -36,17 +50,26 @@ namespace ELearning.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tasks",
+                name: "Variants",
                 columns: table => new
                 {
-                    TaskId = table.Column<int>(nullable: false)
+                    VariantId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Title = table.Column<string>(maxLength: 64, nullable: false),
-                    Description = table.Column<string>(maxLength: 1000, nullable: true)
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TestingCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CorrectOutput = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Number = table.Column<byte>(type: "tinyint", nullable: false),
+                    ExerciseId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tasks", x => x.TaskId);
+                    table.PrimaryKey("PK_Variants", x => x.VariantId);
+                    table.ForeignKey(
+                        name: "FK_Variants_Exercises",
+                        column: x => x.ExerciseId,
+                        principalTable: "Exercises",
+                        principalColumn: "ExerciseId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -95,29 +118,6 @@ namespace ELearning.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TaskVariants",
-                columns: table => new
-                {
-                    TaskVariantId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TestingCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CorrectOutput = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Number = table.Column<byte>(type: "tinyint", nullable: false),
-                    TaskId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TaskVariants", x => x.TaskVariantId);
-                    table.ForeignKey(
-                        name: "FK_TaskVariants_Tasks",
-                        column: x => x.TaskId,
-                        principalTable: "Tasks",
-                        principalColumn: "TaskId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Sections",
                 columns: table => new
                 {
@@ -155,7 +155,7 @@ namespace ELearning.Persistence.Migrations
                     Output = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FinalGrade = table.Column<decimal>(type: "decimal(4, 2)", nullable: true, defaultValue: 0m),
                     SectionId = table.Column<int>(nullable: false),
-                    TaskVariantId = table.Column<int>(nullable: false)
+                    VariantId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -167,10 +167,10 @@ namespace ELearning.Persistence.Migrations
                         principalColumn: "SectionId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Assignments_TaskVariants",
-                        column: x => x.TaskVariantId,
-                        principalTable: "TaskVariants",
-                        principalColumn: "TaskVariantId",
+                        name: "FK_Assignments_Variants",
+                        column: x => x.VariantId,
+                        principalTable: "Variants",
+                        principalColumn: "VariantId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -207,9 +207,9 @@ namespace ELearning.Persistence.Migrations
                 column: "SectionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Assignments_TaskVariantId",
+                name: "IX_Assignments_VariantId",
                 table: "Assignments",
-                column: "TaskVariantId");
+                column: "VariantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Evaluations_AssignmentId",
@@ -237,14 +237,14 @@ namespace ELearning.Persistence.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TaskVariants_TaskId",
-                table: "TaskVariants",
-                column: "TaskId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Users_RoleId",
                 table: "Users",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Variants_ExerciseId",
+                table: "Variants",
+                column: "ExerciseId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -259,7 +259,7 @@ namespace ELearning.Persistence.Migrations
                 name: "Sections");
 
             migrationBuilder.DropTable(
-                name: "TaskVariants");
+                name: "Variants");
 
             migrationBuilder.DropTable(
                 name: "Groups");
@@ -268,7 +268,7 @@ namespace ELearning.Persistence.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Tasks");
+                name: "Exercises");
 
             migrationBuilder.DropTable(
                 name: "Subjects");
