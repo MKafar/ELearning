@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using ELearning.Application.Exceptions;
+using ELearning.Domain.Entities;
 using ELearning.Persistence;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace ELearning.Application.Exercises.Queries.GetExerciseById
 {
@@ -18,16 +18,17 @@ namespace ELearning.Application.Exercises.Queries.GetExerciseById
 
         public async Task<ExerciseViewModel> Handle(GetExerciseByIdQuery request, CancellationToken cancellationToken)
         {
-            var vm = await _context.Exercises
-                .Select(c => new ExerciseViewModel
-                {
-                    Id = c.ExerciseId,
-                    Title = c.Title,
-                    
-                }).Where(r => r.Id == request.Id)
-                .FirstOrDefaultAsync(cancellationToken);
+            var entity = await _context.Exercises
+                .FindAsync(request.Id);
 
-            return vm;
+            if (entity == null)
+                throw new NotFoundException(nameof(Exercise), request.Id);
+
+            return new ExerciseViewModel
+            {
+                Id = entity.ExerciseId,
+                Title = entity.Title            
+            };
         }
     }
 }
