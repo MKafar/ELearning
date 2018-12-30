@@ -1,14 +1,12 @@
 .login {
-color: gray;
-display: flex;
-float: right;
+  color: gray;
+  display: flex;
+  float: right;
+  flex-direction: column;
 }
 
-.loginfield {
-    display: flex;
-    flex-direction: column;
-}
-
-.ui input {
-    margin:0 5px 5px 5px !important;
-}
+// @media (min-width: 300px) {
+//     .login {
+//         width: 200px;
+//     }
+// }

@@ -7,11 +7,11 @@ import './DetailList.scss'
 const DetailList = (props) => {
 
     const detailsHandler = () => {
-        console.log('Szczegóły', props.number);
+        console.log('Szczegóły', props.id);
     }
 
     return (
-        <div>
+        <div className='detailList'>
             <Container>
                 <List divided relaxed>
                     <List.Item>
@@ -19,7 +19,7 @@ const DetailList = (props) => {
                             <Button onClick={detailsHandler}> Szczegóły </Button>
                         </List.Content>
                         <List.Content floated='left'>
-                            { props.number }
+                            { props.id }
                         </List.Content>
                         <List.Content  floated='left'>
                             { props.date }

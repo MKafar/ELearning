@@ -1,0 +1,19 @@
+.StudentExercises {
+    display: flex;
+}
+
+.todayExercise {
+    margin: 15px;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 2px #ccc;
+    width: 300px;
+    padding: 10px;
+    text-align: center;
+    max-height: 250px;
+}
+.previousExercise {
+    margin: 15px;
+    height: 700px;
+    overflow: auto;
+    overflow-x: auto;
+}

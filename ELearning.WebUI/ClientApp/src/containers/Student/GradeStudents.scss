@@ -1,0 +1,26 @@
+.gradeStudents {
+    display: flex;
+    flex-direction: column;
+    margin: 8px;
+    padding: 8px;
+}
+
+.gradeContainer {
+    display: flex;
+}
+
+.studentCode {
+    margin: 8px;
+    padding: 8px;
+    margin-right: 15px;
+}
+
+.dropdown {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.grades {
+    margin: 8px;
+    padding: 8px;
+}

@@ -126,8 +126,8 @@ class Grade extends Component {
                     <List>
                         <List.Item>
                             <List.Content floated='right'>
-                                <Button onClick={this.avgScoreHandler} >Oblicz</Button>
                                 <Button onClick={this.sendScoreHandler} >Wyślij</Button>
+                                <Button onClick={this.avgScoreHandler} >Oblicz</Button>
                             </List.Content>
                             <List.Content>
                                 <Header as='h4'>Średnia ocena: {this.state.avgScore} </Header>

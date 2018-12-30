@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Menu } from 'semantic-ui-react'
 
-import "./Menu.scss";
+import "./MenuStudent.scss";
 
-class menu extends Component {
+class MenuStudent extends Component {
     state = { activeItem: 'home' }
 
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -12,19 +12,24 @@ class menu extends Component {
         const { activeItem } = this.state
 
         return (
-            <Menu inverted vertical>
+            <Menu vertical>
                 <Menu.Item
                     name='home'
                     active={activeItem === 'home'}
                     onClick={this.handleItemClick}
                 />
                 <Menu.Item
-                    name='coding'
-                    active={activeItem === 'coding'}
+                    name='zadanie'
+                    active={activeItem === 'zadanie'}
+                    onClick={this.handleItemClick}
+                />
+                <Menu.Item
+                    name='wyloguj'
+                    active={activeItem === 'wyloguj'}
                     onClick={this.handleItemClick}
                 />
             </Menu>
         )
     }
 }
-export default menu;
+export default MenuStudent;

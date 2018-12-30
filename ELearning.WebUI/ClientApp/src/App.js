@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import 'semantic-ui-react';
+import {BrowserRouter} from 'react-router-dom';
 
 import './App.css';
-import Menu from './components/Menu/Menu.jsx';
-
+import Student from './containers/Student/Student';
+import Admin from './containers/Admin/Admin';
 
 class App extends Component {
 
@@ -31,16 +32,12 @@ class App extends Component {
 
 
     return (
-      <div className='App'>
-        <div className=" block">
-          <div className="menu">
-            <Menu></Menu>
-          </div>
-          <div>
-
-          </div>
-
+      <BrowserRouter>
+        <div className='App'>
+          {/* <Student /> */}
+          <Admin />
         </div>
+      </BrowserRouter>
 
 
 
@@ -50,7 +47,8 @@ class App extends Component {
 
 
 
-        {/* 
+
+        /* 
         //różne mody jednego komponentu
             <CodeWindow code={code}></CodeWindow>
             <CodeWindow changeMode={true} code={'Hello'}></CodeWindow>
@@ -72,10 +70,10 @@ class App extends Component {
                 title = { exercise.title }
                 date = { exercise.date }/>
             } )}
-          </div> */}
+          </div> */
 
 
-        {/*
+        /*
       <div className = "menu">
       <Menu></Menu>
       </div>
@@ -89,9 +87,9 @@ class App extends Component {
           <Codemirror></Codemirror>
           <Output></Output>
         </div>
-        */}
+        */
 
-      </div>
+      
     );
   }
 }
