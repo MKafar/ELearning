@@ -9,7 +9,6 @@ using ELearning.Application.Users.Command.DeleteUser;
 
 namespace ELearning.WebUI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class UsersController : BaseController
     {

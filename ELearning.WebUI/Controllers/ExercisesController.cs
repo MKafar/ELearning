@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ELearning.WebUI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class ExercisesController : BaseController
     {
