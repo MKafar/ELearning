@@ -13,10 +13,4 @@
     <PackageReference Include="MediatR" Version="6.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Users\Command\CreateUser\" />
-    <Folder Include="Users\Command\DeleteUser\" />
-    <Folder Include="Users\Command\UpdateUser\" />
-  </ItemGroup>
-
 </Project>

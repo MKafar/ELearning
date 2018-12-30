@@ -23,9 +23,7 @@ namespace ELearning.Application.Exercises.Commands.UpdateExercise
                 .SingleAsync(c => c.ExerciseId == request.Id, cancellationToken);
 
             if (entity == null)
-            {
                 throw new NotFoundException(nameof(Exercise), request.Id);
-            }
 
             entity.Title = request.Title;
 

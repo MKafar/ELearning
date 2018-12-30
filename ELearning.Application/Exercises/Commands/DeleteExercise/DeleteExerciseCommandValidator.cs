@@ -7,7 +7,7 @@ namespace ELearning.Application.Exercises.Commands.DeleteExercise
         public DeleteExerciseCommandValidator()
         {
             RuleFor(v => v.Id)
-                .NotNull()
+                .NotEmpty()
                 .GreaterThan(0);
         }
     }
