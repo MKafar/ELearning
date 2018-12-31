@@ -23,8 +23,10 @@ namespace ELearning.Application.Groups.Queries.GetGroupsList
                 Groups = await _context.Groups
                     .Select(e => new GroupLookupModel
                     {
+                        Id = e.GroupId,
                         Name = e.Name,
                         AcademicYear = e.AcademicYear,
+                        SubjectId = e.SubjectId,
                         SubjectName = e.Subject.Name,
                         SubjectAbreviation = e.Subject.Abreviation
                     }).ToListAsync(cancellationToken)
