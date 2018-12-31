@@ -25,7 +25,10 @@ namespace ELearning.Application.Users.Queries.GetUsersList
                     {
                         Id = e.UserId,
                         Name = e.Name,
-                        Surname = e.Surname
+                        Surname = e.Surname,
+                        Email = e.Email,
+                        RoleId = e.RoleId,
+                        RoleName = e.Role.Name
                     }).ToListAsync(cancellationToken)
             };
 
