@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Groups\Commands\CreateGroup\" />
     <Folder Include="Groups\Commands\DeleteGroup\" />
     <Folder Include="Groups\Commands\UpdateGroup\" />
   </ItemGroup>
