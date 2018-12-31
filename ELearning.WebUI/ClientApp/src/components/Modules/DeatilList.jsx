@@ -10,6 +10,10 @@ const DetailList = (props) => {
         console.log('Szczegóły', props.id);
     }
 
+    const removeHandler = () => {
+        console.log('Usuń', props.id);
+    }
+
     return (
         <div className='detailList'>
             <Container>
@@ -17,6 +21,7 @@ const DetailList = (props) => {
                     <List.Item>
                         <List.Content floated='right'>
                             <Button onClick={detailsHandler}> Szczegóły </Button>
+                            <Button onClick={removeHandler}> Usuń </Button>
                         </List.Content>
                         <List.Content floated='left'>
                             { props.id }

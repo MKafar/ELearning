@@ -4,7 +4,8 @@ import './AdminExercises.scss';
 import SearchExercise from '../../components/Modules/SearchExercise';
 import DetailList from '../../components/Modules/DeatilList';
 import axios from '../../axios';
-import { Button, Icon} from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
+import ModalAdd from '../../components/Modules/Modal';
 
 class AdminExercises extends Component {
 
@@ -40,8 +41,13 @@ class AdminExercises extends Component {
     reverseState = () => {
         this.setState({ showSelected: false });
     }
-    
+
+    addnewHandler = () => {
+        
+    }
+  
     render() {
+
 
         return (
             <div className='adminExercises'>
@@ -51,6 +57,8 @@ class AdminExercises extends Component {
                             onSelectValue={this.valueHandle} />
                     </div>
                     <Button icon onClick={this.reverseState}><Icon name='delete' /></Button>
+                    {/* <Button onClick={this.addnewHandler}>Dodaj zadanie</Button> */}
+                    <ModalAdd addHanlde={this.addnewHandler}/>
                 </div>
 
                 <div className='exerciseList'>

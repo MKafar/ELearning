@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 import './Admin.scss';
 import MenuAdmin from '../../components/Menu/MenuAdmin';
-//import AdminExercises from './AdminExercises'; 
+//import AdminExerciseDetails from './AdminExerciseDetails';
+import AdminExercises from './AdminExercises'; 
 //import AdminStudents from './AdminStudents';
 
 class Admin extends Component {
@@ -17,7 +18,7 @@ class Admin extends Component {
                     <MenuAdmin />
                 </div>
                 <div className='content'>
-
+                    <AdminExercises />
                 </div>
 
             </div>
