@@ -4,14 +4,6 @@ import React, { Component } from 'react'
 import { Search, Grid } from 'semantic-ui-react'
 import axios from '../../axios';
 
-// const source = [
-//     { title: 'halo' },
-//     { title: 'e' },
-//     { title: 'helo' }
-// ];
-
-
-
 class SearchExercise extends Component {
 
     state = {
@@ -22,10 +14,7 @@ class SearchExercise extends Component {
         axios.get('/api/Exercises/GetAll')
         .then(response => {
             this.setState({source: response.data.exercises})
-            this.props.senddata(response.data.exercises);
         });
-
-        //this.props.sendData(response.data.exercises);
     }
 
     componentWillMount() {
