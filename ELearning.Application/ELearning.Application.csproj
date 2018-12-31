@@ -13,4 +13,11 @@
     <PackageReference Include="MediatR" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Groups\Commands\CreateGroup\" />
+    <Folder Include="Groups\Commands\DeleteGroup\" />
+    <Folder Include="Groups\Commands\UpdateGroup\" />
+    <Folder Include="Groups\Queries\GetGroupById\" />
+  </ItemGroup>
+
 </Project>
