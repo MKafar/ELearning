@@ -4,7 +4,7 @@ import 'semantic-ui-react';
 import {BrowserRouter} from 'react-router-dom';
 
 import './App.css';
-import Student from './containers/Student/Student';
+//import Student from './containers/Student/Student';
 import Admin from './containers/Admin/Admin';
 
 class App extends Component {

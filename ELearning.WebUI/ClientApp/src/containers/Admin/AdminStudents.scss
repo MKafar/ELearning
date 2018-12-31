@@ -1,4 +1,4 @@
-.adminExercises {
+.adminStudents {
     box-sizing: inherit;
     display: flex;
     flex-direction: column;
@@ -17,7 +17,7 @@
 .searching {
     display: flex;
 }
-.exerciseList {
+.studentList {
     max-height: 700px;
     overflow: auto;
 }

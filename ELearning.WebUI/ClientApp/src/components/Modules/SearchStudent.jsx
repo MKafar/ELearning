@@ -4,21 +4,25 @@ import React, { Component } from 'react'
 import { Search, Grid } from 'semantic-ui-react'
 import axios from '../../axios';
 
-//TODO: zmienić endpoint na studentów
-
-
-class SearchExercise extends Component {
+class SearchStudent extends Component {
 
     state = {
         source: []
     }
 
-    componentDidMount () {
-        axios.get('/api/Exercises/GetAll')
-        .then(response => {
-            this.setState({source: response.data.exercises})
-            console.log(response.data.exercises);
-        });
+    componentDidMount() {
+        axios.get('/api/Users/GetAll')
+            .then(response => {
+                const us = response.data.users;
+
+                let i;
+                for(i = 0; i < us.length; i++){
+                    us[i].title = us[i]['name'];
+                    delete us[i].name;
+                }
+            
+                this.setState({ source: response.data.users });
+            });
     }
 
     componentWillMount() {
@@ -29,9 +33,12 @@ class SearchExercise extends Component {
         this.setState({ isLoading: false, results: [], value: '' })
     )
 
-    handleResultSelect = (e, { result }) => (
-        this.setState({ value: result.title })
-    )
+    handleResultSelect = (e, { result }) => {
+        this.setState({ value: result.title });
+
+        this.props.onSelectValue(result.id);
+        
+    }
 
     handleSearchChange = (e, { value }) => {
         this.setState({ isLoading: true, value })
@@ -42,7 +49,6 @@ class SearchExercise extends Component {
             const source = this.state.source;
             const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
             const isMatch = result => re.test(result.title)
-
             this.setState({
                 isLoading: false,
                 results: _.filter(source, isMatch),
@@ -79,4 +85,4 @@ class SearchExercise extends Component {
     }
 }
 
-export default SearchExercise;
+export default SearchStudent;

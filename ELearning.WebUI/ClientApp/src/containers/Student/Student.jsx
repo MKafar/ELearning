@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
 import './Student.scss';
-import ExerciseDetails from './ExerciseDetails';
+//import ExerciseDetails from './ExerciseDetails';
 import StudentCoding from './StudentCoding';
 import MenuStudent from '../../components/Menu/MenuStudent';
-import GradeStudents from './GradeStudents';
-import StudentExercises from './StudentExercises';
+//import GradeStudents from './GradeStudents';
+//import StudentExercises from './StudentExercises';
 
 
 class Student extends Component {
