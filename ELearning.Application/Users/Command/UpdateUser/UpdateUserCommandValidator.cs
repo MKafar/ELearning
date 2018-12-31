@@ -6,10 +6,6 @@ namespace ELearning.Application.Users.Command.UpdateUser
     {
         public UpdateUserCommandValidator()
         {
-            RuleFor(v => v.Id)
-                .NotEmpty()
-                .GreaterThan(0);
-
             RuleFor(v => v.Name)
                 .NotEmpty()
                 .MaximumLength(50);
