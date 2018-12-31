@@ -6,10 +6,6 @@ namespace ELearning.Application.Exercises.Commands.UpdateExercise
     {
         public UpdateExerciseCommandValidator()
         {
-            RuleFor(v => v.Id)
-                .NotEmpty()
-                .GreaterThan(0);
-
             RuleFor(v => v.Title)
                 .NotEmpty()
                 .MaximumLength(64);
