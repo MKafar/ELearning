@@ -6,10 +6,6 @@ namespace ELearning.Application.Subjects.Command.UpdateSubject
     {
         public UpdateSubjectCommandValidator()
         {
-            RuleFor(v => v.Id)
-                .NotEmpty()
-                .GreaterThan(0);
-
             RuleFor(v => v.Name)
                 .NotEmpty()
                 .MaximumLength(128);

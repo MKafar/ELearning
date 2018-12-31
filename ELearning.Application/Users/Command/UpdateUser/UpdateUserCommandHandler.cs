@@ -21,7 +21,7 @@ namespace ELearning.Application.Users.Command.UpdateUser
         public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
             var entity = await _context.Users
-                .SingleOrDefaultAsync(e => e.UserId == request.Id);
+                .SingleAsync(e => e.UserId == request.Id);
 
             if (entity == null)
                 throw new NotFoundException(nameof(User), request.Id);
