@@ -24,7 +24,10 @@ namespace ELearning.Application.Users.Queries.GetUsersList
                     .Select(e => new UserLookupModel
                     {
                         Id = e.UserId,
-                        Name = $"{e.Name} {e.Surname}"
+                        Name = $"{e.Name} {e.Surname}",
+                        Email = e.Email,
+                        RoleId = e.RoleId,
+                        RoleName = e.Role.Name
                     }).ToListAsync(cancellationToken)
             };
 
