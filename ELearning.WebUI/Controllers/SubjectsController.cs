@@ -1,10 +1,10 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using ELearning.Application.Subjects.Command.CreateSubject;
+using ELearning.Application.Subjects.Command.DeleteSubject;
 using ELearning.Application.Subjects.Command.UpdateSubject;
 using ELearning.Application.Subjects.Queries.GetSubjectById;
 using ELearning.Application.Subjects.Queries.GetSubjectsList;
-using ELearning.Application.Users.Command.DeleteUser;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ELearning.WebUI.Controllers
@@ -20,7 +20,7 @@ namespace ELearning.WebUI.Controllers
         }
 
         // GET: api/Subjects/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<SubjectViewModel>> GetById(int id)
         {
             return Ok(await Mediator.Send(new GetSubjectByIdQuery { Id = id }));
@@ -37,9 +37,9 @@ namespace ELearning.WebUI.Controllers
         }
 
         // PUT: api/Subjects/5
-        [HttpPut("{id}")]
+        [HttpPut]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        public async Task<IActionResult> Update(int id, [FromBody]UpdateSubjectCommand command)
+        public async Task<IActionResult> Update([FromBody]UpdateSubjectCommand command)
         {
             await Mediator.Send(command);
 
@@ -51,7 +51,7 @@ namespace ELearning.WebUI.Controllers
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Delete(int id)
         {
-            await Mediator.Send(new DeleteUserCommand { Id = id });
+            await Mediator.Send(new DeleteSubjectCommand { Id = id });
 
             return NoContent();
         }

@@ -40,9 +40,9 @@ namespace ELearning.WebUI.Controllers
         }
 
         // PUT api/exercises/5
-        [HttpPut("{id}")]
+        [HttpPut]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        public async Task<IActionResult> Update(int id, [FromBody]UpdateExerciseCommand command)
+        public async Task<IActionResult> Update([FromBody]UpdateExerciseCommand command)
         {
             await Mediator.Send(command);
 
