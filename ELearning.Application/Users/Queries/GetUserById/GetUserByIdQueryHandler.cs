@@ -28,7 +28,7 @@ namespace ELearning.Application.Users.Queries.GetUserById
             {
                 Id = entity.UserId,
                 Name = $"{entity.Name} {entity.Surname}",
-                Email = entity.Email
+                Email = entity.Email,
                 RoleId = entity.RoleId,
                 RoleName = entity.Role.Name
                 
