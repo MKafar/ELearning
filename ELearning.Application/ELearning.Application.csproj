@@ -24,11 +24,6 @@
     <Folder Include="Evaluations\Commands\UpdateEvaluation\" />
     <Folder Include="Evaluations\Queries\GetEvaluationById\" />
     <Folder Include="Evaluations\Queries\GetEvaluationsList\" />
-    <Folder Include="Variants\Commands\CreateVariant\" />
-    <Folder Include="Variants\Commands\DeleteVariant\" />
-    <Folder Include="Variants\Commands\UpdateVariant\" />
-    <Folder Include="Variants\Queries\GetVariantById\" />
-    <Folder Include="Variants\Queries\GetVariantsList\" />
   </ItemGroup>
 
 </Project>
