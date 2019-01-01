@@ -27,9 +27,11 @@ namespace ELearning.Application.Users.Queries.GetUserById
             return new UserViewModel
             {
                 Id = entity.UserId,
-                Name = entity.Name,
-                Surname = entity.Surname,
-                Email = entity.Email
+                Name = $"{entity.Name} {entity.Surname}",
+                Email = entity.Email,
+                RoleId = entity.RoleId,
+                RoleName = entity.Role.Name
+                
             };
         }
     }

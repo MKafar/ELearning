@@ -12,21 +12,21 @@ namespace ELearning.WebUI.Controllers
     [ApiController]
     public class UsersController : BaseController
     {
-        // GET: api/users
+        // GET: api/Users/GetAll
         [HttpGet]
         public async Task<ActionResult<UsersListViewModel>> GetAll()
         {
             return Ok(await Mediator.Send(new GetUsersListQuery()));
         }
 
-        // GET: api/Users/5
+        // GET: api/Users/GetById/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserViewModel>> Get(int id)
+        public async Task<ActionResult<UserViewModel>> GetById(int id)
         {
             return Ok(await Mediator.Send(new GetUserByIdQuery { Id = id }));
         }
 
-        // POST: api/Users
+        // POST: api/Users/Create
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Create([FromBody]CreateUserCommand command)
@@ -36,7 +36,7 @@ namespace ELearning.WebUI.Controllers
             return NoContent();
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Users/Update
         [HttpPut]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Update([FromBody]UpdateUserCommand command)
@@ -46,7 +46,7 @@ namespace ELearning.WebUI.Controllers
             return NoContent();
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/Users/Delete/5
         [HttpDelete("{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Delete(int id)

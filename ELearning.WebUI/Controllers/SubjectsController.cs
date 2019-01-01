@@ -12,21 +12,21 @@ namespace ELearning.WebUI.Controllers
     [ApiController]
     public class SubjectsController : BaseController
     {
-        // GET: api/Subjects
+        // GET: api/Subjects/GetAll
         [HttpGet]
         public async Task<ActionResult<SubjectsListViewModel>> GetAll()
         {
             return Ok(await Mediator.Send(new GetSubjectsListQuery()));
         }
 
-        // GET: api/Subjects/5
+        // GET: api/Subjects/GetById/5
         [HttpGet("{id}")]
         public async Task<ActionResult<SubjectViewModel>> GetById(int id)
         {
             return Ok(await Mediator.Send(new GetSubjectByIdQuery { Id = id }));
         }
 
-        // POST: api/Subjects
+        // POST: api/Subjects/Create
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Create([FromBody]CreateSubjectCommand command)
@@ -36,7 +36,7 @@ namespace ELearning.WebUI.Controllers
             return NoContent();
         }
 
-        // PUT: api/Subjects/5
+        // PUT: api/Subjects/Update
         [HttpPut]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Update([FromBody]UpdateSubjectCommand command)
@@ -46,7 +46,7 @@ namespace ELearning.WebUI.Controllers
             return NoContent();
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/ApiWithActions/Delete/5
         [HttpDelete("{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Delete(int id)
