@@ -8,11 +8,13 @@ namespace ELearning.Application.Users.Command.CreateUser
         {
             RuleFor(v => v.Name)
                 .NotEmpty()
-                .MaximumLength(50);
+                .MaximumLength(50)
+                .Matches("^[A-Z]([a-z0-9_-]{1,}|)$");
 
             RuleFor(v => v.Surname)
                 .NotEmpty()
-                .MaximumLength(50);
+                .MaximumLength(50)
+                .Matches("^[A-Z]([a-z0-9_-]{1,}|)$");
 
             RuleFor(v => v.Email)
                 .NotEmpty()
