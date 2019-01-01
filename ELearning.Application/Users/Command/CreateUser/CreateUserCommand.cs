@@ -7,6 +7,5 @@ namespace ELearning.Application.Users.Command.CreateUser
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
-        public int RoleId { get; set; }
     }
 }

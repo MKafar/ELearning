@@ -18,11 +18,7 @@ namespace ELearning.Application.Users.Command.UpdateUser
                 .NotEmpty()
                 .MaximumLength(320)
                 .Matches("^.{1,64}@(student.|)polsl.pl$")
-                .WithMessage("University's email has format {login@student.polsl.pl} or {name.surname@polsl.pl}.");
-
-            RuleFor(v => v.RoleId)
-                .NotEmpty()
-                .GreaterThan(0);
+                .WithMessage("University's email has format {login@student.polsl.pl} or {name.surname@student.polsl.pl}.");
         }
     }
 }

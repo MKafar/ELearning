@@ -11,7 +11,7 @@ namespace ELearning.Domain.Entities
 
         public int GroupId { get; set; }
         public string Name { get; set; }
-        public short AcademicYear { get; set; }
+        public int AcademicYear { get; set; }
 
         public int SubjectId { get; set; }
         public Subject Subject { get; set; }
