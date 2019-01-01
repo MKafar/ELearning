@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Input, Dropdown } from 'semantic-ui-react';
+import { Button, Modal, Input, Dropdown, Table } from 'semantic-ui-react';
 import axios from '../../axios';
 
 import './ModalAddStudent.scss';
@@ -75,14 +75,33 @@ class ModalAddStudent extends Component {
             <Modal trigger={<Button>Dodaj studenta</Button>} centered={false}>
                 <Modal.Header>Dodaj studenta</Modal.Header>
                 <Modal.Content >
-                        <Input className='studentInput' placeholder='Imię' onChange={this.nameHandle} />
-                        <Input className='studentInput' placeholder='Nazwisko' onChange={this.surnameHandle} />
-                        <Input className='studentInput' placeholder='mail@student.polsl.pl' onChange={this.emailHandle} />
-                        <Dropdown className='studentInput' placeholder='Laboratorium' clearable options={subjectOptions} selection />
-                        <Dropdown className='studentInput' placeholder='Grupa' clearable options={groupOptions} selection />
-                        <Input className='sectionInput' placeholder='Sekcja' onChange={this.sectionHandle} />
-                        <Button className='addtolistbutton' primary onClick={this.addtolistHandle}>Dodaj</Button>
+                    <Input className='studentInput' placeholder='Imię' onChange={this.nameHandle} />
+                    <Input className='studentInput' placeholder='Nazwisko' onChange={this.surnameHandle} />
+                    <Input className='studentInput' placeholder='mail@student.polsl.pl' onChange={this.emailHandle} />
+                    <Dropdown className='studentInput' placeholder='Laboratorium' clearable options={subjectOptions} selection />
+                    <Dropdown className='studentInput' placeholder='Grupa' clearable options={groupOptions} selection />
+                    <Input className='sectionInput' placeholder='Sekcja' onChange={this.sectionHandle} />
+                    <Button className='addtolistbutton' primary onClick={this.addtolistHandle}>Dodaj</Button>
 
+                    <Table basic='very' className='addstudenttable'>
+                        <Table.Header>
+                            <Table.Row>
+                                <Table.HeaderCell>Laboratorium</Table.HeaderCell>
+                                <Table.HeaderCell>Grupa</Table.HeaderCell>
+                                <Table.HeaderCell>Sekcja</Table.HeaderCell> 
+                                <Table.HeaderCell></Table.HeaderCell>
+                            </Table.Row>
+                        </Table.Header>
+
+                        <Table.Body>
+                            <Table.Row>
+                                <Table.Cell className='laboratory'>John</Table.Cell>
+                                <Table.Cell className='group'>Approved</Table.Cell>
+                                <Table.Cell>None</Table.Cell> 
+                                <Table.Cell><Button className='deletetablebutton'>Usuń</Button></Table.Cell>
+                            </Table.Row>
+                        </Table.Body>
+                    </Table>
                 </Modal.Content>
                 <Modal.Actions>
                     <Button primary onClick={this.addHandle}>Zapisz</Button>
