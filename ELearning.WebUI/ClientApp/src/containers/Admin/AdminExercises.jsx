@@ -5,7 +5,7 @@ import SearchExercise from '../../components/Modules/SearchExercise';
 import DetailList from '../../components/Modules/DeatilList';
 import axios from '../../axios';
 import { Button, Icon } from 'semantic-ui-react';
-import ModalAdd from '../../components/Modules/Modal';
+import ModalAdd from '../../components/Modules/ModalAdd';
 
 class AdminExercises extends Component {
 

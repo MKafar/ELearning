@@ -19,11 +19,6 @@ class MenuStudent extends Component {
                     onClick={this.handleItemClick}
                 />
                 <Menu.Item
-                    name='zadanie'
-                    active={activeItem === 'zadanie'}
-                    onClick={this.handleItemClick}
-                />
-                <Menu.Item
                     name='wyloguj'
                     active={activeItem === 'wyloguj'}
                     onClick={this.handleItemClick}

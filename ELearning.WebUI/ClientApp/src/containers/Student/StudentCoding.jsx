@@ -18,20 +18,25 @@ class StudentCoding extends Component {
     render() {
 
         const sendCodeHandler = () => {
-            console.log('Treść');
+            console.log('wysłano');
+        }
+        
+        const showexercise = () => {
+            console.log('Treść zadania');
         }
 
         return (
             <div className='codingStudent'>
-                <Header size='large'>Jakiś student</Header>
+                <Header size='large'>Imię i nazwisko Tytuł zadania <Button className="exercisedeatilsbutton" onClick={showexercise}>Treść zadania</Button></Header>
+                
                 <div className='codingContainer'>
                     <div>
                         <CodeMirror></CodeMirror>
                     </div>
-                    <div>
-                        <Output></Output>
-                        <Button onClick={sendCodeHandler}>Wyślij</Button>
-                    </div>
+                        <div>
+                            <Output></Output>
+                            <Button className='sendbutton' onClick={sendCodeHandler}>Wyślij</Button>
+                        </div>
                 </div>
             </div>
         );

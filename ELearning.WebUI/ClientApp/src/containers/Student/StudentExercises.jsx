@@ -14,9 +14,9 @@ class StudentExercises extends Component {
             { id: 3, title: 'C' },
             { id: 4, title: 'D' },
             { id: 5, title: 'E' },
-            { id: 5, title: 'E' },
-            { id: 5, title: 'E' },
-            { id: 6, date: '01.01.18', title: 'Kolejny długaśny bardzo długi tytuł, no bardzo długi ffffffffffffffffff ffffffffffffffffffffffff' }
+            { id: 6, title: 'E' },
+            { id: 7, title: 'E' },
+            { id: 8, date: '01.01.18', title: 'Kolejny długaśny bardzo długi tytuł, no bardzo długi ffffffffffffffffff ffffffffffffffffffffffff' }
         ]
     }
 
@@ -30,22 +30,34 @@ class StudentExercises extends Component {
 
         return (
             <div className="StudentExercises">
-
-                <div className="todayExercise">
-                    <Header size='medium'> Dzisiejsze zadanie</Header>
-                    <Button onClick={todayExerciseHandler}>Szczegóły</Button>
-                    <Header size='medium'>Oceń innych</Header>
-                    <Header size='small'>3/20</Header>
-                    <Button onClick={gradeHandler}>Oceń</Button>
+                <div>
+                    <Header size='huge'>Imię i nazwisko studenta</Header>
+                    <Header size='large'>Zadania wykonane</Header>
+                    <div className="previousExercise">
+                        {this.state.exercises.map((exercise) => {
+                            return <DetailList
+                                key={exercise.id}
+                                id={exercise.id}
+                                title={exercise.title}
+                                date={exercise.date} />
+                        })}
+                    </div>
                 </div>
 
-                <div className="previousExercise">
-                    {this.state.exercises.map((exercise) => {
-                        return <DetailList
-                            id={exercise.id}
-                            title={exercise.title}
-                            date={exercise.date} />
-                    })}
+                <div className="todayExercise">
+                    <Header size='large'> Nowe zadanie</Header>
+                    <DetailList
+                        title={"Nowe zadanie"}
+                        date={"01.01.19"}
+                        variant={"Wariant: " + 1}
+                        group={"Grupa: " + "nazwa grupy"}
+                         />
+                        <br />
+                    <div className='gradeOthers'>
+                        <Header size='medium'>Oceń innych</Header>
+                        <Button className='gradebutton' onClick={gradeHandler}>Oceń</Button>
+                </div>
+
                 </div>
             </div>
         );

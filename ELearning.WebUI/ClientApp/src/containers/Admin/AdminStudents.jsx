@@ -5,6 +5,7 @@ import SearchStudent from '../../components/Modules/SearchStudent';
 import DetailList from '../../components/Modules/DeatilList';
 import axios from '../../axios';
 import { Button, Icon} from 'semantic-ui-react';
+import ModalAddStudent  from '../../components/Modules/ModalAddStudent';
 
 class AdminStudents extends Component {
 
@@ -52,6 +53,7 @@ class AdminStudents extends Component {
                             onSelectValue={this.valueHandle} />
                     </div>
                     <Button icon onClick={this.reverseState}><Icon name='delete' /></Button>
+                    <ModalAddStudent addHanlde={this.addnewHandler}/>
                 </div>
 
                 <div className='studentList'>

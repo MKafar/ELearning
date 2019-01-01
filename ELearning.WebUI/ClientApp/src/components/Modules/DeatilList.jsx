@@ -32,6 +32,12 @@ const DetailList = (props) => {
                         <List.Content >
                             { props.title }
                         </List.Content>
+                        <List.Content floated='left' >
+                            { props.variant }
+                        </List.Content>
+                        <List.Content floated='left'>
+                            { props.group }
+                        </List.Content>
                     </List.Item>
                 </List>
             </Container>

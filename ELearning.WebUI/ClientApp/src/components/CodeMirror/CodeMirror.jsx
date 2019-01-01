@@ -39,7 +39,7 @@ class Codemirror extends Component {
         return (
             <div>
                 <CodeMirror value={this.state.code} onChange={this.updateCode.bind(this)} options={options} />
-                <Button onClick={this.runCodeHandler}>Run</Button>
+                <Button className='runbutton'onClick={this.runCodeHandler}>Run</Button>
             </div>
         );
     }
