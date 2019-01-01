@@ -25,7 +25,9 @@ namespace ELearning.Application.Exercises.Commands.DeleteExercise
             if(entity == null)
                 throw new NotFoundException(nameof(Exercise), request.Id);
 
-            var hasVariants = _context.Variants.Any(e => e.ExerciseId == entity.ExerciseId);
+            var hasVariants = _context.Variants
+                .Any(e => e.ExerciseId == entity.ExerciseId);
+
             if(hasVariants)
                 throw new DeleteFailureException(nameof(Exercise), request.Id, "There are existing variants associated with this exercise.");
 

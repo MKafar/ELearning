@@ -29,7 +29,8 @@ namespace ELearning.Application.Groups.Commands.DeleteGroup
             if (entity == null)
                 throw new NotFoundException(nameof(Group), request.Id);
 
-            var hasSections = _context.Sections.Any(e => e.GroupId == entity.GroupId);
+            var hasSections = _context.Sections
+                .Any(e => e.GroupId == entity.GroupId);
 
             if (hasSections)
                 throw new DeleteFailureException(nameof(Group), request.Id, "There are existing sections associated with this group.");

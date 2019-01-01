@@ -15,21 +15,21 @@ namespace ELearning.WebUI.Controllers
     [ApiController]
     public class ExercisesController : BaseController
     {
-        // GET: api/exercises
+        // GET: api/Exercises/GetAll
         [HttpGet]
         public async Task<ActionResult<ExercisesListViewModel>> GetAll()
         {
             return Ok(await Mediator.Send(new GetExercisesListQuery()));
         }
 
-        // GET api/exercises/5
+        // GET api/Exercises/GetById/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ExerciseViewModel>> GetById(int id)
         {
             return Ok(await Mediator.Send(new GetExerciseByIdQuery { Id = id }));
         }
 
-        // POST api/exercises
+        // POST api/Exercises/Create
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Create([FromBody]CreateExerciseCommand command)
@@ -39,7 +39,7 @@ namespace ELearning.WebUI.Controllers
             return NoContent();
         }
 
-        // PUT api/exercises/5
+        // PUT api/Exercises/Update
         [HttpPut]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Update([FromBody]UpdateExerciseCommand command)
@@ -49,7 +49,7 @@ namespace ELearning.WebUI.Controllers
             return NoContent();
         }
 
-        // DELETE api/exercises/5
+        // DELETE api/Exercises/Delete/5
         [HttpDelete("{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Delete(int id)
