@@ -24,9 +24,6 @@
     <Folder Include="Evaluations\Commands\UpdateEvaluation\" />
     <Folder Include="Evaluations\Queries\GetEvaluationById\" />
     <Folder Include="Evaluations\Queries\GetEvaluationsList\" />
-    <Folder Include="Sections\Commands\UpdateSection\" />
-    <Folder Include="Sections\Queries\GetSectionsList\" />
-    <Folder Include="Sections\Queries\GetSectionById\" />
     <Folder Include="Variants\Commands\CreateVariant\" />
     <Folder Include="Variants\Commands\DeleteVariant\" />
     <Folder Include="Variants\Commands\UpdateVariant\" />
