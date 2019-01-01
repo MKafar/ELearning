@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -11,6 +11,24 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="8.1.2" />
     <PackageReference Include="MediatR" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assignments\Commands\CreateAssignment\" />
+    <Folder Include="Assignments\Commands\DeleteAssignment\" />
+    <Folder Include="Assignments\Commands\UpdateAssignment\" />
+    <Folder Include="Assignments\Queries\GetAssignmentsList\" />
+    <Folder Include="Assignments\Queries\GetAssignmentById\" />
+    <Folder Include="Evaluations\Commands\CreateEvaluation\" />
+    <Folder Include="Evaluations\Commands\DeleteEvaluation\" />
+    <Folder Include="Evaluations\Commands\UpdateEvaluation\" />
+    <Folder Include="Evaluations\Queries\GetEvaluationById\" />
+    <Folder Include="Evaluations\Queries\GetEvaluationsList\" />
+    <Folder Include="Variants\Commands\CreateVariant\" />
+    <Folder Include="Variants\Commands\DeleteVariant\" />
+    <Folder Include="Variants\Commands\UpdateVariant\" />
+    <Folder Include="Variants\Queries\GetVariantById\" />
+    <Folder Include="Variants\Queries\GetVariantsList\" />
   </ItemGroup>
 
 </Project>
