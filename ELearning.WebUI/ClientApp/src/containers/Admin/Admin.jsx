@@ -5,6 +5,7 @@ import MenuAdmin from '../../components/Menu/MenuAdmin';
 import AdminExerciseDetails from './AdminExerciseDetails';
 import AdminExercises from './AdminExercises'; 
 import AdminStudents from './AdminStudents';
+import AdminHome from './AdminHome';
 
 class Admin extends Component {
 
@@ -18,7 +19,7 @@ class Admin extends Component {
                     <MenuAdmin />
                 </div>
                 <div className='content'>
-                    <AdminStudents />
+                    <AdminHome />
                 </div>
 
             </div>

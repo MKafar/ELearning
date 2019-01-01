@@ -86,7 +86,6 @@ class ModalAddStudent extends Component {
                     <Table basic='very' className='addstudenttable'>
                         <Table.Header>
                             <Table.Row>
-                                <Table.HeaderCell>Laboratorium</Table.HeaderCell>
                                 <Table.HeaderCell>Grupa</Table.HeaderCell>
                                 <Table.HeaderCell>Sekcja</Table.HeaderCell> 
                                 <Table.HeaderCell></Table.HeaderCell>
@@ -95,7 +94,6 @@ class ModalAddStudent extends Component {
 
                         <Table.Body>
                             <Table.Row>
-                                <Table.Cell className='laboratory'>John</Table.Cell>
                                 <Table.Cell className='group'>Approved</Table.Cell>
                                 <Table.Cell>None</Table.Cell> 
                                 <Table.Cell><Button className='deletetablebutton'>Usuń</Button></Table.Cell>
