@@ -31,7 +31,6 @@ namespace ELearning.Application.Users.Command.UpdateUser
             entity.Email = request.Email;
             entity.Login = request.Login;
             entity.Password = request.Password;
-            entity.RoleId = request.RoleId;
 
             _context.Users.Update(entity);
 
