@@ -13,17 +13,4 @@
     <PackageReference Include="MediatR" Version="6.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Assignments\Commands\CreateAssignment\" />
-    <Folder Include="Assignments\Commands\DeleteAssignment\" />
-    <Folder Include="Assignments\Commands\UpdateAssignment\" />
-    <Folder Include="Assignments\Queries\GetAssignmentsList\" />
-    <Folder Include="Assignments\Queries\GetAssignmentById\" />
-    <Folder Include="Evaluations\Commands\CreateEvaluation\" />
-    <Folder Include="Evaluations\Commands\DeleteEvaluation\" />
-    <Folder Include="Evaluations\Commands\UpdateEvaluation\" />
-    <Folder Include="Evaluations\Queries\GetEvaluationById\" />
-    <Folder Include="Evaluations\Queries\GetEvaluationsList\" />
-  </ItemGroup>
-
 </Project>
