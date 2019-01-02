@@ -13,12 +13,4 @@
     <PackageReference Include="MediatR" Version="6.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Evaluations\Commands\CreateEvaluation\" />
-    <Folder Include="Evaluations\Commands\DeleteEvaluation\" />
-    <Folder Include="Evaluations\Commands\UpdateEvaluation\" />
-    <Folder Include="Evaluations\Queries\GetEvaluationById\" />
-    <Folder Include="Evaluations\Queries\GetEvaluationsList\" />
-  </ItemGroup>
-
 </Project>
