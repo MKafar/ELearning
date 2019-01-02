@@ -6,6 +6,10 @@ import AdminExerciseDetails from './AdminExerciseDetails';
 import AdminExercises from './AdminExercises'; 
 import AdminStudents from './AdminStudents';
 import AdminHome from './AdminHome';
+import ExerciseVariant from './ExerciseVariant';
+import ExerciseVariantDetails from './ExerciseVariantDetails';
+import AdminSubjects from './AdminSubjects';
+import StudentDetails from './StudentDetails';
 
 class Admin extends Component {
 
@@ -19,7 +23,7 @@ class Admin extends Component {
                     <MenuAdmin />
                 </div>
                 <div className='content'>
-                    <AdminHome />
+                    <StudentDetails />
                 </div>
 
             </div>

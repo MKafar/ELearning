@@ -1,26 +1,25 @@
 import React, { Component } from 'react';
 
-import './AdminStudents.scss';
-import SearchStudent from '../../components/Modules/SearchStudent';
+import './AdminSubjects.scss';
+import SearchSubject from '../../components/Modules/SearchSubject';
 import DetailList from '../../components/Modules/DetailList';
 import axios from '../../axios';
-import { Button, Icon} from 'semantic-ui-react';
-import ModalAddStudent  from '../../components/Modules/ModalAddStudent';
+import { Button, Icon } from 'semantic-ui-react';
+import ModalAddSubject from '../../components/Modules/ModalAddSubject';
 
-class AdminStudents extends Component {
+class AdminSubjects extends Component {
 
     state = {
-        users: [],
+        subjects: [],
         value: '',
         selectedItem: [],
         showSelected: false
     }
 
     componentDidMount() {
-        axios.get('/api/Users/GetAll')
+        axios.get('/api/Subjects/GetAll')
             .then(response => {
-                this.setState({ users: response.data.users });
-                //console.log(response.data.users);
+                this.setState({ subjects: response.data.subjects })
             });
     }
 
@@ -33,7 +32,7 @@ class AdminStudents extends Component {
 
     viewData = (selectedId) => {
         //const selectedExercise = this.state.exercises.slice();
-        axios.get('/api/Users/Get/' + selectedId)
+        axios.get('/api/Subjects/GetById/' + selectedId)
             .then(response => {
                 this.setState({ selectedItem: response.data });
             });
@@ -42,38 +41,40 @@ class AdminStudents extends Component {
     reverseState = () => {
         this.setState({ showSelected: false });
     }
-    
+
     render() {
 
+
         return (
-            <div className='adminStudents'>
+            <div className='adminSubjects'>
                 <div className='searching'>
                     <div className='content'>
-                        <SearchStudent
+                        <SearchSubject
                             onSelectValue={this.valueHandle} />
                     </div>
                     <Button icon onClick={this.reverseState}><Icon name='delete' /></Button>
-                    <ModalAddStudent addHanlde={this.addnewHandler}/>
+                    {/* <Button onClick={this.addnewHandler}>Dodaj zadanie</Button> */}
+                    <ModalAddSubject addHanlde={this.addnewHandler}/>
                 </div>
 
-                <div className='studentList'>
+                <div className='exerciseList'>
                     {this.state.showSelected ?
                         <div>
                             <DetailList
-                                visibledetail={true}
+                                visibledetail={false}
                                 visibledelete={true}
-                                key={this.state.selectedItem.id}
                                 id={this.state.selectedItem.id}
+                                key={this.state.selectedItem.id}
                                 title={this.state.selectedItem.name} />
                         </div>
                         :
-                        this.state.users.map((student) => {
+                        this.state.subjects.map((subject) => {
                             return <DetailList
-                                visibledetail={true}
+                                visibledetail={false}
                                 visibledelete={true}
-                                key={student.id}
-                                id={student.id}
-                                title={student.name} />
+                                key={subject.id}
+                                id={subject.id}
+                                title={subject.name} />
                         })
                     }
                 </div>
@@ -82,4 +83,4 @@ class AdminStudents extends Component {
     }
 }
 
-export default AdminStudents;
+export default AdminSubjects;

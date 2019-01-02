@@ -3,7 +3,7 @@ import { Button, Header } from 'semantic-ui-react';
 
 import './StudentExercises.scss';
 
-import DetailList from '../../components/Modules/DeatilList'
+import DetailList from '../../components/Modules/DetailList'
 
 class StudentExercises extends Component {
 
@@ -36,8 +36,9 @@ class StudentExercises extends Component {
                     <div className="previousExercise">
                         {this.state.exercises.map((exercise) => {
                             return <DetailList
+                                visibledetail={true}
+                                visibledelete={true}
                                 key={exercise.id}
-                                id={exercise.id}
                                 title={exercise.title}
                                 date={exercise.date} />
                         })}
@@ -47,6 +48,7 @@ class StudentExercises extends Component {
                 <div className="todayExercise">
                     <Header size='large'> Nowe zadanie</Header>
                     <DetailList
+                        visible={true}
                         title={"Nowe zadanie"}
                         date={"01.01.19"}
                         variant={"Wariant: " + 1}

@@ -3,8 +3,7 @@ import { Container, List, Button } from 'semantic-ui-react'
 
 import './DetailList.scss'
 
-
-const DetailList = (props) => {
+const DetailList  = (props) => {
 
     const detailsHandler = () => {
         console.log('Szczegóły', props.id);
@@ -20,8 +19,9 @@ const DetailList = (props) => {
                 <List divided relaxed>
                     <List.Item>
                         <List.Content floated='right'>
-                            <Button onClick={detailsHandler}> Szczegóły </Button>
-                            <Button onClick={removeHandler}> Usuń </Button>
+                            { props.visibledetail ? <Button onClick={detailsHandler}> Szczegóły </Button> : null }
+                            { props.visibledelete ? <Button onClick={removeHandler}> Usuń </Button> : null }
+                            
                         </List.Content>
                         <List.Content floated='left'>
                             { props.id }
@@ -30,13 +30,17 @@ const DetailList = (props) => {
                             { props.date }
                         </List.Content>
                         <List.Content >
+                            { props.text }
                             { props.title }
+                            { props.number}
                         </List.Content>
                         <List.Content floated='left' >
                             { props.variant }
+                            { props.subject }
                         </List.Content>
                         <List.Content floated='left'>
                             { props.group }
+                            { props.grade}
                         </List.Content>
                     </List.Item>
                 </List>

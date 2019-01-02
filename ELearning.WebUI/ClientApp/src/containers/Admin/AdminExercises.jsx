@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './AdminExercises.scss';
 import SearchExercise from '../../components/Modules/SearchExercise';
-import DetailList from '../../components/Modules/DeatilList';
+import DetailList from '../../components/Modules/DetailList';
 import axios from '../../axios';
 import { Button, Icon } from 'semantic-ui-react';
 import ModalAdd from '../../components/Modules/ModalAdd';
@@ -65,13 +65,16 @@ class AdminExercises extends Component {
                     {this.state.showSelected ?
                         <div>
                             <DetailList
+                                visibledetail={true}
+                                visibledelete={true}
                                 key={this.state.selectedItem.id}
-                                id={this.state.selectedItem.id}
                                 title={this.state.selectedItem.title} />
                         </div>
                         :
                         this.state.exercises.map((exercise) => {
                             return <DetailList
+                                visibledetail={true}
+                                visibledelete={true}
                                 key={exercise.id}
                                 id={exercise.id}
                                 title={exercise.title} />
