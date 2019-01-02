@@ -29,18 +29,7 @@ namespace ELearning.Application.Assignments.Queries.GetAssignmentById
                 Id = entity.AssignmentId,
                 Date = entity.Date.ToString(),
                 VariantId = entity.VariantId,
-                VariantNumber = entity.Variant.Number,
-                ExerciseId = entity.Variant.ExerciseId,
-                ExerciseTitle = entity.Variant.Exercise.Title,
-                SectionId = entity.SectionId,
-                SectionNumber = entity.Section.Number,
-                UserId = entity.Section.UserId,
-                UserName = $"{entity.Section.User.Name} {entity.Section.User.Surname}",
-                GroupId = entity.Section.GroupId,
-                GroupName = entity.Section.Group.Name,
-                SubjectId = entity.Section.Group.SubjectId,
-                SubjectName = entity.Section.Group.Subject.Name,
-                SubjectAbreviation = entity.Section.Group.Subject.Abreviation
+                SectionId = entity.SectionId
             };
         }
     }

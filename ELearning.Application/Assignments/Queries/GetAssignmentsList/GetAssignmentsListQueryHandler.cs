@@ -26,18 +26,7 @@ namespace ELearning.Application.Assignments.Queries.GetAssignmentsList
                         Id = e.AssignmentId,
                         Date = e.Date.ToString(),
                         VariantId = e.VariantId,
-                        VariantNumber = e.Variant.Number,
-                        ExerciseId = e.Variant.ExerciseId,
-                        ExerciseTitle = e.Variant.Exercise.Title,
-                        SectionId = e.SectionId,
-                        SectionNumber = e.Section.Number,
-                        UserId = e.Section.UserId,
-                        UserName = $"{e.Section.User.Name} {e.Section.User.Surname}",
-                        GroupId = e.Section.GroupId,
-                        GroupName = e.Section.Group.Name,
-                        SubjectId = e.Section.Group.SubjectId,
-                        SubjectName = e.Section.Group.Subject.Name,
-                        SubjectAbreviation = e.Section.Group.Subject.Abreviation
+                        SectionId = e.SectionId
                     }).ToListAsync(cancellationToken)
             };
 
