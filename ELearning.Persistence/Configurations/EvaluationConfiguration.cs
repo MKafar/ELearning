@@ -27,15 +27,15 @@ namespace ELearning.Persistence.Configurations
                 .HasColumnName("SectionId")
                 .IsRequired(true);
 
-            builder.HasOne(e => e.Assignment)
+            builder.HasOne(e => e.EvaluatedAssignment)
                 .WithMany(e => e.EvaluationsReceived)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_EvaluationsReceived_Assignments");
 
-            builder.HasOne(e => e.Section)
+            builder.HasOne(e => e.EvaluatorAssignment)
                 .WithMany(e => e.EvaluationsGiven)
                 .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("FK_EvaluationsGiven_Assignments");
+                .HasConstraintName("FK_EvaluationsGiven_AssignmentsSections");
         }
     }
 }
