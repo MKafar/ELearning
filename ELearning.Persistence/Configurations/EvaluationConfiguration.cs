@@ -29,11 +29,13 @@ namespace ELearning.Persistence.Configurations
 
             builder.HasOne(e => e.EvaluatedAssignment)
                 .WithMany(e => e.EvaluationsReceived)
+                .HasForeignKey(e => e.AssignmentId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_EvaluationsReceived_Assignments");
 
             builder.HasOne(e => e.EvaluatorAssignment)
                 .WithMany(e => e.EvaluationsGiven)
+                .HasForeignKey(e => e.SectionId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_EvaluationsGiven_AssignmentsSections");
         }
