@@ -10,6 +10,7 @@ import ExerciseVariant from './ExerciseVariant';
 import ExerciseVariantDetails from './ExerciseVariantDetails';
 import AdminSubjects from './AdminSubjects';
 import StudentDetails from './StudentDetails';
+import StudentDetailsAssignment from './StudentDetailsAssignment';
 
 class Admin extends Component {
 
@@ -23,7 +24,7 @@ class Admin extends Component {
                     <MenuAdmin />
                 </div>
                 <div className='content'>
-                    <StudentDetails />
+                    
                 </div>
 
             </div>

@@ -21,7 +21,7 @@ const DetailList  = (props) => {
                         <List.Content floated='right'>
                             { props.visibledetail ? <Button onClick={detailsHandler}> Szczegóły </Button> : null }
                             { props.visibledelete ? <Button onClick={removeHandler}> Usuń </Button> : null }
-                            
+                            { props.studentgrade }
                         </List.Content>
                         <List.Content floated='left'>
                             { props.id }
@@ -33,10 +33,12 @@ const DetailList  = (props) => {
                             { props.text }
                             { props.title }
                             { props.number}
+                            { props.name }
                         </List.Content>
                         <List.Content floated='left' >
                             { props.variant }
                             { props.subject }
+                            
                         </List.Content>
                         <List.Content floated='left'>
                             { props.group }
