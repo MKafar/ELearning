@@ -20,7 +20,7 @@ namespace ELearning.Persistence.Configurations
 
             builder.Property(e => e.FinalGrade)
                 .HasColumnType("decimal(4, 2)")
-                .HasDefaultValue((decimal)0);
+                .HasDefaultValue((double)0);
 
             builder.Property(e => e.Output)
                 .HasColumnType("nvarchar(max)");
