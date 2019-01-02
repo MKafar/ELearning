@@ -201,7 +201,7 @@ namespace ELearning.Persistence
 
             context.Variants.AddRange(variants);
 
-            SaveChangesWhileToggleIdentityInsert(context, "TaskVariants");
+            SaveChangesWhileToggleIdentityInsert(context, "Variants");
         }
 
         private void SeedAssignment(ELearningDbContext context)

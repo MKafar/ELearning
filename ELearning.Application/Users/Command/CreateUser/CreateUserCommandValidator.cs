@@ -8,11 +8,15 @@ namespace ELearning.Application.Users.Command.CreateUser
         {
             RuleFor(v => v.Name)
                 .NotEmpty()
-                .MaximumLength(50);
+                .MaximumLength(50)
+                .Matches("^[A-Z]([a-z0-9_-]{1,}|)$")
+                .WithMessage("Name should have one upper case letter at the start.");
 
             RuleFor(v => v.Surname)
                 .NotEmpty()
-                .MaximumLength(50);
+                .MaximumLength(50)
+                .Matches("^[A-Z]([a-z0-9_-]{1,}|)$")
+                .WithMessage("Surname should have one upper case letter at the start.");
 
             RuleFor(v => v.Email)
                 .NotEmpty()

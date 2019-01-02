@@ -194,7 +194,7 @@ namespace ELearning.Persistence.Migrations
                         principalColumn: "AssignmentId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_EvaluationsGiven_Assignments",
+                        name: "FK_EvaluationsGiven_AssignmentsSections",
                         column: x => x.SectionId,
                         principalTable: "Assignments",
                         principalColumn: "AssignmentId",
