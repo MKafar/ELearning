@@ -32,8 +32,8 @@ namespace ELearning.Application.Evaluations.Queries.GetEvaluationsListByAssignme
                 }).Where(e => e.AssignmentId == request.Id)
                 .ToListAsync(cancellationToken);
 
-            if (entity == null)
-                throw new NotFoundException(nameof(Evaluation), request.Id);
+            if (entity.Count == 0)
+                throw new NoRecordFoundException(nameof(Evaluation), nameof(Evaluation.AssignmentId), request.Id, "There are no evaluations associated with this assignment.");
 
             return new EvaluationsListViewModel
             {

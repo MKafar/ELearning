@@ -32,7 +32,7 @@ namespace ELearning.Application.Evaluations.Queries.GetEvaluationsListBySectionI
                 .ToListAsync(cancellationToken);
 
             if (entity == null)
-                throw new NotFoundException(nameof(Evaluation), request.Id);
+                throw new NoRecordFoundException(nameof(Evaluation), nameof(Evaluation.SectionId), request.Id, "There are no evaluations associated with this section.");
 
             return new EvaluationsListViewModel
             {
