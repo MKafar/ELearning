@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ELearning.Persistence.Migrations
 {
     [DbContext(typeof(ELearningDbContext))]
-    [Migration("20181229154953_CreateELearningDb")]
+    [Migration("20190102133313_CreateELearningDb")]
     partial class CreateELearningDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,6 +69,7 @@ namespace ELearning.Persistence.Migrations
 
                     b.Property<decimal>("Grade")
                         .ValueGeneratedOnAdd()
+                        .HasConversion(new ValueConverter<decimal, decimal>(v => default(decimal), v => default(decimal), new ConverterMappingHints(precision: 38, scale: 17)))
                         .HasColumnType("decimal(4, 2)")
                         .HasDefaultValue(0m);
 
@@ -272,16 +273,16 @@ namespace ELearning.Persistence.Migrations
 
             modelBuilder.Entity("ELearning.Domain.Entities.Evaluation", b =>
                 {
-                    b.HasOne("ELearning.Domain.Entities.Assignment", "Assignment")
+                    b.HasOne("ELearning.Domain.Entities.Assignment", "EvaluatedAssignment")
                         .WithMany("EvaluationsReceived")
                         .HasForeignKey("AssignmentId")
                         .HasConstraintName("FK_EvaluationsReceived_Assignments")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("ELearning.Domain.Entities.Assignment", "Section")
+                    b.HasOne("ELearning.Domain.Entities.Assignment", "EvaluatorAssignment")
                         .WithMany("EvaluationsGiven")
                         .HasForeignKey("SectionId")
-                        .HasConstraintName("FK_EvaluationsGiven_Assignments")
+                        .HasConstraintName("FK_EvaluationsGiven_AssignmentsSections")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
