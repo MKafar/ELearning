@@ -36,7 +36,7 @@ class SearchSubject extends Component {
     handleResultSelect = (e, { result }) => {
         this.setState({ value: result.title });
 
-        this.props.onSelectValue(result.id);
+        this.props.selectvalue(result.id);
         
     }
 

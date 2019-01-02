@@ -5,27 +5,19 @@ import './DetailList.scss'
 
 const DetailList  = (props) => {
 
-    const detailsHandler = () => {
-        console.log('Szczegóły', props.id);
-    }
-
-    const removeHandler = () => {
-        console.log('Usuń', props.id);
-    }
-
     return (
         <div className='detailList'>
             <Container>
                 <List divided relaxed>
                     <List.Item>
                         <List.Content floated='right'>
-                            { props.visibledetail ? <Button onClick={detailsHandler}> Szczegóły </Button> : null }
-                            { props.visibledelete ? <Button onClick={removeHandler}> Usuń </Button> : null }
+                            { props.visibledetail ? <Button onClick={props.detailsClicked}> Szczegóły </Button> : null }
+                            { props.visibledelete ? <Button onClick={props.removeClicked}> Usuń </Button> : null }
                             { props.studentgrade }
                         </List.Content>
-                        <List.Content floated='left'>
+                        {/* <List.Content floated='left'>
                             { props.id }
-                        </List.Content>
+                        </List.Content> */}
                         <List.Content  floated='left'>
                             { props.date }
                         </List.Content>

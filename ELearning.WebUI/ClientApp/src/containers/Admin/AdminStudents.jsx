@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import './AdminStudents.scss';
 import SearchStudent from '../../components/Modules/SearchStudent';
 import DetailList from '../../components/Modules/DetailList';
 import axios from '../../axios';
-import { Button, Icon} from 'semantic-ui-react';
-import ModalAddStudent  from '../../components/Modules/ModalAddStudent';
+import { Button, Icon } from 'semantic-ui-react';
+import ModalAddStudent from '../../components/Modules/ModalAddStudent';
+
 
 class AdminStudents extends Component {
 
@@ -20,7 +22,7 @@ class AdminStudents extends Component {
         axios.get('/api/Users/GetAll')
             .then(response => {
                 this.setState({ users: response.data.users });
-                //console.log(response.data.users);
+                
             });
     }
 
@@ -28,13 +30,14 @@ class AdminStudents extends Component {
     valueHandle = (selectedValue) => {
         this.setState({ value: selectedValue });
         this.viewData(selectedValue);
-        this.setState({showSelected: true});
+        this.setState({ showSelected: true });
     }
 
     viewData = (selectedId) => {
         //const selectedExercise = this.state.exercises.slice();
-        axios.get('/api/Users/Get/' + selectedId)
+        axios.get('/api/Users/GetById/' + selectedId)
             .then(response => {
+                console.log(response.data);
                 this.setState({ selectedItem: response.data });
             });
     }
@@ -42,18 +45,31 @@ class AdminStudents extends Component {
     reverseState = () => {
         this.setState({ showSelected: false });
     }
-    
+
+    detailsHandler = (detailID) => {
+        console.log('Szczegóły', detailID);
+        this.props.history.push('/students/' + detailID);
+        console.log(this.props.history);
+    }
+
+    removeHandler = (removeID) => {
+        console.log('Usuń', removeID);
+    }
+
     render() {
+        
 
         return (
             <div className='adminStudents'>
                 <div className='searching'>
                     <div className='content'>
-                        <SearchStudent
-                            onSelectValue={this.valueHandle} />
+                        <SearchStudent selectvalue={this.valueHandle} />
                     </div>
                     <Button icon onClick={this.reverseState}><Icon name='delete' /></Button>
-                    <ModalAddStudent addHanlde={this.addnewHandler}/>
+                    <div className='addStudentButton'>
+                        <ModalAddStudent addHanlde={this.addnewHandler} />
+                    </div>
+
                 </div>
 
                 <div className='studentList'>
@@ -64,7 +80,10 @@ class AdminStudents extends Component {
                                 visibledelete={true}
                                 key={this.state.selectedItem.id}
                                 id={this.state.selectedItem.id}
-                                title={this.state.selectedItem.name} />
+                                title={this.state.selectedItem.name}
+                                detailsClicked={()=> this.detailsHandler(this.state.selectedItem.id)}
+                                removeClicked={()=>this.removeHandler(this.state.selectedItem.id)}
+                                />
                         </div>
                         :
                         this.state.users.map((student) => {
@@ -73,13 +92,17 @@ class AdminStudents extends Component {
                                 visibledelete={true}
                                 key={student.id}
                                 id={student.id}
-                                title={student.name} />
+                                title={student.name}
+                                detailsClicked={()=> this.detailsHandler(student.id)}
+                                removeClicked={()=>this.removeHandler(student.id)}
+                                />
                         })
                     }
                 </div>
+                
             </div>
         );
     }
 }
 
-export default AdminStudents;
+export default withRouter(AdminStudents);

@@ -34,7 +34,7 @@ class ModalAddSubject extends Component {
 
 
         return (
-            <Modal trigger={<Button>Dodaj laboratorium</Button>} centered={false}>
+            <Modal trigger={<Button primary>Dodaj laboratorium</Button>} centered={false}>
                 <Modal.Header>Dodaj Laboratorium</Modal.Header>
                 <Modal.Content >
                     <Modal.Description >

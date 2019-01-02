@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Button, Header, Modal, Input } from 'semantic-ui-react';
 import axios from '../../axios';
 
-import './ModalAdd.scss';
+import './ModalAddExercise.scss';
 
-class ModalAdd extends Component {
+class ModalAddExercise extends Component {
     state = {
         title: ''
     }
@@ -28,7 +28,7 @@ class ModalAdd extends Component {
 
 
         return (
-            <Modal trigger={<Button>Dodaj zadanie</Button>} centered={false}>
+            <Modal trigger={<Button primary className='addExercisebutton'>Dodaj zadanie</Button>} centered={false}>
                 <Modal.Header>Dodaj zadanie</Modal.Header>
                 <Modal.Content >
                     <Modal.Description >
@@ -45,4 +45,4 @@ class ModalAdd extends Component {
 
 }
 
-export default ModalAdd
+export default ModalAddExercise

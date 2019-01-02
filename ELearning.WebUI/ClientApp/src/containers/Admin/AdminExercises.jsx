@@ -5,7 +5,7 @@ import SearchExercise from '../../components/Modules/SearchExercise';
 import DetailList from '../../components/Modules/DetailList';
 import axios from '../../axios';
 import { Button, Icon } from 'semantic-ui-react';
-import ModalAdd from '../../components/Modules/ModalAdd';
+import ModalAddExercise from '../../components/Modules/ModalAddExercise';
 
 class AdminExercises extends Component {
 
@@ -54,11 +54,14 @@ class AdminExercises extends Component {
                 <div className='searching'>
                     <div className='content'>
                         <SearchExercise
-                            onSelectValue={this.valueHandle} />
+                            selectvalue={this.valueHandle} />
                     </div>
                     <Button icon onClick={this.reverseState}><Icon name='delete' /></Button>
                     {/* <Button onClick={this.addnewHandler}>Dodaj zadanie</Button> */}
-                    <ModalAdd addHanlde={this.addnewHandler}/>
+                    <div className='addExercisebutton'>
+                        <ModalAddExercise className='addExercisebutton' addHanlde={this.addnewHandler}/> 
+                    </div>
+
                 </div>
 
                 <div className='exerciseList'>
@@ -68,6 +71,7 @@ class AdminExercises extends Component {
                                 visibledetail={true}
                                 visibledelete={true}
                                 key={this.state.selectedItem.id}
+                                id={this.state.selectedItem.id}
                                 title={this.state.selectedItem.title} />
                         </div>
                         :

@@ -4,32 +4,17 @@ import 'semantic-ui-react';
 import {BrowserRouter} from 'react-router-dom';
 
 import './App.css';
-import Student from './containers/Student/Student';
 import Admin from './containers/Admin/Admin';
 
 class App extends Component {
 
 
   state = {
-    exercises: [
-      { number: 1, title: 'Jakiś tytuł ćwiczenia' },
-      { number: 2, title: 'B' },
-      { number: 3, title: 'C' },
-      { number: 4, title: 'D' },
-      { number: 5, title: 'E' },
-      { number: 6, date: '01.01.18', title: 'Kolejny długaśny bardzo długi tytuł, no bardzo długi ffffffffffffffffff ffffffffffffffffffffffff' }
-    ],
-    searches: [
-      { date: '01.02.18', lab: 'PP', exercise: 'A', student: 'Mateusz M'},
-      { date: '02.02.18', lab: 'PP', exercise: 'B', student: 'Mateusz A'},
-      { date: '03.02.18', lab: 'PP', exercise: 'A', student: 'Mateusz K'}
-    ]
+  
   }
 
 
-
   render() {
-
 
     return (
       <BrowserRouter>

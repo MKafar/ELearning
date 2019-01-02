@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 
+
 import './Admin.scss';
-import MenuAdmin from '../../components/Menu/MenuAdmin';
-import AdminExerciseDetails from './AdminExerciseDetails';
-import AdminExercises from './AdminExercises'; 
-import AdminStudents from './AdminStudents';
-import AdminHome from './AdminHome';
-import ExerciseVariant from './ExerciseVariant';
-import ExerciseVariantDetails from './ExerciseVariantDetails';
-import AdminSubjects from './AdminSubjects';
-import StudentDetails from './StudentDetails';
-import StudentDetailsAssignment from './StudentDetailsAssignment';
+
+
+import MenuAdmin from '../../containers/Menu/MenuAdmin';
+
 
 class Admin extends Component {
 
-    state = {}
+    state = {
+        activeItem: 'home'
+    }
+
+    handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
     render() {
 
@@ -23,10 +22,6 @@ class Admin extends Component {
                 <div className='menu'>
                     <MenuAdmin />
                 </div>
-                <div className='content'>
-                    
-                </div>
-
             </div>
         );
     }

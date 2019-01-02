@@ -7,7 +7,7 @@ import axios from '../../axios';
 class SearchStudent extends Component {
 
     state = {
-        source: []
+        source: [],
     }
 
     componentDidMount() {
@@ -36,7 +36,7 @@ class SearchStudent extends Component {
     handleResultSelect = (e, { result }) => {
         this.setState({ value: result.title });
 
-        this.props.onSelectValue(result.id);
+        this.props.selectvalue(result.id);
         
     }
 

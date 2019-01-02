@@ -72,7 +72,7 @@ class ModalAddStudent extends Component {
 
 
         return (
-            <Modal trigger={<Button>Dodaj studenta</Button>} centered={false}>
+            <Modal trigger={<Button primary>Dodaj studenta</Button>} centered={false}>
                 <Modal.Header>Dodaj studenta</Modal.Header>
                 <Modal.Content >
                     <Input className='studentInput' placeholder='Imię' onChange={this.nameHandle} />
@@ -95,7 +95,7 @@ class ModalAddStudent extends Component {
                         <Table.Body>
                             <Table.Row>
                                 <Table.Cell className='group'>Approved</Table.Cell>
-                                <Table.Cell>None</Table.Cell> 
+                                <Table.Cell className='section'>None</Table.Cell> 
                                 <Table.Cell><Button className='deletetablebutton'>Usuń</Button></Table.Cell>
                             </Table.Row>
                         </Table.Body>

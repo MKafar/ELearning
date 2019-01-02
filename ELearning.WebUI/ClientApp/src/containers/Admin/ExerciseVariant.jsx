@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Header, Icon, ButtonGroup } from 'semantic-ui-react';
+import { Header } from 'semantic-ui-react';
 
 import './ExerciseVariant.scss';
 import ModalAddVariant from '../../components/Modules/ModalAddVariant'

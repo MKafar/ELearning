@@ -50,14 +50,17 @@ class AdminSubjects extends Component {
                 <div className='searching'>
                     <div className='content'>
                         <SearchSubject
-                            onSelectValue={this.valueHandle} />
+                            selectvalue={this.valueHandle} />
                     </div>
                     <Button icon onClick={this.reverseState}><Icon name='delete' /></Button>
                     {/* <Button onClick={this.addnewHandler}>Dodaj zadanie</Button> */}
-                    <ModalAddSubject addHanlde={this.addnewHandler}/>
+                    <div className='addSubjectButton'>
+                        <ModalAddSubject addHandle={this.addnewHandler}/>
+                    </div>
+                    
                 </div>
 
-                <div className='exerciseList'>
+                <div className='subjectsList'>
                     {this.state.showSelected ?
                         <div>
                             <DetailList

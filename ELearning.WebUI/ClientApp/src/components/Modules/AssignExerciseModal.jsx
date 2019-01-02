@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button, Modal, Input, Dropdown } from 'semantic-ui-react';
-import axios from '../../axios';
 
 import './AssignExerciseModal.scss';
 
@@ -73,7 +72,7 @@ class AssignExerciseModal extends Component {
     render() {
 
         return (
-            <Modal trigger={<Button>Przypisz zadanie</Button>} centered={false}>
+            <Modal trigger={<Button primary>Przypisz zadanie</Button>} centered={false}>
                 <Modal.Header>Przypisz zadanie</Modal.Header>
                 <Modal.Content >
                     <Dropdown className='studentInput' placeholder='Przedmiot' clearable options={subjectOptions} selection />

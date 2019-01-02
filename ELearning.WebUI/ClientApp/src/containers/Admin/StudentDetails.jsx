@@ -20,13 +20,13 @@ class StudentDetails extends Component {
             { key: 1, text: 'Choice 1', value: 1 },
             { key: 2, text: 'Choice 2', value: 2 },
             { key: 3, text: 'Choice 3', value: 3 },
-        ]
+        ],
     }
     render() {
         return (
             <div className='studentdetailsContener'>
                 <div className='detailsHeader'>
-                    <Header size='large'>Imię i nazwisko studenta</Header>
+                    <Header size='large'>Imię i nazwisko</Header>
                 </div>
                 <div className='studentTables'>
                     <div className='assignmentTable'>

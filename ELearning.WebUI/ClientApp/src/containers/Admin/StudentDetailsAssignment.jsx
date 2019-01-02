@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Header, Button, Label } from 'semantic-ui-react';
+import { Input, Header, Button } from 'semantic-ui-react';
 
 import './StudentDetailsAssignment.scss';
 import CodeWindow from '../../components/Modules/CodeWindow';

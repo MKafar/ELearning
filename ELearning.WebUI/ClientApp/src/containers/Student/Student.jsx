@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 
 import './Student.scss';
-import ExerciseDetails from './ExerciseDetails';
-import StudentCoding from './StudentCoding';
-import MenuStudent from '../../components/Menu/MenuStudent';
-import GradeStudents from './GradeStudents';
+import MenuStudent from '../../containers/Menu/MenuStudent';
 import StudentExercises from './StudentExercises';
-
 
 class Student extends Component {
 
@@ -19,7 +15,7 @@ class Student extends Component {
                 <div className='menu'>
                     <MenuStudent />
                 </div>
-                <StudentCoding />
+                <StudentExercises />
             </div>
         );
     }

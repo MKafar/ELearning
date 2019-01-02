@@ -21,9 +21,6 @@ class StudentExercises extends Component {
     }
 
     render() {
-        const todayExerciseHandler = () => {
-            console.log('Szczegóły');
-        }
         const gradeHandler = () => {
             console.log('Oceń');
         }
@@ -52,7 +49,7 @@ class StudentExercises extends Component {
                         title={"Nowe zadanie"}
                         date={"01.01.19"}
                         variant={"Wariant: " + 1}
-                        group={"Grupa: " + "nazwa grupy"}
+                        group={"Grupa: nazwa grupy"}
                          />
                         <br />
                     <div className='gradeOthers'>
