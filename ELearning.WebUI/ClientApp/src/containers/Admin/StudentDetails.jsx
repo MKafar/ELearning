@@ -22,6 +22,11 @@ class StudentDetails extends Component {
             { key: 3, text: 'Choice 3', value: 3 },
         ],
     }
+    componentDidMount = () => {
+        console.log(this.props.match.params.id);
+    }
+
+
     render() {
         return (
             <div className='studentdetailsContener'>
