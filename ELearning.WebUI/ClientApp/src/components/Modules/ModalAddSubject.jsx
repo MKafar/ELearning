@@ -5,6 +5,11 @@ import axios from '../../axios';
 import './ModalAddSubject.scss';
 
 class ModalAddSubject extends Component {
+
+    constructor(props) {
+        super(props);
+    };
+
     state = {
         name: '',
         abreviation: ''
@@ -24,6 +29,7 @@ class ModalAddSubject extends Component {
         })
             .then(response => {
                 console.log(response);
+                this.props.updateData();
             })
             .catch(error => {
                 console.log(error.response);
@@ -34,7 +40,7 @@ class ModalAddSubject extends Component {
 
 
         return (
-            <Modal trigger={<Button primary>Dodaj laboratorium</Button>} centered={false}>
+            <Modal closeIcon trigger={<Button primary>Dodaj laboratorium</Button>} centered={false}>
                 <Modal.Header>Dodaj Laboratorium</Modal.Header>
                 <Modal.Content >
                     <Modal.Description >
@@ -44,7 +50,9 @@ class ModalAddSubject extends Component {
                     </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button primary onClick={this.addHandle}>Zapisz</Button>
+                    <Button primary onClick={()=>{
+                        this.addHandle();
+                        this.props.updateData();}}> Zapisz</Button>
                 </Modal.Actions>
             </Modal>
         )

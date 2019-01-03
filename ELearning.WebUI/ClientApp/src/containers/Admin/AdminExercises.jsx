@@ -9,6 +9,10 @@ import ModalAddExercise from '../../components/Modules/ModalAddExercise';
 
 class AdminExercises extends Component {
 
+    constructor(props) {
+        super(props);
+    };
+
     state = {
         exercises: [],
         value: '',
@@ -16,11 +20,14 @@ class AdminExercises extends Component {
         showSelected: false
     }
 
-    componentDidMount() {
+    loadData = () => {
         axios.get('/api/Exercises/GetAll')
-            .then(response => {
-                this.setState({ exercises: response.data.exercises })
-            });
+        .then(response => {
+            this.setState({ exercises: response.data.exercises })
+        });
+    }
+    componentDidMount() {
+        this.loadData();
     }
 
 
@@ -42,16 +49,22 @@ class AdminExercises extends Component {
         this.setState({ showSelected: false });
     }
 
-    addnewHandler = () => {
-        
-    }
 
     detailsHandler = (exerciseDetailID) => {
         this.props.history.push('/exercises/' + exerciseDetailID);
     }
 
+
     removeHandler = (exerciseRemoveID) => {
         console.log('Usuń', exerciseRemoveID);
+        axios.delete('/api/Exercises/Delete/'+ exerciseRemoveID)
+            .then(response => {
+                console.log(response);
+                this.loadData();
+            }).catch(error => {
+                console.log(error.response);
+                alert("Nie można usunąć zadania.");
+            });
     }
   
     render() {
@@ -67,7 +80,7 @@ class AdminExercises extends Component {
                     <Button icon onClick={this.reverseState}><Icon name='delete' /></Button>
                     {/* <Button onClick={this.addnewHandler}>Dodaj zadanie</Button> */}
                     <div className='addExercisebutton'>
-                        <ModalAddExercise className='addExercisebutton' addHanlde={this.addnewHandler}/> 
+                        <ModalAddExercise updateData={this.loadData} className='addExercisebutton' addHanlde={this.addnewHandler}/> 
                     </div>
 
                 </div>

@@ -9,6 +9,10 @@ import ModalAddSubject from '../../components/Modules/ModalAddSubject';
 
 class AdminSubjects extends Component {
 
+    constructor(props) {
+        super(props);
+    };
+
     state = {
         subjects: [],
         value: '',
@@ -16,11 +20,15 @@ class AdminSubjects extends Component {
         showSelected: false
     }
 
-    componentDidMount() {
+    loadData = () => {
         axios.get('/api/Subjects/GetAll')
             .then(response => {
                 this.setState({ subjects: response.data.subjects })
             });
+    }
+
+    componentDidMount() {
+        this.loadData();
     }
 
 
@@ -44,6 +52,14 @@ class AdminSubjects extends Component {
 
     removeHandler = (subjectRemoveID) => {
         console.log('Usuń', subjectRemoveID);
+        axios.delete('/api/Subjects/Delete/'+ subjectRemoveID)
+            .then(response => {
+                console.log(response);
+                this.loadData();
+            }).catch(error => {
+                console.log(error.response);
+                alert("Nie można usunąć przedmiotu");
+            });
     }
 
     render() {
@@ -59,7 +75,7 @@ class AdminSubjects extends Component {
                     <Button icon onClick={this.reverseState}><Icon name='delete' /></Button>
                     {/* <Button onClick={this.addnewHandler}>Dodaj zadanie</Button> */}
                     <div className='addSubjectButton'>
-                        <ModalAddSubject addHandle={this.addnewHandler}/>
+                        <ModalAddSubject updateData={this.loadData} addHandle={this.addnewHandler}/>
                     </div>
                     
                 </div>

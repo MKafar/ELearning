@@ -4,10 +4,17 @@ import axios from '../../axios';
 
 import './ModalAddExercise.scss';
 
+
 class ModalAddExercise extends Component {
+
+    constructor(props) {
+        super(props);
+    };
+
     state = {
         title: ''
     }
+
     handleChange = (e) => {
         this.setState({ title: e.target.value })
     }
@@ -20,7 +27,7 @@ class ModalAddExercise extends Component {
                 console.log(response);
             })
             .catch(error => {
-                console.log(error);
+                console.log(error.response);
             })
     }
     render() {
@@ -28,7 +35,7 @@ class ModalAddExercise extends Component {
 
 
         return (
-            <Modal trigger={<Button primary className='addExercisebutton'>Dodaj zadanie</Button>} centered={false}>
+            <Modal closeIcon trigger={<Button primary className='addExercisebutton'>Dodaj zadanie</Button>} centered={false}>
                 <Modal.Header>Dodaj zadanie</Modal.Header>
                 <Modal.Content >
                     <Modal.Description >
@@ -37,7 +44,9 @@ class ModalAddExercise extends Component {
                     </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button primary onClick={this.addHandle}>Zapisz</Button>
+                    <Button primary onClick={()=>{
+                        this.addHandle();
+                        this.props.updateData();}}> Zapisz</Button>
                 </Modal.Actions>
             </Modal>
         )

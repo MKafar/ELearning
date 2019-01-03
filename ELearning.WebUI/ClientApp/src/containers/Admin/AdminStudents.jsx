@@ -10,12 +10,16 @@ import ModalAddStudent from '../../components/Modules/ModalAddStudent';
 
 
 class AdminStudents extends Component {
-
+    constructor(props) {
+        super(props);
+    };
+    
     state = {
         users: [],
         value: '',
         selectedItem: [],
-        showSelected: false
+        showSelected: false,
+        show: false
     }
     loadData = () => {
         axios.get('/api/Users/GetAll')
@@ -78,7 +82,7 @@ class AdminStudents extends Component {
                     </div>
                     <Button icon onClick={this.reverseState}><Icon name='delete' /></Button>
                     <div className='addStudentButton'>
-                        <ModalAddStudent addHanlde={this.addnewHandler} />
+                        <ModalAddStudent updateData={this.loadData} addHanlde={this.addnewHandler} />
                     </div>
 
                 </div>
