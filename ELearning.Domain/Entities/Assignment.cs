@@ -15,7 +15,7 @@ namespace ELearning.Domain.Entities
         public DateTime Date { get; set; }
         public string Solution { get; set; }
         public string Output { get; set; }
-        public decimal? FinalGrade { get; set; }
+        public double? FinalGrade { get; set; }
 
         public int SectionId { get; set; }
         public Section Section { get; set; }

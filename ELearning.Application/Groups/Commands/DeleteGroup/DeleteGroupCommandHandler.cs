@@ -23,9 +23,6 @@ namespace ELearning.Application.Groups.Commands.DeleteGroup
             var entity = await _context.Groups
                 .FindAsync(request.Id);
 
-            var entity2 = await _context.Groups
-                .SingleOrDefaultAsync(e => e.GroupId == 500);
-
             if (entity == null)
                 throw new NotFoundException(nameof(Group), request.Id);
 

@@ -1,6 +1,8 @@
 using ELearning.Application.Exercises.Commands.CreateExercise;
 using ELearning.Application.Exercises.Queries.GetExercisesList;
 using ELearning.Application.Infrastructure;
+using ELearning.Application.Interfaces;
+using ELearning.Infrastructure;
 using ELearning.Persistence;
 using ELearning.WebUI.Filters;
 using FluentValidation.AspNetCore;
@@ -30,6 +32,8 @@ namespace ELearning.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ICompilerService, CompilerService>();
+
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPreProcessorBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
