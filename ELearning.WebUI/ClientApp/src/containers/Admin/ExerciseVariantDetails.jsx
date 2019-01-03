@@ -6,6 +6,11 @@ import CodeWindow from '../../components/Modules/CodeWindow';
 
 class ExerciseVariantDetails extends Component {
 
+    componentDidMount = () => {
+        console.log(this.props.match.params.exerciseVariantID);
+    }
+
+
     render() {
         //zmienianie string na html
         // const htmlString = '<div>Hello World</div>';

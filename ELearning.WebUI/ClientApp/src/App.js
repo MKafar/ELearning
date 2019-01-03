@@ -4,7 +4,8 @@ import 'semantic-ui-react';
 import {BrowserRouter} from 'react-router-dom';
 
 import './App.css';
-import Admin from './containers/Admin/Admin';
+//import Admin from './containers/Admin/Admin';
+import Student from './containers/Student/Student';
 
 class App extends Component {
 
@@ -19,7 +20,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className='App'>
-          <Admin />
+          <Student />
         </div>
       </BrowserRouter>
 

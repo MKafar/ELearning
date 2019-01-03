@@ -31,6 +31,10 @@ class StudentDetailsAssignment extends Component {
         console.log(" Ocena: " + this.state.adminGrade);
     }
 
+    componentDidMount = () => {
+        console.log(this.props.match.params.studentDetailsExerciseID)
+    }
+
     render() {
         return (
             <div className="userAssignmentContainer">

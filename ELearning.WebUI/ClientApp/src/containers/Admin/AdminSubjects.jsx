@@ -42,6 +42,10 @@ class AdminSubjects extends Component {
         this.setState({ showSelected: false });
     }
 
+    removeHandler = (subjectRemoveID) => {
+        console.log('Usuń', subjectRemoveID);
+    }
+
     render() {
 
 
@@ -68,7 +72,9 @@ class AdminSubjects extends Component {
                                 visibledelete={true}
                                 id={this.state.selectedItem.id}
                                 key={this.state.selectedItem.id}
-                                title={this.state.selectedItem.name} />
+                                title={this.state.selectedItem.name}
+                                removeClicked={()=>this.removeHandler(this.state.selectedItem.id)}
+                                 />
                         </div>
                         :
                         this.state.subjects.map((subject) => {
@@ -77,7 +83,10 @@ class AdminSubjects extends Component {
                                 visibledelete={true}
                                 key={subject.id}
                                 id={subject.id}
-                                title={subject.name} />
+                                title={subject.name}
+                                removeClicked={()=>this.removeHandler(subject.id)}
+                                
+                                 />
                         })
                     }
                 </div>

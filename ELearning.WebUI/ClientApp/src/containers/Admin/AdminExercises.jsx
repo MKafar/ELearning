@@ -45,6 +45,14 @@ class AdminExercises extends Component {
     addnewHandler = () => {
         
     }
+
+    detailsHandler = (exerciseDetailID) => {
+        this.props.history.push('/exercises/' + exerciseDetailID);
+    }
+
+    removeHandler = (exerciseRemoveID) => {
+        console.log('Usuń', exerciseRemoveID);
+    }
   
     render() {
 
@@ -72,7 +80,10 @@ class AdminExercises extends Component {
                                 visibledelete={true}
                                 key={this.state.selectedItem.id}
                                 id={this.state.selectedItem.id}
-                                title={this.state.selectedItem.title} />
+                                title={this.state.selectedItem.title}
+                                detailsClicked={()=> this.detailsHandler(this.state.selectedItem.id)}
+                                removeClicked={()=>this.removeHandler(this.state.selectedItem.id)} 
+                                />
                         </div>
                         :
                         this.state.exercises.map((exercise) => {
@@ -81,7 +92,10 @@ class AdminExercises extends Component {
                                 visibledelete={true}
                                 key={exercise.id}
                                 id={exercise.id}
-                                title={exercise.title} />
+                                title={exercise.title}
+                                detailsClicked={()=> this.detailsHandler(exercise.id)}
+                                removeClicked={()=>this.removeHandler(exercise.id)}
+                                 />
                         })
                     }
                 </div>

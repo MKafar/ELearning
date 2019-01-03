@@ -8,7 +8,7 @@ import DetailList from '../../components/Modules/DetailList'
 class StudentExercises extends Component {
 
     state = {
-        exercises: [
+        previousExercises: [
             { id: 1, title: 'Jakiś tytuł ćwiczenia' },
             { id: 2, title: 'B' },
             { id: 3, title: 'C' },
@@ -17,13 +17,24 @@ class StudentExercises extends Component {
             { id: 6, title: 'E' },
             { id: 7, title: 'E' },
             { id: 8, date: '01.01.18', title: 'Kolejny długaśny bardzo długi tytuł, no bardzo długi ffffffffffffffffff ffffffffffffffffffffffff' }
+        ],
+        todaysExercise: [
+            {id: 1, title: "Nowe zadanie", date: "01.01.19", variant: 1, group: "nazwa grupy"}
         ]
     }
 
+
+    previousdetailsHandler = (exercisePreviousDetailID) => {
+        this.props.history.push('/previousexercises/' + exercisePreviousDetailID);
+    }
+    todaydetailsHandler = (exerciseTodayDetailID) => {
+        this.props.history.push('/todayexercise/' + exerciseTodayDetailID);
+    }
+    gradeOthersHandler = () => {
+        this.props.history.push('/gradeothers/');
+    }
+
     render() {
-        const gradeHandler = () => {
-            console.log('Oceń');
-        }
 
         return (
             <div className="StudentExercises">
@@ -31,30 +42,38 @@ class StudentExercises extends Component {
                     <Header size='huge'>Imię i nazwisko studenta</Header>
                     <Header size='large'>Zadania wykonane</Header>
                     <div className="previousExercise">
-                        {this.state.exercises.map((exercise) => {
+                        {this.state.previousExercises.map((exerciseprevious) => {
                             return <DetailList
                                 visibledetail={true}
-                                visibledelete={true}
-                                key={exercise.id}
-                                title={exercise.title}
-                                date={exercise.date} />
+                                visibledelete={false}
+                                key={exerciseprevious.id}
+                                title={exerciseprevious.title}
+                                date={exerciseprevious.date}
+                                detailsClicked={()=> this.previousdetailsHandler(exerciseprevious.id)}
+                                />
+
                         })}
                     </div>
                 </div>
 
                 <div className="todayExercise">
                     <Header size='large'> Nowe zadanie</Header>
-                    <DetailList
-                        visible={true}
-                        title={"Nowe zadanie"}
-                        date={"01.01.19"}
-                        variant={"Wariant: " + 1}
-                        group={"Grupa: nazwa grupy"}
+                    {this.state.todaysExercise.map((exercisetoday) => {
+                            return <DetailList
+                        visibledetail={true}
+                        visibledelete={false}
+                        title={exercisetoday.title}
+                        key={exercisetoday.id}
+                        date={exercisetoday.date}
+                        variant={"Wariant: " + exercisetoday.variant}
+                        group={"Grupa: " + exercisetoday.group}
+                        detailsClicked={()=> this.todaydetailsHandler(exercisetoday.id)}
                          />
+                        })}
                         <br />
                     <div className='gradeOthers'>
                         <Header size='medium'>Oceń innych</Header>
-                        <Button className='gradebutton' onClick={gradeHandler}>Oceń</Button>
+                        <Button className='gradebutton' onClick={this.gradeOthersHandler}>Oceń</Button>
                 </div>
 
                 </div>

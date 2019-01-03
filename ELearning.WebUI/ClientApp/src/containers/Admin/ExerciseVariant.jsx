@@ -16,12 +16,25 @@ class ExerciseVariant extends Component {
         ]
     }
 
+    componentDidMount = () => {
+        console.log(this.props.match.params.exerciseDetailsID);
+    }
+
     editHandler = () => {
         console.log('Edit');
     }
     saveHandler = () => {
         console.log('Zapisz');
     }
+
+    detailsHandler = (exerciseVariantID) => {
+        this.props.history.push('/exercises/' + this.props.match.params.exerciseDetailsID + '/' + exerciseVariantID);
+    }
+
+    removeHandler = (exerciseRemoveID) => {
+        console.log('Usuń', exerciseRemoveID);
+    }
+
     render() {
 
 
@@ -50,7 +63,10 @@ class ExerciseVariant extends Component {
                                 visibledelete={true}
                                 key={variant.id}
                                 number={variant.number}
-                                text={'Wariant: '} />
+                                text={'Wariant: '} 
+                                detailsClicked={()=> this.detailsHandler(variant.id)}
+                                removeClicked={()=>this.removeHandler(variant.id)}
+                                />
                         })}
                     </div>
                 </div>

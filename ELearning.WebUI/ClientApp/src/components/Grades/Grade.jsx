@@ -42,7 +42,7 @@ class Grade extends Component {
     render() {
 
         return (
-            <div className="gradecontainer">
+            <div className="gradeselectcontainer">
                 <Container>
                     <Header as='h3' dividing>Oceń studenta</Header>
                     <div>

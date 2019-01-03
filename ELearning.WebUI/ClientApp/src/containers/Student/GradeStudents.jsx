@@ -34,7 +34,7 @@ class GradeStudents extends Component {
         ]
 
         return (
-            <div className='gradeContainer'>
+            <div className='gradeothersContainer'>
                 <div className='gradeStudents'>
                     <Header size='large'>Oceń innych</Header>
                     <div className='grades'>

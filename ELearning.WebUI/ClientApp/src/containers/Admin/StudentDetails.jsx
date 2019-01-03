@@ -23,9 +23,12 @@ class StudentDetails extends Component {
         ],
     }
     componentDidMount = () => {
-        console.log(this.props.match.params.id);
+        console.log(this.props.match.params.studentDetailsID);
     }
 
+    detailsHandler = (studentExerciseDetailID) => {
+        this.props.history.push('/students/' + this.props.match.params.studentDetailsID + '/' + studentExerciseDetailID);
+    }
 
     render() {
         return (
@@ -44,7 +47,10 @@ class StudentDetails extends Component {
                                 subject={"Przedmiot: " + studentExercise.subject}
                                 date={studentExercise.date}
                                 variant={'Wariant: ' + studentExercise.variant + " "}
-                                grade={"Ocena: " + studentExercise.grade} />
+                                grade={"Ocena: " + studentExercise.grade}
+                                detailsClicked={()=> this.detailsHandler(studentExercise.id)}
+                                 />
+                                
                         })}
                     </div>
                     <div className='assignGroup'>

@@ -47,9 +47,7 @@ class AdminStudents extends Component {
     }
 
     detailsHandler = (detailID) => {
-        console.log('Szczegóły', detailID);
         this.props.history.push('/students/' + detailID);
-        console.log(this.props.history);
     }
 
     removeHandler = (removeID) => {
