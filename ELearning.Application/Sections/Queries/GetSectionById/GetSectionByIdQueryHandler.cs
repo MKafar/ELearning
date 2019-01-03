@@ -24,6 +24,9 @@ namespace ELearning.Application.Sections.Queries.GetSectionById
             if (entity == null)
                 throw new NotFoundException(nameof(Section), request.Id);
 
+            entity.Group = await _context.Groups
+                .FindAsync(entity.GroupId);
+
             return new SectionViewModel
             {
                 Id = entity.SectionId,
