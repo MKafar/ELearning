@@ -1,39 +1,32 @@
 ﻿using ELearning.Application.Interfaces;
+using ELearning.Common;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ELearning.Infrastructure
 {
     public class CompilerService : ICompilerService
     {
-        private const string AbsolutePathToCompilerExeFile = "CompilerAbsolutePath";
-        private string _fileName;
+        private const string AbsolutePathToCompilerExeFileConfigurationName = "CompilerAbsolutePath";
 
         private readonly Process _compiler;
         
         public CompilerService()
         {
-            var basePath = Directory.GetCurrentDirectory() + string.Format("{0}..{0}ELearning.WebUI", Path.DirectorySeparatorChar);
-            
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(basePath)
-                .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsettings.Local.json", optional: true)
-                .Build();
+            _compiler = SetupCompiler();
+        }
 
-            var connectionString = configuration.GetConnectionString(AbsolutePathToCompilerExeFile);
-
-            if (string.IsNullOrEmpty(connectionString))
-                throw new ArgumentException($"Absolute path to compiler exe file '{AbsolutePathToCompilerExeFile}' is null or empty.", nameof(connectionString));
-
-            _compiler = new Process
+        private Process SetupCompiler()
+        {
+            return new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    WorkingDirectory = connectionString,
-                    FileName = "g++.exe",
+                    FileName = SetCompilerPath(),
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     CreateNoWindow = true
@@ -41,29 +34,39 @@ namespace ELearning.Infrastructure
             };
         }
 
-        public void SaveToFile(int assignmentId, string code)
+        private string SetCompilerPath()
         {
-            var filePath = $"{Directory.GetCurrentDirectory()}{Path.DirectorySeparatorChar}bin";
+            var basePath = Directory.GetCurrentDirectory() + string.Format("{0}..{0}ELearning.WebUI", Path.DirectorySeparatorChar);
 
-            DateTime now = DateTime.Now;
-            var currentTime = $"{now.Hour}:{now.Minute}:{now.Second}:{now.Millisecond}";
-            var currentDate = $"{now.Year}-{now.Month}-{now.Day}";
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(basePath)
+                .AddJsonFile("appsettings.json")
+                .AddJsonFile($"appsettings.Local.json", optional: true)
+                .Build();
 
-            _fileName = $"{assignmentId}_{currentDate}_{currentTime}.cpp";
+            var compilerPath = configuration.GetValue<string>(AbsolutePathToCompilerExeFileConfigurationName);
 
-           
+            if (string.IsNullOrEmpty(compilerPath))
+                throw new ArgumentException($"Absolute path to compiler exe file '{AbsolutePathToCompilerExeFileConfigurationName}' is null or empty.", nameof(compilerPath));
+
+            return compilerPath;
         }
 
-        public void Compile()
+        public async Task<string> CompileAsync(string code, FileSettings fileSettings, CancellationToken cancellationToken)
         {
-            _compiler.StartInfo.Arguments = "command line arguments to your executable";
+            var output = "test";
+
+            _compiler.StartInfo.WorkingDirectory = fileSettings.FileSaveDirectory;
+            _compiler.StartInfo.Arguments = string.Format("-o {0} {1}", fileSettings.FileNameWithoutExtension, fileSettings.FileName);
 
             _compiler.Start();
             while (!_compiler.StandardOutput.EndOfStream)
             {
-                string line = _compiler.StandardOutput.ReadLine();
+                string line = await _compiler.StandardOutput.ReadLineAsync();
                 // do something with line
             }
+
+            return output;
         }
     }
 }
