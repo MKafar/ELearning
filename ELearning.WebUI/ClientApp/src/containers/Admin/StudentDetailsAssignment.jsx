@@ -24,7 +24,7 @@ class StudentDetailsAssignment extends Component {
     }
 
     handleChange = (e, { value }) => {
-        value === '' ? this.setState({ adminGrade: 0 }) : this.setState({ adminGrade: value })
+       ((value === '' || value < 0)  ? this.setState({ adminGrade: 0 }) : this.setState({ adminGrade: value })) || ((value > 10) ? this.setState({ adminGrade: 10 }) : this.setState({ adminGrade: value }))
     }
 
     sendAdminGradeHandler = () => {
@@ -60,7 +60,7 @@ class StudentDetailsAssignment extends Component {
 
                         <Header size='medium'>Ostateczna ocena</Header>
                         <div className='adminGrade'>
-                            <Input className='studentGradeInput' label={{ basic: true, content: 'pkt.' }} labelPosition='right' placeholder='Ocena' pattern="[0-10]{0,5}" onChange={this.handleChange}></Input>
+                            <Input className='studentGradeInput' type='number' label={{ basic: true, content: 'pkt.' }} labelPosition='right' placeholder='Ocena' max={10} min={0} step={0.25} onChange={this.handleChange}></Input>
                             <Button primary className='adminGradeSendButton' onClick={this.sendAdminGradeHandler}>Wyślij</Button>
                         </div>
 

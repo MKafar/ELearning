@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-expressions */
 import React, { Component } from 'react';
 import { Button, Form, Header } from 'semantic-ui-react';
-
+import { Route } from 'react-router-dom';
 
 import './Login.scss';
-
+import Admin from '../Admin/Admin';
+import Student from '../Student/Student';
 
 class Login extends Component {
 
@@ -22,15 +24,17 @@ class Login extends Component {
             "Login: " + this.state.login,
             "Hasło: "+ this.state.password
             );
-            // ( this.state.login == "student" && this.state.password == "student") ? 
-            // <Route path="/" exact component={Student} />  
-            // : null;
+
+            this.state.login === "admin" && this.state.password === "admin" ? 
+             console.log(this.props) 
+             : null 
+             
+             //this.props.history.push('/admin/')
+             //this.props.history.push('/student/');
             
     }
-
-
-    //<div className={classes}>
     render() {
+ 
         return (
             <div className='login'>
             <Header size='large'>Zaloguj się</Header>
@@ -41,8 +45,12 @@ class Login extends Component {
                     <Form.Field>
                         <Form.Input placeholder='Password' type='password' onChange={this.changePasswordHandler}/>
                     </Form.Field>
-                    <Button className='loginbutton' primary onClick={this.sendCredentialsHandler()}>Zaloguj</Button>
+                    <Button className='loginbutton' primary onClick={this.sendCredentialsHandler}>Zaloguj</Button>
                 </Form>
+
+                <Route path="/admin" exact component={Admin} />
+                <Route path="/student" exact component={Student} />
+
             </div>
         );
     }

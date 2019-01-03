@@ -17,15 +17,19 @@ class AdminStudents extends Component {
         selectedItem: [],
         showSelected: false
     }
-
-    componentDidMount() {
+    loadData = () => {
         axios.get('/api/Users/GetAll')
             .then(response => {
                 this.setState({ users: response.data.users });
-                
+
+            }).catch(error => {
+                console.log(error.response);
             });
     }
 
+    componentDidMount() {
+        this.loadData();
+    }
 
     valueHandle = (selectedValue) => {
         this.setState({ value: selectedValue });
@@ -34,11 +38,12 @@ class AdminStudents extends Component {
     }
 
     viewData = (selectedId) => {
-        //const selectedExercise = this.state.exercises.slice();
         axios.get('/api/Users/GetById/' + selectedId)
             .then(response => {
                 console.log(response.data);
                 this.setState({ selectedItem: response.data });
+            }).catch(error => {
+                console.log(error.response)
             });
     }
 
@@ -52,6 +57,14 @@ class AdminStudents extends Component {
 
     removeHandler = (removeID) => {
         console.log('Usuń', removeID);
+        axios.delete('/api/Users/Delete/'+ removeID)
+            .then(response => {
+                console.log(response);
+                this.loadData();
+            }).catch(error => {
+                console.log(error.response);
+                alert("Nie można usunąć studenta mającego przypisaną sekcję.");
+            });
     }
 
     render() {
