@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ELearning.Common\ELearning.Common.csproj" />
     <ProjectReference Include="..\ELearning.Persistence\ELearning.Persistence.csproj" />
   </ItemGroup>
 
