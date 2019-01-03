@@ -24,6 +24,9 @@ namespace ELearning.Application.Groups.Queries.GetGroupById
             if (entity == null)
                 throw new NotFoundException(nameof(Group), request.Id);
 
+            entity.Subject = await _context.Subjects
+                .FindAsync(entity.SubjectId);
+
             return new GroupViewModel
             {
                 Id = entity.GroupId,

@@ -24,6 +24,9 @@ namespace ELearning.Application.Variants.Queries.GetVariantById
             if (entity == null)
                 throw new NotFoundException(nameof(Variant), request.Id);
 
+            entity.Exercise = await _context.Exercises
+                .FindAsync(entity.ExerciseId);
+
             return new VariantViewModel
             {
                 Id = entity.VariantId,
