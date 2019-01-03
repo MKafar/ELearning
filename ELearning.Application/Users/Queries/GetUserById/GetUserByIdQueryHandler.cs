@@ -2,6 +2,7 @@
 using ELearning.Domain.Entities;
 using ELearning.Persistence;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,6 +25,9 @@ namespace ELearning.Application.Users.Queries.GetUserById
             if (entity == null)
                 throw new NotFoundException(nameof(User), request.Id);
 
+            entity.Role = await _context.Roles
+                .FindAsync(entity.RoleId);
+            
             return new UserViewModel
             {
                 Id = entity.UserId,
@@ -31,7 +35,6 @@ namespace ELearning.Application.Users.Queries.GetUserById
                 Email = entity.Email,
                 RoleId = entity.RoleId,
                 RoleName = entity.Role.Name
-                
             };
         }
     }

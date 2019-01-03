@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ELearning.Application\ELearning.Application.csproj" />
+    <ProjectReference Include="..\ELearning.Infrastructure\ELearning.Infrastructure.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
