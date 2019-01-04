@@ -20,18 +20,18 @@ namespace ELearning.Application.Variants.Commands.CreateVariant
 
         public async Task<Unit> Handle(CreateVariantCommand request, CancellationToken cancellationToken)
         {
+            var variantAlreadyExists = _context.Variants
+                .Any(e => e.ExerciseId == request.ExerciseId && e.Number == request.Number);
+
+            if (variantAlreadyExists)
+                throw new NotUniqueException(nameof(Variant), nameof(Variant.ExerciseId), request.ExerciseId, nameof(Variant.Number), request.Number);
+
             var entity = new Variant
             {
                 Number = request.Number,
                 ExerciseId = request.ExerciseId,
                 Content = request.Content != null ? request.Content : "No content"
             };
-
-            var variantAlreadyExists = _context.Variants
-                .Any(e => e.ExerciseId == entity.ExerciseId && e.Number == entity.Number);
-
-            if (variantAlreadyExists)
-                throw new NotUniqueException(nameof(Variant), nameof(Variant.ExerciseId), request.ExerciseId, nameof(Variant.Number), request.Number);
 
             _context.Variants.Add(entity);
 
