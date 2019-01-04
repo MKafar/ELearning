@@ -4,6 +4,7 @@ using ELearning.Application.Sections.Commands.CreateSection;
 using ELearning.Application.Sections.Commands.DeleteSection;
 using ELearning.Application.Sections.Commands.UpdateSection;
 using ELearning.Application.Sections.Queries.GetSectionById;
+using ELearning.Application.Sections.Queries.GetSectionEvaluationsListById;
 using ELearning.Application.Sections.Queries.GetSectionsList;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +25,13 @@ namespace ELearning.WebUI.Controllers
         public async Task<ActionResult<SectionViewModel>> GetById(int id)
         {
             return Ok(await Mediator.Send(new GetSectionByIdQuery { Id = id }));
+        }
+
+        // GET: api/Sections/GetAllEvaluationsById/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<SectionEvaluationsListViewModel>> GetAllEvaluationsById(int id)
+        {
+            return Ok(await Mediator.Send(new GetSectionEvaluationsListByIdQuery { Id = id }));
         }
 
         // POST: api/Sections/Create
