@@ -55,7 +55,7 @@ namespace ELearning.Persistence.Migrations
                 {
                     VariantId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TestingCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CorrectOutput = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Number = table.Column<byte>(type: "tinyint", nullable: false),
