@@ -30,9 +30,9 @@ namespace ELearning.WebUI.Controllers
             return Ok(await Mediator.Send(new GetExerciseByIdQuery { Id = id }));
         }
 
-        // GET api/Exercises/GetAlVariantsById/5
+        // GET api/Exercises/GetAllVariantsById/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<VariantsListViewModel>> GetAlVariantsById(int id)
+        public async Task<ActionResult<VariantsListViewModel>> GetAllVariantsById(int id)
         {
             return Ok(await Mediator.Send(new GetExerciseVariantsListByIdQuery { Id = id }));
         }
