@@ -14,7 +14,9 @@ class ExerciseVariantDetails extends Component {
     state ={
         selectedExerciseVariantID: null,
         selectedVariantContent: '',
-        variantNumber: null
+        variantNumber: null,
+        code: '',
+        selectedExerciseID: null
     }
      componentWillMount = () => {
          this.setState({selectedExerciseVariantID: this.props.match.params.exerciseVariantID});
@@ -25,15 +27,36 @@ class ExerciseVariantDetails extends Component {
         .then(response => {
             this.setState({variantNumber: response.data.number});
             this.setState({selectedVariantContent: response.data.content});
-            console.log("Kodzik:"+this.state.selectedVariantContent);
         }).catch(error =>{
             console.log(error.response);
         })
     }
     componentDidMount = () => {
-        this.loadData();
+        this.loadData(this.props.match.params.exerciseVariantID);
+        this.setState({selectedExerciseID: this.props.match.params.exerciseDetailsID });
+        
     }
 
+    getvariantcode = (dataFromCode) =>{
+        this.setState({code: dataFromCode});
+
+    }
+    sendCodeHandler = () => {
+        const inputVariantNumber = this.state.variantNumber;
+        axios.put("/api/Variants/Update", {
+            id: this.state.selectedExerciseVariantID,
+            number: inputVariantNumber,
+            exerciseId:  this.state.selectedExerciseID,
+            content: this.state.code
+        })
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.log(error.response);
+                alert("Nie można dodać treści!")
+            })
+    }
 
     render() {
         //zmienianie string na html
@@ -42,9 +65,9 @@ class ExerciseVariantDetails extends Component {
         // function createMarkup() {
         //     return {__html: htmlString};
         //   }
-        const addvariantcode = () => {
-            console.log("Added");
-        }
+       
+            
+
         const checkvariantcode = () => {
             console.log("Checked");
         }
@@ -56,12 +79,12 @@ class ExerciseVariantDetails extends Component {
                     {/*<div dangerouslySetInnerHTML={createMarkup()} />*/}
                     <div className="variantCodingContent">
                     {
-                        this.state.selectedVariantContent ? <CodeWindow changeModeHTML={true} code={this.state.selectedVariantContent} /> 
+                        this.state.selectedVariantContent ? <CodeWindow getData={this.getvariantcode} changeModeHTML={true} code={this.state.selectedVariantContent} /> 
                         : null
                     }
                         
                         <div className="variantCodingButtons">
-                            <Button primary onClick={addvariantcode}>Dodaj</Button>
+                            <Button primary onClick={this.sendCodeHandler} >Dodaj</Button>
                             <Button onClick={checkvariantcode}>Podejrzyj</Button>
                         </div>
 

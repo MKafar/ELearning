@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CodeMirror from 'react-codemirror';
 import axios from '../../axios';
+import { Button } from 'semantic-ui-react';
 
 import './CodeWindow.scss';
 import 'codemirror/lib/codemirror.css';
@@ -21,12 +22,25 @@ class CodeWindow extends Component {
 
     state = {
         name: 'CodeMirror',
-        code:'',
+        code: '',
         changeMode: false,
-
     };
 
- 
+    setCode = () => {
+        
+        this.props.getData(this.state.code);
+        console.log(this.state.code);
+    }
+    sendCode = ()=>{
+        console.log(this.state.code)
+    }
+
+    updateCode(newCode) {
+        this.setState({
+            code: newCode,
+        });
+        this.props.getData(newCode);
+    }
 
     render() {
         let options = null;
@@ -50,8 +64,9 @@ class CodeWindow extends Component {
 
 
         return (
-            <div>
-                <CodeMirror  value={this.props.code} options={options} />
+            <div className='codeWindow'>
+                <CodeMirror onChange={this.updateCode.bind(this)} value={this.props.code} options={options} />
+                
             </div>
         );
     }

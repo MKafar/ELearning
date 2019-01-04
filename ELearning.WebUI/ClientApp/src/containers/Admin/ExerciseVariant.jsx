@@ -35,7 +35,6 @@ class ExerciseVariant extends Component {
     }
 
     componentDidMount = () => {
-        console.log("Zadanie:"+this.state.selectedExerciseID);
         this.loadData();
     }
     componentWillMount = () => {
