@@ -6,9 +6,6 @@ namespace ELearning.Application.Variants.Commands.CreateVariant
     {
         public CreateVariantCommandValidator()
         {
-            RuleFor(v => v.Content)
-                .NotEmpty();
-
             RuleFor(v => v.Number)
                 .NotEmpty()
                 .GreaterThan(0)
