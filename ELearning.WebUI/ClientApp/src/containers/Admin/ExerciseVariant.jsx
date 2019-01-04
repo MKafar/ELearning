@@ -12,19 +12,15 @@ class ExerciseVariant extends Component {
     };
 
     state = {
-        variants: [
-            { id: 1, number: 1 },
-            { id: 2, number: 2 },
-            { id: 3, number: 3 },
-            { id: 4, number: 4 },
-        ],
+        variants: [],
         selectedExerciseID: null
     }
 
     loadData = () => {
-        axios.get('/')
+        axios.get('/api/Exercises/GetAlVariantsById' + this.state.selectedExerciseID)
         .then(response => {
-            this.setState({ users: response.data.users });
+            console.log(response)
+            //this.setState({ exerciseViariants: response.data.variants });
 
         }).catch(error => {
             console.log(error.response);

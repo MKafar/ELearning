@@ -42,6 +42,7 @@ class ModalAddVariant extends Component {
             })
             .catch(error => {
                 console.log(error.response);
+                alert("Nie można dodać wariantu, który już istnieje!")
             })
     }
     render() {
