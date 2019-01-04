@@ -1,0 +1,28 @@
+.adminExercises {
+    box-sizing: inherit;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+  }
+
+  .content {
+    display: flex;
+  }
+
+.ui.button {
+    margin-top: 10px !important;
+    height: 38px;
+}
+
+.searching {
+    display: flex;
+}
+.exerciseList {
+    max-height: 700px;
+    overflow: auto;
+}
+
+.addExercisebutton {
+    margin-top: 10px !important;
+}

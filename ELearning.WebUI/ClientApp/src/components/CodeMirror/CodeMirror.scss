@@ -3,12 +3,17 @@ p {
 }
 
 .CodeMirror {
-    height: 714px !important;
+    height: 716px !important;
     margin-left: 10px;
     margin-top: 10px;
+    border: solid;
+    border-color: #f1f1f1;
 }
 
 .ReactCodeMirror {
-    width: 700px;
+    width: 600px;
 }
 
+.runbutton {
+    margin-right: 25px !important;
+}

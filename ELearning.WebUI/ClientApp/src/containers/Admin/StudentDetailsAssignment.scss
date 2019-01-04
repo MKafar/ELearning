@@ -1,0 +1,38 @@
+.userAssignmentContainer {
+    margin: 10px;
+    padding: 5px;
+}
+
+.nameHeader {
+    margin-top: 0 !important;
+}
+
+.assignmentContentContainer {
+    display: flex;
+}
+
+.assignmentGradeContainer {
+    width: 370px !important
+}
+
+.studentGradeInput {
+    width: 100px;
+    height: 38px;
+}
+.gradeDetailList {
+    height: 550px !important;
+    overflow: auto;
+    margin-top: 5px;
+}
+
+.adminGradeSendButton {
+    width: 100px;
+    float: right;
+    margin-left: 60px !important;
+}
+.ui.button {
+    margin-top: unset !important;
+}
+.adminGrade {
+    display: flex;
+}

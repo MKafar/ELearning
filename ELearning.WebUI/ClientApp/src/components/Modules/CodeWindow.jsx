@@ -4,15 +4,19 @@ import CodeMirror from 'react-codemirror';
 import './CodeWindow.scss';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/mode/clike/clike';
+import 'codemirror/mode/htmlmixed/htmlmixed.js';
+import 'codemirror/mode/htmlembedded/htmlembedded.js';
 import 'codemirror/theme/neat.css';
 import 'codemirror/addon/edit/closebrackets.js';
+import 'codemirror/mode/xml/xml.js';
+import 'codemirror/mode/css/css.js';
 
 
 class CodeWindow extends Component {
     state = {
         name: 'CodeMirror',
         code: null,
-        changeMode: false
+        changeMode: false,
 
     };
 
@@ -25,10 +29,10 @@ class CodeWindow extends Component {
                 theme: 'neat',
                 autoCloseBrackets: true,
                 readOnly: true
-
-            };
-        } else {
-            options = {
+             };
+             
+        } else if (!this.props.changeMode){
+             options = {
                 lineNumbers: true,
                 mode: 'text/x-c++src',
                 theme: 'neat',
