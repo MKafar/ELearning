@@ -1,7 +1,11 @@
-﻿namespace ELearning.Application.Interfaces
+﻿using ELearning.Common;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace ELearning.Application.Interfaces
 {
     public interface ICompilerService
     {
-        void Compile();
+        Task<string> CompileAsync(string code, FileSettings fileSettings, CancellationToken cancellationToken);
     }
 }

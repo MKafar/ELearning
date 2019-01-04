@@ -32,6 +32,7 @@ namespace ELearning.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IFileSaveService, FileSaveService>();
             services.AddTransient<ICompilerService, CompilerService>();
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPreProcessorBehavior<,>));
@@ -77,7 +78,7 @@ namespace ELearning.WebUI
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
+            
             app.UseSwagger();
             app.UseSwaggerUI(c => 
             {
