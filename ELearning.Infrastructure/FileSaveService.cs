@@ -36,6 +36,9 @@ namespace ELearning.Infrastructure
         {
             var fileSaveDirectory = Directory.GetCurrentDirectory() + string.Format("{0}..{0}bin", Path.DirectorySeparatorChar);
 
+            if (!Directory.Exists(fileSaveDirectory))
+                Directory.CreateDirectory(fileSaveDirectory);
+
             return fileSaveDirectory;
         }
 
