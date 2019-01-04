@@ -1,13 +1,37 @@
 import React, {Component} from 'react';
 import {Header, Button} from 'semantic-ui-react';
+import axios from '../../axios';
 
 import './ExerciseVariantDetails.scss';
 import CodeWindow from '../../components/Modules/CodeWindow';
 
 class ExerciseVariantDetails extends Component {
 
+    constructor(props) {
+        super(props);
+    };
+
+    state ={
+        selectedExerciseVariantID: null,
+        selectedVariantContent: '',
+        variantNumber: null
+    }
+     componentWillMount = () => {
+         this.setState({selectedExerciseVariantID: this.props.match.params.exerciseVariantID});
+         this.loadData(this.props.match.params.exerciseVariantID);
+     }
+    loadData = (param) => {
+        axios.get('/api/Variants/GetById/' + param)
+        .then(response => {
+            this.setState({variantNumber: response.data.number});
+            this.setState({selectedVariantContent: response.data.content});
+            console.log("Kodzik:"+this.state.selectedVariantContent);
+        }).catch(error =>{
+            console.log(error.response);
+        })
+    }
     componentDidMount = () => {
-        console.log(this.props.match.params.exerciseVariantID);
+        this.loadData();
     }
 
 
@@ -28,10 +52,14 @@ class ExerciseVariantDetails extends Component {
         return (
             <div className='variantcontainer'>
                 <div className='variantCodingContainer'>
-                    <Header size='large'>Wariant: 1</Header>
+                    <Header size='large'>Wariant: {this.state.variantNumber}</Header>
                     {/*<div dangerouslySetInnerHTML={createMarkup()} />*/}
                     <div className="variantCodingContent">
-                        <CodeWindow changeModeHTML={true} code={'Hello'} />
+                    {
+                        this.state.selectedVariantContent ? <CodeWindow changeModeHTML={true} code={this.state.selectedVariantContent} /> 
+                        : null
+                    }
+                        
                         <div className="variantCodingButtons">
                             <Button primary onClick={addvariantcode}>Dodaj</Button>
                             <Button onClick={checkvariantcode}>Podejrzyj</Button>

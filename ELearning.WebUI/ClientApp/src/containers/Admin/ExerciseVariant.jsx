@@ -24,13 +24,14 @@ class ExerciseVariant extends Component {
         }).catch(error => {
             console.log(error.response);
         });
-        
+
         axios.get('/api/Exercises/GetById/' + this.state.selectedExerciseID)
         .then(response => {
             this.setState({ selectedExerciseTitle: response.data.title });
         }).catch(error => {
             console.log(error.response);
         });
+        
     }
 
     componentDidMount = () => {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CodeMirror from 'react-codemirror';
+import axios from '../../axios';
 
 import './CodeWindow.scss';
 import 'codemirror/lib/codemirror.css';
@@ -13,12 +14,19 @@ import 'codemirror/mode/css/css.js';
 
 
 class CodeWindow extends Component {
+
+    constructor(props) {
+        super(props);
+    };
+
     state = {
         name: 'CodeMirror',
-        code: null,
+        code:'',
         changeMode: false,
 
     };
+
+ 
 
     render() {
         let options = null;
@@ -39,7 +47,6 @@ class CodeWindow extends Component {
                 autoCloseBrackets: true,
             };
         }
-
 
 
         return (
