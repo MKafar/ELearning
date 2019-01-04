@@ -22,7 +22,7 @@ namespace ELearning.Application.Users.Queries.GetUserAssignmentsListWithDetailsB
         {
             var vm = new UserAssignmentsListWithDetailsViewModel
             {
-                AssignmentsWithDetails = await _context.Assignments
+                UserAssignmentsWithDetails = await _context.Assignments
                     .Select(e => new UserAssignmentWithDetailsLookupModel
                     {
                         UserId = e.Section.UserId,
