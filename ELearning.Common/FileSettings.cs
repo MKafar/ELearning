@@ -22,17 +22,34 @@ namespace ELearning.Common
             }
         }
 
+        public string CompiledFilePath
+        {
+            get
+            {
+                if (FileSaveDirectory == null)
+                    throw new ArgumentNullException(nameof(FileSaveDirectory));
+
+                if (FileNameWithExeExtension == null)
+                    throw new ArgumentNullException(nameof(FileNameWithExeExtension));
+
+                return string.Format("{0}{1}{2}",
+                    FileSaveDirectory,
+                    Path.DirectorySeparatorChar,
+                    FileNameWithExeExtension);
+            }
+        }
+
         public string FileSaveDirectory { get; set; } = null;
         public string FileName { get; set; } = null;
 
-        public string FileNameWithoutExtension
+        public string FileNameWithExeExtension
         {
             get
             {
                 if (FileName == null)
                     throw new ArgumentNullException(nameof(FileName));
 
-                return Path.ChangeExtension(FileName, "").Substring(0, FileName.LastIndexOf('.'));
+                return Path.ChangeExtension(FileName, "exe");
             }
         }
     }
