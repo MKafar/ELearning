@@ -20,12 +20,6 @@ namespace ELearning.Application.Variants.Commands.UpdateVariant
 
         public async Task<Unit> Handle(UpdateVariantCommand request, CancellationToken cancellationToken)
         {
-            var variantAlreadyExists = _context.Variants
-                .Any(e => e.ExerciseId == request.ExerciseId && e.Number == request.Number);
-
-            if (variantAlreadyExists)
-                throw new NotUniqueException(nameof(Variant), nameof(Variant.ExerciseId), request.ExerciseId, nameof(Variant.Number), request.Number);
-
             var entity = await _context.Variants
                 .SingleAsync(e => e.VariantId == request.Id);
 
