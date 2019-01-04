@@ -31,6 +31,7 @@ namespace ELearning.Persistence.Migrations
 
                     b.Property<decimal?>("FinalGrade")
                         .ValueGeneratedOnAdd()
+                        .HasConversion(new ValueConverter<decimal, decimal>(v => default(decimal), v => default(decimal), new ConverterMappingHints(precision: 38, scale: 17)))
                         .HasColumnType("decimal(4, 2)")
                         .HasDefaultValue(0m);
 
@@ -232,7 +233,6 @@ namespace ELearning.Persistence.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Content")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CorrectOutput")

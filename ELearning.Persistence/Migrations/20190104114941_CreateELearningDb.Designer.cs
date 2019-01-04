@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ELearning.Persistence.Migrations
 {
     [DbContext(typeof(ELearningDbContext))]
-    [Migration("20190102133313_CreateELearningDb")]
+    [Migration("20190104114941_CreateELearningDb")]
     partial class CreateELearningDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,7 @@ namespace ELearning.Persistence.Migrations
 
                     b.Property<decimal?>("FinalGrade")
                         .ValueGeneratedOnAdd()
+                        .HasConversion(new ValueConverter<decimal, decimal>(v => default(decimal), v => default(decimal), new ConverterMappingHints(precision: 38, scale: 17)))
                         .HasColumnType("decimal(4, 2)")
                         .HasDefaultValue(0m);
 
@@ -234,7 +235,6 @@ namespace ELearning.Persistence.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Content")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CorrectOutput")

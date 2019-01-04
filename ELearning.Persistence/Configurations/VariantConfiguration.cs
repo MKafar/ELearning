@@ -16,7 +16,7 @@ namespace ELearning.Persistence.Configurations
 
             builder.Property(e => e.Content)
                 .HasColumnType("nvarchar(max)")
-                .IsRequired(true);
+                .IsRequired(false);
 
             builder.Property(e => e.CorrectOutput)
                 .HasColumnType("nvarchar(max)")
