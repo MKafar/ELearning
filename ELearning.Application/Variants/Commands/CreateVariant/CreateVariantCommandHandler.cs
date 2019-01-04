@@ -17,12 +17,8 @@ namespace ELearning.Application.Variants.Commands.CreateVariant
 
         public async Task<Unit> Handle(CreateVariantCommand request, CancellationToken cancellationToken)
         {
-            if (request.Content == null)
-                request.Content = "No content";
-
             var entity = new Variant
             {
-                Content = request.Content,
                 Number = request.Number,
                 ExerciseId = request.ExerciseId
             };
