@@ -2,8 +2,10 @@
 using ELearning.Common;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,28 +15,19 @@ namespace ELearning.Infrastructure
     {
         private const string AbsolutePathToCompilerExeFileConfigurationName = "CompilerAbsolutePath";
 
-        private readonly Process _compiler;
+        private readonly ProcessStartInfo _processStartInfo;
         
         public CompilerService()
         {
-            _compiler = SetupCompiler();
-        }
-
-        private Process SetupCompiler()
-        {
-            return new Process
+            _processStartInfo = new ProcessStartInfo
             {
-                StartInfo = new ProcessStartInfo
-                {
-                    FileName = SetCompilerPath(),
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    CreateNoWindow = true
-                }
+                FileName = SetCompilerPathFromAppsettingsJson(),
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
             };
         }
 
-        private string SetCompilerPath()
+        private string SetCompilerPathFromAppsettingsJson()
         {
             var basePath = Directory.GetCurrentDirectory() + string.Format("{0}..{0}ELearning.WebUI", Path.DirectorySeparatorChar);
 
@@ -54,19 +47,64 @@ namespace ELearning.Infrastructure
 
         public async Task<string> CompileAsync(string code, FileSettings fileSettings, CancellationToken cancellationToken)
         {
-            var output = "test";
+            IList<string> processOutputInAList = new List<string>();
+            StringBuilder processOutput = new StringBuilder();
 
-            _compiler.StartInfo.WorkingDirectory = fileSettings.FileSaveDirectory;
-            _compiler.StartInfo.Arguments = string.Format("-o {0} {1}", fileSettings.FileNameWithoutExtension, fileSettings.FileName);
+            _processStartInfo.WorkingDirectory = fileSettings.FileSaveDirectory;
+            _processStartInfo.Arguments = string.Format("{0} -o {1}", fileSettings.FileName, fileSettings.FileNameWithExeExtension);
 
-            _compiler.Start();
-            while (!_compiler.StandardOutput.EndOfStream)
+            using (Process process = new Process { StartInfo = _processStartInfo })
             {
-                string line = await _compiler.StandardOutput.ReadLineAsync();
-                // do something with line
+                process.Start();
+
+                while (!process.StandardError.EndOfStream)
+                {
+                    processOutputInAList.Add(await process.StandardError.ReadLineAsync());
+                }
+
+                if (processOutputInAList.Count == 0)
+                    return await StartCompiledProgram(fileSettings);
+
+                process.WaitForExit();
             }
 
-            return output;
+            foreach (var line in processOutputInAList)
+            {
+                processOutput.AppendLine(line);
+            }
+
+            return processOutput.ToString();
+        }
+
+        private async Task<string> StartCompiledProgram(FileSettings fileSettings)
+        {
+            IList<string> processOutputInAList = new List<string>();
+            StringBuilder processOutput = new StringBuilder();
+
+            using (Process compiledProgram =
+                new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = fileSettings.CompiledFilePath,
+                        RedirectStandardOutput = true
+                    }
+                })
+            {
+                compiledProgram.Start();
+
+                while (!compiledProgram.StandardOutput.EndOfStream)
+                {
+                    processOutputInAList.Add(await compiledProgram.StandardOutput.ReadLineAsync());
+                }
+            }
+
+            foreach (var line in processOutputInAList)
+            {
+                processOutput.AppendLine(line);
+            }
+
+            return processOutput.ToString();
         }
     }
 }
