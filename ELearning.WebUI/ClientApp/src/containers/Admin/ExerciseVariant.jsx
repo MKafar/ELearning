@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { Header } from 'semantic-ui-react';
+import axios from '../../axios';
 
 import './ExerciseVariant.scss';
 import ModalAddVariant from '../../components/Modules/ModalAddVariant'
 import DetailList from '../../components/Modules/DetailList'
 
 class ExerciseVariant extends Component {
+    constructor(props) {
+        super(props);
+    };
 
     state = {
         variants: [
@@ -18,11 +22,18 @@ class ExerciseVariant extends Component {
     }
 
     loadData = () => {
+        axios.get('/')
+        .then(response => {
+            this.setState({ users: response.data.users });
 
+        }).catch(error => {
+            console.log(error.response);
+        });
     }
 
     componentDidMount = () => {
         console.log("Zadanie:"+this.state.selectedExerciseID);
+        this.loadData();
     }
     componentWillMount = () => {
         this.setState({selectedExerciseID: this.props.match.params.exerciseDetailsID});
@@ -61,7 +72,7 @@ class ExerciseVariant extends Component {
                     </Button.Group>  */}
                     </Header>
 
-                    <ModalAddVariant /> 
+                    <ModalAddVariant updateData={this.loadData} /> 
 
                     <div className="variants">
 

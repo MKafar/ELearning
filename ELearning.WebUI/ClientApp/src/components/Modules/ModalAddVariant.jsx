@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Header, Modal, Dropdown } from 'semantic-ui-react';
-
+import axios from '../../axios';
 
 import './ModalAddVariant.scss';
 
@@ -18,6 +18,11 @@ const variantOptions = [
 ];
 
 class ModalAddVariant extends Component {
+
+    constructor(props) {
+        super(props);
+    };
+
     state = {
         number: null
     }
@@ -26,26 +31,25 @@ class ModalAddVariant extends Component {
         this.setState({ number: value });
         console.log(value);
     }
+
     addHandle = () => {
-        // const inputData = this.state.title;
-        // axios.post('', {
-        //     title: inputData
-        // })
-        //     .then(response => {
-        //         console.log(response);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //     })
-            console.log("Dodano");
-            console.log(this.state.number);
+        const inputVariantNumber = this.state.number;
+        axios.post('/api/Variants/Create', {
+            number: inputVariantNumber,
+        })
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error.response);
+            })
     }
     render() {
 
 
 
         return (
-            <Modal trigger={<Button primary className='modalbutton'>Dodaj wariant</Button>} centered={false}>
+            <Modal closeIcon trigger={<Button primary className='modalbutton'>Dodaj wariant</Button>} centered={false}>
                 <Modal.Header>Dodaj wariant</Modal.Header>
                 <Modal.Content >
                     <Modal.Description >
@@ -54,7 +58,9 @@ class ModalAddVariant extends Component {
                     </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button primary onClick={this.addHandle}>Zapisz</Button>
+                    <Button primary onClick={()=>{
+                        this.addHandle();
+                        this.props.updateData();}}>Zapisz</Button>
                 </Modal.Actions>
             </Modal>
         )
