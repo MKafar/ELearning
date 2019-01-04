@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
 using ELearning.Application.Exercises.Commands.CreateExercise;
 using ELearning.Application.Exercises.Commands.DeleteExercise;

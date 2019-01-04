@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
-using ELearning.Application.Groups.Queries.GetGroupById;
-using ELearning.Application.Groups.Queries.GetGroupsList;
 using ELearning.Application.Sections.Commands.CreateSection;
 using ELearning.Application.Sections.Commands.DeleteSection;
 using ELearning.Application.Sections.Commands.UpdateSection;
+using ELearning.Application.Sections.Queries.GetSectionById;
+using ELearning.Application.Sections.Queries.GetSectionsList;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ELearning.WebUI.Controllers
@@ -15,16 +14,16 @@ namespace ELearning.WebUI.Controllers
     {
         // GET: api/Sections/GetAll
         [HttpGet]
-        public async Task<ActionResult<GroupsListViewModel>> GetAll()
+        public async Task<ActionResult<SectionsListViewModel>> GetAll()
         {
-            return Ok(await Mediator.Send(new GetGroupsListQuery()));
+            return Ok(await Mediator.Send(new GetSectionsListQuery()));
         }
 
         // GET: api/Sections/GetById/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<GroupViewModel>> GetById(int id)
+        public async Task<ActionResult<SectionViewModel>> GetById(int id)
         {
-            return Ok(await Mediator.Send(new GetGroupByIdQuery { Id = id }));
+            return Ok(await Mediator.Send(new GetSectionByIdQuery { Id = id }));
         }
 
         // POST: api/Sections/Create
