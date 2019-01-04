@@ -6,6 +6,7 @@ using ELearning.Application.Exercises.Commands.DeleteExercise;
 using ELearning.Application.Exercises.Commands.UpdateExercise;
 using ELearning.Application.Exercises.Queries.GetExerciseById;
 using ELearning.Application.Exercises.Queries.GetExercisesList;
+using ELearning.Application.Exercises.Queries.GetExerciseVariantsListById;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -27,6 +28,13 @@ namespace ELearning.WebUI.Controllers
         public async Task<ActionResult<ExerciseViewModel>> GetById(int id)
         {
             return Ok(await Mediator.Send(new GetExerciseByIdQuery { Id = id }));
+        }
+
+        // GET api/Exercises/GetAlVariantsById/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<VariantsListViewModel>> GetAlVariantsById(int id)
+        {
+            return Ok(await Mediator.Send(new GetExerciseVariantsListByIdQuery { Id = id }));
         }
 
         // POST api/Exercises/Create
