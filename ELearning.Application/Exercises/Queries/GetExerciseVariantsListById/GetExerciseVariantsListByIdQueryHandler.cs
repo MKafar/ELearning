@@ -25,9 +25,11 @@ namespace ELearning.Application.Exercises.Queries.GetExerciseVariantsListById
                 Variants = await _context.Variants
                     .Select(e => new ExerciseVariantLookupModel
                     {
+                        ExerciseId = e.ExerciseId,
                         VariantId = e.VariantId,
                         VariantNumber = e.Number
-                    }).ToListAsync(cancellationToken)
+                    }).Where(e => e.ExerciseId == request.Id)
+                    .ToListAsync(cancellationToken)
             };
 
             if (vm.Variants == null)
