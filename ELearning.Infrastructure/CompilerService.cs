@@ -1,69 +1,110 @@
 ﻿using ELearning.Application.Interfaces;
+using ELearning.Common;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ELearning.Infrastructure
 {
     public class CompilerService : ICompilerService
     {
-        private const string AbsolutePathToCompilerExeFile = "CompilerAbsolutePath";
-        private string _fileName;
+        private const string AbsolutePathToCompilerExeFileConfigurationName = "CompilerAbsolutePath";
 
-        private readonly Process _compiler;
+        private readonly ProcessStartInfo _processStartInfo;
         
         public CompilerService()
         {
+            _processStartInfo = new ProcessStartInfo
+            {
+                FileName = SetCompilerPathFromAppsettingsJson(),
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
+        }
+
+        private string SetCompilerPathFromAppsettingsJson()
+        {
             var basePath = Directory.GetCurrentDirectory() + string.Format("{0}..{0}ELearning.WebUI", Path.DirectorySeparatorChar);
-            
+
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(basePath)
                 .AddJsonFile("appsettings.json")
                 .AddJsonFile($"appsettings.Local.json", optional: true)
                 .Build();
 
-            var connectionString = configuration.GetConnectionString(AbsolutePathToCompilerExeFile);
+            var compilerPath = configuration.GetValue<string>(AbsolutePathToCompilerExeFileConfigurationName);
 
-            if (string.IsNullOrEmpty(connectionString))
-                throw new ArgumentException($"Absolute path to compiler exe file '{AbsolutePathToCompilerExeFile}' is null or empty.", nameof(connectionString));
+            if (string.IsNullOrEmpty(compilerPath))
+                throw new ArgumentException($"Absolute path to compiler exe file '{AbsolutePathToCompilerExeFileConfigurationName}' is null or empty.", nameof(compilerPath));
 
-            _compiler = new Process
+            return compilerPath;
+        }
+
+        public async Task<string> CompileAsync(string code, FileSettings fileSettings, CancellationToken cancellationToken)
+        {
+            IList<string> processOutputInAList = new List<string>();
+            StringBuilder processOutput = new StringBuilder();
+
+            _processStartInfo.WorkingDirectory = fileSettings.FileSaveDirectory;
+            _processStartInfo.Arguments = string.Format("{0} -o {1}", fileSettings.FileName, fileSettings.FileNameWithExeExtension);
+
+            using (Process process = new Process { StartInfo = _processStartInfo })
             {
-                StartInfo = new ProcessStartInfo
+                process.Start();
+
+                while (!process.StandardError.EndOfStream)
                 {
-                    WorkingDirectory = connectionString,
-                    FileName = "g++.exe",
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    CreateNoWindow = true
+                    processOutputInAList.Add(await process.StandardError.ReadLineAsync());
                 }
-            };
-        }
 
-        public void SaveToFile(int assignmentId, string code)
-        {
-            var filePath = $"{Directory.GetCurrentDirectory()}{Path.DirectorySeparatorChar}bin";
+                if (processOutputInAList.Count == 0)
+                    return await StartCompiledProgram(fileSettings);
 
-            DateTime now = DateTime.Now;
-            var currentTime = $"{now.Hour}:{now.Minute}:{now.Second}:{now.Millisecond}";
-            var currentDate = $"{now.Year}-{now.Month}-{now.Day}";
-
-            _fileName = $"{assignmentId}_{currentDate}_{currentTime}.cpp";
-
-           
-        }
-
-        public void Compile()
-        {
-            _compiler.StartInfo.Arguments = "command line arguments to your executable";
-
-            _compiler.Start();
-            while (!_compiler.StandardOutput.EndOfStream)
-            {
-                string line = _compiler.StandardOutput.ReadLine();
-                // do something with line
+                process.WaitForExit();
             }
+
+            foreach (var line in processOutputInAList)
+            {
+                processOutput.AppendLine(line);
+            }
+
+            return processOutput.ToString();
+        }
+
+        private async Task<string> StartCompiledProgram(FileSettings fileSettings)
+        {
+            IList<string> processOutputInAList = new List<string>();
+            StringBuilder processOutput = new StringBuilder();
+
+            using (Process compiledProgram =
+                new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = fileSettings.CompiledFilePath,
+                        RedirectStandardOutput = true
+                    }
+                })
+            {
+                compiledProgram.Start();
+
+                while (!compiledProgram.StandardOutput.EndOfStream)
+                {
+                    processOutputInAList.Add(await compiledProgram.StandardOutput.ReadLineAsync());
+                }
+            }
+
+            foreach (var line in processOutputInAList)
+            {
+                processOutput.AppendLine(line);
+            }
+
+            return processOutput.ToString();
         }
     }
 }
