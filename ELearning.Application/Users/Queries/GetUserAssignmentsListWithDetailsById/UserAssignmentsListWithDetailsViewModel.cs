@@ -4,6 +4,6 @@ namespace ELearning.Application.Users.Queries.GetUserAssignmentsListWithDetailsB
 {
     public class UserAssignmentsListWithDetailsViewModel
     {
-        public IList<UserAssignmentWithDetailsLookupModel> AssignmentsWithDetails { get; set; }
+        public IList<UserAssignmentWithDetailsLookupModel> UserAssignmentsWithDetails { get; set; }
     }
 }

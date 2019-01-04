@@ -3,10 +3,8 @@ using System.Threading.Tasks;
 using ELearning.Application.Evaluations.Commands.CreateEvaluation;
 using ELearning.Application.Evaluations.Commands.DeleteEvaluation;
 using ELearning.Application.Evaluations.Commands.UpdateEvaluation;
-using ELearning.Application.Evaluations.Models;
 using ELearning.Application.Evaluations.Queries.GetEvaluationById;
-using ELearning.Application.Evaluations.Queries.GetEvaluationsListByAssignmentId;
-using ELearning.Application.Evaluations.Queries.GetEvaluationsListBySectionId;
+using ELearning.Application.Evaluations.Queries.GetEvaluationsList;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ELearning.WebUI.Controllers
@@ -14,18 +12,11 @@ namespace ELearning.WebUI.Controllers
     [ApiController]
     public class EvaluationsController : BaseController
     {
-        // GET: api/Evaluations/GetAllByAssignmentId
-        [HttpGet("{id}")]
-        public async Task<ActionResult<EvaluationsListViewModel>> GetAllByAssignmentId(int id)
+        // GET: api/Evaluations/GetAll
+        [HttpGet()]
+        public async Task<ActionResult<EvaluationsListViewModel>> GetAll()
         {
-            return Ok(await Mediator.Send(new GetEvaluationsListByAssignmentIdQuery { Id = id }));
-        }
-
-        // GET: api/Evaluations/GetAllBySectionId
-        [HttpGet("{id}")]
-        public async Task<ActionResult<EvaluationsListViewModel>> GetAllBySectionId(int id)
-        {
-            return Ok(await Mediator.Send(new GetEvaluationsListBySectionIdQuery { Id = id }));
+            return Ok(await Mediator.Send(new GetEvaluationsListQuery()));
         }
 
         // GET: api/Evaluations/GetById/5

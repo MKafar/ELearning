@@ -6,5 +6,6 @@ namespace ELearning.Application.Variants.Commands.CreateVariant
     {
         public int Number { get; set; }
         public int ExerciseId { get; set; }
+        public string Content { get; set; }
     }
 }

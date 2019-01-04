@@ -1,5 +1,8 @@
-﻿using System.Threading;
+﻿using System;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using ELearning.Application.Exceptions;
 using ELearning.Domain.Entities;
 using ELearning.Persistence;
 using MediatR;
@@ -17,10 +20,17 @@ namespace ELearning.Application.Variants.Commands.CreateVariant
 
         public async Task<Unit> Handle(CreateVariantCommand request, CancellationToken cancellationToken)
         {
+            var variantAlreadyExists = _context.Variants
+                .Any(e => e.ExerciseId == request.ExerciseId && e.Number == request.Number);
+
+            if (variantAlreadyExists)
+                throw new NotUniqueException(nameof(Variant), nameof(Variant.ExerciseId), request.ExerciseId, nameof(Variant.Number), request.Number);
+
             var entity = new Variant
             {
                 Number = request.Number,
-                ExerciseId = request.ExerciseId
+                ExerciseId = request.ExerciseId,
+                Content = request.Content != null ? request.Content : "No content"
             };
 
             _context.Variants.Add(entity);

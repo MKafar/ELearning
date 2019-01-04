@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ELearning.Application.Evaluations.Models
+namespace ELearning.Application.Evaluations.Queries.GetEvaluationsList
 {
     public class EvaluationsListViewModel
     {

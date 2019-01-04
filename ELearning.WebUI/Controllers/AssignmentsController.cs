@@ -4,6 +4,7 @@ using ELearning.Application.Assignments.Commands.CreateAssignment;
 using ELearning.Application.Assignments.Commands.DeleteAssignment;
 using ELearning.Application.Assignments.Commands.UpdateAssignment;
 using ELearning.Application.Assignments.Queries.GetAssignmentById;
+using ELearning.Application.Assignments.Queries.GetAssignmentEvaluationsListById;
 using ELearning.Application.Assignments.Queries.GetAssignmentsList;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +25,13 @@ namespace ELearning.WebUI.Controllers
         public async Task<ActionResult<AssignmentViewModel>> GetById(int id)
         {
             return Ok(await Mediator.Send(new GetAssignmentByIdQuery { Id = id }));
+        }
+
+        // GET: api/Assignments/GetAllEvaluationsById/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<AssignmentEvaluationsListViewModel>> GetAllEvaluationsById(int id)
+        {
+            return Ok(await Mediator.Send(new GetAssignmentEvaluationsListByIdQuery { Id = id }));
         }
 
         // POST: api/Assignments/Create
