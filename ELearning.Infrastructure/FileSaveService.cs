@@ -27,7 +27,7 @@ namespace ELearning.Infrastructure
         {
             var currentTime = $"{now.Hour}-{now.Minute}-{now.Second}";
             var currentDate = $"{now.Year}-{now.Month}-{now.Day}";
-            var fileName = string.Format("assignmentid({0})_{1}_{2}.cpp", assignmentId.ToString(), currentDate, currentTime);
+            var fileName = string.Format("assignmentid-{0}_{1}_{2}.cpp", assignmentId.ToString(), currentDate, currentTime);
 
             return fileName;
         }
