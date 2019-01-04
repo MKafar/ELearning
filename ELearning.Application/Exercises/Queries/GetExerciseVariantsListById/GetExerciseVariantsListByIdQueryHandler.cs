@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ELearning.Application.Exercises.Queries.GetExerciseVariantsListById
 {
-    public class GetExerciseVariantsListByIdQueryHandler : IRequestHandler<GetExerciseVariantsListByIdQuery, VariantsListViewModel>
+    public class GetExerciseVariantsListByIdQueryHandler : IRequestHandler<GetExerciseVariantsListByIdQuery, ExerciseVariantsListViewModel>
     {
         private readonly ELearningDbContext _context;
 
@@ -18,12 +18,12 @@ namespace ELearning.Application.Exercises.Queries.GetExerciseVariantsListById
             _context = context;
         }
 
-        public async Task<VariantsListViewModel> Handle(GetExerciseVariantsListByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ExerciseVariantsListViewModel> Handle(GetExerciseVariantsListByIdQuery request, CancellationToken cancellationToken)
         {
-            var vm = new VariantsListViewModel
+            var vm = new ExerciseVariantsListViewModel
             {
                 Variants = await _context.Variants
-                    .Select(e => new VariantLookupModel
+                    .Select(e => new ExerciseVariantLookupModel
                     {
                         VariantId = e.VariantId,
                         VariantNumber = e.Number

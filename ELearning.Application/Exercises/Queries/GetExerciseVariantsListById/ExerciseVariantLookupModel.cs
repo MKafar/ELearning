@@ -1,6 +1,6 @@
 ﻿namespace ELearning.Application.Exercises.Queries.GetExerciseVariantsListById
 {
-    public class VariantLookupModel
+    public class ExerciseVariantLookupModel
     {
         public int VariantId { get; set; }
         public int VariantNumber { get; set; }

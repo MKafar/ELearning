@@ -32,7 +32,7 @@ namespace ELearning.WebUI.Controllers
 
         // GET api/Exercises/GetAllVariantsById/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<VariantsListViewModel>> GetAllVariantsById(int id)
+        public async Task<ActionResult<ExerciseVariantsListViewModel>> GetAllVariantsById(int id)
         {
             return Ok(await Mediator.Send(new GetExerciseVariantsListByIdQuery { Id = id }));
         }
