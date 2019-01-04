@@ -45,7 +45,7 @@ class ModalAddVariant extends Component {
 
 
         return (
-            <Modal trigger={<Button className='modalbutton'>Dodaj wariant</Button>} centered={false}>
+            <Modal trigger={<Button primary className='modalbutton'>Dodaj wariant</Button>} centered={false}>
                 <Modal.Header>Dodaj wariant</Modal.Header>
                 <Modal.Content >
                     <Modal.Description >

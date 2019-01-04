@@ -17,8 +17,9 @@ class AdminSubjects extends Component {
         subjects: [],
         value: '',
         selectedItem: [],
-        showSelected: false
+        showSelected: false,
     }
+
 
     loadData = () => {
         axios.get('/api/Subjects/GetAll')
@@ -75,7 +76,7 @@ class AdminSubjects extends Component {
                     <Button icon onClick={this.reverseState}><Icon name='delete' /></Button>
                     {/* <Button onClick={this.addnewHandler}>Dodaj zadanie</Button> */}
                     <div className='addSubjectButton'>
-                        <ModalAddSubject updateData={this.loadData} addHandle={this.addnewHandler}/>
+                        <ModalAddSubject  updateData={this.loadData} addHandle={this.addnewHandler}/>
                     </div>
                     
                 </div>

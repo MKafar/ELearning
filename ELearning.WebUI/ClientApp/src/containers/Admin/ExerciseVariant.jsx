@@ -13,11 +13,19 @@ class ExerciseVariant extends Component {
             { id: 2, number: 2 },
             { id: 3, number: 3 },
             { id: 4, number: 4 },
-        ]
+        ],
+        selectedExerciseID: null
+    }
+
+    loadData = () => {
+
     }
 
     componentDidMount = () => {
-        console.log(this.props.match.params.exerciseDetailsID);
+        console.log("Zadanie:"+this.state.selectedExerciseID);
+    }
+    componentWillMount = () => {
+        this.setState({selectedExerciseID: this.props.match.params.exerciseDetailsID});
     }
 
     editHandler = () => {

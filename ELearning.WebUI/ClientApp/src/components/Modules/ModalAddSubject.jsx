@@ -40,7 +40,7 @@ class ModalAddSubject extends Component {
 
 
         return (
-            <Modal closeIcon trigger={<Button primary>Dodaj laboratorium</Button>} centered={false}>
+            <Modal closeIcon trigger={<Button primary >Dodaj laboratorium</Button>} centered={false}>
                 <Modal.Header>Dodaj Laboratorium</Modal.Header>
                 <Modal.Content >
                     <Modal.Description >
@@ -52,7 +52,7 @@ class ModalAddSubject extends Component {
                 <Modal.Actions>
                     <Button primary onClick={()=>{
                         this.addHandle();
-                        this.props.updateData();}}> Zapisz</Button>
+                        this.props.updateData(); }}> Zapisz</Button>
                 </Modal.Actions>
             </Modal>
         )
