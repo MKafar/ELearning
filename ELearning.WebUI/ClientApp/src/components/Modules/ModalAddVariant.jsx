@@ -29,16 +29,18 @@ class ModalAddVariant extends Component {
 
     handleChange = (e, { value }) => {
         this.setState({ number: value });
-        console.log(value);
     }
 
     addHandle = () => {
         const inputVariantNumber = this.state.number;
+        const selectedExercise = this.props.selectedExerciseID;
         axios.post('/api/Variants/Create', {
             number: inputVariantNumber,
+            exerciseId: selectedExercise,
         })
             .then(response => {
                 console.log(response);
+                this.props.updateData();
             })
             .catch(error => {
                 console.log(error.response);
@@ -55,7 +57,16 @@ class ModalAddVariant extends Component {
                 <Modal.Content >
                     <Modal.Description >
                         <Header>Numer wariantu</Header>
-                        <Dropdown className='variantInput' placeholder='Wariant' scrolling clearable options={variantOptions} onChange={this.handleChange} selection />
+                        <Dropdown 
+                            className='variantInput' 
+                            placeholder='Wariant' 
+                            scrolling 
+                            clearable 
+                            options={variantOptions} 
+                            onChange={this.handleChange} 
+                            value={this.state.number}
+                            selection 
+                        />
                     </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>

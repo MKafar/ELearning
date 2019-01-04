@@ -12,16 +12,22 @@ class ExerciseVariant extends Component {
     };
 
     state = {
-        variants: [],
-        selectedExerciseID: null
+        exerciseViariants: [],
+        selectedExerciseID: null,
+        selectedExerciseTitle: ''
     }
 
     loadData = () => {
-        axios.get('/api/Exercises/GetAlVariantsById' + this.state.selectedExerciseID)
+        axios.get('/api/Exercises/GetAllVariantsById/' + this.state.selectedExerciseID)
         .then(response => {
-            console.log(response)
-            //this.setState({ exerciseViariants: response.data.variants });
-
+            this.setState({ exerciseViariants: response.data.variants });
+        }).catch(error => {
+            console.log(error.response);
+        });
+        
+        axios.get('/api/Exercises/GetById/' + this.state.selectedExerciseID)
+        .then(response => {
+            this.setState({ selectedExerciseTitle: response.data.title });
         }).catch(error => {
             console.log(error.response);
         });
@@ -32,6 +38,7 @@ class ExerciseVariant extends Component {
         this.loadData();
     }
     componentWillMount = () => {
+
         this.setState({selectedExerciseID: this.props.match.params.exerciseDetailsID});
     }
 
@@ -47,7 +54,14 @@ class ExerciseVariant extends Component {
     }
 
     removeHandler = (exerciseRemoveID) => {
-        console.log('Usuń', exerciseRemoveID);
+        axios.delete('/api/Variants/Delete/'+ exerciseRemoveID)
+            .then(response => {
+                console.log(response);
+                this.loadData();
+            }).catch(error => {
+                console.log(error.response);
+                alert("Nie można usunąć wariantu");
+            });
     }
 
     render() {
@@ -57,7 +71,7 @@ class ExerciseVariant extends Component {
             <div className="ExerciseVariant">
                 <div>
                     <Header size='huge'>
-                    Jakiś długi tytuł bardzo długi tytuł
+                    {this.state.selectedExerciseTitle}
                     {/* <Button.Group> 
                         <Button icon onClick={this.editHandler}>
                             <Icon name='edit' />
@@ -68,19 +82,19 @@ class ExerciseVariant extends Component {
                     </Button.Group>  */}
                     </Header>
 
-                    <ModalAddVariant updateData={this.loadData} /> 
+                    <ModalAddVariant selectedExerciseID={this.state.selectedExerciseID} updateData={this.loadData} /> 
 
                     <div className="variants">
 
-                        {this.state.variants.map((variant) => {
+                        {this.state.exerciseViariants.map((variant) => {
                             return <DetailList
                                 visibledetail={true}
                                 visibledelete={true}
-                                key={variant.id}
-                                number={variant.number}
+                                key={variant.variantId}
+                                number={variant.variantNumber}
                                 text={'Wariant: '} 
-                                detailsClicked={()=> this.detailsHandler(variant.id)}
-                                removeClicked={()=>this.removeHandler(variant.id)}
+                                detailsClicked={()=> this.detailsHandler(variant.variantId)}
+                                removeClicked={()=>this.removeHandler(variant.variantId)}
                                 />
                         })}
                     </div>

@@ -21,14 +21,24 @@ class ExerciseVariantDetails extends Component {
         const addvariantcode = () => {
             console.log("Added");
         }
+        const checkvariantcode = () => {
+            console.log("Checked");
+        }
 
         return (
             <div className='variantcontainer'>
                 <div className='variantCodingContainer'>
                     <Header size='large'>Wariant: 1</Header>
                     {/*<div dangerouslySetInnerHTML={createMarkup()} />*/}
-                    <CodeWindow changeModeHTML={true}  code={'Hello'} />
-                    <Button onClick={addvariantcode}>Dodaj</Button>
+                    <div className="variantCodingContent">
+                        <CodeWindow changeModeHTML={true} code={'Hello'} />
+                        <div className="variantCodingButtons">
+                            <Button primary onClick={addvariantcode}>Dodaj</Button>
+                            <Button onClick={checkvariantcode}>Podejrzyj</Button>
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
 
