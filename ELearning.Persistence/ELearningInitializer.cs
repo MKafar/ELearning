@@ -1,7 +1,7 @@
-﻿using ELearning.Domain.Entities;
+﻿using CryptoHelper;
+using ELearning.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace ELearning.Persistence
@@ -22,7 +22,7 @@ namespace ELearning.Persistence
             {
                 return;
             }
-
+            
             SeedSubject(context);
 
             SeedGroup(context);
@@ -94,26 +94,26 @@ namespace ELearning.Persistence
         {
             var users = new[]
             {
-                new User { UserId = 1, Name = "Admina", Surname = "Inez", Email = "admina.inez@student.polsl.pl", Login = "admin", Password = "admin", RoleId = 2 },
-                new User { UserId = 2, Name = "Studdent", Surname = "Dentest", Email = "studdent.dentest@student.polsl.pl", Login = "student", Password = "student", RoleId = 1 },
-                new User { UserId = 3, Name = "Skipp", Surname = "Gerritzen", Email = "skipp.gerritzen@student.polsl.pl", Login = "skiger", Password = "0qb0XmNhR", RoleId = 1 },
-                new User { UserId = 4, Name = "Yelena", Surname = "Bohman", Email = "yelena.bohman@student.polsl.pl", Login = "yelboh", Password = "0qb0XmNhR", RoleId = 1 },
-                new User { UserId = 5, Name = "Fielding", Surname = "Rippingall", Email = "fielding.rippingall@student.polsl.pl", Login = "fierip", Password = "0qb0XmNhR", RoleId = 1 },
-                new User { UserId = 6, Name = "Bertrand", Surname = "Deboo", Email = "bertrand.deboo@student.polsl.pl", Login = "berdeb", Password = "0qb0XmNhR", RoleId = 1 },
-                new User { UserId = 7, Name = "Arabele", Surname = "Grouse", Email = "arabele.grouse@student.polsl.pl", Login = "aragro", Password = "0qb0XmNhR", RoleId = 1 },
-                new User { UserId = 8, Name = "Georgeanna", Surname = "Greve", Email = "georgeanna.greve@student.polsl.pl", Login = "geogre", Password = "0qb0XmNhR", RoleId = 1 },
-                new User { UserId = 9, Name = "Gilberto", Surname = "Jotcham", Email = "gilberto.jotcham@student.polsl.pl", Login = "giljot", Password = "0qb0XmNhR", RoleId = 1 },
-                new User { UserId = 10, Name = "Kimball", Surname = "Silcocks", Email = "kimball.silcocks@student.polsl.pl", Login = "kimsil", Password = "0qb0XmNhR", RoleId = 1 },
-                new User { UserId = 11, Name = "Abbye", Surname = "Poacher", Email = "abbye.poacher@student.polsl.pl", Login = "abbpoa", Password = "0qb0XmNhR", RoleId = 1 },
-                new User { UserId = 12, Name = "Reinold", Surname = "Topper", Email = "reinold.topper@student.polsl.pl", Login = "reitop", Password = "0qb0XmNhR", RoleId = 1 },
-                new User { UserId = 13, Name = "Vinny", Surname = "Dunbleton", Email = "vinny.dunbleton@student.polsl.pl", Login = "vindub", Password = "0qb0XmNhR", RoleId = 1 },
-                new User { UserId = 14, Name = "Bearnard", Surname = "Sekulla", Email = "bearnard.sekulla@student.polsl.pl", Login = "beasek", Password = "0qb0XmNhR", RoleId = 1 },
-                new User { UserId = 15, Name = "Ware", Surname = "Knuckles", Email = "ware.knuckles@student.polsl.pl", Login = "warknu", Password = "0qb0XmNhR", RoleId = 1 },
-                new User { UserId = 16, Name = "Lorita", Surname = "Whitters", Email = "lorita.whitters@student.polsl.pl", Login = "lorwhi", Password = "0qb0XmNhR", RoleId = 1 },
-                new User { UserId = 17, Name = "Melinda", Surname = "Moreinis", Email = "melinda.moreinis@student.polsl.pl", Login = "melmor", Password = "0qb0XmNhR", RoleId = 1 },
-                new User { UserId = 18, Name = "Joceline", Surname = "Clemes", Email = "joceline.clemes@student.polsl.pl", Login = "joccle", Password = "0qb0XmNhR", RoleId = 1 },
-                new User { UserId = 19, Name = "Keen", Surname = "Taylder", Email = "keen.taylder@student.polsl.pl", Login = "keetay", Password = "0qb0XmNhR", RoleId = 2 },
-                new User { UserId = 20, Name = "Gardy", Surname = "Dobrowlski", Email = "gardy.dobrowlski@student.polsl.pl", Login = "gardob", Password = "0qb0XmNhR", RoleId = 1 },
+                new User { UserId = 1, Name = "Admina", Surname = "Inez", Email = "admina.inez@student.polsl.pl", Login = "admin", Password = Crypto.HashPassword("admin"), RoleId = 2 },
+                new User { UserId = 2, Name = "Studdent", Surname = "Dentest", Email = "studdent.dentest@student.polsl.pl", Login = "student", Password = Crypto.HashPassword("student"), RoleId = 1 },
+                new User { UserId = 3, Name = "Skipp", Surname = "Gerritzen", Email = "skipp.gerritzen@student.polsl.pl", Login = "skiger", Password = Crypto.HashPassword("0qb0XmNhR"), RoleId = 1 },
+                new User { UserId = 4, Name = "Yelena", Surname = "Bohman", Email = "yelena.bohman@student.polsl.pl", Login = "yelboh", Password = Crypto.HashPassword("0qb0XmNhR"), RoleId = 1 },
+                new User { UserId = 5, Name = "Fielding", Surname = "Rippingall", Email = "fielding.rippingall@student.polsl.pl", Login = "fierip", Password = Crypto.HashPassword("0qb0XmNhR"), RoleId = 1 },
+                new User { UserId = 6, Name = "Bertrand", Surname = "Deboo", Email = "bertrand.deboo@student.polsl.pl", Login = "berdeb", Password = Crypto.HashPassword("0qb0XmNhR"), RoleId = 1 },
+                new User { UserId = 7, Name = "Arabele", Surname = "Grouse", Email = "arabele.grouse@student.polsl.pl", Login = "aragro", Password = Crypto.HashPassword("0qb0XmNhR"), RoleId = 1 },
+                new User { UserId = 8, Name = "Georgeanna", Surname = "Greve", Email = "georgeanna.greve@student.polsl.pl", Login = "geogre", Password = Crypto.HashPassword("0qb0XmNhR"), RoleId = 1 },
+                new User { UserId = 9, Name = "Gilberto", Surname = "Jotcham", Email = "gilberto.jotcham@student.polsl.pl", Login = "giljot", Password = Crypto.HashPassword("0qb0XmNhR"), RoleId = 1 },
+                new User { UserId = 10, Name = "Kimball", Surname = "Silcocks", Email = "kimball.silcocks@student.polsl.pl", Login = "kimsil", Password = Crypto.HashPassword("0qb0XmNhR"), RoleId = 1 },
+                new User { UserId = 11, Name = "Abbye", Surname = "Poacher", Email = "abbye.poacher@student.polsl.pl", Login = "abbpoa", Password = Crypto.HashPassword("0qb0XmNhR"), RoleId = 1 },
+                new User { UserId = 12, Name = "Reinold", Surname = "Topper", Email = "reinold.topper@student.polsl.pl", Login = "reitop", Password = Crypto.HashPassword("0qb0XmNhR"), RoleId = 1 },
+                new User { UserId = 13, Name = "Vinny", Surname = "Dunbleton", Email = "vinny.dunbleton@student.polsl.pl", Login = "vindub", Password = Crypto.HashPassword("0qb0XmNhR"), RoleId = 1 },
+                new User { UserId = 14, Name = "Bearnard", Surname = "Sekulla", Email = "bearnard.sekulla@student.polsl.pl", Login = "beasek", Password = Crypto.HashPassword("0qb0XmNhR"), RoleId = 1 },
+                new User { UserId = 15, Name = "Ware", Surname = "Knuckles", Email = "ware.knuckles@student.polsl.pl", Login = "warknu", Password = Crypto.HashPassword("0qb0XmNhR"), RoleId = 1 },
+                new User { UserId = 16, Name = "Lorita", Surname = "Whitters", Email = "lorita.whitters@student.polsl.pl", Login = "lorwhi", Password = Crypto.HashPassword("0qb0XmNhR"), RoleId = 1 },
+                new User { UserId = 17, Name = "Melinda", Surname = "Moreinis", Email = "melinda.moreinis@student.polsl.pl", Login = "melmor", Password = Crypto.HashPassword("0qb0XmNhR"), RoleId = 1 },
+                new User { UserId = 18, Name = "Joceline", Surname = "Clemes", Email = "joceline.clemes@student.polsl.pl", Login = "joccle", Password = Crypto.HashPassword("0qb0XmNhR"), RoleId = 1 },
+                new User { UserId = 19, Name = "Keen", Surname = "Taylder", Email = "keen.taylder@student.polsl.pl", Login = "keetay", Password = Crypto.HashPassword("0qb0XmNhR"), RoleId = 2 },
+                new User { UserId = 20, Name = "Gardy", Surname = "Dobrowlski", Email = "gardy.dobrowlski@student.polsl.pl", Login = "gardob", Password = Crypto.HashPassword("0qb0XmNhR"), RoleId = 1 },
             };
 
             context.Users.AddRange(users);
