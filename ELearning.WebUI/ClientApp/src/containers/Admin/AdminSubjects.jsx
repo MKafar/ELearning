@@ -28,6 +28,10 @@ class AdminSubjects extends Component {
         this.loadData();
     }
 
+    detailsHandler = (subjectGroupID) => {
+        this.props.history.push('/subject/' + subjectGroupID);
+    }
+
 
     valueHandle = (selectedValue) => {
         this.setState({ value: selectedValue });
@@ -81,22 +85,24 @@ class AdminSubjects extends Component {
                     {this.state.showSelected ?
                         <div>
                             <DetailList
-                                visibledetail={false}
+                                visibledetail={true}
                                 visibledelete={true}
                                 id={this.state.selectedItem.id}
                                 key={this.state.selectedItem.id}
                                 title={this.state.selectedItem.name}
+                                detailsClicked={()=> this.detailsHandler(this.state.selectedItem.id)}
                                 removeClicked={()=>this.removeHandler(this.state.selectedItem.id)}
                                  />
                         </div>
                         :
                         this.state.subjects.map((subject) => {
                             return <DetailList
-                                visibledetail={false}
+                                visibledetail={true}
                                 visibledelete={true}
                                 key={subject.id}
                                 id={subject.id}
                                 title={subject.name}
+                                detailsClicked={()=> this.detailsHandler(subject.id)}
                                 removeClicked={()=>this.removeHandler(subject.id)}
                                 
                                  />

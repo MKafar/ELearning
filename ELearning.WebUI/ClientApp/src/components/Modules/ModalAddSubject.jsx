@@ -36,8 +36,8 @@ class ModalAddSubject extends Component {
 
 
         return (
-            <Modal closeIcon trigger={<Button primary >Dodaj laboratorium</Button>} centered={false}>
-                <Modal.Header>Dodaj Laboratorium</Modal.Header>
+            <Modal closeIcon trigger={<Button primary >Dodaj przedmiot</Button>} centered={false}>
+                <Modal.Header>Dodaj przedmiot</Modal.Header>
                 <Modal.Content >
                     <Modal.Description >
                         <Header>Nazwa Laboratorium</Header>
