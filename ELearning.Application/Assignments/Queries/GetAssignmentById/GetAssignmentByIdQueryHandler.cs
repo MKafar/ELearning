@@ -29,7 +29,8 @@ namespace ELearning.Application.Assignments.Queries.GetAssignmentById
                 Id = entity.AssignmentId,
                 Date = entity.Date.ToString(),
                 VariantId = entity.VariantId,
-                SectionId = entity.SectionId
+                SectionId = entity.SectionId,
+                Content = entity.Solution
             };
         }
     }
