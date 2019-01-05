@@ -41,7 +41,7 @@ class SubjectGroups extends Component {
     }
 
     detailsHandler = (exerciseGroupID) => {
-        this.props.history.push('/subjects/' + this.props.match.params.subjectID + '/' + exerciseGroupID);
+        this.props.history.push('/subject/' + this.props.match.params.subjectID + '/' + exerciseGroupID);
     }
 
     removeHandler = (groupRemoveID) => {

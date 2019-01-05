@@ -14,6 +14,7 @@ import StudentDetailsAssignment from '../Admin/StudentDetailsAssignment';
 import ExerciseVariant from '../Admin/ExerciseVariant';
 import ExerciseVariantDetails from '../Admin/ExerciseVariantDetails';
 import SubjectGroups from '../Admin/SubjectGroups';
+import GroupSections from '../Admin/GroupSections';
 
 class MenuAdmin extends Component {
     state = { activeItem: 'home' }
@@ -59,6 +60,7 @@ class MenuAdmin extends Component {
                     <Route path="/exercises" exact component={AdminExercises} />
                     <Route path="/subject" exact component={AdminSubjects} />
                     <Route path={'/subject/:subjectID'} exact component={SubjectGroups} />
+                    <Route path={'/subject/:subjectID/:groupSectionsID'} exact component={GroupSections} />
                     <Route path="/students" exact component={AdminStudents} />
                     <Route path={'/students/:studentDetailsID'} exact component={StudentDetails} />
                     <Route path={'/students/:studentDetailsID/:studentDetailsExerciseID'} exact component={StudentDetailsAssignment} />

@@ -1,0 +1,18 @@
+.Sections {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+}
+
+.sections {
+    height: 700px;
+    overflow: auto;
+    overflow-x: auto;
+    width: 500px;
+}
+
+.iconbutton {
+    width: 100px !important;
+}
+
+
