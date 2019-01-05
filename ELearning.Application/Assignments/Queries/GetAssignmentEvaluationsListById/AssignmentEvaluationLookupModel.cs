@@ -4,6 +4,7 @@
     {
         public int AssignmentBeingEvaluatedId { get; set; }
         public int SectionWhichEvaluatesId { get; set; }
+        public string StudentsName { get; set; }
         public int EvaluationId { get; set; }
         public double Grade { get; set; }
     }

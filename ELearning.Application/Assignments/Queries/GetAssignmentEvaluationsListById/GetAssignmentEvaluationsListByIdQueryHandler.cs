@@ -27,6 +27,7 @@ namespace ELearning.Application.Assignments.Queries.GetAssignmentEvaluationsList
                     {
                         AssignmentBeingEvaluatedId = e.AssignmentId,
                         SectionWhichEvaluatesId = e.SectionId,
+                        StudentsName = $"{e.EvaluatorAssignment.Section.User.Name} {e.EvaluatorAssignment.Section.User.Surname}",
                         EvaluationId = e.EvaluationId,
                         Grade = e.Grade
                     }).Where(e => e.AssignmentBeingEvaluatedId == request.Id)
