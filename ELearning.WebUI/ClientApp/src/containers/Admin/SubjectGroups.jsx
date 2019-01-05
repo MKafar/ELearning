@@ -10,21 +10,22 @@ class SubjectGroups extends Component {
 
     state = {
         exerciseGroups: [],
-        selectedGroupID: null,
-        selectedGroupName: ''
+        selectedSubjectID: null,
+        selectedSubjectName: ''
     }
 
     loadData = () => {
-        // axios.get('/api/Exercises/GetAllVariantsById/' + this.state.selectedGroupID)//////////////
-        // .then(response => {
-        //     this.setState({ exerciseGroups: response.data.variants });
-        // }).catch(error => {
-        //     console.log(error.response);
-        // });
-
-        axios.get('/api/Sbjects/GetById/' + this.state.selectedGroupID)
+        axios.get('/api/Subjects/GetAllGroupsById/' + this.state.selectedSubjectID)
         .then(response => {
-            this.setState({ selectedGroupName: response.data.title });
+            this.setState({ exerciseGroups: response.data.subjectGroups });
+            console.log("Grupy",this.state.exerciseGroups);
+        }).catch(error => {
+            console.log(error.response);
+        });
+
+        axios.get('/api/Subjects/GetById/' + this.state.selectedSubjectID)
+        .then(response => {
+            this.setState({ selectedSubjectName: response.data.name });
         }).catch(error => {
             console.log(error.response);
         });
@@ -36,15 +37,15 @@ class SubjectGroups extends Component {
     }
     componentWillMount = () => {
 
-        this.setState({selectedGroupID: this.props.match.params.subjectGroupID}); //subjectGroupID
+        this.setState({selectedSubjectID: this.props.match.params.subjectID});
     }
 
     detailsHandler = (exerciseGroupID) => {
-        this.props.history.push('/subjects/' + this.props.match.params.subjectGroupID + '/' + exerciseGroupID);
+        this.props.history.push('/subjects/' + this.props.match.params.subjectID + '/' + exerciseGroupID);
     }
 
     removeHandler = (groupRemoveID) => {
-        axios.delete('/api/Variants/Delete/'+ groupRemoveID)
+        axios.delete('/api/Groups/Delete/'+ groupRemoveID)
             .then(response => {
                 console.log(response);
                 this.loadData();
@@ -61,10 +62,10 @@ class SubjectGroups extends Component {
             <div className="SubjectGroups">
                 <div>
                     <Header size='huge'>
-                    {this.state.selectedGroupName}
+                    {this.state.selectedSubjectName}
                     </Header>
 
-                    <ModalAddGroup selectedGroupID={this.state.selectedGroupID} updateData={this.loadData} /> 
+                    <ModalAddGroup selectedSubjectID={this.state.selectedSubjectID} updateData={this.loadData} /> 
 
                     <div className="groups">
 
@@ -72,11 +73,11 @@ class SubjectGroups extends Component {
                             return <DetailList
                                 visibledetail={true}
                                 visibledelete={true}
-                                key={group.id}
-                                name={group.name}
+                                key={group.groupId}
+                                name={group.groupName}
                                 text={'Grupa: '} 
-                                detailsClicked={()=> this.detailsHandler(group.id)}
-                                removeClicked={()=>this.removeHandler(group.id)}
+                                detailsClicked={()=> this.detailsHandler(group.groupId)}
+                                removeClicked={()=>this.removeHandler(group.groupId)}
                                 />
                         })}
                     </div>

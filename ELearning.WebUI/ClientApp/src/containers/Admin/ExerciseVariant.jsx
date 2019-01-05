@@ -62,14 +62,7 @@ class ExerciseVariant extends Component {
                 <div>
                     <Header size='huge'>
                     {this.state.selectedExerciseTitle}
-                    {/* <Button.Group> 
-                        <Button icon onClick={this.editHandler}>
-                            <Icon name='edit' />
-                        </Button>
-                        <Button icon onClick={this.saveHandler}>
-                            <Icon name='save' />
-                        </Button>
-                    </Button.Group>  */}
+
                     </Header>
 
                     <ModalAddVariant selectedExerciseID={this.state.selectedExerciseID} updateData={this.loadData} /> 

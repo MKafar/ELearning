@@ -58,7 +58,7 @@ class MenuAdmin extends Component {
                     <Route path="/home" exact component={AdminHome} />
                     <Route path="/exercises" exact component={AdminExercises} />
                     <Route path="/subject" exact component={AdminSubjects} />
-                    <Route path={'/subject/:subjectGroupID'} exact component={SubjectGroups} />
+                    <Route path={'/subject/:subjectID'} exact component={SubjectGroups} />
                     <Route path="/students" exact component={AdminStudents} />
                     <Route path={'/students/:studentDetailsID'} exact component={StudentDetails} />
                     <Route path={'/students/:studentDetailsID/:studentDetailsExerciseID'} exact component={StudentDetailsAssignment} />

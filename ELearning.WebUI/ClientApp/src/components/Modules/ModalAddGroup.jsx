@@ -8,19 +8,23 @@ import './ModalAddGroup.scss';
 class ModalAddGroup extends Component {
 
     state = {
-        title: ''
+        name: ''
     }
 
     handleChange = (e) => {
-        this.setState({ title: e.target.value })
+        this.setState({ name: e.target.value })
     }
     addHandle = () => {
-        const inputData = this.state.title;
-        axios.post('/api/Exercises/Create', {
-            title: inputData
+        console.log(this.props);
+        const inputData = this.state.name;
+        const exercise = this.props.selectedSubjectID;
+        axios.post('/api/Groups/Create', {
+            subjectId: exercise,
+            name: inputData
         })
             .then(response => {
                 console.log(response);
+                this.props.updateData();
             })
             .catch(error => {
                 console.log(error.response);
