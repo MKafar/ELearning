@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Input, Header, Button } from 'semantic-ui-react';
 import axios from '../../axios';
+import {withRouter} from 'react-router-dom';
 
 import './StudentDetailsAssignment.scss';
 import CodeWindow from '../../components/Modules/CodeWindow';
@@ -13,7 +14,11 @@ class StudentDetailsAssignment extends Component {
         grades: [],
         adminGrade: 0,
         studentCodeContent: '',
-        studentEvaluationData: []
+        studentEvaluationData: [],
+        studentAssignments: null,
+        assignmentID: null,
+        studentAssignmentData: null,
+        student: ''
     }
 
     handleChange = (e, { value }) => {
@@ -21,32 +26,58 @@ class StudentDetailsAssignment extends Component {
     }
 
     sendAdminGradeHandler = () => {
-        console.log(" Ocena: " + this.state.adminGrade);
-        // axios.put('/api/Assignments/Update', {
-        //     id: this.props.match.params.studentDetailsExerciseID,
-        //     finalGrade: this.state.adminGrade,
-        //     date: this.state.studentEvaluationData.assignmentDate,
-        //     variantId: this.state.studentEvaluationData.variantId,
-        //     sectionId: this.state.studentEvaluationData.sectionId,
-        // }).then(response =>{
-        //     console.log(response);
-        // }).catch(error => {
-        //     console.log(error.response);
-        // })
-            
+        axios.put('/api/Assignments/Update', {
+            id: this.props.match.params.studentDetailsExerciseID,
+            finalGrade: this.state.adminGrade,
+            date: this.state.studentAssignmentData.assignmentDate,
+            variantId: this.state.studentAssignmentData.variantId,
+            sectionId: this.state.studentAssignmentData.sectionId,
+        }).then(response =>{
+            console.log(response);
+        }).catch(error => {
+            console.log(error.response);
+        })       
     }
+
     loadData = () => {
-        axios.get('api/Assignments/GetAllEvaluationsById/'+ this.props.match.params.studentDetailsExerciseID )
+        axios.get('api/Assignments/GetAllEvaluationsById/' + this.props.match.params.studentDetailsExerciseID)
             .then(response => {
-                this.setState({grades: response.data.assignmentEvaluations })
+                this.setState({ grades: response.data.assignmentEvaluations })
             }).catch(error => {
                 console.log(error.response);
             })
 
-        axios.get('/api/Assignments/GetById/' +this.props.match.params.studentDetailsExerciseID )
+        axios.get('/api/Assignments/GetById/' + this.props.match.params.studentDetailsExerciseID)
             .then(response => {
-                this.setState({studentCodeContent: response.data.content });
-                console.log(this.state.studentCodeContent);
+                this.setState({ studentCodeContent: response.data.content });
+                //console.log(this.state.studentCodeContent);
+            }).catch(error => {
+                console.log(error.response);
+            })
+        axios.get('/api/Users/GetById/'+this.props.match.params.studentDetailsID)
+            .then(response => {
+                this.setState({student: response.data.name})
+            }).catch(error => {
+                console.log(error.response);
+            })
+        axios.get('/api/Users/GetAllAssignmentsWithDetailsById/' + this.props.match.params.studentDetailsID)
+            .then(response => {
+                this.setState({ studentAssignments: response.data.userAssignmentsWithDetails });
+                this.setState({assignmentID: this.props.match.params.studentDetailsExerciseID});
+                const assignment = this.state.studentAssignments;
+                let studentassignment;
+
+                assignment.map((obj) => {
+                    for (let property in obj)
+                    {
+                        if (property === "assignmentId" && obj[property] == this.state.assignmentID)
+                        {
+                            studentassignment = obj;
+                        }
+                    }
+                })
+                this.setState({studentAssignmentData: studentassignment});
+
             }).catch(error => {
                 console.log(error.response);
             })
@@ -54,19 +85,20 @@ class StudentDetailsAssignment extends Component {
 
     componentDidMount = () => {
         this.loadData();
-        console.log(this.props.match.params);
-        console.log(this.props);
+        //"Danestudenta:" + this.props.match.params.studentDetailsID
+        //"Dane assignment: "+ this.props.match.params.studentDetailsExerciseID
     }
 
     render() {
         return (
+            this.state.studentAssignmentData && this.state.student ?
             <div className="userAssignmentContainer">
                 <div className="assignmentHeaders">
-                    <Header size='large'>Zadanie, Wariant: 1, 01.01.19</Header>
-                    <Header className="nameHeader" size='medium'>Imię i nazwisko</Header>
+                    <Header size='large'>{"Zadanie: " +this.state.studentAssignmentData.exerciseTitle } &nbsp; {" Wariant: " + this.state.studentAssignmentData.variantNumber} &nbsp; &nbsp;{" Data: " + this.state.studentAssignmentData.assignmentDate}</Header>
+                    <Header className="nameHeader" size='medium'>Student: {this.state.student}</Header>
                 </div>
                 <div className='assignmentContentContainer'>
-                    <CodeWindow className='studentCodeWindow' changeMode={true} code={'Hello'} />
+                    <CodeWindow className='studentCodeWindow' changeMode={true} code={this.state.studentCodeContent} />
                     <div className='assignmentGradeContainer'>
                         <div className='gradeDetailList'>
                             {this.state.grades.map((grade) => {
@@ -89,9 +121,9 @@ class StudentDetailsAssignment extends Component {
 
                     </div>
                 </div>
-            </div>
+            </div> : null
         )
     }
 }
 
-export default StudentDetailsAssignment;
+export default withRouter(StudentDetailsAssignment);

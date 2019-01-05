@@ -13,12 +13,14 @@ class StudentDetails extends Component {
         selectedStudentID: null,
         studentGroupsAndSections: [],
         sectionInput: null,
-        groupInput: null
+        groupInput: null,
+        assignmentData:[]
     }
     loadData = () => {
         axios.get('/api/Users/GetAllAssignmentsWithDetailsById/' + this.state.selectedStudentID)
             .then(response => {
                 this.setState({ studentExercises: response.data.userAssignmentsWithDetails });
+                console.log( this.state.studentExercises);
             }).catch(error => {
                 console.log(error.response);
             })
@@ -58,6 +60,7 @@ class StudentDetails extends Component {
 
     componentDidMount = () => {
         this.loadData();
+        
     }
 
     componentWillMount = () => {
@@ -65,9 +68,9 @@ class StudentDetails extends Component {
     }
 
     detailsHandler = (studentExerciseDetailID) => {
-        this.props.history.push('/students/' + this.props.match.params.studentDetailsID + '/' + studentExerciseDetailID);
+        this.props.history.push({
+            pathname: '/students/' + this.props.match.params.studentDetailsID + '/' + studentExerciseDetailID  });
     }
-    
 
     addtolistHandle = () => {
         const inputSection = this.state.sectionInput;
@@ -128,7 +131,9 @@ class StudentDetails extends Component {
                                 variant={'Wariant: ' + studentExercise.variantNumber}
                                 group={"Grupa: " + studentExercise.groupName + " "}
                                 finalgrade={" Ocena: " + studentExercise.assignmentFinalGrade}
-                                detailsClicked={() => this.detailsHandler(studentExercise.assignmentId)}
+                                detailsClicked={() => {
+                                     this.detailsHandler(studentExercise.assignmentId); 
+                                }}
                             />
                         })}
                     </div>
