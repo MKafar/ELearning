@@ -36,6 +36,7 @@ namespace ELearning.Application.Assignments.Commands.UpdateAssignment
             entity.SectionId = request.SectionId;
             entity.VariantId = request.VariantId;
             entity.Date = dateOfAssignment;
+            entity.FinalGrade = request.FinalGrade;
 
             _context.Assignments.Update(entity);
 
