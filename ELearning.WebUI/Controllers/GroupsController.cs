@@ -4,6 +4,7 @@ using ELearning.Application.Groups.Commands.CreateGroup;
 using ELearning.Application.Groups.Commands.DeleteGroup;
 using ELearning.Application.Groups.Commands.UpdateGroup;
 using ELearning.Application.Groups.Queries.GetGroupById;
+using ELearning.Application.Groups.Queries.GetGroupSectionsListById;
 using ELearning.Application.Groups.Queries.GetGroupsList;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +25,13 @@ namespace ELearning.WebUI.Controllers
         public async Task<ActionResult<GroupViewModel>> GetById(int id)
         {
             return Ok(await Mediator.Send(new GetGroupByIdQuery { Id = id }));
+        }
+
+        // GET: api/Groups/GetAllSectionsById/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<GroupSectionsListViewModel>> GetAllSectionsById(int id)
+        {
+            return Ok(await Mediator.Send(new GetGroupSectionsListByIdQuery { Id = id }));
         }
 
         // POST: api/Groups/Create
