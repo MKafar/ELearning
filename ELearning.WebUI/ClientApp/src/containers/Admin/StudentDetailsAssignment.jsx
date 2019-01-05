@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Input, Header, Button } from 'semantic-ui-react';
+import axios from '../../axios';
 
 import './StudentDetailsAssignment.scss';
 import CodeWindow from '../../components/Modules/CodeWindow';
@@ -8,19 +9,11 @@ import DetailList from '../../components/Modules/DetailList';
 class StudentDetailsAssignment extends Component {
 
     state = {
-        grades: [
-            { id: 1, name: 'Imię Nazwisko', grade: 5.75 },
-            { id: 2, name: 'Imię Nazwisko', grade: 5.5 },
-            { id: 3, name: 'Imię Nazwisko', grade: 5 },
-            { id: 4, name: 'Imię Nazwisko', grade: 2.5 },
-            { id: 5, name: 'Imię Nazwisko', grade: 5.75 },
-            { id: 6, name: 'Imię Nazwisko', grade: 5.5 },
-            { id: 7, name: 'Imię Nazwisko', grade: 5 },
-            { id: 8, name: 'Imię Nazwisko', grade: 2.5 },
-            { id: 9, name: 'Imię Nazwisko', grade: 5 },
-            { id: 10, name: 'Imię Nazwisko', grade: 2.5 },
-        ],
+         //{ id: 1, name: 'Imię Nazwisko', grade: 5.75 },
+        grades: [],
         adminGrade: 0,
+        studentCodeContent: '',
+        studentEvaluationData: []
     }
 
     handleChange = (e, { value }) => {
@@ -29,10 +22,40 @@ class StudentDetailsAssignment extends Component {
 
     sendAdminGradeHandler = () => {
         console.log(" Ocena: " + this.state.adminGrade);
+        // axios.put('/api/Assignments/Update', {
+        //     id: this.props.match.params.studentDetailsExerciseID,
+        //     finalGrade: this.state.adminGrade,
+        //     date: this.state.studentEvaluationData.assignmentDate,
+        //     variantId: this.state.studentEvaluationData.variantId,
+        //     sectionId: this.state.studentEvaluationData.sectionId,
+        // }).then(response =>{
+        //     console.log(response);
+        // }).catch(error => {
+        //     console.log(error.response);
+        // })
+            
+    }
+    loadData = () => {
+        axios.get('api/Assignments/GetAllEvaluationsById/'+ this.props.match.params.studentDetailsExerciseID )
+            .then(response => {
+                this.setState({grades: response.data.assignmentEvaluations })
+            }).catch(error => {
+                console.log(error.response);
+            })
+
+        axios.get('/api/Assignments/GetById/' +this.props.match.params.studentDetailsExerciseID )
+            .then(response => {
+                this.setState({studentCodeContent: response.data.content });
+                console.log(this.state.studentCodeContent);
+            }).catch(error => {
+                console.log(error.response);
+            })
     }
 
     componentDidMount = () => {
-        console.log(this.props.match.params.studentDetailsExerciseID)
+        this.loadData();
+        console.log(this.props.match.params);
+        console.log(this.props);
     }
 
     render() {
@@ -50,10 +73,10 @@ class StudentDetailsAssignment extends Component {
                                 return <DetailList
                                     visibledetail={false}
                                     visibledelete={false}
-                                    key={grade.id}
-                                    id={grade.id}
-                                    name={grade.name}
-                                    studentgrade={grade.grade} />
+                                    key={grade.evaluationId}
+                                    id={grade.evaluationId}
+                                    name={grade.studentsName}
+                                    studentgrade={grade.grade+ " pkt."} />
                             })}
 
                         </div>
@@ -61,7 +84,7 @@ class StudentDetailsAssignment extends Component {
                         <Header size='medium'>Ostateczna ocena</Header>
                         <div className='adminGrade'>
                             <Input className='studentGradeInput' type='number' label={{ basic: true, content: 'pkt.' }} labelPosition='right' placeholder='Ocena' max={10} min={0} step={0.25} onChange={this.handleChange}></Input>
-                            <Button primary className='adminGradeSendButton' onClick={this.sendAdminGradeHandler}>Wyślij</Button>
+                            <Button primary  className='adminGradeSendButton' onClick={this.sendAdminGradeHandler}>Wyślij</Button>
                         </div>
 
                     </div>

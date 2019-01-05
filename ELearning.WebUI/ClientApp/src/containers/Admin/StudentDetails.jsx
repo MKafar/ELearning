@@ -67,6 +67,7 @@ class StudentDetails extends Component {
     detailsHandler = (studentExerciseDetailID) => {
         this.props.history.push('/students/' + this.props.match.params.studentDetailsID + '/' + studentExerciseDetailID);
     }
+    
 
     addtolistHandle = () => {
         const inputSection = this.state.sectionInput;
