@@ -6,5 +6,6 @@
         public string Date { get; set; }
         public int VariantId { get; set; }
         public int SectionId { get; set; }
+        public string Content { get; set; }
     }
 }
