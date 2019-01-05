@@ -35,38 +35,7 @@ class AssignExerciseModal extends Component {
     }
 
     addHandle = () => {
-        console.log("Zapisz");
-        //const nameData = this.state.name;
-        //const surnameData = this.state.surname;
-        //const emailData = this.state.email;
-
-        // axios.post('', {
-        //     name: nameData,
-        //     surname: surnameData,
-        //     email: emailData
-        // })
-        //     .then(response => {
-        //         console.log(response);
-        //     })
-        //     .catch(error => {
-        //         console.log(error.response);
-        //     })
-
-        // axios.post('/api/Users/Create', {
-        //     name: nameData,
-        //     surname: surnameData,
-        //     email: emailData
-        // })
-        //     .then(response => {
-        //         console.log(response);
-        //     })
-        //     .catch(error => {
-        //         console.log(error.response);
-        //     })
-    }
-
-    addtolistHandle = () => {
-        console.log("Dodano do listy");
+    
     }
 
     render() {
@@ -79,9 +48,8 @@ class AssignExerciseModal extends Component {
                     <Dropdown className='studentInput' placeholder='Grupa' clearable options={groupOptions} selection />
                     <Dropdown className='studentInput' placeholder='Sekcja' clearable options={sectionOptions} selection />
                     <Dropdown className='studentInput' placeholder='Zadanie' clearable options={exerciseOptions} selection />
-                    <Dropdown className='studentInput' placeholder='Wariant' clearable options={variantOptions} selection />
-                    <br />
-                    <Input className='sectionInput' label='Data' placeholder='DD/MM/RRR' onChange={this.sectionHandle} />
+                    <Dropdown className='variantInput' placeholder='Wariant' clearable options={variantOptions} selection />
+                    <Input className='dateInput' label='Data' placeholder='DD-MM-RRRR' onChange={this.sectionHandle} />
                 </Modal.Content>
                 <Modal.Actions>
                     <Button primary onClick={this.addHandle}>Zapisz</Button>

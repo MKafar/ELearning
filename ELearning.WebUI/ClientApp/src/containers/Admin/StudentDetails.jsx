@@ -133,6 +133,7 @@ class StudentDetails extends Component {
                                 finalgrade={" Ocena: " + studentExercise.assignmentFinalGrade}
                                 detailsClicked={() => {
                                      this.detailsHandler(studentExercise.assignmentId); 
+                                     this.loadData();
                                 }}
                             />
                         })}
