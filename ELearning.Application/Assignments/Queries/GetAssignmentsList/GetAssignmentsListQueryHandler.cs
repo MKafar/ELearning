@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ELearning.Persistence;
@@ -24,7 +25,7 @@ namespace ELearning.Application.Assignments.Queries.GetAssignmentsList
                     .Select(e => new AssignmentLookupModel
                     {
                         Id = e.AssignmentId,
-                        Date = e.Date.ToString(),
+                        Date = e.Date.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture),
                         VariantId = e.VariantId,
                         SectionId = e.SectionId
                     }).ToListAsync(cancellationToken)

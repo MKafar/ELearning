@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Globalization;
+using System.Threading;
 using System.Threading.Tasks;
 using ELearning.Application.Exceptions;
 using ELearning.Domain.Entities;
@@ -24,10 +25,12 @@ namespace ELearning.Application.Assignments.Queries.GetAssignmentById
             if (entity == null)
                 throw new NotFoundException(nameof(Assignment), request.Id);
 
+            string parsedDate = entity.Date.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture);
+
             return new AssignmentViewModel
             {
                 Id = entity.AssignmentId,
-                Date = entity.Date.ToString(),
+                Date = parsedDate,
                 VariantId = entity.VariantId,
                 SectionId = entity.SectionId,
                 Content = entity.Solution
