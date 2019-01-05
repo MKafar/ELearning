@@ -4,6 +4,7 @@ using ELearning.Application.Infrastructure;
 using ELearning.Application.Interfaces;
 using ELearning.Infrastructure;
 using ELearning.Persistence;
+using ELearning.WebUI.CustomOptions;
 using ELearning.WebUI.Filters;
 using FluentValidation.AspNetCore;
 using MediatR;
@@ -15,6 +16,7 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Reflection;
 
@@ -42,6 +44,7 @@ namespace ELearning.WebUI
 
             services
                 .AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
+                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new JsonLowerCaseContractResolver())
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateExerciseCommandValidator>());
 
