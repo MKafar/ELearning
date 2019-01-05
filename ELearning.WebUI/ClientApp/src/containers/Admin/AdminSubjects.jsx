@@ -21,6 +21,7 @@ class AdminSubjects extends Component {
         axios.get('/api/Subjects/GetAll')
             .then(response => {
                 this.setState({ subjects: response.data.subjects })
+                console.log(this.state.subjects);
             });
     }
 
@@ -89,6 +90,7 @@ class AdminSubjects extends Component {
                                 visibledelete={true}
                                 id={this.state.selectedItem.id}
                                 key={this.state.selectedItem.id}
+                                abreviation={this.state.selectedItem.abreviation}
                                 title={this.state.selectedItem.name}
                                 detailsClicked={()=> this.detailsHandler(this.state.selectedItem.id)}
                                 removeClicked={()=>this.removeHandler(this.state.selectedItem.id)}
@@ -99,6 +101,7 @@ class AdminSubjects extends Component {
                             return <DetailList
                                 visibledetail={true}
                                 visibledelete={true}
+                                abreviation={subject.abreviation}
                                 key={subject.id}
                                 id={subject.id}
                                 title={subject.name}
