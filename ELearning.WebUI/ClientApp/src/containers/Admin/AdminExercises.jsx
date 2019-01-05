@@ -9,10 +9,6 @@ import ModalAddExercise from '../../components/Modules/ModalAddExercise';
 
 class AdminExercises extends Component {
 
-    constructor(props) {
-        super(props);
-    };
-
     state = {
         exercises: [],
         value: '',

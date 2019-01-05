@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Menu } from 'semantic-ui-react';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 
 import "./MenuAdmin.scss";
 
@@ -51,15 +51,19 @@ class MenuAdmin extends Component {
                         active={activeItem === 'student'}
                         onClick={this.handleItemClick} />
                 </Menu>
+                
+                <Switch>
+                    
+                    <Route path="/home" exact component={AdminHome} />
+                    <Route path="/exercises" exact component={AdminExercises} />
+                    <Route path="/laboratory" exact component={AdminSubjects} />
+                    <Route path="/students" exact component={AdminStudents} />
+                    <Route path={'/students/:studentDetailsID'} exact component={StudentDetails} />
+                    <Route path={'/students/:studentDetailsID/:studentDetailsExerciseID'} exact component={StudentDetailsAssignment} />
+                    <Route path={'/exercises/:exerciseDetailsID'} exact component={ExerciseVariant} />
+                    <Route path={'/exercises/:exerciseDetailsID/:exerciseVariantID'} exact component={ExerciseVariantDetails} />
+                </Switch>
 
-                <Route path="/home" exact component={AdminHome} />
-                <Route path="/exercises" exact component={AdminExercises} />
-                <Route path="/laboratory" exact component={AdminSubjects} />
-                <Route path="/students" exact component={AdminStudents} />
-                <Route path={'/students/:studentDetailsID'} exact component={StudentDetails} />
-                <Route path={'/students/:studentDetailsID/:studentDetailsExerciseID'} exact component={StudentDetailsAssignment} />
-                <Route path={'/exercises/:exerciseDetailsID'} exact component={ExerciseVariant} />
-                <Route path={'/exercises/:exerciseDetailsID/:exerciseVariantID'} exact component={ExerciseVariantDetails} />
 
 
             </div>

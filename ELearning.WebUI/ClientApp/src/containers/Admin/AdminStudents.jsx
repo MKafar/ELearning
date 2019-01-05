@@ -10,10 +10,7 @@ import ModalAddStudent from '../../components/Modules/ModalAddStudent';
 
 
 class AdminStudents extends Component {
-    constructor(props) {
-        super(props);
-    };
-    
+
     state = {
         users: [],
         value: '',

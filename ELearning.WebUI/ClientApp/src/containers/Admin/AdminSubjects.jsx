@@ -9,10 +9,6 @@ import ModalAddSubject from '../../components/Modules/ModalAddSubject';
 
 class AdminSubjects extends Component {
 
-    constructor(props) {
-        super(props);
-    };
-
     state = {
         subjects: [],
         value: '',

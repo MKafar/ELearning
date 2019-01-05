@@ -6,10 +6,6 @@ import './ModalAddSubject.scss';
 
 class ModalAddSubject extends Component {
 
-    constructor(props) {
-        super(props);
-    };
-
     state = {
         name: '',
         abreviation: ''

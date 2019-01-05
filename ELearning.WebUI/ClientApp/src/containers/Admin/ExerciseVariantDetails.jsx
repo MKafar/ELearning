@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Header, Button} from 'semantic-ui-react';
 import axios from '../../axios';
+import OpenNewWindow from '../../components/Modules/OpenNewWindow';
 
 import './ExerciseVariantDetails.scss';
 import CodeWindow from '../../components/Modules/CodeWindow';
@@ -9,15 +10,21 @@ class ExerciseVariantDetails extends Component {
 
     constructor(props) {
         super(props);
+        this.state ={
+            selectedExerciseVariantID: null,
+            selectedVariantContent: '',
+            variantNumber: null,
+            code: '',
+            selectedExerciseID: null,
+            showComponent: false,
+            htmlString: null,
+
+        }
+        this._onButtonClick = this._onButtonClick.bind(this);
+        this._onClose = this._onClose.bind(this);
     };
 
-    state ={
-        selectedExerciseVariantID: null,
-        selectedVariantContent: '',
-        variantNumber: null,
-        code: '',
-        selectedExerciseID: null
-    }
+    
      componentWillMount = () => {
          this.setState({selectedExerciseVariantID: this.props.match.params.exerciseVariantID});
          this.loadData(this.props.match.params.exerciseVariantID);
@@ -36,11 +43,20 @@ class ExerciseVariantDetails extends Component {
         this.setState({selectedExerciseID: this.props.match.params.exerciseDetailsID });
         
     }
+    _onButtonClick = () => {
+        console.log("Kod:"+this.state.code);
+        this.setState({showComponent: true});
+        
+    }
+    _onClose = () => {
+        this.setState({showComponent: false});
+    }
 
     getvariantcode = (dataFromCode) =>{
         this.setState({code: dataFromCode});
 
     }
+
     sendCodeHandler = () => {
         const inputVariantNumber = this.state.variantNumber;
         axios.put("/api/Variants/Update", {
@@ -66,11 +82,7 @@ class ExerciseVariantDetails extends Component {
         //     return {__html: htmlString};
         //   }
        
-            
 
-        const checkvariantcode = () => {
-            console.log("Checked");
-        }
 
         return (
             <div className='variantcontainer'>
@@ -85,7 +97,12 @@ class ExerciseVariantDetails extends Component {
                         
                         <div className="variantCodingButtons">
                             <Button primary onClick={this.sendCodeHandler} >Dodaj</Button>
-                            <Button onClick={checkvariantcode}>Podejrzyj</Button>
+                           <Button onClick={this._onButtonClick} >Podejrzyj</Button>
+                           {
+                            this.state.showComponent ?  
+                               <OpenNewWindow close={this._onClose} htmlCode={this.state.selectedVariantContent}  />
+                                : null
+                           }
                         </div>
 
                     </div>

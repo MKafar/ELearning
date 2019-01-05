@@ -48,6 +48,7 @@ class Login extends Component {
                     <Button className='loginbutton' primary onClick={this.sendCredentialsHandler}>Zaloguj</Button>
                 </Form>
 
+                
                 <Route path="/admin" exact component={Admin} />
                 <Route path="/student" exact component={Student} />
 

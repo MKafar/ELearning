@@ -7,9 +7,6 @@ import ModalAddVariant from '../../components/Modules/ModalAddVariant'
 import DetailList from '../../components/Modules/DetailList'
 
 class ExerciseVariant extends Component {
-    constructor(props) {
-        super(props);
-    };
 
     state = {
         exerciseViariants: [],
@@ -40,13 +37,6 @@ class ExerciseVariant extends Component {
     componentWillMount = () => {
 
         this.setState({selectedExerciseID: this.props.match.params.exerciseDetailsID});
-    }
-
-    editHandler = () => {
-        console.log('Edit');
-    }
-    saveHandler = () => {
-        console.log('Zapisz');
     }
 
     detailsHandler = (exerciseVariantID) => {

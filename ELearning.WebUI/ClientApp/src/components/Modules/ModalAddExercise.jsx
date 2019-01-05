@@ -7,10 +7,6 @@ import './ModalAddExercise.scss';
 
 class ModalAddExercise extends Component {
 
-    constructor(props) {
-        super(props);
-    };
-
     state = {
         title: ''
     }

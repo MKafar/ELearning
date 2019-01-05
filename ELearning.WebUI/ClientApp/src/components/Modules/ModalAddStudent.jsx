@@ -4,17 +4,7 @@ import axios from '../../axios';
 
 import './ModalAddStudent.scss';
 
-
-// const groupOptions = [
-//     { key: 1, text: 'group 1', value: 1 },
-//     { key: 2, text: 'group 2', value: 2 },
-//     { key: 3, text: 'group 3', value: 3 },
-// ];
-
 class ModalAddStudent extends Component {
-    constructor(props) {
-        super(props);
-    };
     
     nameHandle = (e) => {
         this.setState({ name: e.target.value })
@@ -38,6 +28,7 @@ class ModalAddStudent extends Component {
         })
             .then(response => {
                 console.log(response);
+                this.props.updateData();
             })
             .catch(error => {
                 console.log(error.response);

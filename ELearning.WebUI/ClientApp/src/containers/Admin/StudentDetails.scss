@@ -29,7 +29,7 @@
 }
 
 .addtolistbuttonAssignment {
-    width: 96.5% !important;
+    width: 25% !important;
     float: unset;
 }
 
@@ -48,3 +48,10 @@
     width: unset !important;
 }
 
+.ui.selection.dropdown {
+    width: 250px !important;
+}
+
+.studentGroupTable {
+    width: 450px;
+}

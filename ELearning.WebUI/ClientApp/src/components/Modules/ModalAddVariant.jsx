@@ -19,10 +19,6 @@ const variantOptions = [
 
 class ModalAddVariant extends Component {
 
-    constructor(props) {
-        super(props);
-    };
-
     state = {
         number: null
     }
