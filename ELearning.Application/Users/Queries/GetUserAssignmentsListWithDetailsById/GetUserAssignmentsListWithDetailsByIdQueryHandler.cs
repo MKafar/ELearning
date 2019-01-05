@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ELearning.Application.Exceptions;
@@ -20,6 +21,12 @@ namespace ELearning.Application.Users.Queries.GetUserAssignmentsListWithDetailsB
 
         public async Task<UserAssignmentsListWithDetailsViewModel> Handle(GetUserAssignmentsListWithDetailsByIdQuery request, CancellationToken cancellationToken)
         {
+            var entity = await _context.Users
+                .FindAsync(request.Id);
+
+            if (entity == null)
+                throw new NotFoundException(nameof(User), request.Id);
+
             var vm = new UserAssignmentsListWithDetailsViewModel
             {
                 UserAssignmentsWithDetails = await _context.Assignments
@@ -27,7 +34,7 @@ namespace ELearning.Application.Users.Queries.GetUserAssignmentsListWithDetailsB
                     {
                         UserId = e.Section.UserId,
                         AssignmentId = e.AssignmentId,
-                        AssignmentDate = e.Date.ToString(),
+                        AssignmentDate = e.Date.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture),
                         AssignmentFinalGrade = e.FinalGrade,
                         VariantId = e.VariantId,
                         VariantNumber = e.Variant.Number,
@@ -37,9 +44,6 @@ namespace ELearning.Application.Users.Queries.GetUserAssignmentsListWithDetailsB
                     }).Where(e => e.UserId == request.Id)
                     .ToListAsync(cancellationToken)
             };
-
-            if (vm == null)
-                throw new NotFoundException(nameof(User), request.Id);
 
             return vm;
         }
