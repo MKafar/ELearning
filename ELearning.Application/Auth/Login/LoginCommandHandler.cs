@@ -14,11 +14,13 @@ namespace ELearning.Application.Auth.Login
     public class LoginCommandHandler : IRequestHandler<LoginCommand, AuthData>
     {
         private readonly ELearningDbContext _context;
+        private readonly IPasswordHasher<User> _passwordHasher;
         private readonly IAuthService _authService;
 
-        public LoginCommandHandler(ELearningDbContext context, IAuthService authService)
+        public LoginCommandHandler(ELearningDbContext context, IPasswordHasher<User> passwordHasher, IAuthService authService)
         {
             _context = context;
+            _passwordHasher = passwordHasher;
             _authService = authService;
         }
 
@@ -30,12 +32,17 @@ namespace ELearning.Application.Auth.Login
             if (entity == null)
                 throw new NotFoundException(nameof(User), request.Login);
 
-            var passwordVerificationResult = _authService.VerifyPassword(entity, request.Password, entity.Password);
+            var passwordVerificationResult = _passwordHasher.VerifyHashedPassword(entity, entity.Password, request.Password);
 
             if (passwordVerificationResult == PasswordVerificationResult.Failed)
                 throw new InvalidPasswordException(request.Login);
 
-            return _authService.GetAuthData(entity.Login, entity.Role.Name);
+            entity.Role = await _context.Roles
+                .FindAsync(entity.RoleId);
+
+            var authData = _authService.GetAuthData(entity.Login, entity.Role.Name);
+
+            return authData;
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using ELearning.Application.Interfaces;
 using ELearning.Common;
-using ELearning.Domain.Entities;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
@@ -12,8 +10,6 @@ namespace ELearning.Infrastructure
 {
     public class AuthService : IAuthService
     {
-        private readonly PasswordHasher<User> _passwordHasher;
-
         private string jwtSecret;
         private int jwtLifespan;
 
@@ -21,7 +17,6 @@ namespace ELearning.Infrastructure
         {
             this.jwtSecret = jwtSecret;
             this.jwtLifespan = jwtLifespan;
-            _passwordHasher = new PasswordHasher<User>();
         }
 
         public AuthData GetAuthData(string id, string role)
@@ -51,16 +46,6 @@ namespace ELearning.Infrastructure
                 Token = token,
                 TokenExpirationTime = ((DateTimeOffset)expirationTime).ToUnixTimeSeconds()
             };
-        }
-
-        public string HashPassword(User user, string password)
-        {
-            return _passwordHasher.HashPassword(user, password);
-        }
-
-        public PasswordVerificationResult VerifyPassword(User user, string hashedPassword, string providedPassword)
-        {
-            return _passwordHasher.VerifyHashedPassword(user, hashedPassword, providedPassword);
         }
     }
 }

@@ -12,13 +12,13 @@ using MediatR.Pipeline;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Reflection;
 using System.Text;
@@ -53,6 +53,8 @@ namespace ELearning.WebUI
 
             services.AddDbContext<ELearningDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ELearningDatabase")));
+
+            services.AddTransient(typeof(IPasswordHasher<>), typeof(PasswordHasher<>));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
