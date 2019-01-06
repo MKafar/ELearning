@@ -40,7 +40,9 @@ namespace ELearning.Application.Auth.Login
             entity.Role = await _context.Roles
                 .FindAsync(entity.RoleId);
 
-            var authData = _authService.GetAuthData(entity.Login, entity.Role.Name);
+            var authData = _authService.GetAuthData(entity.UserId.ToString(), entity.Role.Name);
+
+            authData.UserName = $"{entity.Name} {entity.Surname}";
 
             return authData;
         }
