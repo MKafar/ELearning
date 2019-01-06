@@ -24,36 +24,25 @@ const DetailList = (props) => {
                         <List.Content floated='left'>
                             {props.date}
                         </List.Content>
-                        <List.Content>
-
-                        </List.Content>
                         <List.Content >
                             {props.text}
                             {props.sectionnumber}
-                            {props.title}
-                            &nbsp;                          
+                            {props.title}                        
                             {props.number}
-                            &nbsp;
                             {props.name}
-                            &nbsp;
+                            &nbsp;&nbsp;&nbsp;
                             {props.studentname}
                         </List.Content>
                         <List.Content>
                             {props.abreviation}
                         </List.Content>
                         <List.Content floated='left' >
-                            &nbsp;
                             {props.variant}
-                            &nbsp;
                             {props.subject}
-                            &nbsp;
                         </List.Content>
                         <List.Content floated='left'>
-                            &nbsp;
                             {props.group}
-                            &nbsp;
                             {props.grade}
-                            &nbsp;
                         </List.Content>
                         <List.Content floated='left'>
                             {props.section}
