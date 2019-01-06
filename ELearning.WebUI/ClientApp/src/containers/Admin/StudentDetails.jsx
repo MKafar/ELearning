@@ -19,7 +19,7 @@ class StudentDetails extends Component {
     loadData = () => {
         axios.get('/api/Users/GetAllAssignmentsWithDetailsById/' + this.state.selectedStudentID)
             .then(response => {
-                this.setState({ studentExercises: response.data.userAssignmentsWithDetails });
+                this.setState({ studentExercises: response.data.userassignmentswithdetails });
                 console.log( this.state.studentExercises);
             }).catch(error => {
                 console.log(error.response);
@@ -79,8 +79,8 @@ class StudentDetails extends Component {
 
         axios.post('/api/Sections/Create', {
             number: inputSection,
-            groupId: inputGroup,
-            userId: student
+            groupid: inputGroup,
+            userid: student
         })
             .then(response => {
                 console.log(response.data);
@@ -125,14 +125,14 @@ class StudentDetails extends Component {
                             return <DetailList
                                 visibledetail={true}
                                 visibledelete={false}
-                                key={studentExercise.assignmentId}
-                                title={studentExercise.exerciseTitle + " "}
-                                date={studentExercise.assignmentDate}
-                                variant={'Wariant: ' + studentExercise.variantNumber}
-                                group={"Grupa: " + studentExercise.groupName + " "}
-                                finalgrade={" Ocena: " + studentExercise.assignmentFinalGrade}
+                                key={studentExercise.assignmentd}
+                                title={studentExercise.exercisetitle + " "}
+                                date={studentExercise.assignmentdate}
+                                variant={'Wariant: ' + studentExercise.variantnumber}
+                                group={"Grupa: " + studentExercise.groupname + " "}
+                                finalgrade={" Ocena: " + studentExercise.assignmentfinalgrade}
                                 detailsClicked={() => {
-                                     this.detailsHandler(studentExercise.assignmentId); 
+                                     this.detailsHandler(studentExercise.assignmentid); 
                                      this.loadData();
                                 }}
                             />
@@ -149,11 +149,11 @@ class StudentDetails extends Component {
                                 return <DetailList
                                     visibledetail={false}
                                     visibledelete={true}
-                                    key={groupsadnsections.sectionId}
-                                    id={groupsadnsections.sectionId}
-                                    group={"Grupa: " + groupsadnsections.groupName + " "}
-                                    section={" Sekcja: " + groupsadnsections.sectionNumber}
-                                    removeClicked={() => this.removeHandler(groupsadnsections.sectionId)}
+                                    key={groupsadnsections.sectionid}
+                                    id={groupsadnsections.sectionid}
+                                    studentgroup={"Grupa: " + groupsadnsections.groupname + " "}
+                                    studentsection={" Sekcja: " + groupsadnsections.sectionnumber}
+                                    removeClicked={() => this.removeHandler(groupsadnsections.sectionid)}
                                 />
                             })}
                         </div>

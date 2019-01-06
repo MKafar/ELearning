@@ -62,7 +62,7 @@ class ExerciseVariantDetails extends Component {
         axios.put("/api/Variants/Update", {
             id: this.state.selectedExerciseVariantID,
             number: inputVariantNumber,
-            exerciseId:  this.state.selectedExerciseID,
+            exerciseid:  this.state.selectedExerciseID,
             content: this.state.code
         })
             .then(response => {

@@ -73,11 +73,11 @@ class ExerciseVariant extends Component {
                             return <DetailList
                                 visibledetail={true}
                                 visibledelete={true}
-                                key={variant.variantId}
-                                number={variant.variantNumber}
+                                key={variant.variantid}
+                                number={variant.variantnumber}
                                 text={'Wariant: '} 
-                                detailsClicked={()=> this.detailsHandler(variant.variantId)}
-                                removeClicked={()=>this.removeHandler(variant.variantId)}
+                                detailsClicked={()=> this.detailsHandler(variant.variantid)}
+                                removeClicked={()=>this.removeHandler(variant.variantid)}
                                 />
                         })}
                     </div>

@@ -32,6 +32,9 @@ const DetailList = (props) => {
                             {props.name}
                             &nbsp;&nbsp;&nbsp;
                             {props.studentname}
+                            {props.studentgroup}
+                            &nbsp;&nbsp;&nbsp;
+                            {props.studentsection}
                         </List.Content>
                         <List.Content>
                             {props.abreviation}

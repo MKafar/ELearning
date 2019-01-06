@@ -17,7 +17,7 @@ class GroupSections extends Component {
     loadData = () => {
         axios.get('/api/Groups/GetAllSectionsById/' + this.state.selectedGroupID)
         .then(response => {
-            this.setState({ groupSections: response.data.groupSections });
+            this.setState({ groupSections: response.data.groupsections });
             console.log("Sekcje",this.state.groupSections);
         }).catch(error => {
             console.log(error.response);
@@ -36,7 +36,6 @@ class GroupSections extends Component {
         this.loadData();
     }
     componentWillMount = () => {
-
         this.setState({selectedGroupID: this.props.match.params.groupSectionsID});
     }
 
@@ -73,11 +72,11 @@ class GroupSections extends Component {
                             return <DetailList
                                 visibledetail={false}
                                 visibledelete={true}
-                                key={section.sectionId}
-                                studentname={section.userName} 
-                                sectionnumber={section.sectionNumber}
+                                key={section.sectionid}
+                                studentname={section.username} 
+                                sectionnumber={section.sectionnumber}
                                 text={'Sekcja: '} 
-                                removeClicked={()=>this.removeHandler(section.sectionId)}
+                                removeClicked={()=>this.removeHandler(section.sectionid)}
                                 />
                         })}
                     </div>

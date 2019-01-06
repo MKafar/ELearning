@@ -28,10 +28,10 @@ class StudentDetailsAssignment extends Component {
     sendAdminGradeHandler = () => {
         axios.put('/api/Assignments/Update', {
             id: this.props.match.params.studentDetailsExerciseID,
-            finalGrade: this.state.adminGrade,
-            date: this.state.studentAssignmentData.assignmentDate,
-            variantId: this.state.studentAssignmentData.variantId,
-            sectionId: this.state.studentAssignmentData.sectionId,
+            finalgrade: this.state.adminGrade,
+            date: this.state.studentAssignmentData.assignmentdate,
+            variantid: this.state.studentAssignmentData.variantid,
+            sectionid: this.state.studentAssignmentData.sectionid,
         }).then(response =>{
             console.log(response);
         }).catch(error => {
@@ -42,7 +42,7 @@ class StudentDetailsAssignment extends Component {
     loadData = () => {
         axios.get('api/Assignments/GetAllEvaluationsById/' + this.props.match.params.studentDetailsExerciseID)
             .then(response => {
-                this.setState({ grades: response.data.assignmentEvaluations })
+                this.setState({ grades: response.data.assignmentevaluations })
             }).catch(error => {
                 console.log(error.response);
             })
@@ -62,7 +62,7 @@ class StudentDetailsAssignment extends Component {
             })
         axios.get('/api/Users/GetAllAssignmentsWithDetailsById/' + this.props.match.params.studentDetailsID)
             .then(response => {
-                this.setState({ studentAssignments: response.data.userAssignmentsWithDetails });
+                this.setState({ studentAssignments: response.data.userassignmentswithdetails });
                 this.setState({assignmentID: this.props.match.params.studentDetailsExerciseID});
                 const assignment = this.state.studentAssignments;
                 let studentassignment;
@@ -70,7 +70,7 @@ class StudentDetailsAssignment extends Component {
                 assignment.map((obj) => {
                     for (let property in obj)
                     {
-                        if (property === "assignmentId" && obj[property] == this.state.assignmentID)
+                        if (property === "assignmentid" && obj[property] == this.state.assignmentID)
                         {
                             studentassignment = obj;
                         }
@@ -94,7 +94,7 @@ class StudentDetailsAssignment extends Component {
             this.state.studentAssignmentData && this.state.student ?
             <div className="userAssignmentContainer">
                 <div className="assignmentHeaders">
-                    <Header size='large'>{"Zadanie: " +this.state.studentAssignmentData.exerciseTitle } &nbsp; {" Wariant: " + this.state.studentAssignmentData.variantNumber} &nbsp; &nbsp;{" Data: " + this.state.studentAssignmentData.assignmentDate}</Header>
+                    <Header size='large'>{"Zadanie: " +this.state.studentAssignmentData.exercisetitle } &nbsp; {" Wariant: " + this.state.studentAssignmentData.variantnumber} &nbsp; &nbsp;{" Data: " + this.state.studentAssignmentData.assignmentdate}</Header>
                     <Header className="nameHeader" size='medium'>Student: {this.state.student}</Header>
                 </div>
                 <div className='assignmentContentContainer'>
@@ -105,9 +105,9 @@ class StudentDetailsAssignment extends Component {
                                 return <DetailList
                                     visibledetail={false}
                                     visibledelete={false}
-                                    key={grade.evaluationId}
-                                    id={grade.evaluationId}
-                                    name={grade.studentsName}
+                                    key={grade.evaluationid}
+                                    id={grade.evaluationid}
+                                    name={grade.studentsname}
                                     studentgrade={grade.grade+ " pkt."} />
                             })}
 

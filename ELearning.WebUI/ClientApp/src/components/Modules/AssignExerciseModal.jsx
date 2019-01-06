@@ -4,21 +4,26 @@ import axios from '../../axios';
 
 import './AssignExerciseModal.scss';
 
-// const subjectOptions = [
-//     { key: 1, text: 'Choice 1', value: 1 },
-//     { key: 2, text: 'Choice 2', value: 2 },
-//     { key: 3, text: 'Choice 3', value: 3 },
-// ];
-
 class AssignExerciseModal extends Component {
     state = {
-        title: '',
         subjectOptions: [],
         groupOptions: [],
         sectionOptions: [],
         exerciseOptions: [],
         variantOptions: [],
-        date: null
+
+        subjectAllOptions: [],
+        groupAllOptions: [],
+        sectionAllOptions: [],
+        exerciseAllOptions: [],
+        variantAllOptions: [],
+
+        subject: null,
+        group: null,
+        section: null,
+        exercise: null,
+        variant: null,
+        date: null,
     }
 
     componentDidMount = () => {
@@ -36,7 +41,8 @@ class AssignExerciseModal extends Component {
                 sub[i].value = sub[i]['id'];
 
             }
-            this.setState({subjectOptions: response.data.subjects})
+            this.setState({subjectOptions: response.data.subjects});
+            this.setState({subjectAllOptions: response.data.subjects});            
         }).catch(error => {
             console.log(error.response);
         })
@@ -50,7 +56,8 @@ class AssignExerciseModal extends Component {
                 gr[i].key = gr[i]['id'];
                 gr[i].value = gr[i]['id'];
             }
-            this.setState({groupOptions: response.data.groups})
+            this.setState({groupOptions: response.data.groups});
+            this.setState({groupAllOptions: response.data.groups});
             //console.log(this.state.groupOptions);
         }).catch(error => {
             console.log(error.response);
@@ -65,7 +72,8 @@ class AssignExerciseModal extends Component {
                 sec[i].key = sec[i]['id'];
                 sec[i].value = sec[i]['id'];
             }
-            this.setState({sectionOptions: response.data.sections})
+            this.setState({sectionOptions: response.data.sections});
+            this.setState({sectionAllOptions: response.data.sections});
             //console.log(this.state.sectionOptions);
         }).catch(error => {
             console.log(error.response);
@@ -80,7 +88,8 @@ class AssignExerciseModal extends Component {
                 ex[i].key = ex[i]['id'];
                 ex[i].value = ex[i]['id'];
             }
-            this.setState({exerciseOptions: response.data.exercises})
+            this.setState({exerciseOptions: response.data.exercises});
+            this.setState({exerciseAllOptions: response.data.exercises});
             //console.log(this.state.exerciseOptions);
         }).catch(error => {
             console.log(error.response);
@@ -96,7 +105,8 @@ class AssignExerciseModal extends Component {
                 va[i].value = va[i]['id'];
                 delete va[i].content;
             }
-            this.setState({variantOptions: response.data.variants})
+            this.setState({variantOptions: response.data.variants});
+            this.setState({variantAllOptions: response.data.variants});
             console.log(this.state.variantOptions);
         }).catch(error => {
             console.log(error.response);
@@ -105,22 +115,109 @@ class AssignExerciseModal extends Component {
 
     }
 
+    subjectChangeHandler = (e, { value }) => {
+        this.setState({ groupOptions: this.state.groupAllOptions });
+
+        this.setState({ subject: value });
+
+        
+        if (value != null)
+        {
+            let groupsListByValue = [];
+
+            this.state.groupOptions.map((entity) => {
+                for (let property in entity)
+                {
+                    if (property === "subjectid" && entity[property] == value)
+                    {
+                        groupsListByValue.push(entity);
+                    }
+                }
+            })
+
+            this.setState({ groupOptions: groupsListByValue });
+        }
+    }
+
+    groupChangeHandler = (e, { value }) => {
+        this.setState({ sectionOptions: this.state.sectionAllOptions });
+        this.setState({ group: value });
+
+        let sectionsListByValue = [];
+        
+        this.state.sectionOptions.map((entity) => {
+            for (let property in entity)
+            {
+                if (property === "groupid" && entity[property] == value)
+                {
+                    sectionsListByValue.push(entity);
+                }
+            }
+        })
+        
+        this.setState({ sectionOptions: sectionsListByValue });
+        sectionsListByValue = [];
+    }
+
+    sectionChangeHandler = (e, { value }) => {
+        this.setState({ section: value });
+    }
+
+    exerciseChangeHandler = (e, { value }) => {
+        this.setState({ exerciseOptions: this.state.exerciseAllOptions });
+        this.setState({ exercise: value });
+
+        let exercisesListByValue = [];
+        
+        this.state.exerciseOptions.map((entity) => {
+            for (let property in entity)
+            {
+                if (property === "variantid" && entity[property] == value)
+                {
+                    exercisesListByValue.push(entity);
+                }
+            }
+        })
+
+        this.setState({ exerciseOptions: exercisesListByValue });
+        exercisesListByValue = [];
+    }
+    variantChangeHandler = (e, { value }) => {
+        this.setState({ variant: value });
+    }
+    dataChangeHandler = (e) => {
+        this.setState({ date: e.target.value });
+    }
+
     addHandle = () => {
+        const sectionId = this.state.section;
+        const variantId = this.state.variant;
+        const assignmentDate = this.state.date;
+
+        axios.put('/api/Assignments/Create', {
+            sectionid: sectionId,
+            variantid: variantId,
+            date: assignmentDate
+        }).then( response => {
+            console.log(response);
+        }).catch(error => {
+            console.log(error.response);
+        })
     
     }
 
     render() {
 
         return (
-            <Modal trigger={<Button primary>Przypisz zadanie</Button>} centered={false}>
+            <Modal closeIcon trigger={<Button primary>Przypisz zadanie</Button>} centered={false}>
                 <Modal.Header>Przypisz zadanie</Modal.Header>
                 <Modal.Content >
-                    <Dropdown className='studentInput' placeholder='Przedmiot' clearable options={this.state.subjectOptions} selection  />
-                    <Dropdown className='studentInput' placeholder='Grupa' clearable options={this.state.groupOptions} selection />
-                    <Dropdown className='studentInput' placeholder='Sekcja' clearable options={this.state.sectionOptions} selection />
-                    <Dropdown className='studentInput' placeholder='Zadanie' clearable options={this.state.exerciseOptions} selection />
-                    <Dropdown className='variantInput' placeholder='Wariant' clearable options={this.state.variantOptions} selection />
-                    <Input className='dateInput' label='Data' placeholder='DD-MM-RRRR' onChange={this.sectionHandle} />
+                    <Dropdown className='studentInput' placeholder='Przedmiot' clearable options={this.state.subjectOptions} selection onChange={this.subjectChangeHandler} />
+                    <Dropdown className='studentInput' placeholder='Grupa' clearable options={this.state.groupOptions} selection onChange={this.groupChangeHandler} disabled={false}/>
+                    <Dropdown className='studentInput' placeholder='Sekcja' clearable options={this.state.sectionOptions} selection onChange={this.sectionChangeHandler}/>
+                    <Dropdown className='studentInput' placeholder='Zadanie' clearable options={this.state.exerciseOptions} selection onChange={this.exerciseChangeHandler}/>
+                    <Dropdown className='variantAssignmentInput' placeholder='Wariant' clearable options={this.state.variantOptions} selection onChange={this.variantChangeHandler} />
+                    <Input className='dateInput' label='Data' placeholder='DD-MM-RRRR' onChange={this.dataChangeHandler} />
                 </Modal.Content>
                 <Modal.Actions>
                     <Button primary onClick={this.addHandle}>Zapisz</Button>

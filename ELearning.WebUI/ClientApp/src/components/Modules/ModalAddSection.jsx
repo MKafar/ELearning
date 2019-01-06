@@ -77,8 +77,8 @@ class ModalAddSection extends Component {
         const selectedUser = this.state.user;
         axios.post('/api/Sections/Create', {
             number: inputSectionNumber,
-            groupId: selectedGroup,
-           userId: selectedUser
+            groupid: selectedGroup,
+           userid: selectedUser
         })
             .then(response => {
                 console.log(response.data);

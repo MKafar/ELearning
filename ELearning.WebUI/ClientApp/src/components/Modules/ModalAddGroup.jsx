@@ -19,7 +19,7 @@ class ModalAddGroup extends Component {
         const inputData = this.state.name;
         const exercise = this.props.selectedSubjectID;
         axios.post('/api/Groups/Create', {
-            subjectId: exercise,
+            subjectid: exercise,
             name: inputData
         })
             .then(response => {

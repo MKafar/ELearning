@@ -17,7 +17,7 @@ class SubjectGroups extends Component {
     loadData = () => {
         axios.get('/api/Subjects/GetAllGroupsById/' + this.state.selectedSubjectID)
         .then(response => {
-            this.setState({ exerciseGroups: response.data.subjectGroups });
+            this.setState({ exerciseGroups: response.data.subjectgroups });
             console.log("Grupy",this.state.exerciseGroups);
         }).catch(error => {
             console.log(error.response);
@@ -73,11 +73,11 @@ class SubjectGroups extends Component {
                             return <DetailList
                                 visibledetail={true}
                                 visibledelete={true}
-                                key={group.groupId}
-                                name={group.groupName}
+                                key={group.groupid}
+                                name={group.groupname}
                                 text={'Grupa: '} 
-                                detailsClicked={()=> this.detailsHandler(group.groupId)}
-                                removeClicked={()=>this.removeHandler(group.groupId)}
+                                detailsClicked={()=> this.detailsHandler(group.groupid)}
+                                removeClicked={()=>this.removeHandler(group.groupid)}
                                 />
                         })}
                     </div>

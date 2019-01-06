@@ -32,7 +32,7 @@ class ModalAddVariant extends Component {
         const selectedExercise = this.props.selectedExerciseID;
         axios.post('/api/Variants/Create', {
             number: inputVariantNumber,
-            exerciseId: selectedExercise,
+            exerciseid: selectedExercise,
             content: "//Code Here"
         })
             .then(response => {
