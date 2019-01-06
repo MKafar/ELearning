@@ -6,6 +6,7 @@ using ELearning.Common;
 using ELearning.Domain.Entities;
 using ELearning.Persistence;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace ELearning.Application.Auth.Login
@@ -29,9 +30,9 @@ namespace ELearning.Application.Auth.Login
             if (entity == null)
                 throw new NotFoundException(nameof(User), request.Login);
 
-            var passwordIsValid = _authService.VerifyPassword(request.Password, entity.Password);
+            var passwordVerificationResult = _authService.VerifyPassword(entity, request.Password, entity.Password);
 
-            if (!passwordIsValid)
+            if (passwordVerificationResult == PasswordVerificationResult.Failed)
                 throw new InvalidPasswordException(request.Login);
 
             return _authService.GetAuthData(entity.Login, entity.Role.Name);
