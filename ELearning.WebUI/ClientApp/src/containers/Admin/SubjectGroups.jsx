@@ -60,9 +60,9 @@ class SubjectGroups extends Component {
 
         return (
             <div className="SubjectGroups">
-                <div>
+                <div className="subjectGroupsContainer">
                     <Header size='huge'>
-                    {this.state.selectedSubjectName}
+                        {this.state.selectedSubjectName}
                     </Header>
 
                     <ModalAddGroup selectedSubjectID={this.state.selectedSubjectID} updateData={this.loadData} /> 
