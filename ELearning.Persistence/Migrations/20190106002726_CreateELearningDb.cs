@@ -82,7 +82,7 @@ namespace ELearning.Persistence.Migrations
                     Surname = table.Column<string>(maxLength: 50, nullable: false),
                     Email = table.Column<string>(maxLength: 320, nullable: false),
                     Login = table.Column<string>(maxLength: 10, nullable: false),
-                    Password = table.Column<string>(maxLength: 16, nullable: false),
+                    Password = table.Column<string>(nullable: false),
                     RoleId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

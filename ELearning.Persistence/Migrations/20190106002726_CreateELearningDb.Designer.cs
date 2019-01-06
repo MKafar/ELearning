@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ELearning.Persistence.Migrations
 {
     [DbContext(typeof(ELearningDbContext))]
-    [Migration("20190104114941_CreateELearningDb")]
+    [Migration("20190106002726_CreateELearningDb")]
     partial class CreateELearningDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -210,8 +210,7 @@ namespace ELearning.Persistence.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(16);
+                        .IsRequired();
 
                     b.Property<int>("RoleId")
                         .HasColumnName("RoleId");
