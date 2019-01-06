@@ -109,15 +109,13 @@ class AssignExerciseModal extends Component {
     
     }
 
-   
-
     render() {
 
         return (
             <Modal trigger={<Button primary>Przypisz zadanie</Button>} centered={false}>
                 <Modal.Header>Przypisz zadanie</Modal.Header>
                 <Modal.Content >
-                    <Dropdown className='studentInput' placeholder='Przedmiot' clearable options={this.state.subjectOptions} selection />
+                    <Dropdown className='studentInput' placeholder='Przedmiot' clearable options={this.state.subjectOptions} selection  />
                     <Dropdown className='studentInput' placeholder='Grupa' clearable options={this.state.groupOptions} selection />
                     <Dropdown className='studentInput' placeholder='Sekcja' clearable options={this.state.sectionOptions} selection />
                     <Dropdown className='studentInput' placeholder='Zadanie' clearable options={this.state.exerciseOptions} selection />
