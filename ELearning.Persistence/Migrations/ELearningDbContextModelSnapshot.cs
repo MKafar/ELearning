@@ -208,8 +208,7 @@ namespace ELearning.Persistence.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(16);
+                        .IsRequired();
 
                     b.Property<int>("RoleId")
                         .HasColumnName("RoleId");

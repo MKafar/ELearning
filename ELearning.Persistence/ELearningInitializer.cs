@@ -1,7 +1,7 @@
 ﻿using ELearning.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace ELearning.Persistence
@@ -22,7 +22,7 @@ namespace ELearning.Persistence
             {
                 return;
             }
-
+            
             SeedSubject(context);
 
             SeedGroup(context);
@@ -115,6 +115,14 @@ namespace ELearning.Persistence
                 new User { UserId = 19, Name = "Keen", Surname = "Taylder", Email = "keen.taylder@student.polsl.pl", Login = "keetay", Password = "0qb0XmNhR", RoleId = 2 },
                 new User { UserId = 20, Name = "Gardy", Surname = "Dobrowlski", Email = "gardy.dobrowlski@student.polsl.pl", Login = "gardob", Password = "0qb0XmNhR", RoleId = 1 },
             };
+
+            PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
+
+            foreach (var user in users)
+            {
+                var hashedPassword = passwordHasher.HashPassword(user, user.Password);
+                user.Password = hashedPassword;
+            }
 
             context.Users.AddRange(users);
 
