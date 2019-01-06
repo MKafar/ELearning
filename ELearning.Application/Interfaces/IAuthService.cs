@@ -1,6 +1,4 @@
 ﻿using ELearning.Common;
-using ELearning.Domain.Entities;
-using Microsoft.AspNetCore.Identity;
 
 namespace ELearning.Application.Interfaces
 {
