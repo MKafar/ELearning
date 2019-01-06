@@ -9,7 +9,7 @@ namespace ELearning.WebUI.Controllers
     public class AuthController : BaseController
     {
         // POST: api/Auth/login
-        [HttpPost("login")]
+        [HttpPost]
         public async Task<ActionResult<AuthData>> Login([FromBody] LoginCommand command)
         {
             return Ok(await Mediator.Send(command));
