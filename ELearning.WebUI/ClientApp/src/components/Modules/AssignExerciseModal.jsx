@@ -119,7 +119,6 @@ class AssignExerciseModal extends Component {
         this.setState({ groupOptions: this.state.groupAllOptions });
 
         this.setState({ subject: value });
-
         
         if (value != null)
         {
@@ -212,11 +211,11 @@ class AssignExerciseModal extends Component {
             <Modal closeIcon trigger={<Button primary>Przypisz zadanie</Button>} centered={false}>
                 <Modal.Header>Przypisz zadanie</Modal.Header>
                 <Modal.Content >
-                    <Dropdown className='studentInput' placeholder='Przedmiot' clearable options={this.state.subjectOptions} selection onChange={this.subjectChangeHandler} />
-                    <Dropdown className='studentInput' placeholder='Grupa' clearable options={this.state.groupOptions} selection onChange={this.groupChangeHandler} disabled={false}/>
-                    <Dropdown className='studentInput' placeholder='Sekcja' clearable options={this.state.sectionOptions} selection onChange={this.sectionChangeHandler}/>
-                    <Dropdown className='studentInput' placeholder='Zadanie' clearable options={this.state.exerciseOptions} selection onChange={this.exerciseChangeHandler}/>
-                    <Dropdown className='variantAssignmentInput' placeholder='Wariant' clearable options={this.state.variantOptions} selection onChange={this.variantChangeHandler} />
+                    <Dropdown className='studentInput' placeholder='Przedmiot' fluid search options={this.state.subjectOptions} selection onChange={this.subjectChangeHandler} />
+                    <Dropdown className='studentInput' placeholder='Grupa' fluid search options={this.state.groupOptions} selection onChange={this.groupChangeHandler} disabled={false}/>
+                    <Dropdown className='studentInput' placeholder='Sekcja' fluid search options={this.state.sectionOptions} selection onChange={this.sectionChangeHandler}/>
+                    <Dropdown className='studentInput' placeholder='Zadanie' fluid search options={this.state.exerciseOptions} selection onChange={this.exerciseChangeHandler}/>
+                    <Dropdown className='variantAssignmentInput' placeholder='Wariant' fluid search options={this.state.variantOptions} selection onChange={this.variantChangeHandler} />
                     <Input className='dateInput' label='Data' placeholder='DD-MM-RRRR' onChange={this.dataChangeHandler} />
                 </Modal.Content>
                 <Modal.Actions>
