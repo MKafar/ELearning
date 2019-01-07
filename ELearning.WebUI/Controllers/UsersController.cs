@@ -8,6 +8,7 @@ using ELearning.Application.Users.Command.UpdateUser;
 using ELearning.Application.Users.Command.DeleteUser;
 using ELearning.Application.Users.Queries.GetUserSectionsListById;
 using ELearning.Application.Users.Queries.GetUserAssignmentsListWithDetailsById;
+using ELearning.Application.Users.Queries.GetStudentsList;
 
 namespace ELearning.WebUI.Controllers
 {
@@ -19,6 +20,13 @@ namespace ELearning.WebUI.Controllers
         public async Task<ActionResult<UsersListViewModel>> GetAll()
         {
             return Ok(await Mediator.Send(new GetUsersListQuery()));
+        }
+
+        // GET: api/Users/GetAllStudents/
+        [HttpGet]
+        public async Task<ActionResult<StudentsListViewModel>> GetAllStudents()
+        {
+            return Ok(await Mediator.Send(new GetStudentsListQuery()));
         }
 
         // GET: api/Users/GetById/5

@@ -1,5 +1,4 @@
-﻿using CryptoHelper;
-using ELearning.Application.Interfaces;
+﻿using ELearning.Application.Interfaces;
 using ELearning.Common;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -47,16 +46,6 @@ namespace ELearning.Infrastructure
                 Token = token,
                 TokenExpirationTime = ((DateTimeOffset)expirationTime).ToUnixTimeSeconds()
             };
-        }
-
-        public string HashPassword(string password)
-        {
-            return Crypto.HashPassword(password);
-        }
-
-        public bool VerifyPassword(string actualPassword, string hashedPassword)
-        {
-            return Crypto.VerifyHashedPassword(hashedPassword, actualPassword);
         }
     }
 }
