@@ -6,8 +6,8 @@ import {BrowserRouter} from 'react-router-dom';
 import './App.css';
 import Admin from './containers/Admin/Admin';
 
-//import Student from './containers/Student/Student';
-//import Login from './containers/Login/Login';
+import Student from './containers/Student/Student';
+import Login from './containers/Login/Login';
 
 class App extends Component {
 
@@ -21,13 +21,15 @@ class App extends Component {
 
     return (
       <BrowserRouter>
-        <div className='App'>
-        
+        <div className="App">
+          {/* <div className='loginContener'>
+            <Login />
+          </div> */}
+
           <Admin />
         </div>
-        
       </BrowserRouter>
-      
+
 
 
 

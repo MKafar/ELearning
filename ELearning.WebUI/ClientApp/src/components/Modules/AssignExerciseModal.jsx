@@ -115,78 +115,95 @@ class AssignExerciseModal extends Component {
 
     }
 
+    // subjectChangeHandler = (e, { value }) => {
+    //     this.setState({ groupOptions: this.state.groupAllOptions });
+
+    //     this.setState({ subject: value });
+        
+    //     if (value != null)
+    //     {
+    //         let groupsListByValue = [];
+
+    //         this.state.groupOptions.map((entity) => {
+    //             for (let property in entity)
+    //             {
+    //                 if (property === "subjectid" && entity[property] == value)
+    //                 {
+    //                     groupsListByValue.push(entity);
+    //                 }
+    //             }
+    //         })
+
+    //         this.setState({ groupOptions: groupsListByValue });
+    //     }
+    // }
+
+    // groupChangeHandler = (e, { value }) => {
+    //     this.setState({ sectionOptions: this.state.sectionAllOptions });
+    //     this.setState({ group: value });
+
+    //     let sectionsListByValue = [];
+        
+    //     this.state.sectionOptions.map((entity) => {
+    //         for (let property in entity)
+    //         {
+    //             if (property === "groupid" && entity[property] == value)
+    //             {
+    //                 sectionsListByValue.push(entity);
+    //             }
+    //         }
+    //     })
+        
+    //     this.setState({ sectionOptions: sectionsListByValue });
+    //     sectionsListByValue = [];
+    // }
+
+    // sectionChangeHandler = (e, { value }) => {
+    //     this.setState({ section: value });
+    // }
+
+    // exerciseChangeHandler = (e, { value }) => {
+    //     this.setState({ exerciseOptions: this.state.exerciseAllOptions });
+    //     this.setState({ exercise: value });
+
+    //     let exercisesListByValue = [];
+        
+    //     this.state.exerciseOptions.map((entity) => {
+    //         for (let property in entity)
+    //         {
+    //             if (property === "variantid" && entity[property] == value)
+    //             {
+    //                 exercisesListByValue.push(entity);
+    //             }
+    //         }
+    //     })
+
+    //     this.setState({ exerciseOptions: exercisesListByValue });
+    //     exercisesListByValue = [];
+    // }
+    // variantChangeHandler = (e, { value }) => {
+    //     this.setState({ variant: value });
+    // }
+    // dataChangeHandler = (e) => {
+    //     this.setState({ date: e.target.value });
+    // }
+
     subjectChangeHandler = (e, { value }) => {
-        this.setState({ groupOptions: this.state.groupAllOptions });
-
         this.setState({ subject: value });
-        
-        if (value != null)
-        {
-            let groupsListByValue = [];
-
-            this.state.groupOptions.map((entity) => {
-                for (let property in entity)
-                {
-                    if (property === "subjectid" && entity[property] == value)
-                    {
-                        groupsListByValue.push(entity);
-                    }
-                }
-            })
-
-            this.setState({ groupOptions: groupsListByValue });
-        }
     }
-
     groupChangeHandler = (e, { value }) => {
-        this.setState({ sectionOptions: this.state.sectionAllOptions });
         this.setState({ group: value });
-
-        let sectionsListByValue = [];
-        
-        this.state.sectionOptions.map((entity) => {
-            for (let property in entity)
-            {
-                if (property === "groupid" && entity[property] == value)
-                {
-                    sectionsListByValue.push(entity);
-                }
-            }
-        })
-        
-        this.setState({ sectionOptions: sectionsListByValue });
-        sectionsListByValue = [];
     }
-
     sectionChangeHandler = (e, { value }) => {
         this.setState({ section: value });
     }
-
     exerciseChangeHandler = (e, { value }) => {
-        this.setState({ exerciseOptions: this.state.exerciseAllOptions });
         this.setState({ exercise: value });
-
-        let exercisesListByValue = [];
-        
-        this.state.exerciseOptions.map((entity) => {
-            for (let property in entity)
-            {
-                if (property === "variantid" && entity[property] == value)
-                {
-                    exercisesListByValue.push(entity);
-                }
-            }
-        })
-
-        this.setState({ exerciseOptions: exercisesListByValue });
-        exercisesListByValue = [];
-    }
-    variantChangeHandler = (e, { value }) => {
-        this.setState({ variant: value });
     }
     dataChangeHandler = (e) => {
         this.setState({ date: e.target.value });
     }
+
 
     addHandle = () => {
         const sectionId = this.state.section;
@@ -208,14 +225,14 @@ class AssignExerciseModal extends Component {
     render() {
 
         return (
-            <Modal closeIcon trigger={<Button primary>Przypisz zadanie</Button>} centered={false}>
+            <Modal closeIcon trigger={<Button className='assignexercisebutton' primary>Przypisz zadanie</Button>} centered={false}>
                 <Modal.Header>Przypisz zadanie</Modal.Header>
-                <Modal.Content >
-                    <Dropdown className='studentInput' placeholder='Przedmiot' fluid search options={this.state.subjectOptions} selection onChange={this.subjectChangeHandler} />
-                    <Dropdown className='studentInput' placeholder='Grupa' fluid search options={this.state.groupOptions} selection onChange={this.groupChangeHandler} disabled={false}/>
-                    <Dropdown className='studentInput' placeholder='Sekcja' fluid search options={this.state.sectionOptions} selection onChange={this.sectionChangeHandler}/>
-                    <Dropdown className='studentInput' placeholder='Zadanie' fluid search options={this.state.exerciseOptions} selection onChange={this.exerciseChangeHandler}/>
-                    <Dropdown className='variantAssignmentInput' placeholder='Wariant' fluid search options={this.state.variantOptions} selection onChange={this.variantChangeHandler} />
+                <Modal.Content  className="modalContent">
+                    <Dropdown className='studentInput' placeholder='Przedmiot'  options={this.state.subjectOptions} selection onChange={this.subjectChangeHandler} />
+                    <Dropdown className='studentInput' placeholder='Grupa'  options={this.state.groupOptions} selection onChange={this.groupChangeHandler} disabled={false}/>
+                    <Dropdown className='studentInput' placeholder='Sekcja'  options={this.state.sectionOptions} selection onChange={this.sectionChangeHandler}/>
+                    <Dropdown className='studentInput' placeholder='Zadanie'  options={this.state.exerciseOptions} selection onChange={this.exerciseChangeHandler}/>
+                    <Dropdown className='variantAssignmentInput' placeholder='Wariant' options={this.state.variantOptions} selection onChange={this.variantChangeHandler} />
                     <Input className='dateInput' label='Data' placeholder='DD-MM-RRRR' onChange={this.dataChangeHandler} />
                 </Modal.Content>
                 <Modal.Actions>

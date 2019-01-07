@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NewWindow from 'react-new-window';
 
 class OpenNewWindow extends Component {
-    
+
     componentDidMount = () => {
         //const code = this.props.htmlCode;
         console.log(this.props);
@@ -15,10 +15,18 @@ class OpenNewWindow extends Component {
         return (
             <NewWindow>
                 <button onClick={this.props.close}>Zamknij</button>
-                <h1>Hejka jestem</h1>
-                {html}
+
+                <html>
+                    <head>
+                        <title>Przykład</title>
+                    </head>
+                    <body>
+                        <p>Witaj Świecie!</p>
+                    </body>
+                </html>
+                {/* {html}
                 {string}
-                {this.props.htmlCode}
+                {this.props.htmlCode} */}
             </NewWindow>
         )
     }
