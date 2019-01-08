@@ -2,8 +2,8 @@
 
 namespace ELearning.Application.Users.Queries.GetSectionsListById
 {
-    public class SectionsListViewModel
+    public class SectionsDetailedListViewModel
     {
-        public IList<SectionsLookupModel> Sections { get; set; }
+        public IList<SectionDetailedLookupModel> Sections { get; set; }
     }
 }

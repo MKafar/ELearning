@@ -39,7 +39,7 @@ namespace ELearning.WebUI.Controllers
 
         // GET: api/Users/GetAllSectionsById/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<SectionsListViewModel>> GetAllSectionsById(int id)
+        public async Task<ActionResult<SectionsDetailedListViewModel>> GetAllSectionsById(int id)
         {
             return Ok(await Mediator.Send(new GetSectionsListByIdQuery { Id = id }));
         }

@@ -1,6 +1,6 @@
 ﻿namespace ELearning.Application.Users.Queries.GetSectionsListById
 {
-    public class SectionsLookupModel
+    public class SectionDetailedLookupModel
     {
         public int UserId { get; set; }
         public int SectionId { get; set; }

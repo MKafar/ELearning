@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ELearning.Application.Users.Queries.GetSectionsListById
 {
-    public class GetSectionsListByIdQueryHandler : IRequestHandler<GetSectionsListByIdQuery, SectionsListViewModel>
+    public class GetSectionsListByIdQueryHandler : IRequestHandler<GetSectionsListByIdQuery, SectionsDetailedListViewModel>
     {
         private readonly ELearningDbContext _context;
 
@@ -18,10 +18,10 @@ namespace ELearning.Application.Users.Queries.GetSectionsListById
             _context = context;
         }
 
-        public async Task<SectionsListViewModel> Handle(GetSectionsListByIdQuery request, CancellationToken cancellationToken)
+        public async Task<SectionsDetailedListViewModel> Handle(GetSectionsListByIdQuery request, CancellationToken cancellationToken)
         {
             var entity = await _context.Sections
-                .Select(e => new SectionsLookupModel
+                .Select(e => new SectionDetailedLookupModel
                 {
                     UserId = e.UserId,
                     SectionId = e.SectionId,
@@ -34,7 +34,7 @@ namespace ELearning.Application.Users.Queries.GetSectionsListById
             if (entity.Count == 0)
                 throw new NoRecordFoundException(nameof(Section), nameof(Section.UserId), request.Id, "There are no sections associated with this user.");
 
-            return new SectionsListViewModel
+            return new SectionsDetailedListViewModel
             {
                 Sections = entity
             };
