@@ -7,21 +7,21 @@ using ELearning.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace ELearning.Application.Users.Queries.GetUserSectionsListById
+namespace ELearning.Application.Users.Queries.GetSectionsListById
 {
-    public class GetUserSectionsListByIdQueryHandler : IRequestHandler<GetUserSectionsListByIdQuery, UserSectionsListViewModel>
+    public class GetSectionsListByIdQueryHandler : IRequestHandler<GetSectionsListByIdQuery, SectionsListViewModel>
     {
         private readonly ELearningDbContext _context;
 
-        public GetUserSectionsListByIdQueryHandler(ELearningDbContext context)
+        public GetSectionsListByIdQueryHandler(ELearningDbContext context)
         {
             _context = context;
         }
 
-        public async Task<UserSectionsListViewModel> Handle(GetUserSectionsListByIdQuery request, CancellationToken cancellationToken)
+        public async Task<SectionsListViewModel> Handle(GetSectionsListByIdQuery request, CancellationToken cancellationToken)
         {
             var entity = await _context.Sections
-                .Select(e => new UserSectionsLookupModel
+                .Select(e => new SectionsLookupModel
                 {
                     UserId = e.UserId,
                     SectionId = e.SectionId,
@@ -34,7 +34,7 @@ namespace ELearning.Application.Users.Queries.GetUserSectionsListById
             if (entity.Count == 0)
                 throw new NoRecordFoundException(nameof(Section), nameof(Section.UserId), request.Id, "There are no sections associated with this user.");
 
-            return new UserSectionsListViewModel
+            return new SectionsListViewModel
             {
                 Sections = entity
             };

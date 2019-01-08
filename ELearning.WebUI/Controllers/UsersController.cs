@@ -6,7 +6,7 @@ using System.Net;
 using ELearning.Application.Users.Command.CreateUser;
 using ELearning.Application.Users.Command.UpdateUser;
 using ELearning.Application.Users.Command.DeleteUser;
-using ELearning.Application.Users.Queries.GetUserSectionsListById;
+using ELearning.Application.Users.Queries.GetSectionsListById;
 using ELearning.Application.Users.Queries.GetAssignmentsListWithDetailsById;
 using ELearning.Application.Users.Queries.GetStudentsList;
 using ELearning.Application.Users.Queries.GetPastAssignmentsListById;
@@ -39,9 +39,9 @@ namespace ELearning.WebUI.Controllers
 
         // GET: api/Users/GetAllSectionsById/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserSectionsListViewModel>> GetAllSectionsById(int id)
+        public async Task<ActionResult<SectionsListViewModel>> GetAllSectionsById(int id)
         {
-            return Ok(await Mediator.Send(new GetUserSectionsListByIdQuery { Id = id }));
+            return Ok(await Mediator.Send(new GetSectionsListByIdQuery { Id = id }));
         }
 
         // GET: api/Users/GetAllAssignmentsWithDetailsById/5
