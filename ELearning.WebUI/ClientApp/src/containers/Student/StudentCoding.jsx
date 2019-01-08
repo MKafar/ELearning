@@ -3,7 +3,6 @@ import { Header, Button } from 'semantic-ui-react';
 
 import './StudentCoding.scss';
 import CodeMirror from '../../components/CodeMirror/CodeMirror';
-import Output from '../../components/CodeMirror/Output';
 
 
 class StudentCoding extends Component {
@@ -17,9 +16,6 @@ class StudentCoding extends Component {
 
     render() {
 
-        const sendCodeHandler = () => {
-            console.log('wysłano');
-        }
         
         const showexercise = () => {
             console.log('Treść zadania');
@@ -33,10 +29,6 @@ class StudentCoding extends Component {
                     <div>
                         <CodeMirror></CodeMirror>
                     </div>
-                        <div>
-                            <Output></Output>
-                            <Button className='sendbutton' onClick={sendCodeHandler}>Wyślij</Button>
-                        </div>
                 </div>
             </div>
         );

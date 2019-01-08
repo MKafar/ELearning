@@ -77,14 +77,16 @@ class StudentDetailsAssignment extends Component {
                     }
                 })
                 this.setState({studentAssignmentData: studentassignment});
-
+                console.log(this.state.studentAssignmentData);
             }).catch(error => {
                 console.log(error.response);
             })
     }
 
     componentDidMount = () => {
+
         this.loadData();
+        
         //"Danestudenta:" + this.props.match.params.studentDetailsID
         //"Dane assignment: "+ this.props.match.params.studentDetailsExerciseID
     }

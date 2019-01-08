@@ -24,6 +24,7 @@ class AssignExerciseModal extends Component {
         exercise: null,
         variant: null,
         date: null,
+        time: null,
     }
 
     componentDidMount = () => {
@@ -203,17 +204,22 @@ class AssignExerciseModal extends Component {
     dataChangeHandler = (e) => {
         this.setState({ date: e.target.value });
     }
+    hourChangeHandler = (e) => {
+        this.setState({ time: e.target.value });
+    }
 
 
     addHandle = () => {
         const sectionId = this.state.section;
         const variantId = this.state.variant;
         const assignmentDate = this.state.date;
+        const assgnmentTime = this.state.time;
 
         axios.put('/api/Assignments/Create', {
             sectionid: sectionId,
             variantid: variantId,
-            date: assignmentDate
+            date: assignmentDate,
+            time: assgnmentTime,
         }).then( response => {
             console.log(response);
         }).catch(error => {
@@ -233,7 +239,9 @@ class AssignExerciseModal extends Component {
                     <Dropdown className='studentInput' placeholder='Sekcja'  options={this.state.sectionOptions} selection onChange={this.sectionChangeHandler}/>
                     <Dropdown className='studentInput' placeholder='Zadanie'  options={this.state.exerciseOptions} selection onChange={this.exerciseChangeHandler}/>
                     <Dropdown className='variantAssignmentInput' placeholder='Wariant' options={this.state.variantOptions} selection onChange={this.variantChangeHandler} />
-                    <Input className='dateInput' label='Data' placeholder='DD-MM-RRRR' onChange={this.dataChangeHandler} />
+                    <br />
+                    <Input className='dateInput' type='date' label='Data' placeholder='DD-MM-RRRR' onChange={this.dataChangeHandler} />
+                    <Input className='dateInput' type='time' label='Godz.'  onChange={this.hourChangeHandler} />
                 </Modal.Content>
                 <Modal.Actions>
                     <Button primary onClick={this.addHandle}>Zapisz</Button>

@@ -6,6 +6,7 @@ p {
     height: 716px !important;
     margin-left: 10px;
     margin-top: 10px;
+    margin-bottom: 5px;
     border: solid;
     border-color: #f1f1f1;
 }
@@ -16,4 +17,30 @@ p {
 
 .runbutton {
     margin-right: 25px !important;
+}
+.outputbox {
+    background-color: #d4d1d1;
+    height: 715px;
+    width: 400px;
+    margin: 11px;
+    color: gray;
+    padding: 15px;
+    padding-left: 20px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+
+}
+.codeArea {
+    display: flex;
+    flex-direction: column;
+}
+.codingSection {
+    display: flex;
+}
+
+.output {
+    display: flex;
+    flex-direction: column;
 }
