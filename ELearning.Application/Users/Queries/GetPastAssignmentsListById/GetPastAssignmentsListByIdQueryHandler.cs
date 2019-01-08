@@ -6,25 +6,25 @@ using ELearning.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace ELearning.Application.Users.Queries.GetUserPastAssignmentsListById
+namespace ELearning.Application.Users.Queries.GetPastAssignmentsListById
 {
-    public class GetUserPastAssignmentsListByIdQueryHandler : IRequestHandler<GetUserPastAssignmentsListByIdQuery, UserPastAssignmentsListViewModel>
+    public class GetPastAssignmentsListByIdQueryHandler : IRequestHandler<GetPastAssignmentsListByIdQuery, PastAssignmentsListViewModel>
     {
         private readonly ELearningDbContext _context;
 
-        public GetUserPastAssignmentsListByIdQueryHandler(ELearningDbContext context)
+        public GetPastAssignmentsListByIdQueryHandler(ELearningDbContext context)
         {
             _context = context;
         }
 
-        public async Task<UserPastAssignmentsListViewModel> Handle(GetUserPastAssignmentsListByIdQuery request, CancellationToken cancellationToken)
+        public async Task<PastAssignmentsListViewModel> Handle(GetPastAssignmentsListByIdQuery request, CancellationToken cancellationToken)
         {
             DateTime now = DateTime.Now;
 
-            var vm = new UserPastAssignmentsListViewModel
+            var vm = new PastAssignmentsListViewModel
             {
                 PastAssignments = await _context.Assignments
-                    .Select(e => new UserPastAssignmentLookupModel
+                    .Select(e => new PastAssignmentLookupModel
                     {
                         AssignmentId = e.AssignmentId,
                         UserId = e.Section.UserId,

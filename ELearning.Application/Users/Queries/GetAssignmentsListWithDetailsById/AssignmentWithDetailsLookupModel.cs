@@ -1,6 +1,6 @@
-﻿namespace ELearning.Application.Users.Queries.GetUserAssignmentsListWithDetailsById
+﻿namespace ELearning.Application.Users.Queries.GetAssignmentsListWithDetailsById
 {
-    public class UserAssignmentWithDetailsLookupModel
+    public class AssignmentWithDetailsLookupModel
     {
         public int AssignmentId { get; set; }
         public string AssignmentDate { get; set; }

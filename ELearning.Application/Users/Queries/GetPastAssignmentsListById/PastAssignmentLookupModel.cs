@@ -1,6 +1,6 @@
-﻿namespace ELearning.Application.Users.Queries.GetUserPastAssignmentsListById
+﻿namespace ELearning.Application.Users.Queries.GetPastAssignmentsListById
 {
-    public class UserPastAssignmentLookupModel
+    public class PastAssignmentLookupModel
     {
         public int AssignmentId { get; set; }
         public int UserId { get; set; }

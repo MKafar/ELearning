@@ -7,9 +7,9 @@ using ELearning.Application.Users.Command.CreateUser;
 using ELearning.Application.Users.Command.UpdateUser;
 using ELearning.Application.Users.Command.DeleteUser;
 using ELearning.Application.Users.Queries.GetUserSectionsListById;
-using ELearning.Application.Users.Queries.GetUserAssignmentsListWithDetailsById;
+using ELearning.Application.Users.Queries.GetAssignmentsListWithDetailsById;
 using ELearning.Application.Users.Queries.GetStudentsList;
-using ELearning.Application.Users.Queries.GetUserPastAssignmentsListById;
+using ELearning.Application.Users.Queries.GetPastAssignmentsListById;
 
 namespace ELearning.WebUI.Controllers
 {
@@ -46,16 +46,16 @@ namespace ELearning.WebUI.Controllers
 
         // GET: api/Users/GetAllAssignmentsWithDetailsById/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserAssignmentsListWithDetailsViewModel>> GetAllAssignmentsWithDetailsById(int id)
+        public async Task<ActionResult<AssignmentsListWithDetailsViewModel>> GetAllAssignmentsWithDetailsById(int id)
         {
-            return Ok(await Mediator.Send(new GetUserAssignmentsListWithDetailsByIdQuery { Id = id }));
+            return Ok(await Mediator.Send(new GetAssignmentsListWithDetailsByIdQuery { Id = id }));
         }
 
         // GET: api/Users/GetAllPastAssignmentsById/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserPastAssignmentsListViewModel>> GetAllPastAssignmentsById(int id)
+        public async Task<ActionResult<PastAssignmentsListViewModel>> GetAllPastAssignmentsById(int id)
         {
-            return Ok(await Mediator.Send(new GetUserPastAssignmentsListByIdQuery { Id = id }));
+            return Ok(await Mediator.Send(new GetPastAssignmentsListByIdQuery { Id = id }));
         }
 
         // POST: api/Users/Create

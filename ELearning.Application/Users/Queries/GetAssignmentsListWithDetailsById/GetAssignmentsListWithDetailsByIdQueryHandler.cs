@@ -8,18 +8,18 @@ using ELearning.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace ELearning.Application.Users.Queries.GetUserAssignmentsListWithDetailsById
+namespace ELearning.Application.Users.Queries.GetAssignmentsListWithDetailsById
 {
-    public class GetUserAssignmentsListWithDetailsByIdQueryHandler : IRequestHandler<GetUserAssignmentsListWithDetailsByIdQuery, UserAssignmentsListWithDetailsViewModel>
+    public class GetAssignmentsListWithDetailsByIdQueryHandler : IRequestHandler<GetAssignmentsListWithDetailsByIdQuery, AssignmentsListWithDetailsViewModel>
     {
         private readonly ELearningDbContext _context;
 
-        public GetUserAssignmentsListWithDetailsByIdQueryHandler(ELearningDbContext context)
+        public GetAssignmentsListWithDetailsByIdQueryHandler(ELearningDbContext context)
         {
             _context = context;
         }
 
-        public async Task<UserAssignmentsListWithDetailsViewModel> Handle(GetUserAssignmentsListWithDetailsByIdQuery request, CancellationToken cancellationToken)
+        public async Task<AssignmentsListWithDetailsViewModel> Handle(GetAssignmentsListWithDetailsByIdQuery request, CancellationToken cancellationToken)
         {
             var entity = await _context.Users
                 .FindAsync(request.Id);
@@ -27,10 +27,10 @@ namespace ELearning.Application.Users.Queries.GetUserAssignmentsListWithDetailsB
             if (entity == null)
                 throw new NotFoundException(nameof(User), request.Id);
 
-            var vm = new UserAssignmentsListWithDetailsViewModel
+            var vm = new AssignmentsListWithDetailsViewModel
             {
                 UserAssignmentsWithDetails = await _context.Assignments
-                    .Select(e => new UserAssignmentWithDetailsLookupModel
+                    .Select(e => new AssignmentWithDetailsLookupModel
                     {
                         UserId = e.Section.UserId,
                         AssignmentId = e.AssignmentId,
