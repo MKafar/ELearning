@@ -27,15 +27,17 @@ namespace ELearning.Application.Assignments.Commands.UpdateAssignment
             if (entity == null)
                 throw new NotFoundException(nameof(Assignment), request.Id);
 
-            var dateOfAssignmentParseSuccessful = DateTime
-                .TryParse(request.Date, new CultureInfo("pl-PL"), DateTimeStyles.AllowWhiteSpaces, out DateTime dateOfAssignment);
+            var dateTime = $"{request.Date} {request.Time}";
 
-            if (!dateOfAssignmentParseSuccessful)
+            var dateTimeOfAssignmentParseSuccessful = DateTime
+                .TryParse(dateTime, new CultureInfo("pl-PL"), DateTimeStyles.AllowWhiteSpaces, out DateTime dateTimeOfAssignment);
+
+            if (!dateTimeOfAssignmentParseSuccessful)
                 throw new ParseDateFailureException(request.Date);
 
             entity.SectionId = request.SectionId;
             entity.VariantId = request.VariantId;
-            entity.Date = dateOfAssignment;
+            entity.Date = dateTimeOfAssignment;
             entity.FinalGrade = request.FinalGrade;
 
             _context.Assignments.Update(entity);

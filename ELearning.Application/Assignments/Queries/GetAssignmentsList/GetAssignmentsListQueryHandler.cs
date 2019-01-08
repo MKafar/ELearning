@@ -26,6 +26,7 @@ namespace ELearning.Application.Assignments.Queries.GetAssignmentsList
                     {
                         Id = e.AssignmentId,
                         Date = e.Date.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture),
+                        Time = e.Date.ToString("hh:MM", CultureInfo.InvariantCulture),
                         VariantId = e.VariantId,
                         SectionId = e.SectionId
                     }).ToListAsync(cancellationToken)

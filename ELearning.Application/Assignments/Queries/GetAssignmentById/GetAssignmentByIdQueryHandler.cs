@@ -26,11 +26,13 @@ namespace ELearning.Application.Assignments.Queries.GetAssignmentById
                 throw new NotFoundException(nameof(Assignment), request.Id);
 
             string parsedDate = entity.Date.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture);
+            string parsedTime = entity.Date.ToString("hh:MM", CultureInfo.InvariantCulture);
 
             return new AssignmentViewModel
             {
                 Id = entity.AssignmentId,
                 Date = parsedDate,
+                Time = parsedTime,
                 VariantId = entity.VariantId,
                 SectionId = entity.SectionId,
                 Content = entity.Solution

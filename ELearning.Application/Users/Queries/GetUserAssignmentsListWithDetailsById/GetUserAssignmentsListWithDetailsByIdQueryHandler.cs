@@ -35,6 +35,7 @@ namespace ELearning.Application.Users.Queries.GetUserAssignmentsListWithDetailsB
                         UserId = e.Section.UserId,
                         AssignmentId = e.AssignmentId,
                         AssignmentDate = e.Date.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture),
+                        AssignmentTime = e.Date.ToString("hh:MM", CultureInfo.InvariantCulture),
                         AssignmentFinalGrade = e.FinalGrade,
                         VariantId = e.VariantId,
                         VariantNumber = e.Variant.Number,
