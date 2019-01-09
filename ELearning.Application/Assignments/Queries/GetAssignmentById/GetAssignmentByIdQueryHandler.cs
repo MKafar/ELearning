@@ -5,6 +5,7 @@ using ELearning.Application.Exceptions;
 using ELearning.Domain.Entities;
 using ELearning.Persistence;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace ELearning.Application.Assignments.Queries.GetAssignmentById
 {
@@ -20,10 +21,16 @@ namespace ELearning.Application.Assignments.Queries.GetAssignmentById
         public async Task<AssignmentViewModel> Handle(GetAssignmentByIdQuery request, CancellationToken cancellationToken)
         {
             var entity = await _context.Assignments
-                .FindAsync(request.Id);
+                .SingleAsync(e => e.AssignmentId == request.Id);
 
             if (entity == null)
                 throw new NotFoundException(nameof(Assignment), request.Id);
+
+            entity.Variant = await _context.Variants
+                .SingleAsync(e => e.VariantId == entity.VariantId);
+
+            entity.Variant.Exercise = await _context.Exercises
+                .SingleAsync(e => e.ExerciseId == entity.Variant.ExerciseId);
 
             string parsedDate = entity.Date.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture);
             string parsedTime = entity.Date.ToString("HH:mm", CultureInfo.InvariantCulture);
