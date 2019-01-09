@@ -15,6 +15,8 @@ import ExerciseVariant from '../Admin/ExerciseVariant';
 import ExerciseVariantDetails from '../Admin/ExerciseVariantDetails';
 import SubjectGroups from '../Admin/SubjectGroups';
 import GroupSections from '../Admin/GroupSections';
+import Admin from '../Admin/Admin';
+import Student from '../Student/Student';
 
 class MenuAdmin extends Component {
     state = { activeItem: 'home' }
@@ -55,7 +57,7 @@ class MenuAdmin extends Component {
                 </Menu>
                 
                 <Switch>
-                    
+                    <Route path="/admin" exact component={AdminHome} />
                     <Route path="/home" exact component={AdminHome} />
                     <Route path="/exercises" exact component={AdminExercises} />
                     <Route path="/subject" exact component={AdminSubjects} />

@@ -17,7 +17,7 @@ class StudentDetails extends Component {
         assignmentData:[]
     }
     loadData = () => {
-        axios.get('/api/Users/GetAllAssignmentsWithDetailsById/' + this.state.selectedStudentID)
+        axios.get('/api/Users/GetAssignmentsWithDetailsById/' + this.state.selectedStudentID)
             .then(response => {
                 this.setState({ studentExercises: response.data.userassignmentswithdetails });
                 console.log( this.state.studentExercises);
@@ -43,7 +43,7 @@ class StudentDetails extends Component {
                 console.log(error.response);
         })
 
-        axios.get('/api/Users/GetAllSectionsById/' + this.state.selectedStudentID)
+        axios.get('/api/Users/GetSectionsById/' + this.state.selectedStudentID)
             .then(response => {
                 this.setState({ studentGroupsAndSections: response.data.sections });
             }).catch(error => {

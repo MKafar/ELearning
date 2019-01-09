@@ -7,12 +7,18 @@ class OpenNewWindow extends Component {
         console.log(this.props);
     }
 
+    createMarkup = () => {
+        return {__html: this.props.htmlCode};
+    }
+
     render() {
 
         return (
-            <NewWindow>
+            <NewWindow >
                 <button onClick={this.props.close}>Zamknij</button>
-                {this.props.htmlCode}
+                <div dangerouslySetInnerHTML={this.createMarkup()}>
+
+                </div>
             </NewWindow>
         )
     }

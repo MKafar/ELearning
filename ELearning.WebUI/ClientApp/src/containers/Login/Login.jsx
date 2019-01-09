@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-expressions */
 import React, { Component } from 'react';
 import { Button, Form, Header } from 'semantic-ui-react';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
+import axios from '../../axios';
 
 import './Login.scss';
 import Admin from '../Admin/Admin';
@@ -12,6 +13,7 @@ class Login extends Component {
     state = {
         login: '',
         password: '',
+        userData: null
     }
     changeLoginHandler = (e) => {
         this.setState({ login: e.target.value })
@@ -20,19 +22,28 @@ class Login extends Component {
         this.setState({ password: e.target.value })
     }
     sendCredentialsHandler = () => {
-        console.log(
-            "Login: " + this.state.login,
-            "Hasło: "+ this.state.password
-            );
 
-            this.state.login === "admin" && this.state.password === "admin" ? 
-             console.log(this.props) 
-             : null 
-             
-             //this.props.history.push('/admin/')
-             //this.props.history.push('/student/');
-            
+        axios.post('/api/Auth/Login', {
+            login: this.state.login,
+            password: this.state.password
+        }).then(response => {
+            //console.log(response.data);
+            this.setState({userData: response.data});
+
+
+        }).catch(error => {
+            console.log(error.response);
+        })
+
+          
+           
     }
+
+    // <Link to='admin'>Admin</Link>
+    // <Link to='student'>Student</Link>
+
+    //this.props.history.push('/admin/')
+     //this.props.history.push('/student/');
     render() {
  
         return (
@@ -47,10 +58,6 @@ class Login extends Component {
                     </Form.Field>
                     <Button className='loginbutton' primary onClick={this.sendCredentialsHandler}>Zaloguj</Button>
                 </Form>
-
-                
-                <Route path="/admin" exact component={Admin} />
-                <Route path="/student" exact component={Student} />
 
             </div>
         );

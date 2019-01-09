@@ -7,6 +7,8 @@ import StudentExercises from '../Student/StudentExercises';
 import StudentCoding from '../Student/StudentCoding';
 import ExerciseDetails from '../Student/ExerciseDetails';
 import GradeStudents from '../Student/GradeStudents';
+import Admin from '../Admin/Admin';
+import Student from '../Student/Student';
 
 class MenuStudent extends Component {
     state = { activeItem: 'home' }
@@ -32,7 +34,8 @@ class MenuStudent extends Component {
                         active={activeItem === 'wyloguj'}
                         onClick={this.handleItemClick} /> */}
             </Menu>
-
+ 
+            <Route path="/student" exact component={StudentExercises} />
             <Route path="/home" exact component={StudentExercises} />
             <Route path={'/previousexercises/:previousAssignmentID'} exact component={ExerciseDetails} />
             <Route path={'/todayexercise/:exerciseTodayDetailID'} exact component={StudentCoding} />

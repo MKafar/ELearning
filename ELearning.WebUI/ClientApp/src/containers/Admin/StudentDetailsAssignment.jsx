@@ -60,7 +60,7 @@ class StudentDetailsAssignment extends Component {
             }).catch(error => {
                 console.log(error.response);
             })
-        axios.get('/api/Users/GetAllAssignmentsWithDetailsById/' + this.props.match.params.studentDetailsID)
+        axios.get('/api/Users/GetAssignmentsWithDetailsById/' + this.props.match.params.studentDetailsID)
             .then(response => {
                 this.setState({ studentAssignments: response.data.userassignmentswithdetails });
                 this.setState({assignmentID: this.props.match.params.studentDetailsExerciseID});
@@ -77,7 +77,6 @@ class StudentDetailsAssignment extends Component {
                     }
                 })
                 this.setState({studentAssignmentData: studentassignment});
-                console.log(this.state.studentAssignmentData);
             }).catch(error => {
                 console.log(error.response);
             })

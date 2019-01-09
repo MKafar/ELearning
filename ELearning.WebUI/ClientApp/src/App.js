@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import 'semantic-ui-react';
-import {BrowserRouter} from 'react-router-dom';
+import {BrowserRouter, Route} from 'react-router-dom';
 
 import './App.css';
 import Admin from './containers/Admin/Admin';
-
 import Student from './containers/Student/Student';
 import Login from './containers/Login/Login';
 
@@ -26,8 +25,13 @@ class App extends Component {
             <Login />
           </div> */}
 
-          <Admin />
+          < Student />
+
+          {/* <Admin /> */}
+          <Route path="/admin" exact component={Admin} />
+          <Route path="/student" exact component={Student} />
         </div>
+
       </BrowserRouter>
 
 

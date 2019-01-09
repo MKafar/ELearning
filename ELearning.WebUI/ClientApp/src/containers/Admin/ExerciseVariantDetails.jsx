@@ -44,7 +44,7 @@ class ExerciseVariantDetails extends Component {
         
     }
     _onButtonClick = () => {
-        console.log("Kod:"+this.state.code);
+        //console.log("Kod:"+this.state.code);
         this.setState({showComponent: true});
         
     }
