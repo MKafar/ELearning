@@ -1,4 +1,6 @@
-﻿namespace ELearning.Application.Users.Queries.GetPresentAssignmentsListById
+﻿using System;
+
+namespace ELearning.Application.Users.Queries.GetPresentAssignmentsListById
 {
     public class PresentAssignmentLookupModel
     {
@@ -6,6 +8,7 @@
         public int UserId { get; set; }
         public string Date { get; set; }
         public string Time { get; set; }
+        public DateTime DateTime { get; set; }
 
         public int ExerciseId { get; set; }
         public string ExerciseTitle { get; set; }

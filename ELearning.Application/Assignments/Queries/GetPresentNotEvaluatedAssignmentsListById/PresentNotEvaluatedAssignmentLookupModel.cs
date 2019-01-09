@@ -1,5 +1,4 @@
-﻿using ELearning.Domain.Entities;
-using System.Collections.Generic;
+﻿using System;
 
 namespace ELearning.Application.Assignments.Queries.GetPresentNotEvaluatedAssignmentsListById
 {
@@ -8,6 +7,7 @@ namespace ELearning.Application.Assignments.Queries.GetPresentNotEvaluatedAssign
         public int AssignmentId { get; set; }
         public int UserId { get; set; }
         public string Date { get; set; }
+        public DateTime DateTime { get; set; }
         public string Solution { get; set; }
 
         public int GroupId { get; set; }

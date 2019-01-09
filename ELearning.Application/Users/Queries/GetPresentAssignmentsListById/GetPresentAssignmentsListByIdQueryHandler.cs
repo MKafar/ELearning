@@ -22,16 +22,15 @@ namespace ELearning.Application.Users.Queries.GetPresentAssignmentsListById
         {
             DateTime now = DateTime.Now;
 
-            // TODO sprawdzić porównanie dat - być może nie działa prawidłowo
-
             var vm = new PresentAssignmentsListViewModel
             {
                 PresentAssignments = await _context.Assignments
                     .Select(e => new PresentAssignmentLookupModel
                     {
                         AssignmentId = e.AssignmentId,
-                        Date = e.Date.Date.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture),
-                        Time = e.Date.TimeOfDay.ToString("HH:mm", CultureInfo.InvariantCulture),
+                        Date = e.Date.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture),
+                        Time = e.Date.ToString("HH:mm", CultureInfo.InvariantCulture),
+                        DateTime = e.Date,
                         VariantId = e.VariantId,
                         Content = e.Variant.Content,
                         ExerciseId = e.Variant.ExerciseId,
@@ -40,7 +39,7 @@ namespace ELearning.Application.Users.Queries.GetPresentAssignmentsListById
                         GroupName = e.Section.Group.Name,
                         UserId = e.Section.UserId
                     }).Where(e => e.UserId == request.Id)
-                    .Where(e => DateTime.Parse(e.Date) < now && now < DateTime.Parse(e.Date).AddHours(1).AddMinutes(30))
+                    .Where(e => e.DateTime < now && now < e.DateTime.AddHours(1).AddMinutes(30))
                     .ToListAsync(cancellationToken)
             };
 
