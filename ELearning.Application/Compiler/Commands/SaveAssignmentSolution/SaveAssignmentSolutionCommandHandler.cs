@@ -25,6 +25,8 @@ namespace ELearning.Application.Compiler.Commands.SaveAssignmentSolution
             if (entity == null)
                 throw new NotFoundException(nameof(Assignment), request.AssignmentId);
 
+            entity.Solution = request.Solution;
+
             _context.Assignments.Update(entity);
 
             await _context.SaveChangesAsync();
