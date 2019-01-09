@@ -40,6 +40,7 @@ namespace ELearning.Application.Assignments.Queries.GetAssignmentById
                 Id = entity.AssignmentId,
                 SectionId = entity.SectionId,
                 Date = parsedDate,
+                Time = parsedTime,
                 Solution = entity.Solution,
                 FinalGrade = entity.FinalGrade,
                 

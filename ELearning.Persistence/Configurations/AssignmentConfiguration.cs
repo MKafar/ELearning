@@ -15,7 +15,7 @@ namespace ELearning.Persistence.Configurations
                 .IsRequired(true);
 
             builder.Property(e => e.Date)
-                .HasColumnType("date")
+                .HasColumnType("datetime")
                 .IsRequired(true);
 
             builder.Property(e => e.FinalGrade)

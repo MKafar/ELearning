@@ -20,17 +20,19 @@ namespace ELearning.Application.Assignments.Commands.CreateAssignment
 
         public async Task<Unit> Handle(CreateAssignmentCommand request, CancellationToken cancellationToken)
         {
-            var dateOfAssignmentParseSuccessful = DateTime
-                .TryParse(request.Date, new CultureInfo("pl-PL"), DateTimeStyles.AllowWhiteSpaces, out DateTime dateOfAssignment);
+            var dateTime = $"{request.Date} {request.Time}";
 
-            if (!dateOfAssignmentParseSuccessful)
+            var dateTimeOfAssignmentParseSuccessful = DateTime
+                .TryParse(dateTime, new CultureInfo("pl-PL"), DateTimeStyles.AllowWhiteSpaces, out DateTime dateTimeOfAssignment);
+
+            if (!dateTimeOfAssignmentParseSuccessful)
                 throw new ParseDateFailureException(request.Date);
 
             var entity = new Assignment
             {
                 SectionId = request.SectionId,
                 VariantId = request.VariantId,
-                Date = dateOfAssignment
+                Date = dateTimeOfAssignment
             };
 
             _context.Assignments.Add(entity);

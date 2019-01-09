@@ -6,10 +6,11 @@ using System.Net;
 using ELearning.Application.Users.Command.CreateUser;
 using ELearning.Application.Users.Command.UpdateUser;
 using ELearning.Application.Users.Command.DeleteUser;
-using ELearning.Application.Users.Queries.GetUserSectionsListById;
-using ELearning.Application.Users.Queries.GetUserAssignmentsListWithDetailsById;
+using ELearning.Application.Users.Queries.GetSectionsListById;
+using ELearning.Application.Users.Queries.GetAssignmentsListWithDetailsById;
 using ELearning.Application.Users.Queries.GetStudentsList;
-using ELearning.Application.Users.Queries.GetUserPastAssignmentsListById;
+using ELearning.Application.Users.Queries.GetPastAssignmentsListById;
+using ELearning.Application.Users.Queries.GetPresentAssignmentsListById;
 
 namespace ELearning.WebUI.Controllers
 {
@@ -37,25 +38,32 @@ namespace ELearning.WebUI.Controllers
             return Ok(await Mediator.Send(new GetUserByIdQuery { Id = id }));
         }
 
-        // GET: api/Users/GetAllSectionsById/5
+        // GET: api/Users/GetSectionsById/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserSectionsListViewModel>> GetAllSectionsById(int id)
+        public async Task<ActionResult<SectionsDetailedListViewModel>> GetSectionsById(int id)
         {
-            return Ok(await Mediator.Send(new GetUserSectionsListByIdQuery { Id = id }));
+            return Ok(await Mediator.Send(new GetSectionsListByIdQuery { Id = id }));
         }
 
-        // GET: api/Users/GetAllAssignmentsWithDetailsById/5
+        // GET: api/Users/GetAssignmentsWithDetailsById/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserAssignmentsListWithDetailsViewModel>> GetAllAssignmentsWithDetailsById(int id)
+        public async Task<ActionResult<AssignmentsListWithDetailsViewModel>> GetAssignmentsWithDetailsById(int id)
         {
-            return Ok(await Mediator.Send(new GetUserAssignmentsListWithDetailsByIdQuery { Id = id }));
+            return Ok(await Mediator.Send(new GetAssignmentsListWithDetailsByIdQuery { Id = id }));
         }
 
-        // GET: api/Users/GetAllPastAssignmentsById/5
+        // GET: api/Users/GetPastAssignmentsById/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserPastAssignmentsListViewModel>> GetAllPastAssignmentsById(int id)
+        public async Task<ActionResult<PastAssignmentsListViewModel>> GetPastAssignmentsById(int id)
         {
-            return Ok(await Mediator.Send(new GetUserPastAssignmentsListByIdQuery { Id = id }));
+            return Ok(await Mediator.Send(new GetPastAssignmentsListByIdQuery { Id = id }));
+        }
+
+        // GET: api/Users/GetPresentAssignmentsById/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<PresentAssignmentsListViewModel>> GetPresentAssignmentsById(int id)
+        {
+            return Ok(await Mediator.Send(new GetPresentAssignmentsListByIdQuery { Id = id }));
         }
 
         // POST: api/Users/Create
