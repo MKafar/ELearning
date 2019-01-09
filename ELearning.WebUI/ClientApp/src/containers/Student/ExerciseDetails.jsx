@@ -41,15 +41,22 @@ class ExerciseDetails extends Component {
         return (
             <div className='exerciseContainer'>
                 <div className="doneExerciseCode">
-                    {/* <Header size='large'>{this.state.assigmnentDetails.exercisetitle}</Header> */}
-                    {this.state.assigmnentDetails ? 
-                    <CodeWindow changeMode={true} code={this.state.assigmnentDetails.solution} /> 
-                    : null }
+
+                    {this.state.assigmnentDetails ?
+                        <Header size='large'>{this.state.assigmnentDetails.exercisetitle}</Header>
+                        : null}
+                    {this.state.assigmnentDetails ?
+                        <CodeWindow changeMode={true} code={this.state.assigmnentDetails.solution} />
+                        : null}
                 </div>
                 <div className='exerciseInfo'>
-                    <Header size='large'>Data</Header>
+                    {this.state.assigmnentDetails ?
+                        <Header size='large'>Data:{this.state.assigmnentDetails.date}</Header>
+                        : null}
                     <Button onClick={this.descriptionHandler}>Treść</Button>
-                    <Container className='gradeContainer'> Ocena: 5.0</Container>
+                    {this.state.assigmnentDetails ?
+                    <Container className='gradeContainer'> Ocena: {this.state.assigmnentDetails.finalgrade}</Container> 
+                    : null}
 
                 </div>
             </div>
