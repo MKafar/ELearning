@@ -29,13 +29,7 @@ namespace ELearning.Application.Users.Queries.GetPastAssignmentsListById
                         AssignmentId = e.AssignmentId,
                         UserId = e.Section.UserId,
                         Date = e.Date.ToString("dd-MM-yyyy"),
-                        Solution = e.Solution,
-                        FinalGrade = e.FinalGrade,
-                        VariantId = e.VariantId,
-                        Content = e.Variant.Content,
-                        ExerciseId = e.Variant.ExerciseId,
                         ExerciseTitle = e.Variant.Exercise.Title,
-                        GroupId = e.Section.GroupId,
                         GroupName = e.Section.Group.Name
                     }).Where(e => e.UserId == request.Id && DateTime.Parse(e.Date) < now)
                     .ToListAsync(cancellationToken)
