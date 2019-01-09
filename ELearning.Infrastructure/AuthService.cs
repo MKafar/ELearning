@@ -41,7 +41,7 @@ namespace ELearning.Infrastructure
 
             return new AuthData
             {
-                Id = id,
+                Id = int.Parse(id),
                 Role = role,
                 Token = token,
                 TokenExpirationTime = ((DateTimeOffset)expirationTime).ToUnixTimeSeconds()
