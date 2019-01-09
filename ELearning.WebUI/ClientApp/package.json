@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@types/react-codemirror": "^1.0.2",
-    "JSCPP": "^2.0.8",
     "axios": "^0.18.0",
     "codemirror": "^5.42.0",
     "node-sass": "^4.11.0",

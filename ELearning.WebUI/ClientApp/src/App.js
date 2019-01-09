@@ -26,7 +26,7 @@ class App extends Component {
             <Login />
           </div> */}
 
-          <Student />
+          <Admin />
         </div>
       </BrowserRouter>
 

@@ -4,27 +4,26 @@ import axios from '../../axios';
 
 import './ExerciseDetails.scss';
 import CodeWindow from '../../components/Modules/CodeWindow';
-import Axios from 'axios';
-
+import OpenNewWindow from '../../components/Modules/OpenNewWindow';
 
 class ExerciseDetails extends Component {
-
-    state = {
-        assigmnentDetails: null,
-        assignmentCode: null,
-        exercises: [
-            { number: 1, title: 'Jakiś tytuł ćwiczenia' },
-        ],
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            assigmnentDetails: null,
+            showComponent: false,
+        }
+        this._onButtonClick = this._onButtonClick.bind(this);
+        this._onClose = this._onClose.bind(this);
     }
     loadData = () => {
-        
+
 
         axios.get('/api/Assignments/GetById/' + this.props.match.params.previousAssignmentID)
             .then(response => {
-                this.setState({assigmnentDetails: response.data});          
+                this.setState({ assigmnentDetails: response.data });
             }).catch(error => {
-                 console.log(error.response);
+                console.log(error.response);
             })
 
     }
@@ -32,8 +31,12 @@ class ExerciseDetails extends Component {
     componentDidMount = () => {
         this.loadData();
     }
-    descriptionHandler = () => {
-        console.log('Treść');
+    _onButtonClick = () => {
+        this.setState({ showComponent: true });
+
+    }
+    _onClose = () => {
+        this.setState({ showComponent: false });
     }
 
     render() {
@@ -51,13 +54,17 @@ class ExerciseDetails extends Component {
                 </div>
                 <div className='exerciseInfo'>
                     {this.state.assigmnentDetails ?
-                        <Header size='large'>Data:{this.state.assigmnentDetails.date}</Header>
+                        <Header size='large'>Data:&nbsp;{this.state.assigmnentDetails.date}</Header>
                         : null}
-                    <Button onClick={this.descriptionHandler}>Treść</Button>
-                    {this.state.assigmnentDetails ?
-                    <Container className='gradeContainer'> Ocena: {this.state.assigmnentDetails.finalgrade}</Container> 
-                    : null}
+                    <Button onClick={this._onButtonClick}>Treść</Button>
 
+                    {this.state.showComponent ?
+                        <OpenNewWindow close={this._onClose} htmlCode={this.state.assigmnentDetails.solution} />
+                        : null
+                    }
+                    {this.state.assigmnentDetails ?
+                        <Container className='gradeContainer'> Ocena:&nbsp;{this.state.assigmnentDetails.finalgrade}</Container>
+                        : null}
                 </div>
             </div>
         );

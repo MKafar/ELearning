@@ -49,7 +49,15 @@ class Codemirror extends Component {
     }
 
     sendCodeHandler = () => {
-        console.log('wysłano');
+        axios.post('/api/Compiler/Send',{
+            assignmentid:  this.props.assignmentID,
+            solution: this.state.code
+        }).then(response => {
+            console.log(response);
+        }).catch(error => {
+            console.log(error.response);
+        })
+
     }
 
     render() {
