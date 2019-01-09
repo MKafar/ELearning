@@ -7,16 +7,8 @@ import CodeMirror from '../../components/CodeMirror/CodeMirror';
 
 class StudentCoding extends Component {
 
-    state = {
-        exercises: [
-            { number: 1, title: 'Jakiś tytuł ćwiczenia' },
-        ],
-
-    }
-
     render() {
 
-        
         const showexercise = () => {
             console.log('Treść zadania');
         }
@@ -26,9 +18,7 @@ class StudentCoding extends Component {
                 <Header size='large'>Imię i nazwisko Tytuł zadania <Button className="exercisedeatilsbutton" onClick={showexercise}>Treść zadania</Button></Header>
                 
                 <div className='codingContainer'>
-                    <div>
-                        <CodeMirror></CodeMirror>
-                    </div>
+                        <CodeMirror />
                 </div>
             </div>
         );

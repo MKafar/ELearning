@@ -1,31 +1,36 @@
 import React, { Component } from 'react';
 import { Button, Header } from 'semantic-ui-react';
+import axios from '../..//axios';
 
 import './StudentExercises.scss';
 
-import DetailList from '../../components/Modules/DetailList'
+import DetailList from '../../components/Modules/DetailList';
 
 class StudentExercises extends Component {
 
     state = {
-        previousExercises: [
-            { id: 1, title: 'Jakiś tytuł ćwiczenia' },
-            { id: 2, title: 'B' },
-            { id: 3, title: 'C' },
-            { id: 4, title: 'D' },
-            { id: 5, title: 'E' },
-            { id: 6, title: 'E' },
-            { id: 7, title: 'E' },
-            { id: 8, date: '01.01.18', title: 'Kolejny długaśny bardzo długi tytuł, no bardzo długi ffffffffffffffffff ffffffffffffffffffffffff' }
-        ],
+        previousExercises: [],
         todaysExercise: [
             {id: 1, title: "Nowe zadanie", date: "01.01.19", variant: 1, group: "nazwa grupy"}
         ]
     }
+    loadData = () => {
+        const userid = 2;
+        axios.get('/api/Users/GetAllPastAssignmentsById/' +  userid)
+            .then (response => {
+                this.setState({previousExercises: response.data.pastassignments});
+            }).catch (error =>{ 
+                console.log(error.response);
+            })
+    }
+
+    componentDidMount = () => {
+        this.loadData();
+    }
 
 
-    previousdetailsHandler = (exercisePreviousDetailID) => {
-        this.props.history.push('/previousexercises/' + exercisePreviousDetailID);
+    previousdetailsHandler = (previousAssignmentID) => {
+        this.props.history.push('/previousexercises/' + previousAssignmentID);
     }
     todaydetailsHandler = (exerciseTodayDetailID) => {
         this.props.history.push('/todayexercise/' + exerciseTodayDetailID);
@@ -46,10 +51,11 @@ class StudentExercises extends Component {
                             return <DetailList
                                 visibledetail={true}
                                 visibledelete={false}
-                                key={exerciseprevious.id}
-                                title={exerciseprevious.title}
+                                key={exerciseprevious.assignmentid}
+                                title={exerciseprevious.exercisetitle}
                                 date={exerciseprevious.date}
-                                detailsClicked={()=> this.previousdetailsHandler(exerciseprevious.id)}
+                                group={"Grupa: " + exerciseprevious.groupname}
+                                detailsClicked={()=> this.previousdetailsHandler(exerciseprevious.assignmentid)}
                                 />
 
                         })}

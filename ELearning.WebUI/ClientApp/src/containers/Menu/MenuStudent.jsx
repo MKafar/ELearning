@@ -34,7 +34,7 @@ class MenuStudent extends Component {
             </Menu>
 
             <Route path="/home" exact component={StudentExercises} />
-            <Route path={'/previousexercises/:exercisePreviousDetailID'} exact component={ExerciseDetails} />
+            <Route path={'/previousexercises/:previousAssignmentID'} exact component={ExerciseDetails} />
             <Route path={'/todayexercise/:exerciseTodayDetailID'} exact component={StudentCoding} />
             <Route path="/gradeothers" exact component={GradeStudents} />
 
