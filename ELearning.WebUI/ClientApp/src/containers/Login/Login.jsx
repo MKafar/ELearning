@@ -1,48 +1,52 @@
 import React, { Component } from 'react';
 import { Button, Form, Header } from 'semantic-ui-react';
-import { Route, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import axios from '../../axios';
+import { hasRole } from '../../auth';
 
 import './Login.scss';
-import Admin from '../Admin/Admin';
-import Student from '../Student/Student';
 
 class Login extends Component {
 
     state = {
         login: '',
         password: '',
-        userData: null
+        userData: [],
     }
+
     changeLoginHandler = (e) => {
         this.setState({ login: e.target.value })
     }
+
     changePasswordHandler = (e) => {
         this.setState({ password: e.target.value })
     }
+
     sendCredentialsHandler = () => {
 
         axios.post('/api/Auth/Login', {
             login: this.state.login,
             password: this.state.password
         }).then(response => {
-            //console.log(response.data);
-            this.setState({userData: response.data});
-
-
+            console.log("Login successful response.data:", response.data);
+            this.setState({userData: [response.data.role]});
+            this.redirectDependingOnRole(response.data.role);
         }).catch(error => {
-            console.log(error.response);
-        })
-
-          
-           
+            console.log("Login error.response:", error.response);
+        })     
     }
 
-    // <Link to='admin'>Admin</Link>
-    // <Link to='student'>Student</Link>
+    redirectDependingOnRole = (userRole) => {
+        const user = {
+            roles: [userRole]
+        }
+        
+        let hasRoleStudent = hasRole(user, ['Student']);
+        let hasRoleAdmin = hasRole(user, ['Administrator']);
 
-    //this.props.history.push('/admin/')
-     //this.props.history.push('/student/');
+        hasRoleStudent ? this.props.history.push('/student/') : hasRoleAdmin ? this.props.history.push('/admin/') : this.props.history.push('/');
+    }
+
     render() {
  
         return (
@@ -62,4 +66,4 @@ class Login extends Component {
         );
     }
 }
-export default Login;
+export default withRouter(Login);

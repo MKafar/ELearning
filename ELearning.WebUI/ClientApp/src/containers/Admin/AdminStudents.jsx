@@ -117,4 +117,4 @@ class AdminStudents extends Component {
     }
 }
 
-export default withRouter(AdminStudents);
+export default AdminStudents;

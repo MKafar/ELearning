@@ -35,8 +35,8 @@ class MenuStudent extends Component {
                         onClick={this.handleItemClick} /> */}
             </Menu>
  
-            <Route path="/student" exact component={StudentExercises} />
             <Route path="/home" exact component={StudentExercises} />
+            <Route path="/student" exact component={StudentExercises} />
             <Route path={'/previousexercises/:previousAssignmentID'} exact component={ExerciseDetails} />
             <Route path={'/todayexercise/:exerciseTodayDetailID'} exact component={StudentCoding} />
             <Route path="/gradeothers" exact component={GradeStudents} />
