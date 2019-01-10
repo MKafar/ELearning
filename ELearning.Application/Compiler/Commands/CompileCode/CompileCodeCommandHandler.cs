@@ -34,7 +34,7 @@ namespace ELearning.Application.Compiler.Commands.CompileCode
 
             var fileSettings = await _filesave.SaveToFileAsync(request.AssignmentId, request.Code, _now, cancellationToken);
 
-            var output = await _compiler.CompileAsync(request.Code, fileSettings, cancellationToken);
+            var output = await _compiler.CompileAsync(fileSettings, cancellationToken);
 
             return new CompilerOutputViewModel
             {

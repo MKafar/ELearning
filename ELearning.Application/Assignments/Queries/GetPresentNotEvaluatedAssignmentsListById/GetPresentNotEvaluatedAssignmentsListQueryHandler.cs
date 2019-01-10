@@ -39,8 +39,6 @@ namespace ELearning.Application.Assignments.Queries.GetPresentNotEvaluatedAssign
                 }).Where(e => e.SectionId == entity.SectionId)
                 .ToListAsync(cancellationToken);
 
-            // TODO sprawdzić porównanie dat - być może nie działa prawidłowo
-
             var vm = new PresentNotEvaluatedAssignmentsListViewModel
             {
                 PresentAssignments = await _context.Assignments
@@ -48,10 +46,11 @@ namespace ELearning.Application.Assignments.Queries.GetPresentNotEvaluatedAssign
                     {
                         AssignmentId = e.AssignmentId,
                         Date = e.Date.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture),
+                        DateTime = e.Date,
                         Solution = e.Solution,
                         UserId = e.Section.UserId,
                         GroupId = e.Section.GroupId
-                    }).Where(e => DateTime.Parse(e.Date) < now && now < DateTime.Parse(e.Date).AddHours(1).AddMinutes(30))
+                    }).Where(e => e.DateTime < now && now < e.DateTime.AddHours(1).AddMinutes(30))
                     .Where(e => !evaluationsGiven.Exists((Evaluation p) => p.AssignmentId == e.AssignmentId && p.SectionId == entity.SectionId))
                     .Where(e => e.AssignmentId != entity.AssignmentId)
                     .Where(e => e.GroupId == entity.Section.GroupId)

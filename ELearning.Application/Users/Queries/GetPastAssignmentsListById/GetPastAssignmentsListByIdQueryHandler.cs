@@ -29,9 +29,10 @@ namespace ELearning.Application.Users.Queries.GetPastAssignmentsListById
                         AssignmentId = e.AssignmentId,
                         UserId = e.Section.UserId,
                         Date = e.Date.ToString("dd-MM-yyyy"),
+                        DateTime = e.Date,
                         ExerciseTitle = e.Variant.Exercise.Title,
                         GroupName = e.Section.Group.Name
-                    }).Where(e => e.UserId == request.Id && DateTime.Parse(e.Date) < now)
+                    }).Where(e => e.UserId == request.Id && e.DateTime < now)
                     .ToListAsync(cancellationToken)
             };
 

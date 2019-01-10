@@ -6,6 +6,6 @@ namespace ELearning.Application.Interfaces
 {
     public interface ICompilerService
     {
-        Task<string> CompileAsync(string code, FileSettings fileSettings, CancellationToken cancellationToken);
+        Task<string> CompileAsync(FileSettings fileSettings, CancellationToken cancellationToken);
     }
 }

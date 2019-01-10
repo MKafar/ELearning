@@ -45,7 +45,7 @@ namespace ELearning.Infrastructure
             return compilerPath;
         }
 
-        public async Task<string> CompileAsync(string code, FileSettings fileSettings, CancellationToken cancellationToken)
+        public async Task<string> CompileAsync(FileSettings fileSettings, CancellationToken cancellationToken)
         {
             IList<string> processOutputInAList = new List<string>();
             StringBuilder processOutput = new StringBuilder();
