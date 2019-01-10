@@ -56,7 +56,17 @@ namespace ELearning.Persistence
 
             context.Subjects.AddRange(subjects);
 
-            SaveChangesWhileToggleIdentityInsert(context, "Subjects");
+            context.Database.OpenConnection();
+            try
+            {
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Subjects ON");
+                context.SaveChanges();
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Subjects OFF");
+            }
+            finally
+            {
+                context.Database.CloseConnection();
+            }
         }
 
         private void SeedGroup(ELearningDbContext context)
@@ -74,7 +84,17 @@ namespace ELearning.Persistence
 
             context.Groups.AddRange(groups);
 
-            SaveChangesWhileToggleIdentityInsert(context, "Groups");
+            context.Database.OpenConnection();
+            try
+            {
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Groups ON");
+                context.SaveChanges();
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Groups OFF");
+            }
+            finally
+            {
+                context.Database.CloseConnection();
+            }
         }
 
         private void SeedRole(ELearningDbContext context)
@@ -87,7 +107,17 @@ namespace ELearning.Persistence
 
             context.Roles.AddRange(roles);
 
-            SaveChangesWhileToggleIdentityInsert(context, "Roles");
+            context.Database.OpenConnection();
+            try
+            {
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Roles ON");
+                context.SaveChanges();
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Roles OFF");
+            }
+            finally
+            {
+                context.Database.CloseConnection();
+            }
         }
 
         private void SeedUser(ELearningDbContext context)
@@ -126,7 +156,17 @@ namespace ELearning.Persistence
 
             context.Users.AddRange(users);
 
-            SaveChangesWhileToggleIdentityInsert(context, "Users");
+            context.Database.OpenConnection();
+            try
+            {
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Users ON");
+                context.SaveChanges();
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Users OFF");
+            }
+            finally
+            {
+                context.Database.CloseConnection();
+            }
         }
 
         private void SeedSection(ELearningDbContext context)
@@ -176,7 +216,17 @@ namespace ELearning.Persistence
 
             context.Sections.AddRange(sections);
 
-            SaveChangesWhileToggleIdentityInsert(context, "Sections");
+            context.Database.OpenConnection();
+            try
+            {
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Sections ON");
+                context.SaveChanges();
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Sections OFF");
+            }
+            finally
+            {
+                context.Database.CloseConnection();
+            }
         }
 
         private void SeedExercise(ELearningDbContext context)
@@ -195,7 +245,17 @@ namespace ELearning.Persistence
 
             context.Exercises.AddRange(exercises);
 
-            SaveChangesWhileToggleIdentityInsert(context, "Exercises");
+            context.Database.OpenConnection();
+            try
+            {
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Exercises ON");
+                context.SaveChanges();
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Exercises OFF");
+            }
+            finally
+            {
+                context.Database.CloseConnection();
+            }
         }
 
         private void SeedVariant(ELearningDbContext context)
@@ -209,7 +269,17 @@ namespace ELearning.Persistence
 
             context.Variants.AddRange(variants);
 
-            SaveChangesWhileToggleIdentityInsert(context, "Variants");
+            context.Database.OpenConnection();
+            try
+            {
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Variants ON");
+                context.SaveChanges();
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Variants OFF");
+            }
+            finally
+            {
+                context.Database.CloseConnection();
+            }
         }
 
         private void SeedAssignment(ELearningDbContext context)
@@ -230,7 +300,17 @@ namespace ELearning.Persistence
 
             context.Assignments.AddRange(assignments);
 
-            SaveChangesWhileToggleIdentityInsert(context, "Assignments");
+            context.Database.OpenConnection();
+            try
+            {
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Assignments ON");
+                context.SaveChanges();
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Assignments OFF");
+            }
+            finally
+            {
+                context.Database.CloseConnection();
+            }
         }
 
         private void SeedEvaluation(ELearningDbContext context)
@@ -271,26 +351,17 @@ namespace ELearning.Persistence
 
             context.Evaluations.AddRange(evaluations);
 
-            SaveChangesWhileToggleIdentityInsert(context, "Evaluations");
-        }
-
-        private void SaveChangesWhileToggleIdentityInsert(ELearningDbContext context, string table)
-        {
-            string setIdentityInsertOn = $"SET IDENTITY_INSERT dbo.{table} ON";
-            string setIdentityInsertOff = $"SET IDENTITY_INSERT dbo.{table} OFF";
-
             context.Database.OpenConnection();
             try
             {
-                context.Database.ExecuteSqlCommand(setIdentityInsertOn);
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Evaluations ON");
                 context.SaveChanges();
-                context.Database.ExecuteSqlCommand(setIdentityInsertOff);
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Evaluations OFF");
             }
             finally
             {
                 context.Database.CloseConnection();
             }
-
         }
     }
 }
