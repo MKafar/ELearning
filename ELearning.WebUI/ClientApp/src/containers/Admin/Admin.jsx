@@ -9,12 +9,6 @@ import MenuAdmin from '../../containers/Menu/MenuAdmin';
 
 class Admin extends Component {
 
-    state = {
-        activeItem: 'home'
-    }
-
-    handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
     render() {
 
         return (

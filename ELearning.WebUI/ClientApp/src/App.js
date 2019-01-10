@@ -21,11 +21,9 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          {/* <div className='loginContener'>
+          <div className='loginContener'>
             <Login />
-          </div> */}
-
-          < Student />
+          </div>
 
           {/* <Admin /> */}
           <Route path="/admin" exact component={Admin} />

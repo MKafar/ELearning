@@ -69,9 +69,6 @@ class MenuAdmin extends Component {
                     <Route path={'/exercises/:exerciseDetailsID'} exact component={ExerciseVariant} />
                     <Route path={'/exercises/:exerciseDetailsID/:exerciseVariantID'} exact component={ExerciseVariantDetails} />
                 </Switch>
-
-
-
             </div>
         )
     }

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import React, { Component } from 'react';
 import { Button, Form, Header } from 'semantic-ui-react';
 import { Route, Link } from 'react-router-dom';

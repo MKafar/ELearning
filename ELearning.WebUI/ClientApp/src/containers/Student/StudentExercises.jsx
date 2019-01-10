@@ -16,7 +16,7 @@ class StudentExercises extends Component {
     }
     loadData = () => {
         const userid = 2;
-        axios.get('/api/Users/GetAllPastAssignmentsById/' +  userid)
+        axios.get('/api/Users/GetPastAssignmentsById/' +  userid)
             .then (response => {
                 this.setState({previousExercises: response.data.pastassignments});
             }).catch (error =>{ 
