@@ -49,6 +49,7 @@ namespace ELearning.Application.Assignments.Queries.GetPresentNotEvaluatedAssign
                         DateTime = e.Date,
                         Solution = e.Solution,
                         UserId = e.Section.UserId,
+                        UserName = $"{e.Section.User.Name} {e.Section.User.Surname}",
                         GroupId = e.Section.GroupId
                     }).Where(e => e.DateTime < now && now < e.DateTime.AddHours(1).AddMinutes(30))
                     .Where(e => !evaluationsGiven.Exists((Evaluation p) => p.AssignmentId == e.AssignmentId && p.SectionId == entity.SectionId))

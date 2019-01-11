@@ -6,6 +6,7 @@ namespace ELearning.Application.Assignments.Queries.GetPresentNotEvaluatedAssign
     {
         public int AssignmentId { get; set; }
         public int UserId { get; set; }
+        public string UserName { get; set; }
         public string Date { get; set; }
         public DateTime DateTime { get; set; }
         public string Solution { get; set; }
