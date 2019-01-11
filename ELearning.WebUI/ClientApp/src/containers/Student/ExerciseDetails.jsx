@@ -21,6 +21,7 @@ class ExerciseDetails extends Component {
 
         axios.get('/api/Assignments/GetById/' + this.props.match.params.previousAssignmentID)
             .then(response => {
+                console.log("AssignmentDetails",response.data  )
                 this.setState({ assigmnentDetails: response.data });
             }).catch(error => {
                 console.log(error.response);
@@ -59,7 +60,7 @@ class ExerciseDetails extends Component {
                     <Button onClick={this._onButtonClick}>Treść</Button>
 
                     {this.state.showComponent ?
-                        <OpenNewWindow close={this._onClose} htmlCode={this.state.assigmnentDetails.solution} />
+                        <OpenNewWindow close={this._onClose} htmlCode={this.state.assigmnentDetails.content} />
                         : null
                     }
                     {this.state.assigmnentDetails ?

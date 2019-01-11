@@ -1,11 +1,23 @@
 .login {
   color: gray;
   display: flex;
-  float: right;
   flex-direction: column;
-  margin: 10px;
-  padding: 10px;
-  position: ab
+  position: ab;
+  box-sizing: inherit;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  height: 100%;
+  padding: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: center;
 }
 // @media (min-width: 300px) {
 //     .login {

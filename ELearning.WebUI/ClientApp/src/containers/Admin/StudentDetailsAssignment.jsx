@@ -30,6 +30,7 @@ class StudentDetailsAssignment extends Component {
             id: this.props.match.params.studentDetailsExerciseID,
             finalgrade: this.state.adminGrade,
             date: this.state.studentAssignmentData.assignmentdate,
+            time: this.state.studentAssignmentData.assignmenttime,
             variantid: this.state.studentAssignmentData.variantid,
             sectionid: this.state.studentAssignmentData.sectionid,
         }).then(response =>{
@@ -49,7 +50,7 @@ class StudentDetailsAssignment extends Component {
 
         axios.get('/api/Assignments/GetById/' + this.props.match.params.studentDetailsExerciseID)
             .then(response => {
-                this.setState({ studentCodeContent: response.data.content });
+                this.setState({ studentCodeContent: response.data.solution });
                 //console.log(this.state.studentCodeContent);
             }).catch(error => {
                 console.log(error.response);
