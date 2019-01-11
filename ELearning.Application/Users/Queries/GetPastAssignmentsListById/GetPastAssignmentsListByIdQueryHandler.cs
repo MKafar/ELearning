@@ -32,7 +32,7 @@ namespace ELearning.Application.Users.Queries.GetPastAssignmentsListById
                         DateTime = e.Date,
                         ExerciseTitle = e.Variant.Exercise.Title,
                         GroupName = e.Section.Group.Name
-                    }).Where(e => e.UserId == request.Id && e.DateTime < now)
+                    }).Where(e => e.UserId == request.Id && e.DateTime.AddHours(1).AddMinutes(30) < now)
                     .ToListAsync(cancellationToken)
             };
 
