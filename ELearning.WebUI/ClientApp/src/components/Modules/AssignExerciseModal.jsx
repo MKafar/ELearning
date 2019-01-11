@@ -108,12 +108,10 @@ class AssignExerciseModal extends Component {
             }
             this.setState({variantOptions: response.data.variants});
             this.setState({variantAllOptions: response.data.variants});
-            console.log(this.state.variantOptions);
+            console.log("AssignExerciseModal component. Variants/GetAll response.data.variants: ", this.state.variantOptions);
         }).catch(error => {
-            console.log(error.response);
+            console.log("AssignExerciseModal component. Variants/GetAll error.response: ", error.response);
         })
-
-
     }
 
     // subjectChangeHandler = (e, { value }) => {
@@ -208,7 +206,6 @@ class AssignExerciseModal extends Component {
         this.setState({ time: e.target.value });
     }
 
-
     addHandle = () => {
         const sectionId = this.state.section;
         const variantId = this.state.variant;
@@ -225,7 +222,6 @@ class AssignExerciseModal extends Component {
         }).catch(error => {
             console.log(error.response);
         })
-    
     }
 
     render() {

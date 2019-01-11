@@ -40,7 +40,7 @@ class ExerciseVariant extends Component {
     }
 
     detailsHandler = (exerciseVariantID) => {
-        this.props.history.push('/exercises/' + this.props.match.params.exerciseDetailsID + '/' + exerciseVariantID);
+        this.props.history.push('/admin/exercises/' + this.props.match.params.exerciseDetailsID + '/' + exerciseVariantID);
     }
 
     removeHandler = (exerciseRemoveID) => {

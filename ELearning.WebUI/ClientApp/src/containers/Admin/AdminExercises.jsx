@@ -47,7 +47,7 @@ class AdminExercises extends Component {
 
 
     detailsHandler = (exerciseDetailID) => {
-        this.props.history.push('/exercises/' + exerciseDetailID);
+        this.props.history.push('/admin/exercises/' + exerciseDetailID);
     }
 
 

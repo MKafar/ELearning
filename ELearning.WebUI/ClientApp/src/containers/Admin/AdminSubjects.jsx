@@ -30,7 +30,7 @@ class AdminSubjects extends Component {
     }
 
     detailsHandler = (subjectGroupID) => {
-        this.props.history.push('/subject/' + subjectGroupID);
+        this.props.history.push('/admin/subject/' + subjectGroupID);
     }
 
 

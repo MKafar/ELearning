@@ -20,10 +20,10 @@ class ModalAddExercise extends Component {
             title: inputData
         })
             .then(response => {
-                console.log(response);
+                console.log("ModalAddExercise component. Create exercise response: ", response);
             })
             .catch(error => {
-                console.log(error.response);
+                console.log("ModalAddExercise component. Create exercise error.response:", error.response);
             })
     }
     render() {

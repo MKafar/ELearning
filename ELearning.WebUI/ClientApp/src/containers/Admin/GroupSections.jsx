@@ -40,7 +40,7 @@ class GroupSections extends Component {
     }
 
     detailsHandler = (groupSectionID) => {
-        this.props.history.push('/subject/' + this.props.match.params.groupSectionsID + '/' + groupSectionID);
+        this.props.history.push('/admin/subject/' + this.props.match.params.groupSectionsID + '/' + groupSectionID);
     }
 
     removeHandler = (sectionRemoveID) => {

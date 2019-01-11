@@ -30,19 +30,24 @@ class Login extends Component {
         }).then(response => {
             console.log("Login successful response.data:", response.data);
             this.setState({userData: [response.data.role]});
-            this.redirectDependingOnRole(response.data.role);
+
+            const user = {
+                roles: [response.data.role],
+                userid: response.data.id,
+                username: response.data.username
+            }     
+
+            this.manageUserAuthorization(user);
         }).catch(error => {
             console.log("Login error.response:", error.response);
         })     
     }
 
-    redirectDependingOnRole = (userRole) => {
-        const user = {
-            roles: [userRole]
-        }
-        
+    manageUserAuthorization = (user) => {
         let hasRoleStudent = hasRole(user, ['Student']);
         let hasRoleAdmin = hasRole(user, ['Administrator']);
+
+        hasRoleStudent || hasRoleAdmin ? this.props.onSetUser(user) : this.props.onClearUser();
 
         hasRoleStudent ? this.props.history.push('/student/') : hasRoleAdmin ? this.props.history.push('/admin/') : this.props.history.push('/');
     }

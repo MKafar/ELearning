@@ -26,17 +26,18 @@ class StudentExercises extends Component {
 
     componentDidMount = () => {
         this.loadData();
+        console.log("StudentExercises component. ComponentDidMount: ", this.props.user);
     }
 
 
     previousdetailsHandler = (previousAssignmentID) => {
-        this.props.history.push('/previousexercises/' + previousAssignmentID);
+        this.props.history.push('/student/previousexercises/' + previousAssignmentID);
     }
     todaydetailsHandler = (exerciseTodayDetailID) => {
-        this.props.history.push('/todayexercise/' + exerciseTodayDetailID);
+        this.props.history.push('/student/todayexercise/' + exerciseTodayDetailID);
     }
     gradeOthersHandler = () => {
-        this.props.history.push('/gradeothers/');
+        this.props.history.push('/student/gradeothers/');
     }
 
     render() {
