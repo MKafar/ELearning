@@ -2,6 +2,7 @@ using ELearning.Application.Exercises.Commands.CreateExercise;
 using ELearning.Application.Exercises.Queries.GetExercisesList;
 using ELearning.Application.Infrastructure;
 using ELearning.Application.Interfaces;
+using ELearning.Common;
 using ELearning.Infrastructure;
 using ELearning.Persistence;
 using ELearning.WebUI.CustomOptions;
@@ -56,6 +57,12 @@ namespace ELearning.WebUI
 
             services.AddTransient(typeof(IPasswordHasher<>), typeof(PasswordHasher<>));
 
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+
+            var appSettings = appSettingsSection.Get<AppSettings>();
+
+            var key = Encoding.UTF8.GetBytes(appSettings.Secret);
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -66,18 +73,12 @@ namespace ELearning.WebUI
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
 
-                        IssuerSigningKey = new SymmetricSecurityKey(
-                            Encoding.UTF8.GetBytes(Configuration.GetValue<string>("JWTSecretKey"))
-                            )
+                        IssuerSigningKey = new SymmetricSecurityKey(key)
                     };
                 });
 
-            services.AddSingleton<IAuthService>(
-                new AuthService(
-                    Configuration.GetValue<string>("JWTSecretKey"),
-                    Configuration.GetValue<int>("JWTLifespan")
-                    )
-            );
+            services.Configure<AppSettings>(appSettingsSection);
+            services.AddSingleton<IAuthService, AuthService>();
 
             services.AddSwaggerGen(c =>
             {
