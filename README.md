@@ -1,9 +1,10 @@
 # ELearning
 Dane do logowania:
-Admin:
-  login: admin
-  hasło: admin
+Admin: <br/>
+  login: admin <br />
+  hasło: admin <br /> 
+  <br />
 
-Student:
-  login: student
-  hasło: student
+Student: <br />
+  login: student <br />
+  hasło: student <br />
