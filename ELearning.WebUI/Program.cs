@@ -35,6 +35,7 @@ namespace ELearning.WebUI
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseUrls("http://localhost:51593")
                 .UseStartup<Startup>();
     }
 }
