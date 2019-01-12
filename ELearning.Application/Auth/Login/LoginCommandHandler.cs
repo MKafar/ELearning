@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using ELearning.Application.Exceptions;
 using ELearning.Application.Interfaces;
-using ELearning.Common;
 using ELearning.Domain.Entities;
 using ELearning.Persistence;
 using MediatR;
@@ -11,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ELearning.Application.Auth.Login
 {
-    public class LoginCommandHandler : IRequestHandler<LoginCommand, AuthData>
+    public class LoginCommandHandler : IRequestHandler<LoginCommand, User>
     {
         private readonly ELearningDbContext _context;
         private readonly IPasswordHasher<User> _passwordHasher;
@@ -24,7 +23,7 @@ namespace ELearning.Application.Auth.Login
             _authService = authService;
         }
 
-        public async Task<AuthData> Handle(LoginCommand request, CancellationToken cancellationToken)
+        public async Task<User> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             var entity = await _context.Users
                 .SingleAsync(e => e.Login == request.Login);
@@ -37,14 +36,14 @@ namespace ELearning.Application.Auth.Login
             if (passwordVerificationResult == PasswordVerificationResult.Failed)
                 throw new InvalidPasswordException(request.Login);
 
+            entity.Password = null;
+
             entity.Role = await _context.Roles
                 .FindAsync(entity.RoleId);
 
-            var authData = _authService.GetAuthData(entity.UserId.ToString(), entity.Role.Name);
-
-            authData.UserName = $"{entity.Name} {entity.Surname}";
-
-            return authData;
+            entity = _authService.IssueToken(entity);
+            
+            return entity;
         }
     }
 }
