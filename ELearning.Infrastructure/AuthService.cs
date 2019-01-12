@@ -1,5 +1,7 @@
 ﻿using ELearning.Application.Interfaces;
 using ELearning.Common;
+using ELearning.Domain.Entities;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
@@ -10,42 +12,38 @@ namespace ELearning.Infrastructure
 {
     public class AuthService : IAuthService
     {
-        private string jwtSecret;
-        private int jwtLifespan;
+        private readonly AppSettings _appSettings;
 
-        public AuthService(string jwtSecret, int jwtLifespan)
+        public AuthService(IOptions<AppSettings> appSettings)
         {
-            this.jwtSecret = jwtSecret;
-            this.jwtLifespan = jwtLifespan;
+            _appSettings = appSettings.Value;
         }
 
-        public AuthData GetAuthData(string id, string role)
+        public User IssueToken(User user)
         {
-            var expirationTime = DateTime.UtcNow.AddSeconds(jwtLifespan);
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var key = Encoding.UTF8.GetBytes(_appSettings.Secret);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.Name, id)
+                    new Claim(ClaimTypes.Name, user.UserId.ToString()),
+                    new Claim(ClaimTypes.Role, user.Role.Name)
                 }),
-                Expires = expirationTime,
+                Expires = DateTime.UtcNow.AddDays(30),
                 SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret)),
+                    new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature
                     )
             };
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var token = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
+            var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            return new AuthData
-            {
-                Id = int.Parse(id),
-                Role = role,
-                Token = token,
-                TokenExpirationTime = ((DateTimeOffset)expirationTime).ToUnixTimeSeconds()
-            };
+            user.Token = tokenHandler.WriteToken(token);
+
+            return user;
         }
     }
 }
