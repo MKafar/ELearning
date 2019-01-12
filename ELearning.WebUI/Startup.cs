@@ -116,6 +116,8 @@ namespace ELearning.WebUI
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "ELearning API v1");
+                c.DisplayRequestDuration();
+                c.EnableFilter();
             });
 
             app.UseMvc(routes =>
