@@ -69,7 +69,7 @@ class StudentDetails extends Component {
 
     detailsHandler = (studentExerciseDetailID) => {
         this.props.history.push({
-            pathname: '/students/' + this.props.match.params.studentDetailsID + '/' + studentExerciseDetailID  });
+            pathname: '/admin/students/' + this.props.match.params.studentDetailsID + '/' + studentExerciseDetailID  });
     }
 
     addtolistHandle = () => {

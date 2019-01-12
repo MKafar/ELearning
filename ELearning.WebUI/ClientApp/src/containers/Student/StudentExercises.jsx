@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Header } from 'semantic-ui-react';
 import axios from '../..//axios';
+import {withRouter} from 'react-router';
 
 import './StudentExercises.scss';
 
@@ -10,33 +11,44 @@ class StudentExercises extends Component {
 
     state = {
         previousExercises: [],
-        todaysExercise: [
-            {id: 1, title: "Nowe zadanie", date: "01.01.19", variant: 1, group: "nazwa grupy"}
-        ]
+        todaysExercise: [],
     }
     loadData = () => {
-        const userid = 2;
+        const userid = this.props.user.userid;
         axios.get('/api/Users/GetPastAssignmentsById/' +  userid)
             .then (response => {
                 this.setState({previousExercises: response.data.pastassignments});
             }).catch (error =>{ 
                 console.log(error.response);
             })
+        
+        axios.get('/api/Users/GetPresentAssignmentsById/' + userid)
+            .then (response => {
+                console.log('Present',response.data);
+                this.setState({todaysExercise: response.data.presentassignments});
+            }).catch(error => {
+                console.log(error.response);
+            })
     }
 
     componentDidMount = () => {
         this.loadData();
+        console.log("StudentExercises component. ComponentDidMount: ", this.props);
     }
 
 
     previousdetailsHandler = (previousAssignmentID) => {
-        this.props.history.push('/previousexercises/' + previousAssignmentID);
+        this.props.history.push({
+            pathname: '/student/previousexercises/' + previousAssignmentID,
+        });
     }
     todaydetailsHandler = (exerciseTodayDetailID) => {
-        this.props.history.push('/todayexercise/' + exerciseTodayDetailID);
+        this.props.history.push('/student/todayexercise/' + exerciseTodayDetailID);
     }
-    gradeOthersHandler = () => {
-        this.props.history.push('/gradeothers/');
+    gradeOthersHandler = (exerciseTodayDetailID) => {
+        this.props.history.push('/student/gradeothers/' + exerciseTodayDetailID);
+        console.log(this.state.todaysExercise.assignmentid)
+
     }
 
     render() {
@@ -44,7 +56,7 @@ class StudentExercises extends Component {
         return (
             <div className="StudentExercises">
                 <div>
-                    <Header size='huge'>Imię i nazwisko studenta</Header>
+                    <Header size='huge'>Witaj {this.props.user.username}!</Header>
                     <Header size='large'>Zadania wykonane</Header>
                     <div className="previousExercise">
                         {this.state.previousExercises.map((exerciseprevious) => {
@@ -55,8 +67,8 @@ class StudentExercises extends Component {
                                 title={exerciseprevious.exercisetitle}
                                 date={exerciseprevious.date}
                                 group={"Grupa: " + exerciseprevious.groupname}
-                                detailsClicked={()=> this.previousdetailsHandler(exerciseprevious.assignmentid)}
-                                />
+                                detailsClicked={() => this.previousdetailsHandler(exerciseprevious.assignmentid)}
+                            />
 
                         })}
                     </div>
@@ -64,28 +76,30 @@ class StudentExercises extends Component {
 
                 <div className="todayExercise">
                     <Header size='large'> Nowe zadanie</Header>
-                    {this.state.todaysExercise.map((exercisetoday) => {
+                    {
+                        this.state.todaysExercise.map((exercisetoday) => {
                             return <DetailList
-                        visibledetail={true}
-                        visibledelete={false}
-                        title={exercisetoday.title}
-                        key={exercisetoday.id}
-                        date={exercisetoday.date}
-                        variant={"Wariant: " + exercisetoday.variant}
-                        group={"Grupa: " + exercisetoday.group}
-                        detailsClicked={()=> this.todaydetailsHandler(exercisetoday.id)}
-                         />
-                        })}
-                        <br />
+                                visibledetail={true}
+                                visibledelete={false}
+                                title={exercisetoday.exercisetitle}
+                                key={exercisetoday.assignmentid}
+                                date={exercisetoday.date}
+                                group={"Grupa: " + exercisetoday.groupname}
+                                detailsClicked={() => this.todaydetailsHandler(exercisetoday.assignmentid)}
+                            />
+                        })
+                    }
+                    < br />
+                
                     <div className='gradeOthers'>
                         <Header size='medium'>Oceń innych</Header>
-                        <Button className='gradebutton' onClick={this.gradeOthersHandler}>Oceń</Button>
-                </div>
-
+                        {this.state.todaysExercise.map((exercisetoday) => {
+                         return <Button  key={exercisetoday.assignmentid} className='gradebutton' onClick={() => this.gradeOthersHandler(exercisetoday.assignmentid)}>Oceń</Button> }) }
+                    </div> 
                 </div>
             </div>
         );
     }
 }
 
-export default StudentExercises;
+export default withRouter(StudentExercises);

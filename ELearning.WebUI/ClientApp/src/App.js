@@ -1,89 +1,69 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import 'semantic-ui-react';
-import {BrowserRouter, Route} from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import './App.css';
 import Admin from './containers/Admin/Admin';
 import Student from './containers/Student/Student';
 import Login from './containers/Login/Login';
+import { hasRole } from './auth';
 
 class App extends Component {
 
-
   state = {
-  
+    user: {
+      roles: [],
+      userid: null,
+      username: ""
+    }
   }
 
+  onSetUser = (userProp) => {
+    this.setState({ user: userProp });
+  }
+
+  onClearUser = () => {
+    this.setState({
+      user: {
+        roles: [],
+        userId: null,
+        userName: ""
+      }
+    })
+  }
 
   render() {
+    const user = this.state.user;
 
     return (
       <BrowserRouter>
         <div className="App">
-          <div className='loginContener'>
-            <Login />
-          </div>
+          <Switch>
 
-          {/* <Admin /> */}
-          <Route path="/admin" exact component={Admin} />
-          <Route path="/student" exact component={Student} />
+            { hasRole(user, ['Student']) && <Route path='/student' component={() => <Student
+              user={user}
+              onClearUser={this.onClearUser}
+            />}
+            />}
+
+            {hasRole(user, ['Administrator']) && <Route path='/admin' component={() => <Admin
+              user={user}
+              onClearUser={this.onClearUser}
+            />}
+            />}
+
+            <Route exact path='/' component={() => <Login
+              user={user}
+              onSetUser={this.onSetUser}
+              onClearRoles={this.onClearRoles}
+            />}
+            />
+
+            <Redirect from="*" to="/" />
+          </Switch>
         </div>
-
       </BrowserRouter>
-
-
-
-
-
-
-
-
-
-
-
-        /* 
-        //różne mody jednego komponentu
-            <CodeWindow code={code}></CodeWindow>
-            <CodeWindow changeMode={true} code={'Hello'}></CodeWindow>
-        // tabela szukania
-           { this.state.searches.map((search) => {
-           return <SearchTable
-           date = { search.date }
-           lab = { search.lab }
-           exercise = { search.exercise }
-           student = { search.student } />
-           })}
-        
-        
-        //lista zadań
-        <div className = 'detailList'>
-            {this.state.exercises.map((exercise) => {
-              return <DetailList
-                number = { exercise.number }
-                title = { exercise.title }
-                date = { exercise.date }/>
-            } )}
-          </div> */
-
-
-        /*
-      <div className = "menu">
-      <Menu></Menu>
-      </div>
-        <div className="logincontainer">
-          <LoginInput></LoginInput>
-          <LoginButton></LoginButton>
-        </div>
-        
-
-         <div className='coding'>
-          <Codemirror></Codemirror>
-          <Output></Output>
-        </div>
-        */
-
-      
     );
   }
 }
