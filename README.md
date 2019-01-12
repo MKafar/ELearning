@@ -1,5 +1,5 @@
 # ELearning
-Dane do logowania:
+Dane do logowania: <br />
 Admin: <br/>
   login: admin <br />
   hasło: admin <br /> 
