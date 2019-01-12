@@ -3,7 +3,7 @@ using MediatR;
 
 namespace ELearning.Application.Auth.Login
 {
-    public class LoginCommand : IRequest<User>
+    public class LoginCommand : IRequest<LoginViewModel>
     {
         public string Login { get; set; }
         public string Password { get; set; }

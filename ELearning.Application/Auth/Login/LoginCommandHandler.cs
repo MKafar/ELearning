@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using ELearning.Application.Exceptions;
 using ELearning.Application.Interfaces;
@@ -10,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ELearning.Application.Auth.Login
 {
-    public class LoginCommandHandler : IRequestHandler<LoginCommand, User>
+    public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginViewModel>
     {
         private readonly ELearningDbContext _context;
         private readonly IPasswordHasher<User> _passwordHasher;
@@ -23,10 +24,20 @@ namespace ELearning.Application.Auth.Login
             _authService = authService;
         }
 
-        public async Task<User> Handle(LoginCommand request, CancellationToken cancellationToken)
+        public async Task<LoginViewModel> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             var entity = await _context.Users
-                .SingleAsync(e => e.Login == request.Login);
+                .Select(e => new User
+                {
+                    UserId = e.UserId,
+                    Name = e.Name,
+                    Surname = e.Surname,
+                    Email = e.Email,
+                    Login = e.Login,
+                    Password = e.Password,
+                    Role = e.Role,
+                    Token = e.Token
+                }).SingleAsync(e => e.Login == request.Login);
 
             if (entity == null)
                 throw new NotFoundException(nameof(User), request.Login);
@@ -36,14 +47,17 @@ namespace ELearning.Application.Auth.Login
             if (passwordVerificationResult == PasswordVerificationResult.Failed)
                 throw new InvalidPasswordException(request.Login);
 
-            entity.Password = null;
-
-            entity.Role = await _context.Roles
-                .FindAsync(entity.RoleId);
-
             entity = _authService.IssueToken(entity);
-            
-            return entity;
+
+            return new LoginViewModel
+            {
+                UserId = entity.UserId,
+                UserName = $"{entity.Name} {entity.Surname}",
+                Email = entity.Email,
+                Login = entity.Login,
+                Role = entity.Role.Name,
+                Token = entity.Token
+            };
         }
     }
 }

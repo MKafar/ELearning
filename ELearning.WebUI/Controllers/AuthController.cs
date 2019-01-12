@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using ELearning.Application.Auth.Login;
-using ELearning.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ELearning.WebUI.Controllers
@@ -10,7 +9,7 @@ namespace ELearning.WebUI.Controllers
     {
         // POST: api/Auth/login
         [HttpPost]
-        public async Task<ActionResult<User>> Login([FromBody] LoginCommand command)
+        public async Task<ActionResult<LoginViewModel>> Login([FromBody] LoginCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
