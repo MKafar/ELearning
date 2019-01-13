@@ -18,6 +18,10 @@ namespace ELearning.Persistence.Configurations
                 .HasMaxLength(320)
                 .IsRequired(true);
 
+            builder.Property(e => e.Role)
+                .HasMaxLength(50)
+                .IsRequired(true);
+
             builder.Property(e => e.Login)
                 .HasMaxLength(10)
                 .IsRequired(true);
@@ -32,14 +36,6 @@ namespace ELearning.Persistence.Configurations
             builder.Property(e => e.Surname)
                 .HasMaxLength(50)
                 .IsRequired(true);
-
-            builder.Property(e => e.RoleId)
-                .HasColumnName("RoleId")
-                .IsRequired(true);
-
-            builder.HasOne(e => e.Role)
-                .WithMany(e => e.Users)
-                .HasConstraintName("FK_Users_Roles");
         }
     }
 }

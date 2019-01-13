@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ELearning.Domain.Entities;
 using ELearning.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -26,8 +27,8 @@ namespace ELearning.Application.Users.Queries.GetStudentsList
                         Id = e.UserId,
                         Name = $"{e.Name} {e.Surname}",
                         Email = e.Email,
-                        RoleId = e.RoleId
-                    }).Where(e => e.RoleId == 1)
+                        Role = e.Role
+                    }).Where(e => e.Role == Role.Student)
                     .ToListAsync(cancellationToken)
             };
 

@@ -55,7 +55,7 @@ namespace ELearning.Application.Auth.Login
                 UserName = $"{entity.Name} {entity.Surname}",
                 Email = entity.Email,
                 Login = entity.Login,
-                Role = entity.Role.Name,
+                Role = entity.Role,
                 Token = entity.Token
             };
         }

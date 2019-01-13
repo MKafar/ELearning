@@ -7,10 +7,12 @@ using ELearning.Application.Assignments.Queries.GetAssignmentById;
 using ELearning.Application.Assignments.Queries.GetAssignmentEvaluationsListById;
 using ELearning.Application.Assignments.Queries.GetAssignmentsList;
 using ELearning.Application.Assignments.Queries.GetPresentNotEvaluatedAssignmentsListById;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ELearning.WebUI.Controllers
 {
+    [Authorize]
     [ApiController]
     public class AssignmentsController : BaseController
     {

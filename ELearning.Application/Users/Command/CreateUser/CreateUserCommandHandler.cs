@@ -29,7 +29,7 @@ namespace ELearning.Application.Users.Command.CreateUser
                 Email = request.Email,
                 Login = loginData,
                 Password = loginData,
-                RoleId = 1
+                Role = Role.Student
             };
 
             _context.Users.Add(entity);

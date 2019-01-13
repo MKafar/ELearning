@@ -24,17 +24,13 @@ namespace ELearning.Application.Users.Queries.GetUserById
 
             if (entity == null)
                 throw new NotFoundException(nameof(User), request.Id);
-
-            entity.Role = await _context.Roles
-                .FindAsync(entity.RoleId);
             
             return new UserViewModel
             {
                 Id = entity.UserId,
                 Name = $"{entity.Name} {entity.Surname}",
                 Email = entity.Email,
-                RoleId = entity.RoleId,
-                RoleName = entity.Role.Name
+                Role = entity.Role
             };
         }
     }
