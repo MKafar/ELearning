@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ELearning.WebUI.Controllers
 {
+    // TODO Authorization
+
     [ApiController]
     public class GroupsController : BaseController
     {

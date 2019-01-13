@@ -8,10 +8,10 @@ using ELearning.Application.Exercises.Queries.GetExercisesList;
 using ELearning.Application.Exercises.Queries.GetExerciseVariantsListById;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace ELearning.WebUI.Controllers
 {
+    // TODO Authorization
+
     [ApiController]
     public class ExercisesController : BaseController
     {

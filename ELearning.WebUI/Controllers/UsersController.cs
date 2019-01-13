@@ -14,6 +14,8 @@ using ELearning.Application.Users.Queries.GetPresentAssignmentsListById;
 
 namespace ELearning.WebUI.Controllers
 {
+    // TODO Authorization
+
     [ApiController]
     public class UsersController : BaseController
     {
