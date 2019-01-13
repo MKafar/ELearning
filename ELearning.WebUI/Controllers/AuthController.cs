@@ -1,9 +1,11 @@
 ﻿using System.Threading.Tasks;
 using ELearning.Application.Auth.Login;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ELearning.WebUI.Controllers
 {
+    [AllowAnonymous]
     [ApiController]
     public class AuthController : BaseController
     {

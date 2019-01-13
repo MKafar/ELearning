@@ -2,10 +2,13 @@
 using System.Threading.Tasks;
 using ELearning.Application.Compiler.Commands.CompileCode;
 using ELearning.Application.Compiler.Commands.SaveAssignmentSolution;
+using ELearning.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ELearning.WebUI.Controllers
 {
+    [Authorize(Roles = Role.Student)]
     [ApiController]
     public class CompilerController : BaseController
     {
