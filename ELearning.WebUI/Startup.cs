@@ -21,6 +21,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerUI;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
@@ -80,9 +82,22 @@ namespace ELearning.WebUI
             services.Configure<AppSettings>(appSettingsSection);
             services.AddSingleton<IAuthService, AuthService>();
 
+            var security = new Dictionary<string, IEnumerable<string>>
+                {
+                    {"Bearer", new string[] { }},
+                };
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "ELearning API", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+                c.AddSecurityRequirement(security);
             });
 
             // In production, the React files will be served from this directory
@@ -117,6 +132,8 @@ namespace ELearning.WebUI
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "ELearning API v1");
+                c.DocumentTitle = "Swagger documentation";
+                c.DocExpansion(DocExpansion.None);
             });
 
             app.UseMvc(routes =>
