@@ -13,12 +13,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ELearning.WebUI.Controllers
 {
-    [Authorize(Roles = Role.Admin)]
+    [Authorize(Roles = Role.AdminOrStudent)]
     [ApiController]
     public class AssignmentsController : BaseController
     {
         // GET: api/Assignments/GetAll
         [HttpGet]
+        [Authorize(Roles = Role.Admin)]
         public async Task<ActionResult<AssignmentsListViewModel>> GetAll()
         {
             return Ok(await Mediator.Send(new GetAssignmentsListQuery()));
@@ -26,6 +27,7 @@ namespace ELearning.WebUI.Controllers
 
         // GET: api/Assignments/GetById/5
         [HttpGet("{id}")]
+        [Authorize(Roles = Role.AdminOrStudent)]
         public async Task<ActionResult<AssignmentViewModel>> GetById(int id)
         {
             return Ok(await Mediator.Send(new GetAssignmentByIdQuery { Id = id }));
@@ -33,6 +35,7 @@ namespace ELearning.WebUI.Controllers
 
         // GET: api/Assignments/GetAllEvaluationsById/5
         [HttpGet("{id}")]
+        [Authorize(Roles = Role.Admin)]
         public async Task<ActionResult<AssignmentEvaluationsListViewModel>> GetAllEvaluationsById(int id)
         {
             return Ok(await Mediator.Send(new GetAssignmentEvaluationsListByIdQuery { Id = id }));
@@ -48,6 +51,7 @@ namespace ELearning.WebUI.Controllers
 
         // POST: api/Assignments/Create
         [HttpPost]
+        [Authorize(Roles = Role.Admin)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Create([FromBody] CreateAssignmentCommand command)
         {
@@ -58,6 +62,7 @@ namespace ELearning.WebUI.Controllers
 
         // PUT: api/Assignments/Update
         [HttpPut]
+        [Authorize(Roles = Role.Admin)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Update([FromBody] UpdateAssignmentCommand command)
         {
@@ -68,6 +73,7 @@ namespace ELearning.WebUI.Controllers
 
         // DELETE: api/Assignments/Delete/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = Role.Admin)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Delete(int id)
         {
