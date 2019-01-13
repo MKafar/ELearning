@@ -7,12 +7,13 @@ using ELearning.Application.Assignments.Queries.GetAssignmentById;
 using ELearning.Application.Assignments.Queries.GetAssignmentEvaluationsListById;
 using ELearning.Application.Assignments.Queries.GetAssignmentsList;
 using ELearning.Application.Assignments.Queries.GetPresentNotEvaluatedAssignmentsListById;
+using ELearning.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ELearning.WebUI.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = Role.Admin)]
     [ApiController]
     public class AssignmentsController : BaseController
     {
@@ -39,6 +40,7 @@ namespace ELearning.WebUI.Controllers
 
         // GET: api/Assignments/GetPresentNotEvaluatedAssignmentsById/5
         [HttpGet("{id}")]
+        [Authorize(Roles = Role.Student)]
         public async Task<ActionResult<PresentNotEvaluatedAssignmentsListViewModel>> GetPresentNotEvaluatedAssignmentsById(int id)
         {
             return Ok(await Mediator.Send(new GetPresentNotEvaluatedAssignmentsListQuery { Id = id }));
