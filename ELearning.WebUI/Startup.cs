@@ -136,6 +136,8 @@ namespace ELearning.WebUI
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "ELearning API v1");
                 c.DocumentTitle = "Swagger documentation";
                 c.DocExpansion(DocExpansion.None);
+                c.DisplayRequestDuration();
+                c.EnableFilter();
             });
 
             app.UseMvc(routes =>
