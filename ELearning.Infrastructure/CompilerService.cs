@@ -1,5 +1,5 @@
 ﻿using ELearning.Application.Interfaces;
-using ELearning.Common;
+using ELearning.Common.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace ELearning.Infrastructure
 {
     public class CompilerService : ICompilerService
     {
-        private const string AbsolutePathToCompilerExeFileConfigurationName = "CompilerAbsolutePath";
+        private const string AbsolutePathToCompilerExeFileConfigurationName = "C++CompilerAbsolutePath";
 
         private readonly ProcessStartInfo _processStartInfo;
         
@@ -45,7 +45,7 @@ namespace ELearning.Infrastructure
             return compilerPath;
         }
 
-        public async Task<string> CompileAsync(FileSettings fileSettings, CancellationToken cancellationToken)
+        public async Task<string> CompileAsync(IFileSettings fileSettings, CancellationToken cancellationToken)
         {
             IList<string> processOutputInAList = new List<string>();
             StringBuilder processOutput = new StringBuilder();
@@ -76,7 +76,7 @@ namespace ELearning.Infrastructure
             return processOutput.ToString();
         }
 
-        private async Task<string> StartCompiledProgram(FileSettings fileSettings)
+        private async Task<string> StartCompiledProgram(IFileSettings fileSettings)
         {
             IList<string> processOutputInAList = new List<string>();
             StringBuilder processOutput = new StringBuilder();

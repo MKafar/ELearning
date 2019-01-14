@@ -1,5 +1,5 @@
 ﻿using ELearning.Application.Interfaces;
-using ELearning.Common;
+using ELearning.Common.Interfaces;
 using System;
 using System.IO;
 using System.Threading;
@@ -9,18 +9,19 @@ namespace ELearning.Infrastructure
 {
     public class FileSaveService : IFileSaveService
     {
-        public FileSaveService()
+        private readonly IFileSettings _fileSettings;
+
+        public FileSaveService(IFileSettings fileSettings)
         {
+            _fileSettings = fileSettings;
         }
 
-        private FileSettings SetFileSettings(int assignmentId, DateTime now)
+        private IFileSettings SetFileSettings(int assignmentId, DateTime now)
         {
-            var fileSettings = new FileSettings();
+            _fileSettings.FileName = SetFileName(assignmentId, now);
+            _fileSettings.FileSaveDirectory = SetFileSaveDirectory();
 
-            fileSettings.FileName = SetFileName(assignmentId, now);
-            fileSettings.FileSaveDirectory = SetFileSaveDirectory();
-
-            return fileSettings;
+            return _fileSettings;
         }
 
         private string SetFileName(int assignmentId, DateTime now)
@@ -42,7 +43,7 @@ namespace ELearning.Infrastructure
             return fileSaveDirectory;
         }
 
-        public async Task<FileSettings> SaveToFileAsync(int assignmentId, string code, DateTime now, CancellationToken cancellationToken)
+        public async Task<IFileSettings> SaveToFileAsync(int assignmentId, string code, DateTime now, CancellationToken cancellationToken)
         {
             var fileSettings = SetFileSettings(assignmentId, now);
 
@@ -54,7 +55,7 @@ namespace ELearning.Infrastructure
 
             await File.WriteAllTextAsync(fileSettings.FilePath, code, cancellationToken);
             
-            return fileSettings;
+            return _fileSettings;
         }
     }
 }

@@ -3,6 +3,7 @@ using ELearning.Application.Exercises.Queries.GetExercisesList;
 using ELearning.Application.Infrastructure;
 using ELearning.Application.Interfaces;
 using ELearning.Common;
+using ELearning.Common.Interfaces;
 using ELearning.Infrastructure;
 using ELearning.Persistence;
 using ELearning.WebUI.CustomOptions;
@@ -40,6 +41,7 @@ namespace ELearning.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IFileSettings, FileSettings>();
             services.AddTransient<IFileSaveService, FileSaveService>();
             services.AddTransient<ICompilerService, CompilerService>();
 

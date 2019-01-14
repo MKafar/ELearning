@@ -1,9 +1,10 @@
-﻿using System;
+﻿using ELearning.Common.Interfaces;
+using System;
 using System.IO;
 
 namespace ELearning.Common
 {
-    public class FileSettings
+    public class FileSettings : IFileSettings
     {
         public string FilePath
         {
