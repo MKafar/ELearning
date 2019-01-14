@@ -30,11 +30,5 @@ namespace ELearning.Persistence
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ELearningDbContext).Assembly);
         }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-            optionsBuilder.EnableSensitiveDataLogging();
-        }
     }
 }
