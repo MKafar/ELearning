@@ -30,8 +30,6 @@ namespace ELearning.Application.Infrastructure
             {
                 var name = typeof(TRequest).Name;
 
-                // TODO Add User Details
-
                 _logger.LogWarning("ELearning Long Running Request: {Name} ({ElapsedMiliseconds} miliseconds) {@Request}", name, _timer.ElapsedMilliseconds, request);
             }
 

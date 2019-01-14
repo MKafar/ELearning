@@ -17,9 +17,7 @@ namespace ELearning.Application.Infrastructure
         public Task Process(TRequest request, CancellationToken cancellationToken)
         {
             var name = typeof(TRequest).Name;
-
-            // TODO Add User Details
-
+            
             _logger.LogInformation("ELearning Request: {Name} {@Request}", name, request);
 
             return Task.CompletedTask;
