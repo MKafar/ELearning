@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-
 import './Admin.scss';
-
 import MenuAdmin from '../../containers/Menu/MenuAdmin';
 import AdminExercises from './AdminExercises';
 import AdminStudents from './AdminStudents';
@@ -18,13 +16,11 @@ import GroupSections from './GroupSections';
 class Admin extends Component {
     render() {
         const user = this.props.user;
-
         return (
             <div className='admin'>
                 <div className='menu'>
                     <MenuAdmin onClearRoles={this.props.onClearUser} />
                 </div>
-
                 <Switch>
                     <Route path="/admin" exact component={() => <AdminHome user={user} />} />
                     <Route path="/admin/exercises" exact component={AdminExercises} />
@@ -41,5 +37,4 @@ class Admin extends Component {
         );
     }
 }
-
 export default Admin;

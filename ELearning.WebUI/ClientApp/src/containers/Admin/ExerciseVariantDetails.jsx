@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Header, Button} from 'semantic-ui-react';
 import axios from '../../axios';
-import OpenNewWindow from '../../components/Modules/OpenNewWindow';
 
 import './ExerciseVariantDetails.scss';
 import CodeWindow from '../../components/Modules/CodeWindow';
+import OpenNewWindow from '../../components/Modules/OpenNewWindow';
 
 class ExerciseVariantDetails extends Component {
 

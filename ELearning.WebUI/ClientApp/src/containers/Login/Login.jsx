@@ -3,27 +3,21 @@ import { Button, Form, Header } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 import axios from '../../axios';
 import { hasRole } from '../../auth';
-
 import './Login.scss';
 
 class Login extends Component {
-
     state = {
         login: '',
         password: '',
         userData: [],
     }
-
     changeLoginHandler = (e) => {
         this.setState({ login: e.target.value })
     }
-
     changePasswordHandler = (e) => {
         this.setState({ password: e.target.value })
     }
-
     sendCredentialsHandler = () => {
-
         axios.post('/api/Auth/Login', {
             login: this.state.login,
             password: this.state.password
@@ -36,24 +30,19 @@ class Login extends Component {
                 userid: response.data.id,
                 username: response.data.username
             }     
-
             this.manageUserAuthorization(user);
         }).catch(error => {
             console.log("Login error.response:", error.response);
         })     
     }
-
     manageUserAuthorization = (user) => {
         let hasRoleStudent = hasRole(user, ['Student']);
         let hasRoleAdmin = hasRole(user, ['Administrator']);
 
         hasRoleStudent || hasRoleAdmin ? this.props.onSetUser(user) : this.props.onClearUser();
-
         hasRoleStudent ? this.props.history.push('/student/') : hasRoleAdmin ? this.props.history.push('/admin/') : this.props.history.push('/');
     }
-
     render() {
- 
         return (
             <div className='login'>
             <Header size='large'>Zaloguj się</Header>
@@ -66,7 +55,6 @@ class Login extends Component {
                     </Form.Field>
                     <Button className='loginbutton' primary onClick={this.sendCredentialsHandler}>Zaloguj</Button>
                 </Form>
-
             </div>
         );
     }

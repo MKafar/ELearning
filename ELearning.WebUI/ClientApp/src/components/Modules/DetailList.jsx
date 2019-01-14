@@ -1,10 +1,8 @@
 import React from 'react'
 import { Container, List, Button } from 'semantic-ui-react'
-
 import './DetailList.scss'
 
 const DetailList = (props) => {
-
     return (
         <div className='detailList'>
             <Container>
@@ -18,9 +16,6 @@ const DetailList = (props) => {
                         <List.Content floated='right'>
                             {props.finalgrade}
                         </List.Content>
-                        {/* <List.Content floated='left'>
-                            { props.id }
-                        </List.Content> */}
                         <List.Content floated='left'>
                             {props.date}
                         </List.Content>
@@ -53,10 +48,7 @@ const DetailList = (props) => {
                     </List.Item>
                 </List>
             </Container>
-
         </div>
-
     );
 }
-
 export default DetailList;

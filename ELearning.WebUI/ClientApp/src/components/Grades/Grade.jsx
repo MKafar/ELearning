@@ -61,7 +61,7 @@ class Grade extends Component {
                                     ></Dropdown>
                                 </List.Content>
                                 <List.Content>
-                                    Waruek oceny 1.
+                                    Zgodność z treścią zadania
                             </List.Content>
                             </List.Item>
 
@@ -79,7 +79,7 @@ class Grade extends Component {
                                     ></Dropdown>
                                 </List.Content>
                                 <List.Content>
-                                    Waruek oceny 2.
+                                    Czytelność
                             </List.Content>
                             </List.Item>
 
@@ -97,7 +97,7 @@ class Grade extends Component {
                                     ></Dropdown>
                                 </List.Content>
                                 <List.Content >
-                                    Waruek oceny 3.
+                                    Odporność na błędy
                             </List.Content>
                             </List.Item>
 
@@ -115,7 +115,7 @@ class Grade extends Component {
                                     ></Dropdown>
                                 </List.Content>
                                 <List.Content >
-                                    Waruek oceny 4.
+                                    Optymalizacja
                             </List.Content>
                             </List.Item>
                         </List>
