@@ -9,37 +9,32 @@ import 'codemirror/mode/clike/clike';
 import 'codemirror/theme/neat.css';
 import 'codemirror/addon/edit/closebrackets.js';
 
-
-
-
 class Codemirror extends Component {
     state = {
         name: 'CodeMirror',
         code: '// Code Here',
         output: null,
-
     };
 
     runCodeHandler = () => {
-        this.setState({output: "waiting..."})
+        this.setState({ output: "waiting..." })
         console.log(this.state.code)
         axios.post('/api/Compiler/Run', {
             assignmentid: 1,
             code: this.state.code
-        }).then(response =>{
+        }).then(response => {
             console.log(response.data);
             let outputString = response.data.output;
             let changedOutput = outputString.replace(/\r\n/g, "<br />");
-            //let codeOutput = html(changedOutput);
-             this.setState({output: changedOutput});
-    
+            this.setState({ output: changedOutput });
+
         }).catch(error => {
             console.log(error.response);
         })
     }
-    
+
     createMarkup = () => {
-           return {__html: this.state.output};
+        return { __html: this.state.output };
     }
 
     updateCode(newCode) {
@@ -49,26 +44,24 @@ class Codemirror extends Component {
     }
 
     sendCodeHandler = () => {
-        axios.post('/api/Compiler/Send',{
-            assignmentid:  this.props.assignmentID,
+        axios.post('/api/Compiler/Send', {
+            assignmentid: this.props.assignmentID,
             solution: this.state.code
         }).then(response => {
             console.log(response);
         }).catch(error => {
             console.log(error.response);
         })
-
     }
 
     render() {
-
         let options = {
             lineNumbers: true,
             mode: 'text/x-c++src',
             theme: 'neat',
             autoCloseBrackets: true,
         };
-        
+
         return (
             <div className="codingSection">
                 <div className="codeArea">
@@ -77,7 +70,7 @@ class Codemirror extends Component {
                 </div>
                 <div className="output">
                     <div className="outputbox" dangerouslySetInnerHTML={this.createMarkup()}>
-                        
+
                     </div>
                     <Button className='sendbutton' onClick={this.sendCodeHandler}>Wyślij</Button>
                 </div>
@@ -85,5 +78,4 @@ class Codemirror extends Component {
         );
     }
 }
-
 export default Codemirror;

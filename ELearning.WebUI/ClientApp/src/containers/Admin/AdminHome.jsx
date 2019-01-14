@@ -1,10 +1,9 @@
 import React from 'react';
-import AssignExerciseModal from '../../components/Modules/AssignExerciseModal';
 import { Header } from 'semantic-ui-react';
 import axios from '../../axios';
 
 import './AdminHome.scss';
-
+import AssignExerciseModal from '../../components/Modules/AssignExerciseModal';
 
 const AdminHome = (props) => (
     <div className='adminhome'>

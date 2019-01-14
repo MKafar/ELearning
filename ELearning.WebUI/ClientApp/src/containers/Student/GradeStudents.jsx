@@ -11,7 +11,12 @@ import Grade from '../../components/Grades/Grade';
 class GradeStudents extends Component {
 
     state = {
-        studentOptions: [],
+        studentOptions: [
+            { key: '1', text: 'Jan Kowalski', value: '1' },
+            { key: '2', text: 'Anna Nowak', value: '2' },
+            { key: '3', text: 'Andrzej Nowakowski', value: '3' },
+            { key: '4', text: 'Monika Sołtysik', value: '4' },
+        ],
         gradeDetails: []
     }
     componentDidMount = () => {
