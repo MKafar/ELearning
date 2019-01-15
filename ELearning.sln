@@ -15,15 +15,18 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{6CCD80BC-7428-4D96-B48C-92F26A45C3C2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{2E59C3C4-3DA8-454B-8A22-C3D2803C3E01}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9AA8DD59-E78C-4CDC-B0ED-08A6298AB6F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELearning.Application.Tests", "ELearning.Application.Tests\ELearning.Application.Tests.csproj", "{8DF36065-CA0E-4108-880E-B88FB903C661}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ELearning.Application.Tests", "ELearning.Application.Tests\ELearning.Application.Tests.csproj", "{8DF36065-CA0E-4108-880E-B88FB903C661}"
 	ProjectSection(ProjectDependencies) = postProject
 		{91965B4C-DAA0-415C-A153-E1F74F1FB4F8} = {91965B4C-DAA0-415C-A153-E1F74F1FB4F8}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELearning.Domain.Tests", "ELearning.Domain.Tests\ELearning.Domain.Tests.csproj", "{6FA2A1B3-28D8-40B4-8CE6-36E46F0AFBEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ELearning.Domain.Tests", "ELearning.Domain.Tests\ELearning.Domain.Tests.csproj", "{6FA2A1B3-28D8-40B4-8CE6-36E46F0AFBEA}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F075BB86-7455-467C-A23D-1AC83B33DB21} = {F075BB86-7455-467C-A23D-1AC83B33DB21}
 	EndProjectSection
@@ -34,23 +37,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{75A1E8F7-D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{78074A64-FB6A-4C5F-BAE4-6FF33E3E0FBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELearning.Common", "ELearning.Common\ELearning.Common.csproj", "{872CB023-71FD-4CFD-A42A-4A3D324EFB1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ELearning.Common", "ELearning.Common\ELearning.Common.csproj", "{872CB023-71FD-4CFD-A42A-4A3D324EFB1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELearning.Application", "ELearning.Application\ELearning.Application.csproj", "{91965B4C-DAA0-415C-A153-E1F74F1FB4F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ELearning.Application", "ELearning.Application\ELearning.Application.csproj", "{91965B4C-DAA0-415C-A153-E1F74F1FB4F8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EA6A8505-BF42-4ECF-B561-738BCC24D364} = {EA6A8505-BF42-4ECF-B561-738BCC24D364}
 		{F075BB86-7455-467C-A23D-1AC83B33DB21} = {F075BB86-7455-467C-A23D-1AC83B33DB21}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELearning.Domain", "ELearning.Domain\ELearning.Domain.csproj", "{F075BB86-7455-467C-A23D-1AC83B33DB21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ELearning.Domain", "ELearning.Domain\ELearning.Domain.csproj", "{F075BB86-7455-467C-A23D-1AC83B33DB21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELearning.Infrastructure", "ELearning.Infrastructure\ELearning.Infrastructure.csproj", "{67E5FD7F-C644-4424-8328-AB0A6D040631}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ELearning.Infrastructure", "ELearning.Infrastructure\ELearning.Infrastructure.csproj", "{67E5FD7F-C644-4424-8328-AB0A6D040631}"
 	ProjectSection(ProjectDependencies) = postProject
 		{872CB023-71FD-4CFD-A42A-4A3D324EFB1C} = {872CB023-71FD-4CFD-A42A-4A3D324EFB1C}
 		{91965B4C-DAA0-415C-A153-E1F74F1FB4F8} = {91965B4C-DAA0-415C-A153-E1F74F1FB4F8}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELearning.Persistence", "ELearning.Persistence\ELearning.Persistence.csproj", "{EA6A8505-BF42-4ECF-B561-738BCC24D364}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ELearning.Persistence", "ELearning.Persistence\ELearning.Persistence.csproj", "{EA6A8505-BF42-4ECF-B561-738BCC24D364}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F075BB86-7455-467C-A23D-1AC83B33DB21} = {F075BB86-7455-467C-A23D-1AC83B33DB21}
 	EndProjectSection
