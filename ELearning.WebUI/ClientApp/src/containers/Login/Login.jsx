@@ -5,53 +5,64 @@ import axios from '../../axios';
 import { hasRole } from '../../auth';
 import './Login.scss';
 
-class Login extends Component {
+class Login extends Component
+{
     state = {
         login: '',
         password: '',
         userData: [],
     }
-    changeLoginHandler = (e) => {
+    changeLoginHandler = (e) =>
+    {
         this.setState({ login: e.target.value })
     }
-    changePasswordHandler = (e) => {
+    changePasswordHandler = (e) =>
+    {
         this.setState({ password: e.target.value })
     }
-    sendCredentialsHandler = () => {
+    sendCredentialsHandler = () =>
+    {
         axios.post('/api/Auth/Login', {
             login: this.state.login,
             password: this.state.password
-        }).then(response => {
+        }).then(response =>
+        {
             console.log("Login successful response.data:", response.data);
-            this.setState({userData: [response.data.role]});
+            this.setState({ userData: [response.data.role] });
+
+            const token = response.data.token;
 
             const user = {
                 roles: [response.data.role],
                 userid: response.data.id,
                 username: response.data.username
-            }     
+            }
+            axios.defaults.headers.common['Authorization'] = "Bearer " + token;
             this.manageUserAuthorization(user);
-        }).catch(error => {
+        }).catch(error =>
+        {
             console.log("Login error.response:", error.response);
-        })     
+        })
     }
-    manageUserAuthorization = (user) => {
+    manageUserAuthorization = (user) =>
+    {
         let hasRoleStudent = hasRole(user, ['Student']);
         let hasRoleAdmin = hasRole(user, ['Administrator']);
 
         hasRoleStudent || hasRoleAdmin ? this.props.onSetUser(user) : this.props.onClearUser();
         hasRoleStudent ? this.props.history.push('/student/') : hasRoleAdmin ? this.props.history.push('/admin/') : this.props.history.push('/');
     }
-    render() {
+    render()
+    {
         return (
             <div className='login'>
-            <Header size='large'>Zaloguj się</Header>
+                <Header size='large'>Zaloguj się</Header>
                 <Form>
                     <Form.Field>
                         <Form.Input placeholder='Login' type='text' onChange={this.changeLoginHandler} />
                     </Form.Field>
                     <Form.Field>
-                        <Form.Input placeholder='Password' type='password' onChange={this.changePasswordHandler}/>
+                        <Form.Input placeholder='Password' type='password' onChange={this.changePasswordHandler} />
                     </Form.Field>
                     <Button className='loginbutton' primary onClick={this.sendCredentialsHandler}>Zaloguj</Button>
                 </Form>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import 'semantic-ui-react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import axios from './axios';
 
 import './App.css';
 import Admin from './containers/Admin/Admin';
@@ -9,8 +10,8 @@ import Student from './containers/Student/Student';
 import Login from './containers/Login/Login';
 import { hasRole } from './auth';
 
-class App extends Component {
-
+class App extends Component
+{
   state = {
     user: {
       roles: [],
@@ -19,11 +20,15 @@ class App extends Component {
     }
   }
 
-  onSetUser = (userProp) => {
+  onSetUser = (userProp) =>
+  {
     this.setState({ user: userProp });
   }
 
-  onClearUser = () => {
+  onClearUser = () =>
+  {
+    axios.defaults.headers.common['Authorization'] = "";
+
     this.setState({
       user: {
         roles: [],
@@ -33,7 +38,8 @@ class App extends Component {
     })
   }
 
-  render() {
+  render()
+  {
     const user = this.state.user;
 
     return (
@@ -41,7 +47,7 @@ class App extends Component {
         <div className="App">
           <Switch>
 
-            { hasRole(user, ['Student']) && <Route path='/student' component={() => <Student
+            {hasRole(user, ['Student']) && <Route path='/student' component={() => <Student
               user={user}
               onClearUser={this.onClearUser}
             />}
