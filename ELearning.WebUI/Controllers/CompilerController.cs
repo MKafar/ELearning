@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ELearning.WebUI.Controllers
 {
-    [Authorize(Roles = Role.Student)]
     [ApiController]
     public class CompilerController : BaseController
     {
         // POST: api/Compiler/run
         [HttpPost]
+        [Authorize(Roles = Role.Student)]
         public async Task<ActionResult<string>> Run([FromBody] CompileCodeCommand command)
         {
             return Ok(await Mediator.Send(command));
@@ -21,6 +21,7 @@ namespace ELearning.WebUI.Controllers
 
         // POST: api/Compiler/send
         [HttpPost]
+        [Authorize(Roles = Role.Student)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Send([FromBody] SaveAssignmentSolutionCommand command)
         {

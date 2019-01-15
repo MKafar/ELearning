@@ -11,6 +11,8 @@ using ELearning.Application.Users.Queries.GetAssignmentsListWithDetailsById;
 using ELearning.Application.Users.Queries.GetStudentsList;
 using ELearning.Application.Users.Queries.GetPastAssignmentsListById;
 using ELearning.Application.Users.Queries.GetPresentAssignmentsListById;
+using ELearning.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ELearning.WebUI.Controllers
 {
@@ -21,6 +23,7 @@ namespace ELearning.WebUI.Controllers
     {
         // GET: api/Users/GetAll
         [HttpGet]
+        [Authorize(Roles = Role.Admin)]
         public async Task<ActionResult<UsersListViewModel>> GetAll()
         {
             return Ok(await Mediator.Send(new GetUsersListQuery()));
@@ -28,6 +31,7 @@ namespace ELearning.WebUI.Controllers
 
         // GET: api/Users/GetAllStudents/
         [HttpGet]
+        [Authorize(Roles = Role.None)]
         public async Task<ActionResult<StudentsListViewModel>> GetAllStudents()
         {
             return Ok(await Mediator.Send(new GetStudentsListQuery()));
@@ -35,6 +39,7 @@ namespace ELearning.WebUI.Controllers
 
         // GET: api/Users/GetById/5
         [HttpGet("{id}")]
+        [Authorize(Roles = Role.Admin)]
         public async Task<ActionResult<UserViewModel>> GetById(int id)
         {
             return Ok(await Mediator.Send(new GetUserByIdQuery { Id = id }));
@@ -42,6 +47,7 @@ namespace ELearning.WebUI.Controllers
 
         // GET: api/Users/GetSectionsById/5
         [HttpGet("{id}")]
+        [Authorize(Roles = Role.Admin)]
         public async Task<ActionResult<SectionsDetailedListViewModel>> GetSectionsById(int id)
         {
             return Ok(await Mediator.Send(new GetSectionsListByIdQuery { Id = id }));
@@ -49,6 +55,7 @@ namespace ELearning.WebUI.Controllers
 
         // GET: api/Users/GetAssignmentsWithDetailsById/5
         [HttpGet("{id}")]
+        [Authorize(Roles = Role.Admin)]
         public async Task<ActionResult<AssignmentsListWithDetailsViewModel>> GetAssignmentsWithDetailsById(int id)
         {
             return Ok(await Mediator.Send(new GetAssignmentsListWithDetailsByIdQuery { Id = id }));
@@ -56,6 +63,7 @@ namespace ELearning.WebUI.Controllers
 
         // GET: api/Users/GetPastAssignmentsById/5
         [HttpGet("{id}")]
+        [Authorize(Roles = Role.Student)]
         public async Task<ActionResult<PastAssignmentsListViewModel>> GetPastAssignmentsById(int id)
         {
             return Ok(await Mediator.Send(new GetPastAssignmentsListByIdQuery { Id = id }));
@@ -63,6 +71,7 @@ namespace ELearning.WebUI.Controllers
 
         // GET: api/Users/GetPresentAssignmentsById/5
         [HttpGet("{id}")]
+        [Authorize(Roles = Role.Student)]
         public async Task<ActionResult<PresentAssignmentsListViewModel>> GetPresentAssignmentsById(int id)
         {
             return Ok(await Mediator.Send(new GetPresentAssignmentsListByIdQuery { Id = id }));
@@ -70,6 +79,7 @@ namespace ELearning.WebUI.Controllers
 
         // POST: api/Users/Create
         [HttpPost]
+        [Authorize(Roles = Role.None)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Create([FromBody]CreateUserCommand command)
         {
@@ -80,6 +90,7 @@ namespace ELearning.WebUI.Controllers
 
         // PUT: api/Users/Update
         [HttpPut]
+        [Authorize(Roles = Role.None)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Update([FromBody]UpdateUserCommand command)
         {
@@ -90,6 +101,7 @@ namespace ELearning.WebUI.Controllers
 
         // DELETE: api/Users/Delete/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = Role.Admin)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Delete(int id)
         {

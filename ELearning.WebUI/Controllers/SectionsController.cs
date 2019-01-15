@@ -6,6 +6,8 @@ using ELearning.Application.Sections.Commands.UpdateSection;
 using ELearning.Application.Sections.Queries.GetSectionById;
 using ELearning.Application.Sections.Queries.GetSectionEvaluationsListById;
 using ELearning.Application.Sections.Queries.GetSectionsList;
+using ELearning.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ELearning.WebUI.Controllers
@@ -17,6 +19,7 @@ namespace ELearning.WebUI.Controllers
     {
         // GET: api/Sections/GetAll
         [HttpGet]
+        [Authorize(Roles = Role.None)]
         public async Task<ActionResult<SectionsListViewModel>> GetAll()
         {
             return Ok(await Mediator.Send(new GetSectionsListQuery()));
@@ -24,6 +27,7 @@ namespace ELearning.WebUI.Controllers
 
         // GET: api/Sections/GetById/5
         [HttpGet("{id}")]
+        [Authorize(Roles = Role.None)]
         public async Task<ActionResult<SectionViewModel>> GetById(int id)
         {
             return Ok(await Mediator.Send(new GetSectionByIdQuery { Id = id }));
@@ -31,6 +35,7 @@ namespace ELearning.WebUI.Controllers
 
         // GET: api/Sections/GetAllEvaluationsById/5
         [HttpGet("{id}")]
+        [Authorize(Roles = Role.None)]
         public async Task<ActionResult<SectionEvaluationsListViewModel>> GetAllEvaluationsById(int id)
         {
             return Ok(await Mediator.Send(new GetSectionEvaluationsListByIdQuery { Id = id }));
@@ -38,6 +43,7 @@ namespace ELearning.WebUI.Controllers
 
         // POST: api/Sections/Create
         [HttpPost]
+        [Authorize(Roles = Role.Admin)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Create([FromBody] CreateSectionCommand command)
         {
@@ -48,6 +54,7 @@ namespace ELearning.WebUI.Controllers
 
         // PUT: api/Sections/Update/5
         [HttpPut]
+        [Authorize(Roles = Role.None)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Update([FromBody] UpdateSectionCommand command)
         {
@@ -58,6 +65,7 @@ namespace ELearning.WebUI.Controllers
 
         // DELETE: api/Sections/Delete/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = Role.Admin)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Delete(int id)
         {

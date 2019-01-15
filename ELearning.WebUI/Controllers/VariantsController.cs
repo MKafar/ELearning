@@ -5,6 +5,8 @@ using ELearning.Application.Variants.Commands.DeleteVariant;
 using ELearning.Application.Variants.Commands.UpdateVariant;
 using ELearning.Application.Variants.Queries.GetVariantById;
 using ELearning.Application.Variants.Queries.GetVariantsList;
+using ELearning.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ELearning.WebUI.Controllers
@@ -16,6 +18,7 @@ namespace ELearning.WebUI.Controllers
     {
         // GET: api/Variants/GetAll
         [HttpGet]
+        [Authorize(Roles = Role.None)]
         public async Task<ActionResult<VariantsListViewModel>> GetAll()
         {
             return Ok(await Mediator.Send(new GetVariantsListQuery()));
@@ -23,6 +26,7 @@ namespace ELearning.WebUI.Controllers
 
         // GET: api/Variants/GetById/5
         [HttpGet("{id}")]
+        [Authorize(Roles = Role.Admin)]
         public async Task<ActionResult<VariantViewModel>> GetById(int id)
         {
             return Ok(await Mediator.Send(new GetVariantByIdQuery { Id = id }));
@@ -30,6 +34,7 @@ namespace ELearning.WebUI.Controllers
 
         // POST: api/Variants/Create
         [HttpPost]
+        [Authorize(Roles = Role.None)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Create([FromBody] CreateVariantCommand command)
         {
@@ -40,6 +45,7 @@ namespace ELearning.WebUI.Controllers
 
         // PUT: api/Variants/Update/
         [HttpPut]
+        [Authorize(Roles = Role.Admin)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Update([FromBody] UpdateVariantCommand command)
         {
@@ -50,6 +56,7 @@ namespace ELearning.WebUI.Controllers
 
         // DELETE: api/Variants/Delete/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = Role.Admin)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Delete(int id)
         {

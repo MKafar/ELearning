@@ -19,7 +19,7 @@ namespace ELearning.WebUI.Controllers
     {
         // GET: api/Assignments/GetAll
         [HttpGet]
-        [Authorize(Roles = Role.Admin)]
+        [Authorize(Roles = Role.None)]
         public async Task<ActionResult<AssignmentsListViewModel>> GetAll()
         {
             return Ok(await Mediator.Send(new GetAssignmentsListQuery()));
@@ -51,7 +51,7 @@ namespace ELearning.WebUI.Controllers
 
         // POST: api/Assignments/Create
         [HttpPost]
-        [Authorize(Roles = Role.Admin)]
+        [Authorize(Roles = Role.None)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Create([FromBody] CreateAssignmentCommand command)
         {
@@ -73,7 +73,7 @@ namespace ELearning.WebUI.Controllers
 
         // DELETE: api/Assignments/Delete/5
         [HttpDelete("{id}")]
-        [Authorize(Roles = Role.Admin)]
+        [Authorize(Roles = Role.None)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Delete(int id)
         {

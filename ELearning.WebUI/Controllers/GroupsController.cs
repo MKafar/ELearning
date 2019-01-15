@@ -6,6 +6,8 @@ using ELearning.Application.Groups.Commands.UpdateGroup;
 using ELearning.Application.Groups.Queries.GetGroupById;
 using ELearning.Application.Groups.Queries.GetGroupSectionsListById;
 using ELearning.Application.Groups.Queries.GetGroupsList;
+using ELearning.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ELearning.WebUI.Controllers
@@ -17,6 +19,7 @@ namespace ELearning.WebUI.Controllers
     {
         // GET: api/Groups/GetAll
         [HttpGet]
+        [Authorize(Roles = Role.Admin)]
         public async Task<ActionResult<GroupsListViewModel>> GetAll()
         {
             return Ok(await Mediator.Send(new GetGroupsListQuery()));
@@ -24,6 +27,7 @@ namespace ELearning.WebUI.Controllers
 
         // GET: api/Groups/GetById/5
         [HttpGet("{id}")]
+        [Authorize(Roles = Role.Admin)]
         public async Task<ActionResult<GroupViewModel>> GetById(int id)
         {
             return Ok(await Mediator.Send(new GetGroupByIdQuery { Id = id }));
@@ -31,6 +35,7 @@ namespace ELearning.WebUI.Controllers
 
         // GET: api/Groups/GetAllSectionsById/5
         [HttpGet("{id}")]
+        [Authorize(Roles = Role.Admin)]
         public async Task<ActionResult<GroupSectionsListViewModel>> GetAllSectionsById(int id)
         {
             return Ok(await Mediator.Send(new GetGroupSectionsListByIdQuery { Id = id }));
@@ -38,6 +43,7 @@ namespace ELearning.WebUI.Controllers
 
         // POST: api/Groups/Create
         [HttpPost]
+        [Authorize(Roles = Role.None)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Create([FromBody] CreateGroupCommand command)
         {
@@ -48,6 +54,7 @@ namespace ELearning.WebUI.Controllers
 
         // PUT: api/Groups/Update
         [HttpPut]
+        [Authorize(Roles = Role.None)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Update([FromBody] UpdateGroupCommand command)
         {
@@ -58,6 +65,7 @@ namespace ELearning.WebUI.Controllers
 
         // DELETE: api/Groups/Delete/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = Role.Admin)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Delete(int id)
         {
