@@ -14,6 +14,7 @@ class StudentExercises extends Component {
         todaysExercise: [],
     }
     loadData = () => {
+        console.log("user: ",this.props.user);
         const userid = this.props.user.userid;
         axios.get('/api/Users/GetPastAssignmentsById/' +  userid)
             .then (response => {

@@ -5,55 +5,44 @@ import axios from '../../axios';
 import { hasRole } from '../../auth';
 import './Login.scss';
 
-class Login extends Component
-{
+class Login extends Component {
     state = {
         login: '',
-        password: '',
-        userData: [],
+        password: ''
     }
-    changeLoginHandler = (e) =>
-    {
+    changeLoginHandler = (e) => {
         this.setState({ login: e.target.value })
     }
-    changePasswordHandler = (e) =>
-    {
+    changePasswordHandler = (e) => {
         this.setState({ password: e.target.value })
     }
-    sendCredentialsHandler = () =>
-    {
+    sendCredentialsHandler = () => {
         axios.post('/api/Auth/Login', {
             login: this.state.login,
             password: this.state.password
-        }).then(response =>
-        {
-            console.log("Login successful response.data:", response.data);
-            this.setState({ userData: [response.data.role] });
-
+        }).then(response => {
             const token = response.data.token;
-
             const user = {
                 roles: [response.data.role],
-                userid: response.data.id,
+                userid: response.data.userid,
                 username: response.data.username
             }
+
             axios.defaults.headers.common['Authorization'] = "Bearer " + token;
+            
             this.manageUserAuthorization(user);
-        }).catch(error =>
-        {
-            console.log("Login error.response:", error.response);
+        }).catch(error => {
+            console.log(error.response);
         })
     }
-    manageUserAuthorization = (user) =>
-    {
+    manageUserAuthorization = (user) => {
         let hasRoleStudent = hasRole(user, ['Student']);
         let hasRoleAdmin = hasRole(user, ['Administrator']);
-
+        
         hasRoleStudent || hasRoleAdmin ? this.props.onSetUser(user) : this.props.onClearUser();
         hasRoleStudent ? this.props.history.push('/student/') : hasRoleAdmin ? this.props.history.push('/admin/') : this.props.history.push('/');
     }
-    render()
-    {
+    render() {
         return (
             <div className='login'>
                 <Header size='large'>Zaloguj się</Header>
