@@ -20,7 +20,7 @@ class Codemirror extends Component {
         this.setState({ output: "waiting..." })
         console.log(this.state.code)
         axios.post('/api/Compiler/Run', {
-            assignmentid: 1,
+            assignmentid: this.props.assignmentID,
             code: this.state.code
         }).then(response => {
             console.log(response.data);
