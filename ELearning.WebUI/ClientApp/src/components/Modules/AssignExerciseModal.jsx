@@ -193,11 +193,15 @@ class AssignExerciseModal extends Component {
     groupChangeHandler = (e, { value }) => {
         this.setState({ group: value });
     }
+
     sectionChangeHandler = (e, { value }) => {
         this.setState({ section: value });
     }
     exerciseChangeHandler = (e, { value }) => {
         this.setState({ exercise: value });
+    }
+    variantChangeHandler = (e, { value }) => {
+        this.setState({ variant: value });
     }
     dataChangeHandler = (e) => {
         this.setState({ date: e.target.value });
@@ -209,10 +213,15 @@ class AssignExerciseModal extends Component {
     addHandle = () => {
         const sectionId = this.state.section;
         const variantId = this.state.variant;
-        const assignmentDate = this.state.date;
+        let assignmentDate = this.state.date;
+        assignmentDate = assignmentDate.split("-").reverse().join("-");
         const assgnmentTime = this.state.time;
+        console.log('Time',assgnmentTime );
+        console.log('Date',assignmentDate );
+        console.log('Variant',variantId );
+        console.log('Section',sectionId );
 
-        axios.put('/api/Assignments/Create', {
+        axios.post('/api/Assignments/Create', {
             sectionid: sectionId,
             variantid: variantId,
             date: assignmentDate,

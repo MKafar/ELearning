@@ -35,6 +35,8 @@ class Grade extends Component {
         this.setState({avgScore : Math.floor(this.state.case1 + this.state.case2 + this.state.case3 + this.state.case4)/4})
     }
     sendScoreHandler = () => {
+        this.props.grade();
+        console.log(this.props);
         console.log('Clicked')
         console.log(this.state.avgScore)
     }
