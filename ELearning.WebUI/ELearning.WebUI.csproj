@@ -26,6 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp-workspace.code-workspace" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ELearning.Application\ELearning.Application.csproj" />
     <ProjectReference Include="..\ELearning.Infrastructure\ELearning.Infrastructure.csproj" />
   </ItemGroup>
