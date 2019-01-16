@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ELearning.WebUI.Controllers
 {
-    [Authorize(Roles = Role.AdminOrStudent)]
     [ApiController]
     public class AssignmentsController : BaseController
     {
@@ -51,7 +50,7 @@ namespace ELearning.WebUI.Controllers
 
         // POST: api/Assignments/Create
         [HttpPost]
-        [Authorize(Roles = Role.None)]
+        [Authorize(Roles = Role.Admin)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> Create([FromBody] CreateAssignmentCommand command)
         {

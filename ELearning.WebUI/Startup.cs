@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -51,7 +52,11 @@ namespace ELearning.WebUI
             services.AddMediatR(typeof(GetExercisesListQueryHandler).GetTypeInfo().Assembly);
 
             services
-                .AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
+                .AddMvc(options => 
+                {
+                    options.Filters.Add(typeof(CustomExceptionFilterAttribute));
+                    options.Filters.Add(new AllowAnonymousFilter()); // TODO remove for production
+                })
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new JsonLowerCaseContractResolver())
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateExerciseCommandValidator>());
@@ -135,9 +140,8 @@ namespace ELearning.WebUI
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "ELearning API v1");
                 c.DocumentTitle = "Swagger documentation";
-                c.DocExpansion(DocExpansion.None);
+                c.DocExpansion(DocExpansion.List);
                 c.DisplayRequestDuration();
-                c.EnableFilter();
             });
 
             app.UseMvc(routes =>
