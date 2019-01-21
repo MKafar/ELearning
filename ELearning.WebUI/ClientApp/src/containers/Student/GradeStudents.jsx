@@ -11,34 +11,34 @@ import Grade from '../../components/Grades/Grade';
 class GradeStudents extends Component {
 
     state = {
-        studentOptions: [
-            { key: '1', text: 'Jan Kowalski', value: '1' },
-            { key: '2', text: 'Anna Nowak', value: '2' },
-            { key: '3', text: 'Andrzej Nowakowski', value: '3' },
-            { key: '4', text: 'Monika Sołtysik', value: '4' },
-        ],
-        gradeDetails: [],
+        //value to musi być assignment id tego studenta ktorego oceniasz
+        studentOptions: [],
         selectedStudent: null,
+        evaluator: null,
+        grade: null,
+        selectedStudentSolution: null,
     }
     componentDidMount = () => {
         console.log(this.props.match.params.exerciseTodayDetailID);
         axios.get('/api/Assignments/GetPresentNotEvaluatedAssignmentsById/'+ this.props.match.params.exerciseTodayDetailID)
             .then( response => {
-                this.setState({gradeDetails: response.data.presentassignments});
+                this.setState({studentOptions: response.data.presentassignments});
             }).catch(error => {
+                console.log(error.response);
+            })
+        axios.get('/api/Assignments/GetById/'+ this.props.match.params.exerciseTodayDetailID)
+            .then(response=> {
+                this.setState({evaluator: response.data.sectionid})
+            }).catch(error=>{
                 console.log(error.response);
             })
     }
 
-    sendGrade = () => {
-       console.log('dziala')
-    }
+
     studentChangeHandler = (e, { value }) => {
         this.setState({selectedStudent: value });
-    }
-    showSolution = () => {
-        console.log(this.state.selectedStudent);
-        
+        this.setState({selectedStudentSolution: null});
+        this.setState({selectedStudentSolution: this.state.studentOptions.solution});
     }
 
     render() {
@@ -50,13 +50,15 @@ class GradeStudents extends Component {
                     <Header size='large'>Oceń innych</Header>
                     <div className='grades'>
                         <Dropdown className="selectStudent" placeholder='Student' search   options={this.state.studentOptions} selection onChange={this.studentChangeHandler} />
-                        <Button className="solutionButton" onClick={this.showSolution}>Pokaż rozwiązanie</Button>
-                        <Grade grade={this.sendGrade}/>
+                        <Grade assignment={this.state.selectedStudent} section={this.state.evaluator} />
                     </div>
 
                 </div>
                 <div className='studentCode'>
-                    <CodeWindow changeMode={true} code={this.state.gradeDetails.solution} />
+                {this.state.selectedStudentSolution ? 
+                    <CodeWindow changeMode={true} code={this.state.selectedStudentSolution} />
+                    : null
+                }
                 </div>
             </div>
         );

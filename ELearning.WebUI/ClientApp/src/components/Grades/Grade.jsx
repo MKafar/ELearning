@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
-import { Container, Dropdown, Header, List, Button, Divider } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import { Container, Dropdown, Header, List, Button, Divider } from 'semantic-ui-react';
+import axios from '../../axios';
 
-import './Grade.scss'
+import './Grade.scss';
 
 const options = [
     { key: 1, text: '0', value: 0 },
@@ -28,17 +29,23 @@ class Grade extends Component {
     }
 
     handleChange = (e, { name, value }) => {
-        this.setState({ [name]: value})
-        
+        this.setState({ [name]: value})  
     }
     avgScoreHandler = () => {
         this.setState({avgScore : Math.floor(this.state.case1 + this.state.case2 + this.state.case3 + this.state.case4)/4})
     }
+
     sendScoreHandler = () => {
-        this.props.grade();
         console.log(this.props);
-        console.log('Clicked')
-        console.log(this.state.avgScore)
+        axios.post('/api/Evaluations/Create', {
+             assignmentid: this.props.assignment,
+             sectionid: this.props.section,
+              grade: this.state.avgScore
+        }).then(response => {
+             console.log(response);
+        }).catch(error=>{
+             console.log(error.response);
+        })
     }
 
     render() {
