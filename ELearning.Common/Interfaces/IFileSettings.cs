@@ -2,10 +2,10 @@
 {
     public interface IFileSettings
     {
+        string FileName { get; }
+        string FileSaveDirectory { get; }
         string FilePath { get; }
         string CompiledFilePath { get; }
-        string FileSaveDirectory { get; set; }
-        string FileName { get; set; }
         string FileNameWithExeExtension { get; }
     }
 }

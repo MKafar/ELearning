@@ -6,6 +6,40 @@ namespace ELearning.Common
 {
     public class FileSettings : IFileSettings
     {
+        private readonly int _assignmentId;
+        private readonly DateTime _now;
+
+        public FileSettings(int assignmentId, DateTime now)
+        {
+            _assignmentId = assignmentId;
+            _now = now;
+        }
+
+        public string FileName
+        {
+            get
+            {
+                var currentTime = $"{_now.Hour}-{_now.Minute}-{_now.Second}";
+                var currentDate = $"{_now.Year}-{_now.Month}-{_now.Day}";
+                var fileName = string.Format("assignmentid-{0}_{1}_{2}.cpp", _assignmentId.ToString(), currentDate, currentTime);
+
+                return fileName;
+            }
+        }
+
+        public string FileSaveDirectory
+        {
+            get
+            {
+                var fileSaveDirectory = Directory.GetCurrentDirectory() + string.Format("{0}..{0}bin", Path.DirectorySeparatorChar);
+
+                if (!Directory.Exists(fileSaveDirectory))
+                    Directory.CreateDirectory(fileSaveDirectory);
+
+                return fileSaveDirectory;
+            }
+        }
+
         public string FilePath
         {
             get
@@ -39,9 +73,6 @@ namespace ELearning.Common
                     FileNameWithExeExtension);
             }
         }
-
-        public string FileSaveDirectory { get; set; } = null;
-        public string FileName { get; set; } = null;
 
         public string FileNameWithExeExtension
         {
