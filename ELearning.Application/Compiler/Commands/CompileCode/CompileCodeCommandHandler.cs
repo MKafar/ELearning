@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ELearning.Application.Exceptions;
 using ELearning.Application.Interfaces;
+using ELearning.Common;
 using ELearning.Domain.Entities;
 using ELearning.Persistence;
 using MediatR;
@@ -32,7 +33,10 @@ namespace ELearning.Application.Compiler.Commands.CompileCode
             if (entity == null)
                 throw new NotFoundException(nameof(Assignment), request.AssignmentId);
 
-            var fileSettings = await _filesave.SaveToFileAsync(request.AssignmentId, request.Code, _now, cancellationToken);
+            var fileSettings = new FileSettings(entity.AssignmentId, _now);
+
+            if (!await _filesave.SaveToFileAsync(fileSettings, request.Code, cancellationToken))
+                throw new Exception("Save file operation failed.");
 
             var output = await _compiler.CompileAsync(fileSettings, cancellationToken);
 

@@ -15,18 +15,6 @@ namespace ELearning.Infrastructure
     {
         private const string AbsolutePathToCompilerExeFileConfigurationName = "C++CompilerAbsolutePath";
 
-        private readonly ProcessStartInfo _processStartInfo;
-        
-        public CompilerService()
-        {
-            _processStartInfo = new ProcessStartInfo
-            {
-                FileName = SetCompilerPathFromAppsettingsJson(),
-                RedirectStandardOutput = true,
-                RedirectStandardError = true
-            };
-        }
-
         private string SetCompilerPathFromAppsettingsJson()
         {
             var basePath = Directory.GetCurrentDirectory() + string.Format("{0}..{0}ELearning.WebUI", Path.DirectorySeparatorChar);
@@ -50,10 +38,16 @@ namespace ELearning.Infrastructure
             IList<string> processOutputInAList = new List<string>();
             StringBuilder processOutput = new StringBuilder();
 
-            _processStartInfo.WorkingDirectory = fileSettings.FileSaveDirectory;
-            _processStartInfo.Arguments = string.Format("{0} -o {1}", fileSettings.FileName, fileSettings.FileNameWithExeExtension);
+            var processStartInfo = new ProcessStartInfo
+            {
+                FileName = SetCompilerPathFromAppsettingsJson(),
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                WorkingDirectory = fileSettings.FileSaveDirectory,
+                Arguments = string.Format("{0} -o {1}", fileSettings.FileName, fileSettings.FileNameWithExeExtension)
+            };
 
-            using (Process process = new Process { StartInfo = _processStartInfo })
+            using (Process process = new Process { StartInfo = processStartInfo })
             {
                 process.Start();
 

@@ -3,7 +3,6 @@ using ELearning.Application.Exercises.Queries.GetExercisesList;
 using ELearning.Application.Infrastructure;
 using ELearning.Application.Interfaces;
 using ELearning.Common;
-using ELearning.Common.Interfaces;
 using ELearning.Infrastructure;
 using ELearning.Persistence;
 using ELearning.WebUI.CustomOptions;
@@ -42,7 +41,6 @@ namespace ELearning.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IFileSettings, FileSettings>();
             services.AddTransient<IFileSaveService, FileSaveService>();
             services.AddTransient<ICompilerService, CompilerService>();
 
@@ -67,6 +65,8 @@ namespace ELearning.WebUI
             services.AddTransient(typeof(IPasswordHasher<>), typeof(PasswordHasher<>));
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+            services.AddSingleton<IAuthService, AuthService>();
 
             var appSettings = appSettingsSection.Get<AppSettings>();
 
@@ -85,9 +85,6 @@ namespace ELearning.WebUI
                         IssuerSigningKey = new SymmetricSecurityKey(key)
                     };
                 });
-
-            services.Configure<AppSettings>(appSettingsSection);
-            services.AddSingleton<IAuthService, AuthService>();
 
             var security = new Dictionary<string, IEnumerable<string>>
                 {
