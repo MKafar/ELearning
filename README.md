@@ -36,9 +36,9 @@ npm install
 
 4. (Optional) Next follow the instructions from MinGW wiki Getting Started page to install the compiler:
 
-http://www.mingw.org/wiki/Getting_Started
+/t http://www.mingw.org/wiki/Getting_Started
 
-In the process install g++ compiler.
+/t In the process install g++ compiler.
 
 5. Make sure that port setup in front-end `ELearning.WebUI\ClientApp\src\axios.js` and in back-end are the same. 
 
