@@ -34,11 +34,7 @@ dotnet build
 npm install
 ```
 
-4. (Optional) Next follow the instructions from MinGW wiki Getting Started page to install the compiler:
-
-/t http://www.mingw.org/wiki/Getting_Started
-
-/t In the process install g++ compiler.
+4. (Optional) Next follow the instructions from [MinGW wiki Getting Started page](http://www.mingw.org/wiki/Getting_Started) to install the compiler. In the process install g++ compiler.
 
 5. Make sure that port setup in front-end `ELearning.WebUI\ClientApp\src\axios.js` and in back-end are the same. 
 
@@ -61,10 +57,10 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 User data provided for testing purposes:
 
-Administrator account
-  **login:** admin
-  **password:** admin 
+1. Administrator account
+ * **login:** admin
+ * **password:** admin 
 
-Student account
-  **login:** student
-  **password:** student
+2. Student account
+ * **login:** student
+ * **password:** student
