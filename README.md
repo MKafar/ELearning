@@ -1,6 +1,6 @@
 # ELearning Application
 
-The work concerns the design and implementation of the back-end of the e-learning web application used to support the didactic process of programming.
+The work concerns the design and implementation of the back-end of the e-learning web application intended to support the didactic process of programming.
 
 ## Getting Started
 
