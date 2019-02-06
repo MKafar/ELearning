@@ -44,15 +44,6 @@ npm install
 dotnet run
 ```
 
-## Authors
-
-* **[Mateusz Młotek](https://github.com/MKafar)** - ASP.NET Core Back-End
-* **[Daria Ratyńska](https://github.com/peacchy)** - React Front-End in directory `ELearning.WebUI\ClientApp`
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
 ### Login data
 
 User data provided for testing purposes:
@@ -64,3 +55,12 @@ User data provided for testing purposes:
 2. Student account
  * **login:** student
  * **password:** student
+
+## Authors
+
+* **[Mateusz Młotek](https://github.com/MKafar)** - ASP.NET Core Back-End
+* **[Daria Ratyńska](https://github.com/peacchy)** - React Front-End in directory `ELearning.WebUI\ClientApp`
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
